@@ -7,7 +7,7 @@ public class Game {
     public static void main(String[] args) 
     {
     	GameCanvas game=new GameCanvas();
-    	JFrame frame = new JFrame("Geometry game");
+    	JFrame frame = new JFrame("Geometry");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setResizable(true);

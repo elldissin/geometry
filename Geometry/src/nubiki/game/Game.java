@@ -10,7 +10,7 @@ public class Game {
     	JFrame frame = new JFrame("Geometry game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.add(game);
         frame.setVisible(true);
         game.start();

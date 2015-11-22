@@ -9,11 +9,9 @@ public class Player extends GameObject implements Shooting {
 	private static final long serialVersionUID = 1L;
 	private int health;
 	private int level;
-	private  ArrayList<Projectile> projectiles;
 
 	public Player() {
 		super(); 
-		projectiles=new ArrayList<Projectile>();
 		health=100;
 		level=1;
 		body();
@@ -57,11 +55,14 @@ public class Player extends GameObject implements Shooting {
 	public void move() {
 		for(int i=0;i<points.size();i++)
 			points.get(i).translate(speedX, speedY);
+		posX+=speedX;
+		posY+=speedY;
 	}
 	//try to handle projectile moving and drawing inside player
 	@Override
 	public void shoot() {
-		Projectile projectile = new Projectile();
-		projectiles.add(projectile);
+		Projectile projectile = new Projectile((int)posX, (int)posY);
+		projectile.setSpeedX(30);
+		GameCanvas.addObject(projectile);
 	}
 }

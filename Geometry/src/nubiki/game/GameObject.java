@@ -19,7 +19,9 @@ public abstract class GameObject {
 		return posX;
 	}
 	public void setPosX(double posX) {
+		points.clear();
 		this.posX = posX;
+		body();
 	}
 	public double getPosY() {
 		return posY;

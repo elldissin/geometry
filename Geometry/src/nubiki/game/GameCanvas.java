@@ -19,7 +19,7 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
     private int height;
     private GameObject player,player2;
     
-    private ArrayList<GameObject> gameObjects;
+    private static ArrayList<GameObject> gameObjects;
 	public GameCanvas() {
 		super();
 		isRunning=false;
@@ -30,7 +30,7 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
-		addplayers();
+		addPlayers();
 	}
 	
 	public synchronized void start() {
@@ -41,12 +41,17 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 		thread.start();
 	}
 	
-	private void addplayers() {
+	private void addPlayers() {
 		player=new Player();
 		player2=new Player();
 		player2.setPosX(player2.getPosX()+300);
 		gameObjects.add(player);
 		gameObjects.add(player2);
+	}
+
+	protected static void addObject(GameObject obj) {
+		if(obj!=null)
+			gameObjects.add(obj);
 	}
 	
 	
@@ -103,10 +108,12 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 			player2.setSpeedY(5);
 		}
 		
-		if (code==KeyEvent.VK_Q){
-			Projectile projectile=new Projectile();
-			projectile.setSpeedX(15);
-			gameObjects.add(projectile);
+		if (code==KeyEvent.VK_Q) {
+		Player shootingPlayer = (Player)(player);
+			shootingPlayer.shoot();
+//			Projectile projectile=new Projectile();
+//			projectile.setSpeedX(15);
+//			gameObjects.add(projectile);
 		}
 //		repaint();
 	}

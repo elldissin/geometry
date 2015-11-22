@@ -9,12 +9,15 @@ import java.util.ArrayList;
 public class Projectile extends GameObject{
 	private static final long serialVersionUID = 1L;
 
-	public Projectile() {
+	public Projectile(int x, int y) {
 		super();
+		posX=x;
+		posY=y;
 	}
 	@Override
 	public ArrayList<Point> body() {
 		if(points.isEmpty()) {
+			System.out.println("calculating projectile points");
 			Point p = new Point((int)(posX+5),(int)(posY+5));
 			points.add(0, p);
 			p = new Point((int)(posX+10),(int)(posY+5));

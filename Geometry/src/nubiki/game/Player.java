@@ -39,17 +39,17 @@ public class Player extends GameObject implements Shooting {
 
 	//@Override
 	public void draw(Graphics g) {
-		body();
-		
 		Graphics2D g2 = (Graphics2D) g;
 		GeneralPath path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
-		path.moveTo(points.get(0).getX(), points.get(0).getY());
-		for(int i=1;i<points.size();i++) {
-			path.lineTo(points.get(i).getX(), points.get(i).getY());	
-		}		
-		path.closePath();
-		g2.draw(path);
-		g2.fill(path);
+		if(!points.isEmpty()) {
+			path.moveTo(points.get(0).getX(), points.get(0).getY());
+			for(int i=1;i<points.size();i++) {
+				path.lineTo(points.get(i).getX(), points.get(i).getY());	
+			}		
+			path.closePath();
+			g2.draw(path);
+		}
+//		g2.fill(path);
 	}
 	
 	public void move() {
@@ -63,6 +63,8 @@ public class Player extends GameObject implements Shooting {
 	public void shoot() {
 		Projectile projectile = new Projectile((int)posX, (int)posY);
 		projectile.setSpeedX(30);
-		GameCanvas.addObject(projectile);
+		GameCanvas.addObject(projectile); //add each other to ignore list to avoid collisions
+		addIgnoreObject(projectile);
+		projectile.addIgnoreObject(this);
 	}
 }

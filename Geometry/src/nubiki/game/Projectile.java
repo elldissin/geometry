@@ -37,7 +37,7 @@ public class Projectile extends GameObject{
 		}		
 		path.closePath();
 		g2.draw(path);
-		g2.fill(path);
+//		g2.fill(path);
 	}
 	
 	public void move() {

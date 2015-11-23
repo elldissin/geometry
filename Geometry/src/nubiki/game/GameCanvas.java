@@ -17,7 +17,7 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
     
     private int width;
     private int height;
-    private GameObject player,player2;
+    private GameObject player1,player2;
     
     private static ArrayList<GameObject> gameObjects;
 	public GameCanvas() {
@@ -42,10 +42,10 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 	}
 	
 	private void addPlayers() {
-		player=new Player();
+		player1=new Player();
 		player2=new Player();
 		player2.setPosX(player2.getPosX()+300);
-		gameObjects.add(player);
+		gameObjects.add(player1);
 		gameObjects.add(player2);
 	}
 
@@ -83,16 +83,16 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 		int code = e.getKeyCode();
 		
 		if (code==KeyEvent.VK_RIGHT){
-			player.setSpeedX(5);
+			player1.setSpeedX(5);
 		}
 		if (code==KeyEvent.VK_LEFT){
-			player.setSpeedX(-5);
+			player1.setSpeedX(-5);
 		}
 		if (code==KeyEvent.VK_UP){
-			player.setSpeedY(-5);
+			player1.setSpeedY(-5);
 		}
 		if (code==KeyEvent.VK_DOWN){
-			player.setSpeedY(5);
+			player1.setSpeedY(5);
 		}
 		
 		if (code==KeyEvent.VK_D){
@@ -108,15 +108,23 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 			player2.setSpeedY(5);
 		}
 		
-		if (code==KeyEvent.VK_Q) {
-		Player shootingPlayer = (Player)(player);
+		if (code==KeyEvent.VK_Q) { //casting to be fixed
+		Player shootingPlayer = (Player)(player2);
 		if(shootingPlayer!=null)
 			shootingPlayer.shoot();
 //			Projectile projectile=new Projectile();
 //			projectile.setSpeedX(15);
 //			gameObjects.add(projectile);
 		}
-//		repaint();
+		
+		if (code==KeyEvent.VK_CONTROL) { //casting to be fixed
+		Player shootingPlayer = (Player)(player1);
+		if(shootingPlayer!=null)
+			shootingPlayer.shoot();
+//			Projectile projectile=new Projectile();
+//			projectile.setSpeedX(15);
+//			gameObjects.add(projectile);
+		}
 	}
 	
 	@Override
@@ -124,10 +132,10 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 		int code = e.getKeyCode();
 		//this needs to be fixed, stopping even when releasing the other key
 		if (code==KeyEvent.VK_RIGHT || code==KeyEvent.VK_LEFT) {
-			player.setSpeedX(0);
+			player1.setSpeedX(0);
 		}
 		if (code==KeyEvent.VK_UP || code==KeyEvent.VK_DOWN ){
-			player.setSpeedY(0);
+			player1.setSpeedY(0);
 		}
 		if (code==KeyEvent.VK_A || code==KeyEvent.VK_D) {
 			player2.setSpeedX(0);
@@ -189,12 +197,12 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 				delta--;
 			}
 			//to print out fps and updates
-			if(System.currentTimeMillis()-timer>1000) {
-				timer+=1000;
-				System.out.println("FPS:"+frames+" Updates:"+updates);
-				frames=0;
-				updates=0;
-			}
+//			if(System.currentTimeMillis()-timer>1000) {
+//				timer+=1000;
+//				System.out.println("FPS:"+frames+" Updates:"+updates);
+//				frames=0;
+//				updates=0;
+//			}
 		}
 		stop();
 	}

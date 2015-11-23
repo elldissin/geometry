@@ -17,6 +17,7 @@ public abstract class GameObject {
 	protected int distTravelled;
 	protected int liveDistance;
 	protected ArrayList <Point> points;
+	protected ArrayList <GameObject> ignoredObjects;
 	
 	public double getPosX() {
 		return posX;
@@ -57,6 +58,7 @@ public abstract class GameObject {
 		liveDistance=400;
 		obsolete=false;
 		points=new ArrayList<Point>();
+		ignoredObjects = new ArrayList <GameObject>(); 
 	}
 	
 	public int getSpeedX() {
@@ -82,13 +84,21 @@ public abstract class GameObject {
 	}
 
 	boolean isColliding(GameObject o) {
-		Rectangle2D rect1 = new Rectangle ((int)(this.getPosX()),(int)
-				(this.getPosY()),(int)(this.getObjWidth())*2,(int)(this.getObjHeight())*2);
-		Rectangle2D rect2 = new Rectangle ((int)(o.getPosX()),(int)
-				(o.getPosY()),(int)(o.getObjWidth())*2,(int)(o.getObjHeight())*2);
-		if (rect1.intersects(rect2))
-			return true;
+		if(!ignoredObjects.contains(o)){
+			Rectangle2D rect1 = new Rectangle ((int)(this.getPosX()),(int)
+					(this.getPosY()),(int)(this.getObjWidth())*2,(int)(this.getObjHeight())*2);
+			Rectangle2D rect2 = new Rectangle ((int)(o.getPosX()),(int)
+					(o.getPosY()),(int)(o.getObjWidth())*2,(int)(o.getObjHeight())*2);
+			if (rect1.intersects(rect2))
+				return true;
+			return false;
+		}
 		return false;
+	}
+	
+	void addIgnoreObject(GameObject o) {
+		if(o!=null)
+			ignoredObjects.add(o);
 	}
 	
 	public abstract void move();

@@ -110,6 +110,7 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 		
 		if (code==KeyEvent.VK_Q) {
 		Player shootingPlayer = (Player)(player);
+		if(shootingPlayer!=null)
 			shootingPlayer.shoot();
 //			Projectile projectile=new Projectile();
 //			projectile.setSpeedX(15);
@@ -121,7 +122,7 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int code = e.getKeyCode();
-		
+		//this needs to be fixed, stopping even when releasing the other key
 		if (code==KeyEvent.VK_RIGHT || code==KeyEvent.VK_LEFT) {
 			player.setSpeedX(0);
 		}
@@ -152,13 +153,19 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 				gameObjects.remove(i);
 		}
 	
+		//Handles collisions BUG collision with own projectile; can shoot after death
+		for(int i=0; i<gameObjects.size();i++)
+			for(int j=0; j<gameObjects.size();j++) {
+				if(gameObjects.get(i).isColliding(gameObjects.get(j)) && i!=j) {
+					System.out.println("Collision happened");
+					gameObjects.get(i).setObsolete(true); //marks object for deletion
+				}
+			}
+
 		//Handles objects movement
 		for(int i=0; i<gameObjects.size();i++) {
-//			System.out.println("gameobjects size:"+gameObjects.size());
 			gameObjects.get(i).move();
 		}
-		//вызов проверки сталкновений
-		player.isColliding(player2);
 	}
 
 	@Override

@@ -44,6 +44,11 @@ public class Projectile extends GameObject{
 		for(int i=0;i<points.size();i++)
 			points.get(i).translate(speedX, speedY);
 		distTravelled+=Math.sqrt(Math.pow(speedX, 2)+Math.pow(speedY, 2));
+		posX+=speedX;
+		posY+=speedY;
+		if(distTravelled>liveDistance)
+			setObsolete(true);
+			
 	}
 
 }

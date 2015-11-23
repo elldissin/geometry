@@ -13,6 +13,7 @@ public abstract class GameObject {
 	protected double objWidth;
 	protected double objHeight;
 	protected int speedX,speedY;
+	private boolean obsolete;
 	protected int distTravelled;
 	protected int liveDistance;
 	protected ArrayList <Point> points;
@@ -54,6 +55,7 @@ public abstract class GameObject {
 		speedY=0;
 		distTravelled=0;
 		liveDistance=400;
+		obsolete=false;
 		points=new ArrayList<Point>();
 	}
 	
@@ -69,30 +71,25 @@ public abstract class GameObject {
 	public void setSpeedY(int speedY) {
 		this.speedY = speedY;
 	}
+	public void setObsolete(boolean value) {
+		obsolete=value;
+	}
+	
 	public abstract void draw(Graphics g);
 	public abstract  ArrayList<Point> body();
 	public  boolean isObsolete() {
-		if(distTravelled>liveDistance)
-			return true;
-		else 
-			return false;
+			return obsolete;
 	}
-	//проверка сталкновений, всё херня ибо не работает, есть мысль как улучшить.
+
 	boolean isColliding(GameObject o) {
-		Rectangle2D rect1 = new Rectangle ((int)(this.getObjWidth()),(int)
-		(this.getObjWidth()),(int)(this.getObjWidth())*2,(int)(this.getObjWidth())*2);
-		Rectangle2D rect2 = new Rectangle (100,100,30,20);
+		Rectangle2D rect1 = new Rectangle ((int)(this.getPosX()),(int)
+				(this.getPosY()),(int)(this.getObjWidth())*2,(int)(this.getObjHeight())*2);
+		Rectangle2D rect2 = new Rectangle ((int)(o.getPosX()),(int)
+				(o.getPosY()),(int)(o.getObjWidth())*2,(int)(o.getObjHeight())*2);
 		if (rect1.intersects(rect2))
-		System.out.print("da");
-		else
-			System.out.print("net");
+			return true;
 		return false;
 	}
-//	public void move(int x, int y) {
-//		for(int i=0;i<points.size();i++)
-//			points.get(i).translate(x, y);
-//	}
-	
 	
 	public abstract void move();
 }

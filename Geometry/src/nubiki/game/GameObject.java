@@ -2,6 +2,8 @@ package nubiki.game;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public abstract class GameObject {
@@ -75,11 +77,22 @@ public abstract class GameObject {
 		else 
 			return false;
 	}
-	
+	//проверка сталкновений, всё херня ибо не работает, есть мысль как улучшить.
+	boolean isColliding(GameObject o) {
+		Rectangle2D rect1 = new Rectangle ((int)(this.getObjWidth()),(int)
+		(this.getObjWidth()),(int)(this.getObjWidth())*2,(int)(this.getObjWidth())*2);
+		Rectangle2D rect2 = new Rectangle (100,100,30,20);
+		if (rect1.intersects(rect2))
+		System.out.print("da");
+		else
+			System.out.print("net");
+		return false;
+	}
 //	public void move(int x, int y) {
 //		for(int i=0;i<points.size();i++)
 //			points.get(i).translate(x, y);
 //	}
+	
 	
 	public abstract void move();
 }

@@ -151,12 +151,14 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 			if(gameObjects.get(i).isObsolete())
 				gameObjects.remove(i);
 		}
-		
+	
 		//Handles objects movement
 		for(int i=0; i<gameObjects.size();i++) {
 //			System.out.println("gameobjects size:"+gameObjects.size());
 			gameObjects.get(i).move();
 		}
+		//вызов проверки сталкновений
+		player.isColliding(player2);
 	}
 
 	@Override

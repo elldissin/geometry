@@ -2,6 +2,7 @@ package nubiki.game;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
@@ -20,10 +21,10 @@ public class Player extends GameObject implements Shooting {
 	public ArrayList<Point> body() {
 //		points.clear();
 		if(points.isEmpty()) {
-			System.out.println("player points recalculation...");
+//			System.out.println("player points recalculation...");
 			for(int i=0;i<level+2;i++) {
-				int x1=(int) (posX+(objWidth*Math.cos(2*Math.PI/(level+2)*i)));
-				int y1=(int) (posY+(objHeight*Math.sin(2*Math.PI/(level+2)*i)));
+				int x1=(int) (posX+(objWidth*Math.cos(2*Math.PI/(level+2)*i+angle)));
+				int y1=(int) (posY+(objHeight*Math.sin(2*Math.PI/(level+2)*i+angle)));
 				Point p = new Point(x1,y1);
 				points.add(i, p);
 			}
@@ -53,16 +54,31 @@ public class Player extends GameObject implements Shooting {
 	}
 	
 	public void move() {
-		for(int i=0;i<points.size();i++)
-			points.get(i).translate(speedX, speedY);
-		posX+=speedX;
-		posY+=speedY;
+		if(speed>0) {
+			for(int i=0;i<points.size();i++)
+				points.get(i).translate(getSpeedX(), getSpeedY());
+			posX+=getSpeedX();
+			posY+=getSpeedY();
+		}
+	}
+	public void turn() {
+		if(turnSpeed!=0) {
+//			System.out.println("angle"+angle);
+			angle+=turnSpeed;
+			points.clear();
+			body();
+	//		System.out.println("rotating speed:"+turnSpeed+" posX"+posX+"posY"+posY);
+	//		AffineTransform t=AffineTransform.getRotateInstance(turnSpeed,posX,posY);
+	//		for(int i=0;i<points.size();i++)
+	//			t.transform(points.get(i),points.get(i));
+		}
 	}
 	//try to handle projectile moving and drawing inside player
 	@Override
 	public void shoot() {
 		Projectile projectile = new Projectile((int)posX, (int)posY);
-		projectile.setSpeedX(30);
+		projectile.setSpeed(20);
+		projectile.setAngle(angle);
 		GameCanvas.addObject(projectile); //add each other to ignore list to avoid collisions
 		addIgnoreObject(projectile);
 		projectile.addIgnoreObject(this);

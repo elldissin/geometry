@@ -81,32 +81,50 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 	public void keyPressed(KeyEvent e) {
 //		System.out.println("Key pressed...");
 		int code = e.getKeyCode();
-		
-		if (code==KeyEvent.VK_RIGHT){
-			player1.setSpeedX(5);
+		if (code==KeyEvent.VK_UP){
+			player1.setSpeed(5);
 		}
 		if (code==KeyEvent.VK_LEFT){
-			player1.setSpeedX(-5);
+			player1.setTurnSpeed(-0.1);
 		}
-		if (code==KeyEvent.VK_UP){
-			player1.setSpeedY(-5);
-		}
-		if (code==KeyEvent.VK_DOWN){
-			player1.setSpeedY(5);
-		}
-		
-		if (code==KeyEvent.VK_D){
-			player2.setSpeedX(5);
-		}
-		if (code==KeyEvent.VK_A){
-			player2.setSpeedX(-5);
+		if (code==KeyEvent.VK_RIGHT){
+			player1.setTurnSpeed(0.1);
 		}
 		if (code==KeyEvent.VK_W){
-			player2.setSpeedY(-5);
+			player2.setSpeed(5);
 		}
-		if (code==KeyEvent.VK_S){
-			player2.setSpeedY(5);
+		if (code==KeyEvent.VK_A){
+			player2.setTurnSpeed(-0.1);
 		}
+		if (code==KeyEvent.VK_D){
+			player2.setTurnSpeed(0.1);;
+		}
+		
+//		if (code==KeyEvent.VK_RIGHT){
+//			player1.setSpeedX(5);
+//		}
+//		if (code==KeyEvent.VK_LEFT){
+//			player1.setSpeedX(-5);
+//		}
+//		if (code==KeyEvent.VK_UP){
+//			player1.setSpeedY(-5);
+//		}
+//		if (code==KeyEvent.VK_DOWN){
+//			player1.setSpeedY(5);
+//		}
+//		
+//		if (code==KeyEvent.VK_D){
+//			player2.setSpeedX(5);
+//		}
+//		if (code==KeyEvent.VK_A){
+//			player2.setSpeedX(-5);
+//		}
+//		if (code==KeyEvent.VK_W){
+//			player2.setSpeedY(-5);
+//		}
+//		if (code==KeyEvent.VK_S){
+//			player2.setSpeedY(5);
+//		}
 		
 		if (code==KeyEvent.VK_Q) { //casting to be fixed
 		Player shootingPlayer = (Player)(player2);
@@ -131,17 +149,36 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		int code = e.getKeyCode();
 		//this needs to be fixed, stopping even when releasing the other key
-		if (code==KeyEvent.VK_RIGHT || code==KeyEvent.VK_LEFT) {
-			player1.setSpeedX(0);
+//		if (code==KeyEvent.VK_RIGHT || code==KeyEvent.VK_LEFT) {
+//			player1.setSpeedX(0);
+//		}
+//		if (code==KeyEvent.VK_UP || code==KeyEvent.VK_DOWN ){
+//			player1.setSpeedY(0);
+//		}
+//		if (code==KeyEvent.VK_A || code==KeyEvent.VK_D) {
+//			player2.setSpeedX(0);
+//		}
+//		if (code==KeyEvent.VK_W|| code==KeyEvent.VK_S ){
+//			player2.setSpeedY(0);
+//		}
+		if (code==KeyEvent.VK_UP){
+			player1.setSpeed(0);
 		}
-		if (code==KeyEvent.VK_UP || code==KeyEvent.VK_DOWN ){
-			player1.setSpeedY(0);
+		if (code==KeyEvent.VK_LEFT){
+			player1.setTurnSpeed(0);
 		}
-		if (code==KeyEvent.VK_A || code==KeyEvent.VK_D) {
-			player2.setSpeedX(0);
+		if (code==KeyEvent.VK_RIGHT){
+			player1.setTurnSpeed(0);
 		}
-		if (code==KeyEvent.VK_W|| code==KeyEvent.VK_S ){
-			player2.setSpeedY(0);
+		
+		if (code==KeyEvent.VK_W){
+			player2.setSpeed(0);
+		}
+		if (code==KeyEvent.VK_A){
+			player2.setTurnSpeed(0);
+		}
+		if (code==KeyEvent.VK_D){
+			player2.setTurnSpeed(0);
 		}
 	}
 
@@ -173,6 +210,7 @@ public class GameCanvas extends Canvas implements Runnable, KeyListener {
 		//Handles objects movement
 		for(int i=0; i<gameObjects.size();i++) {
 			gameObjects.get(i).move();
+			gameObjects.get(i).turn();
 		}
 	}
 

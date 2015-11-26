@@ -13,6 +13,9 @@ public abstract class GameObject {
 	protected double objWidth;
 	protected double objHeight;
 	protected int speedX,speedY;
+	protected int speed;
+	protected double angle;
+	protected double turnSpeed;
 	private boolean obsolete;
 	protected int distTravelled;
 	protected int liveDistance;
@@ -54,6 +57,9 @@ public abstract class GameObject {
 		objHeight=20.0;
 		speedX=0;
 		speedY=0;
+		speed=0;
+		angle=0;
+		turnSpeed=0;
 		distTravelled=0;
 		liveDistance=400;
 		obsolete=false;
@@ -61,14 +67,32 @@ public abstract class GameObject {
 		ignoredObjects = new ArrayList <GameObject>(); 
 	}
 	
+	public double getTurnSpeed() {
+		return turnSpeed;
+	}
+	public void setTurnSpeed(double turnSpeed) {
+		this.turnSpeed = turnSpeed;
+	}
+	public int getSpeed() {
+		return speed;
+	}
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	public double getAngle() {
+		return angle;
+	}
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
 	public int getSpeedX() {
-		return speedX;
+		return (int) (speed*Math.cos((double)angle));
 	}
 	public void setSpeedX(int speedX) {
 		this.speedX = speedX;
 	}
 	public int getSpeedY() {
-		return speedY;
+		return speedY=(int) (speed*Math.sin((double)angle));
 	}
 	public void setSpeedY(int speedY) {
 		this.speedY = speedY;
@@ -102,4 +126,5 @@ public abstract class GameObject {
 	}
 	
 	public abstract void move();
+	public abstract void turn();
 }

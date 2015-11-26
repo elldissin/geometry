@@ -42,13 +42,17 @@ public class Projectile extends GameObject{
 	
 	public void move() {
 		for(int i=0;i<points.size();i++)
-			points.get(i).translate(speedX, speedY);
-		distTravelled+=Math.sqrt(Math.pow(speedX, 2)+Math.pow(speedY, 2));
-		posX+=speedX;
-		posY+=speedY;
+			points.get(i).translate(getSpeedX(), getSpeedY());
+		distTravelled+=Math.sqrt(Math.pow(getSpeedX(), 2)+Math.pow(getSpeedY(), 2));
+		posX+=getSpeedX();
+		posY+=getSpeedY();
 		if(distTravelled>liveDistance)
 			setObsolete(true);
 			
 	}
-
+	
+	public void turn() {
+		angle+=turnSpeed;
+		body();
+	}
 }

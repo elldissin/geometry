@@ -7,9 +7,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import javax.swing.JPanel;
+
 //import com.sun.swing.internal.plaf.synth.resources.synth;
 
-public class GameCanvas extends Canvas implements Runnable, KeyListener {
+public class GameCanvas extends JPanel implements Runnable, KeyListener {
     private static final long serialVersionUID = 1L;
     
     private boolean isRunning;

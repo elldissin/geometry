@@ -16,7 +16,7 @@ public abstract class GameObject {
 	protected int speed;
 	protected double angle;
 	protected double turnSpeed;
-	private boolean obsolete;
+	protected boolean obsolete;
 	protected int distTravelled;
 	protected int liveDistance;
 	protected ArrayList <Point> points;
@@ -103,9 +103,6 @@ public abstract class GameObject {
 	
 	public abstract void draw(Graphics g);
 	public abstract  ArrayList<Point> body();
-	public  boolean isObsolete() {
-			return obsolete;
-	}
 
 	boolean isColliding(GameObject o) {
 		if(!ignoredObjects.contains(o)){

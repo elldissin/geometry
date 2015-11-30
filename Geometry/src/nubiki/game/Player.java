@@ -6,7 +6,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
-public class Player extends GameObject implements Shooting {
+public class Player extends GameObject implements NormalPlayer {
 	private static final long serialVersionUID = 1L;
 	private int health;
 	private int level;
@@ -79,8 +79,52 @@ public class Player extends GameObject implements Shooting {
 		Projectile projectile = new Projectile((int)posX, (int)posY);
 		projectile.setSpeed(20);
 		projectile.setAngle(angle);
-		GameCanvas.addObject(projectile); //add each other to ignore list to avoid collisions
+		GameCanvas.addProjectile(projectile); 
+		//add each other to ignore list to avoid collisions
 		addIgnoreObject(projectile);
 		projectile.addIgnoreObject(this);
+	}
+
+	@Override
+	public void setMoving() {
+		// TODO Auto-generated method stub
+		setSpeed(5);
+	}
+
+	@Override
+	public void setStopped() {
+		// TODO Auto-generated method stub
+		setSpeed(0);
+	}
+
+	@Override
+	public void destroy() {
+		setObsolete(true);
+	}
+
+	@Override
+	public void updateState() {
+		move();
+		turn();
+	}
+
+	@Override
+	public void setTurningCW() {
+		turnSpeed=0.1;
+	}
+	
+	@Override
+	public void setTurningCCW() {
+		turnSpeed=-0.1;
+	}
+
+	@Override
+	public void setNotTurning() {
+		turnSpeed=0;
+	}
+
+	@Override
+	public boolean isDestroyed() {
+		return obsolete;
 	}
 }

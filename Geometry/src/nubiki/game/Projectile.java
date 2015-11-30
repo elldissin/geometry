@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
-public class Projectile extends GameObject{
+public class Projectile extends GameObject implements NormalProjectile{
 	private static final long serialVersionUID = 1L;
 
 	public Projectile(int x, int y) {
@@ -17,7 +17,7 @@ public class Projectile extends GameObject{
 	@Override
 	public ArrayList<Point> body() {
 		if(points.isEmpty()) {
-			System.out.println("calculating projectile points");
+//			System.out.println("calculating projectile points");
 			Point p = new Point((int)(posX+5),(int)(posY+5));
 			points.add(0, p);
 			p = new Point((int)(posX+10),(int)(posY+5));
@@ -54,5 +54,18 @@ public class Projectile extends GameObject{
 	public void turn() {
 		angle+=turnSpeed;
 		body();
+	}
+	@Override
+	public void updateState() {
+		move();
+	}
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public boolean isDestroyed() {
+		return obsolete;
 	}
 }

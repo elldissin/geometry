@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
-public abstract class GameObject {
+public abstract class GameObject implements Updatable {
 	private static final long serialVersionUID = 1L;
 	protected double posX;
 	protected double posY;	
@@ -104,8 +104,15 @@ public abstract class GameObject {
 	public abstract void draw(Graphics g);
 	public abstract  ArrayList<Point> body();
 
-	boolean isColliding(GameObject o) {
-		if(!ignoredObjects.contains(o)){
+	
+	void addIgnoreObject(GameObject o) {
+		if(o!=null)
+			ignoredObjects.add(o);
+	}
+	
+	@Override
+	public boolean isColliding(GameObject o) {
+		if(!ignoredObjects.contains(o)) {
 			Rectangle2D rect1 = new Rectangle ((int)(this.getPosX()),(int)
 					(this.getPosY()),(int)(this.getObjWidth())*2,(int)(this.getObjHeight())*2);
 			Rectangle2D rect2 = new Rectangle ((int)(o.getPosX()),(int)
@@ -115,11 +122,6 @@ public abstract class GameObject {
 			return false;
 		}
 		return false;
-	}
-	
-	void addIgnoreObject(GameObject o) {
-		if(o!=null)
-			ignoredObjects.add(o);
 	}
 	
 	public abstract void move();

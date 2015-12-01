@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -17,20 +18,17 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
     private boolean isRunning;
     private Thread thread;
     
-    private int width;
-    private int height;
-    private NormalPlayer player1,player2;
-    
-    private static ArrayList<NormalPlayer> players;
-    private static ArrayList<NormalProjectile> projectiles;
+    private final int WIDTH=800;
+    private final int HEIGHT=600;
+    private Player player1,player2;
+    private static List<GameObject> updatableObjects;
+    private static List<Drawable> drawableObjects;
 	public GameCanvas() {
 		super();
 		isRunning=false;
-		width=800;
-		height=600;
-		players=new  ArrayList<NormalPlayer>();
-		projectiles= new ArrayList<NormalProjectile>();
-		setPreferredSize(new Dimension(width, height));
+		updatableObjects=new ArrayList<GameObject>();
+		drawableObjects=new ArrayList<Drawable>();
+		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
@@ -46,15 +44,19 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
 	}
 	
 	private void addPlayers() {
-		player1=new Player();
-		player2=new Player();
-		players.add(player1);
-		players.add(player2);
+		player1=new Player(100,100);
+		player2=new Player(400,100);
+		updatableObjects.add(player1);
+		updatableObjects.add(player2);
+		drawableObjects.add(player1);
+		drawableObjects.add(player2);
 	}
 
-	protected static void addProjectile(NormalProjectile obj) {
-		if(obj!=null)
-			projectiles.add(obj);
+	protected static void addProjectile(Projectile obj) {
+		if(obj!=null) {
+			updatableObjects.add(obj);
+			drawableObjects.add(obj);
+		}
 	}
 	
 	
@@ -76,10 +78,8 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
 	public void paintComponent(Graphics g) {
 //		System.out.println("painting canvas...");
 		super.paintComponent(g);
-		for(int i=0; i<players.size();i++)
-			players.get(i).draw(g);
-		for(int i=0; i<projectiles.size();i++)
-			projectiles.get(i).draw(g);
+		for(int i=0; i<updatableObjects.size();i++)
+			drawableObjects.get(i).draw(g);
 	}
 	
 	@Override
@@ -95,6 +95,7 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
 		if (code==KeyEvent.VK_LEFT){
 			player1.setTurningCCW();
 		}
+		
 		if (code==KeyEvent.VK_W){
 			player2.setMoving();
 		}
@@ -105,48 +106,12 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
 			player2.setTurningCCW();
 		}
 		
-//		if (code==KeyEvent.VK_RIGHT){
-//			player1.setSpeedX(5);
-//		}
-//		if (code==KeyEvent.VK_LEFT){
-//			player1.setSpeedX(-5);
-//		}
-//		if (code==KeyEvent.VK_UP){
-//			player1.setSpeedY(-5);
-//		}
-//		if (code==KeyEvent.VK_DOWN){
-//			player1.setSpeedY(5);
-//		}
-//		
-//		if (code==KeyEvent.VK_D){
-//			player2.setSpeedX(5);
-//		}
-//		if (code==KeyEvent.VK_A){
-//			player2.setSpeedX(-5);
-//		}
-//		if (code==KeyEvent.VK_W){
-//			player2.setSpeedY(-5);
-//		}
-//		if (code==KeyEvent.VK_S){
-//			player2.setSpeedY(5);
-//		}
-		
 		if (code==KeyEvent.VK_Q) { //casting to be fixed
-			Player shootingPlayer = (Player)(player2);
-			if(shootingPlayer!=null)
-				shootingPlayer.shoot();
-			//			Projectile projectile=new Projectile();
-			//			projectile.setSpeedX(15);
-			//			gameObjects.add(projectile);
+			player2.shoot();
 		}
 		
 		if (code==KeyEvent.VK_CONTROL) { //casting to be fixed
-			Player shootingPlayer = (Player)(player1);
-			if(shootingPlayer!=null)
-				shootingPlayer.shoot();
-				//			Projectile projectile=new Projectile();
-				//			projectile.setSpeedX(15);
-				//			gameObjects.add(projectile);
+			player1.shoot();
 		}
 	}
 	
@@ -154,18 +119,6 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		int code = e.getKeyCode();
 		//this needs to be fixed, stopping even when releasing the other key
-//		if (code==KeyEvent.VK_RIGHT || code==KeyEvent.VK_LEFT) {
-//			player1.setSpeedX(0);
-//		}
-//		if (code==KeyEvent.VK_UP || code==KeyEvent.VK_DOWN ){
-//			player1.setSpeedY(0);
-//		}
-//		if (code==KeyEvent.VK_A || code==KeyEvent.VK_D) {
-//			player2.setSpeedX(0);
-//		}
-//		if (code==KeyEvent.VK_W|| code==KeyEvent.VK_S ){
-//			player2.setSpeedY(0);
-//		}
 		if (code==KeyEvent.VK_UP){
 			player1.setStopped();;
 		}
@@ -198,32 +151,26 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
 	
 	private void updateState() {
 		//Handles destruction of obsolete objects
-		for(int i=0; i<players.size();i++) {
-			if(players.get(i).isDestroyed())
-				players.remove(i);
+		for(int i=0; i<updatableObjects.size();i++) {
+			if(updatableObjects.get(i).isDestroyed()) {
+				updatableObjects.remove(i);
+				drawableObjects.remove(i); //THE TWO LISTS MAY BE DIFFERENT ...?
+			}
 		}
 		
-		for(int i=0; i<projectiles.size();i++) {
-			if(projectiles.get(i).isDestroyed())
-				projectiles.remove(i);
-		}
-	
-		//Handles collisions BUG collision with own projectile; can shoot after death
-		for(int i=0; i<players.size();i++)
-			for(int j=0; j<projectiles.size();j++) {
-				if(((GameObject) players.get(i)).isColliding((GameObject) projectiles.get(j))) {
+		//Handles collisions
+		for(int i=0; i<updatableObjects.size();i++)
+			for(int j=0; j<updatableObjects.size();j++) {
+				if(updatableObjects.get(i).isColliding(updatableObjects.get(j)) && i!=j) {
 					System.out.println("Collision happened");
-					players.get(i).destroy(); //marks object for deletion
-					projectiles.get(j).destroy(); //marks object for deletion
+					updatableObjects.get(i).destroy(); //marks object for deletion
+					updatableObjects.get(j).destroy(); //marks object for deletion
 				}
 			}
 
-		//Handles objects movement
-		for(int i=0; i<players.size();i++) {
-			players.get(i).updateState();
-		}
-		for(int i=0; i<projectiles.size();i++) {
-			projectiles.get(i).updateState();
+		//Handles objects updates
+		for(int i=0; i<updatableObjects.size();i++) {
+			updatableObjects.get(i).update();
 		}
 	}
 

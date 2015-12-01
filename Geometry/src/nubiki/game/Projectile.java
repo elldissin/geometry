@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
-public class Projectile extends GameObject implements NormalProjectile{
+public class Projectile extends GameObject implements  Drawable {
 	private static final long serialVersionUID = 1L;
 
 	public Projectile(int x, int y) {
@@ -41,11 +41,13 @@ public class Projectile extends GameObject implements NormalProjectile{
 	}
 	
 	public void move() {
-		for(int i=0;i<points.size();i++)
-			points.get(i).translate(getSpeedX(), getSpeedY());
-		distTravelled+=Math.sqrt(Math.pow(getSpeedX(), 2)+Math.pow(getSpeedY(), 2));
-		posX+=getSpeedX();
-		posY+=getSpeedY();
+		if(speed>0) {
+			distTravelled+=Math.sqrt(Math.pow(getSpeedX(), 2)+Math.pow(getSpeedY(), 2));
+			posX+=getSpeedX();
+			posY+=getSpeedY();
+			points.clear();
+			body();
+		}
 		if(distTravelled>liveDistance)
 			setObsolete(true);
 			
@@ -55,10 +57,7 @@ public class Projectile extends GameObject implements NormalProjectile{
 		angle+=turnSpeed;
 		body();
 	}
-	@Override
-	public void updateState() {
-		move();
-	}
+
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -67,5 +66,9 @@ public class Projectile extends GameObject implements NormalProjectile{
 	@Override
 	public boolean isDestroyed() {
 		return obsolete;
+	}
+	@Override
+	public void update() {
+		move();
 	}
 }

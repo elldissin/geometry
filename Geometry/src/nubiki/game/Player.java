@@ -2,11 +2,14 @@ package nubiki.game;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
-public class Player extends GameObject implements NormalPlayer {
+public class Player extends GameObject implements Drawable,
+Controllable, Shooting {
 	private static final long serialVersionUID = 1L;
 	private int health;
 	private int level;
@@ -15,6 +18,15 @@ public class Player extends GameObject implements NormalPlayer {
 		super(); 
 		health=100;
 		level=1;
+		body();
+	}
+	
+	public Player(int x, int y) {
+		super(); 
+		health=100;
+		level=1;
+		setPosX(x);
+		setPosY(y);
 		body();
 	}
 
@@ -55,10 +67,10 @@ public class Player extends GameObject implements NormalPlayer {
 	
 	public void move() {
 		if(speed>0) {
-			for(int i=0;i<points.size();i++)
-				points.get(i).translate(getSpeedX(), getSpeedY());
 			posX+=getSpeedX();
 			posY+=getSpeedY();
+			points.clear();
+			body();
 		}
 	}
 	public void turn() {
@@ -67,10 +79,6 @@ public class Player extends GameObject implements NormalPlayer {
 			angle+=turnSpeed;
 			points.clear();
 			body();
-	//		System.out.println("rotating speed:"+turnSpeed+" posX"+posX+"posY"+posY);
-	//		AffineTransform t=AffineTransform.getRotateInstance(turnSpeed,posX,posY);
-	//		for(int i=0;i<points.size();i++)
-	//			t.transform(points.get(i),points.get(i));
 		}
 	}
 	//try to handle projectile moving and drawing inside player
@@ -103,12 +111,6 @@ public class Player extends GameObject implements NormalPlayer {
 	}
 
 	@Override
-	public void updateState() {
-		move();
-		turn();
-	}
-
-	@Override
 	public void setTurningCW() {
 		turnSpeed=0.1;
 	}
@@ -126,5 +128,11 @@ public class Player extends GameObject implements NormalPlayer {
 	@Override
 	public boolean isDestroyed() {
 		return obsolete;
+	}
+
+	@Override
+	public void update() {
+		move();
+		turn();
 	}
 }

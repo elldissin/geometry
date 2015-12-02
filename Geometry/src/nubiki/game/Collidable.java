@@ -6,4 +6,5 @@ public interface Collidable {
 	public double getPosY();
 	public double getObjHeight();
 	public double getObjWidth();
+	public void destroy();
 }

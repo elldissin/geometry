@@ -169,6 +169,8 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
 			for(int j=0; j<collidableObjects.size();j++) {
 				if(collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i!=j) {
 					System.out.println("Collision happened");
+					collidableObjects.get(i).destroy();
+					collidableObjects.get(j).destroy();//empty destroy method in projectile to ignore ?
 				}
 			}
 
@@ -199,12 +201,15 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
 				delta--;
 			}
 			//to print out fps and updates
-//			if(System.currentTimeMillis()-timer>1000) {
-//				timer+=1000;
+			if(System.currentTimeMillis()-timer>1000) {
+				timer+=1000;
 //				System.out.println("FPS:"+frames+" Updates:"+updates);
 //				frames=0;
 //				updates=0;
-//			}
+			System.out.println("\nTotal collidable:"+collidableObjects.size());
+			System.out.println("Total drawable:"+drawableObjects.size());
+			System.out.println("Total updatable:"+updatableObjects.size());
+			}
 		}
 		stop();
 	}

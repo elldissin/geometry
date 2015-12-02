@@ -53,8 +53,8 @@ public abstract class GameObject {
 		super();
 		posX=100.0;
 		posY=100.0;
-		objWidth=20.0;
-		objHeight=20.0;
+		objWidth=20;
+		objHeight=20;
 		speedX=0;
 		speedY=0;
 		speed=0;

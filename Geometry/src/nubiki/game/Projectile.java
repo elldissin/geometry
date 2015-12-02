@@ -13,6 +13,8 @@ public class Projectile extends GameObject implements  Drawable, Updatable, Coll
 		super();
 		posX=x;
 		posY=y;
+		objHeight=5;
+		objWidth=5;
 	}
 	@Override
 	public ArrayList<Point> body() {
@@ -22,6 +24,10 @@ public class Projectile extends GameObject implements  Drawable, Updatable, Coll
 			points.add(0, p);
 			p = new Point((int)(posX+10),(int)(posY+5));
 			points.add(1,p);
+			p = new Point((int)(posX+10),(int)(posY+0));
+			points.add(2,p);
+			p = new Point((int)(posX+5),(int)(posY+0));
+			points.add(3,p);
 		}
 		return points;
 	}
@@ -50,7 +56,6 @@ public class Projectile extends GameObject implements  Drawable, Updatable, Coll
 		}
 		if(distTravelled>liveDistance)
 			setObsolete(true);
-			
 	}
 	
 	public void turn() {
@@ -60,8 +65,7 @@ public class Projectile extends GameObject implements  Drawable, Updatable, Coll
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-		
+		setObsolete(true);
 	}
 	@Override
 	public boolean isDestroyed() {

@@ -85,7 +85,7 @@ Updatable, Controllable, Shooting, Collidable {
 	@Override
 	public void shoot() {
 		Projectile projectile = new Projectile((int)posX, (int)posY);
-		projectile.setSpeed(20);
+		projectile.setSpeed(5);
 		projectile.setAngle(angle);
 		GameCanvas.addProjectile(projectile); 
 		//add each other to ignore list to avoid collisions

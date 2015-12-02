@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
-public class Projectile extends GameObject implements  Drawable {
+public class Projectile extends GameObject implements  Drawable, Updatable, Collidable {
 	private static final long serialVersionUID = 1L;
 
 	public Projectile(int x, int y) {

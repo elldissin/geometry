@@ -21,13 +21,15 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
     private final int WIDTH=800;
     private final int HEIGHT=600;
     private Player player1,player2;
-    private static List<GameObject> updatableObjects;
+    private static List<Updatable> updatableObjects;
     private static List<Drawable> drawableObjects;
+    private static List<Collidable> collidableObjects;
 	public GameCanvas() {
 		super();
 		isRunning=false;
-		updatableObjects=new ArrayList<GameObject>();
+		updatableObjects=new ArrayList<Updatable>();
 		drawableObjects=new ArrayList<Drawable>();
+		collidableObjects=new ArrayList<Collidable>();
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		addKeyListener(this);
 		setFocusable(true);
@@ -48,14 +50,19 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
 		player2=new Player(400,100);
 		updatableObjects.add(player1);
 		updatableObjects.add(player2);
+		
 		drawableObjects.add(player1);
 		drawableObjects.add(player2);
+		
+		collidableObjects.add(player1);
+		collidableObjects.add(player2);
 	}
 
 	protected static void addProjectile(Projectile obj) {
 		if(obj!=null) {
 			updatableObjects.add(obj);
 			drawableObjects.add(obj);
+			collidableObjects.add(obj);
 		}
 	}
 	
@@ -78,7 +85,7 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
 	public void paintComponent(Graphics g) {
 //		System.out.println("painting canvas...");
 		super.paintComponent(g);
-		for(int i=0; i<updatableObjects.size();i++)
+		for(int i=0; i<drawableObjects.size();i++)
 			drawableObjects.get(i).draw(g);
 	}
 	
@@ -153,18 +160,15 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
 		//Handles destruction of obsolete objects
 		for(int i=0; i<updatableObjects.size();i++) {
 			if(updatableObjects.get(i).isDestroyed()) {
-				updatableObjects.remove(i);
-				drawableObjects.remove(i); //THE TWO LISTS MAY BE DIFFERENT ...?
+				removeFromScene(updatableObjects.get(i));
 			}
 		}
 		
 		//Handles collisions
-		for(int i=0; i<updatableObjects.size();i++)
-			for(int j=0; j<updatableObjects.size();j++) {
-				if(updatableObjects.get(i).isColliding(updatableObjects.get(j)) && i!=j) {
+		for(int i=0; i<collidableObjects.size();i++)
+			for(int j=0; j<collidableObjects.size();j++) {
+				if(collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i!=j) {
 					System.out.println("Collision happened");
-					updatableObjects.get(i).destroy(); //marks object for deletion
-					updatableObjects.get(j).destroy(); //marks object for deletion
 				}
 			}
 
@@ -203,5 +207,11 @@ public class GameCanvas extends JPanel implements Runnable, KeyListener {
 //			}
 		}
 		stop();
+	}
+	
+	private void removeFromScene(Updatable obj) {
+		updatableObjects.remove(obj);
+		drawableObjects.remove(obj);
+		collidableObjects.remove(obj);
 	}
 }

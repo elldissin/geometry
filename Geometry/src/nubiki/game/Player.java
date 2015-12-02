@@ -9,7 +9,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class Player extends GameObject implements Drawable,
-Controllable, Shooting {
+Updatable, Controllable, Shooting, Collidable {
 	private static final long serialVersionUID = 1L;
 	private int health;
 	private int level;

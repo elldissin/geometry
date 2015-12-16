@@ -87,7 +87,7 @@ Updatable, Controllable, Shooting, Collidable {
 		Projectile projectile = new Projectile((int)posX, (int)posY);
 		projectile.setSpeed(5);
 		projectile.setAngle(angle);
-		GameCanvas.addProjectile(projectile); 
+		GameManager.addProjectile(projectile); 
 		//add each other to ignore list to avoid collisions
 		addIgnoreObject(projectile);
 		projectile.addIgnoreObject(this);

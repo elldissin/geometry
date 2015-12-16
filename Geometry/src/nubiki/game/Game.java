@@ -13,6 +13,8 @@ public class Game {
         frame.setResizable(false);
         frame.add(game.getCamera());
         frame.setVisible(true);
+        frame.setFocusable(true); //important call to allow listening to keys
+        frame.addKeyListener(game);
         game.start();
     }
 }

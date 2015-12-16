@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import javax.swing.JPanel;
 
 //import com.sun.swing.internal.plaf.synth.resources.synth;
 
-public class GameManager extends JPanel implements Runnable, KeyListener {
+public class GameManager implements Runnable, KeyListener {
     private static final long serialVersionUID = 1L;
     
     private boolean isRunning;
@@ -31,7 +32,6 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
 		updatableObjects=new ArrayList<Updatable>();
 		drawableObjects=new ArrayList<Drawable>();
 		collidableObjects=new ArrayList<Collidable>();
-		addKeyListener(this);
 		addPlayers();
 	}
 	
@@ -79,13 +79,6 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
 		System.exit(1);
 	}
 	
-	@Override
-	public void paintComponent(Graphics g) {
-//		System.out.println("painting canvas...");
-		super.paintComponent(g);
-		for(int i=0; i<drawableObjects.size();i++)
-			drawableObjects.get(i).draw(g);
-	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -151,6 +144,9 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
 	}
 	
 	private void render() {
+		Point p = new Point((int)player1.getPosX()-camera1.getViewWidth()/2,(int)player1.getPosY()
+				-camera1.getViewHeight()/2);
+		camera1.setViewOffset(p);
 		camera1.show(drawableObjects);
 	}
 	

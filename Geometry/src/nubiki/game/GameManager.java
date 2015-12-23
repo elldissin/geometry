@@ -19,7 +19,7 @@ public class GameManager implements Runnable, KeyListener {
     
     private boolean isRunning;
     private Thread thread;
-    private GameCamera camera1;
+    private GameCamera camera1, camera2;
     
     private Player player1,player2;
     private static List<Updatable> updatableObjects;
@@ -29,6 +29,7 @@ public class GameManager implements Runnable, KeyListener {
 		super();
 		isRunning=false;
 		camera1=new GameCamera();
+		camera2=new GameCamera();
 		updatableObjects=new ArrayList<Updatable>();
 		drawableObjects=new ArrayList<Drawable>();
 		collidableObjects=new ArrayList<Collidable>();
@@ -144,10 +145,16 @@ public class GameManager implements Runnable, KeyListener {
 	}
 	
 	private void render() {
+		//ties camera 1 to player 1
 		Point p = new Point((int)player1.getPosX()-camera1.getViewWidth()/2,(int)player1.getPosY()
 				-camera1.getViewHeight()/2);
 		camera1.setViewOffset(p);
 		camera1.show(drawableObjects);
+		//ties camera 2 to player 2
+		p = new Point((int)player2.getPosX()-camera2.getViewWidth()/2,(int)player2.getPosY()
+				-camera2.getViewHeight()/2);
+		camera2.setViewOffset(p);
+		camera2.show(drawableObjects);
 	}
 	
 	private void updateState() {
@@ -214,7 +221,11 @@ public class GameManager implements Runnable, KeyListener {
 		collidableObjects.remove(obj);
 	}
 	
-	public GameCamera getCamera() {
-		return camera1;
+	public GameCamera getCamera(int number) {
+		if(number==1)
+			return camera1;
+		if(number==2)
+			return camera2;
+		return new GameCamera(); //if not 1 or 2 return empty camera
 	}
 }

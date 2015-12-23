@@ -18,10 +18,10 @@ public class GameCamera extends JPanel {
     
 	public GameCamera() {
 		super();
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		viewOffset=new Point(0,0);
-		viewWidth=800;
+		viewWidth=400;
 		viewHeight=600;
+		setPreferredSize(new Dimension(viewWidth, viewHeight));
+		viewOffset=new Point(0,0);
 	}
 	
     public int getViewWidth() {
@@ -57,6 +57,10 @@ public class GameCamera extends JPanel {
 	public void paintComponent(Graphics g) {
 //		System.out.println("painting canvas...");
 		super.paintComponent(g);
+		g.drawString("Left top",5,10);
+		g.drawString("Right top",300,10);
+		g.drawString("Left bottom",5,570);
+		g.drawString("Right bottom",300,570);
 		g.translate((int)-viewOffset.getX(), (int)-viewOffset.getY());
 		if(drawableObjects!=null)
 		for(int i=0; i<drawableObjects.size();i++)

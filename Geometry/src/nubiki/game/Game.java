@@ -1,5 +1,8 @@
 package nubiki.game;
 
+import java.awt.BorderLayout;
+import java.awt.LayoutManager;
+
 import javax.swing.JFrame;
 
 public class Game {
@@ -11,7 +14,8 @@ public class Game {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setResizable(false);
-        frame.add(game.getCamera());
+        frame.add(game.getCamera(1), BorderLayout.LINE_START);
+        frame.add(game.getCamera(2), BorderLayout.LINE_END);
         frame.setVisible(true);
         frame.setFocusable(true); //important call to allow listening to keys
         frame.addKeyListener(game);

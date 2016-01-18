@@ -75,4 +75,12 @@ public class Projectile extends GameObject implements  Drawable, Updatable, Coll
 	public void update() {
 		move();
 	}
+	@Override
+	public int getMaxSpeed() {
+		return maxSpeed;
+	}
+	@Override
+	public void setMaxSpeed(int maxSpeed) {
+		this.maxSpeed = maxSpeed;
+	}
 }

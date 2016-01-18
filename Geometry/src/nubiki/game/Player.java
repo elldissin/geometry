@@ -13,6 +13,7 @@ Updatable, Controllable, Shooting, Collidable {
 	private static final long serialVersionUID = 1L;
 	private int health;
 	private int level;
+	private int maxSpeed;
 
 	public Player() {
 		super(); 
@@ -25,6 +26,7 @@ Updatable, Controllable, Shooting, Collidable {
 		super(); 
 		health=100;
 		level=1;
+		maxSpeed=5;
 		setPosX(x);
 		setPosY(y);
 		body();
@@ -85,7 +87,7 @@ Updatable, Controllable, Shooting, Collidable {
 	@Override
 	public void shoot() {
 		Projectile projectile = new Projectile((int)posX, (int)posY);
-		projectile.setSpeed(5);
+		projectile.setSpeed(7);
 		projectile.setAngle(angle);
 		GameManager.addProjectile(projectile); 
 		//add each other to ignore list to avoid collisions
@@ -96,13 +98,21 @@ Updatable, Controllable, Shooting, Collidable {
 	@Override
 	public void setMoving() {
 		// TODO Auto-generated method stub
-		setSpeed(5);
+		setSpeed(maxSpeed);
 	}
 
 	@Override
 	public void setStopped() {
 		// TODO Auto-generated method stub
 		setSpeed(0);
+	}
+
+	public int getMaxSpeed() {
+		return maxSpeed;
+	}
+
+	public void setMaxSpeed(int maxSpeed) {
+		this.maxSpeed = maxSpeed;
 	}
 
 	@Override

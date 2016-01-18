@@ -20,6 +20,7 @@ public class GameManager implements Runnable, KeyListener {
     private boolean isRunning;
     private Thread thread;
     private GameCamera camera1, camera2;
+    private EffectManager effManager;
     
     private Player player1,player2;
     private static List<Updatable> updatableObjects;
@@ -30,6 +31,7 @@ public class GameManager implements Runnable, KeyListener {
 		isRunning=false;
 		camera1=new GameCamera();
 		camera2=new GameCamera();
+		effManager=new EffectManager();
 		updatableObjects=new ArrayList<Updatable>();
 		drawableObjects=new ArrayList<Drawable>();
 		collidableObjects=new ArrayList<Collidable>();
@@ -170,8 +172,10 @@ public class GameManager implements Runnable, KeyListener {
 			for(int j=0; j<collidableObjects.size();j++) {
 				if(collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i!=j) {
 					System.out.println("Collision happened");
-					collidableObjects.get(i).destroy();
-					collidableObjects.get(j).destroy();//empty destroy method in projectile to ignore ?
+					effManager.handle(collidableObjects.get(i), new SlowEffect());
+//					collidableObjects.get(i).destroy();
+//					collidableObjects.get(i).destroy();
+//					collidableObjects.get(j).destroy();//empty destroy method in projectile to ignore ?
 				}
 			}
 

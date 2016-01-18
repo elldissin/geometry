@@ -13,7 +13,7 @@ public abstract class GameObject {
 	protected double objWidth;
 	protected double objHeight;
 	protected int speedX,speedY;
-	protected int speed;
+	protected int maxSpeed, speed;
 	protected double angle;
 	protected double turnSpeed;
 	protected boolean obsolete;
@@ -58,6 +58,7 @@ public abstract class GameObject {
 		speedX=0;
 		speedY=0;
 		speed=0;
+		maxSpeed=10;
 		angle=0;
 		turnSpeed=0;
 		distTravelled=0;
@@ -77,7 +78,9 @@ public abstract class GameObject {
 		return speed;
 	}
 	public void setSpeed(int speed) {
-		this.speed = speed;
+		if (speed<=maxSpeed)
+			this.speed = speed;
+		else this.speed=maxSpeed;
 	}
 	public double getAngle() {
 		return angle;

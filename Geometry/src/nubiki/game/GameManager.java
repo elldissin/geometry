@@ -49,6 +49,10 @@ public class GameManager implements Runnable, KeyListener {
 	private void addPlayers() {
 		player1=new Player(100,100);
 		player2=new Player(400,100);
+		
+		player1.setBehaviour(new SlowBehaviour(player1));
+		player2.setBehaviour(new SlowBehaviour(player2));
+		
 		updatableObjects.add(player1);
 		updatableObjects.add(player2);
 		
@@ -88,31 +92,31 @@ public class GameManager implements Runnable, KeyListener {
 //		System.out.println("Key pressed...");
 		int code = e.getKeyCode();
 		if (code==KeyEvent.VK_UP){
-			player1.setMoving();
-		}
-		if (code==KeyEvent.VK_RIGHT){
-			player1.setTurningCW();
-		}
-		if (code==KeyEvent.VK_LEFT){
-			player1.setTurningCCW();
-		}
-		
-		if (code==KeyEvent.VK_W){
 			player2.setMoving();
 		}
-		if (code==KeyEvent.VK_D){
+		if (code==KeyEvent.VK_RIGHT){
 			player2.setTurningCW();
 		}
-		if (code==KeyEvent.VK_A){
+		if (code==KeyEvent.VK_LEFT){
 			player2.setTurningCCW();
 		}
 		
+		if (code==KeyEvent.VK_W){
+			player1.setMoving();
+		}
+		if (code==KeyEvent.VK_D){
+			player1.setTurningCW();
+		}
+		if (code==KeyEvent.VK_A){
+			player1.setTurningCCW();
+		}
+		
 		if (code==KeyEvent.VK_Q) { //casting to be fixed
-			player2.shoot();
+			player1.shoot();
 		}
 		
 		if (code==KeyEvent.VK_CONTROL) { //casting to be fixed
-			player1.shoot();
+			player2.shoot();
 		}
 	}
 	
@@ -121,23 +125,23 @@ public class GameManager implements Runnable, KeyListener {
 		int code = e.getKeyCode();
 		//this needs to be fixed, stopping even when releasing the other key
 		if (code==KeyEvent.VK_UP){
-			player1.setStopped();;
+			player2.setStopped();;
 		}
 		if (code==KeyEvent.VK_LEFT){
-			player1.setNotTurning();
+			player2.setNotTurning();
 		}
 		if (code==KeyEvent.VK_RIGHT){
-			player1.setNotTurning();
+			player2.setNotTurning();
 		}
 		
 		if (code==KeyEvent.VK_W){
-			player2.setStopped();
+			player1.setStopped();
 		}
 		if (code==KeyEvent.VK_A){
-			player2.setNotTurning();
+			player1.setNotTurning();
 		}
 		if (code==KeyEvent.VK_D){
-			player2.setNotTurning();
+			player1.setNotTurning();
 		}
 	}
 
@@ -172,7 +176,9 @@ public class GameManager implements Runnable, KeyListener {
 			for(int j=0; j<collidableObjects.size();j++) {
 				if(collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i!=j) {
 					System.out.println("Collision happened");
-					effManager.handle(collidableObjects.get(i), new SlowEffect());
+					GameObject converted = (GameObject)(collidableObjects.get(i));
+					if (converted.getBehaviour()!=null)
+						effManager.handle(converted.getBehaviour(), new SlowEffect());
 //					collidableObjects.get(i).destroy();
 //					collidableObjects.get(i).destroy();
 //					collidableObjects.get(j).destroy();//empty destroy method in projectile to ignore ?

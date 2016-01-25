@@ -19,6 +19,7 @@ public abstract class GameObject {
 	protected boolean obsolete;
 	protected int distTravelled;
 	protected int liveDistance;
+	protected Behaviour behaviour;
 	protected ArrayList <Point> points;
 	protected ArrayList <GameObject> ignoredObjects;
 	
@@ -65,9 +66,18 @@ public abstract class GameObject {
 		liveDistance=400;
 		obsolete=false;
 		points=new ArrayList<Point>();
-		ignoredObjects = new ArrayList <GameObject>(); 
+		ignoredObjects = new ArrayList <GameObject>();
+		behaviour=null;
 	}
 	
+	public Behaviour getBehaviour() {
+		if (behaviour!=null)
+			return behaviour;
+		else return null;
+	}
+	public void setBehaviour(Behaviour behaviour) {
+		this.behaviour = behaviour;
+	}
 	public double getTurnSpeed() {
 		return turnSpeed;
 	}

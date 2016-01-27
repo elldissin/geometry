@@ -217,9 +217,9 @@ public class GameManager implements Runnable, KeyListener {
 //				System.out.println("FPS:"+frames+" Updates:"+updates);
 //				frames=0;
 //				updates=0;
-			System.out.println("\nTotal collidable:"+collidableObjects.size());
-			System.out.println("Total drawable:"+drawableObjects.size());
-			System.out.println("Total updatable:"+updatableObjects.size());
+//			System.out.println("\nTotal collidable:"+collidableObjects.size());
+//			System.out.println("Total drawable:"+drawableObjects.size());
+//			System.out.println("Total updatable:"+updatableObjects.size());
 			}
 		}
 		stop();

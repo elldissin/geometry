@@ -11,7 +11,8 @@ public class SlowBehaviour extends GeneralBehaviour implements Behaviour {
 	public void doBehaviour() {
 		if (slowable) {
 			System.out.println("Object is being slowed now");
-			ownerObject.setSpeed((int)(ownerObject.getSpeed()/2));	
+			ownerObject.setMaxSpeed((int)(ownerObject.getMaxSpeed()/2));
+			slowable=false;
 		}
 	}
 

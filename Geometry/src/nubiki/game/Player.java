@@ -13,7 +13,6 @@ Updatable, Controllable, Shooting, Collidable {
 	private static final long serialVersionUID = 1L;
 	private int health;
 	private int level;
-	private int maxSpeed;
 
 	public Player() {
 		super(); 
@@ -68,6 +67,7 @@ Updatable, Controllable, Shooting, Collidable {
 	}
 	
 	public void move() {
+		speed=Math.min(speed,maxSpeed);
 		if(speed>0) {
 			posX+=getSpeedX();
 			posY+=getSpeedY();

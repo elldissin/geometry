@@ -46,6 +46,7 @@ public abstract class GameObject {
 	public double getObjHeight() {
 		return objHeight;
 	}
+	
 	public void setObjHeight(double objHeight) {
 		this.objHeight = objHeight;
 	}
@@ -138,4 +139,6 @@ public abstract class GameObject {
 	
 	public abstract void move();
 	public abstract void turn();
+	abstract public int getMaxSpeed();
+	abstract public void setMaxSpeed(int maxSpeed);
 }

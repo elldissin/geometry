@@ -1,6 +1,6 @@
 package nubiki.game;
 
 public interface Behaviour {
-	public void doBehaviour();
+	public void doBehaviour(int amount);
 	public boolean isSlowable();
 }

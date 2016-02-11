@@ -8,10 +8,9 @@ public class SlowBehaviour extends GeneralBehaviour implements Behaviour {
 	}
 	
 	@Override
-	public void doBehaviour() {
+	public void doBehaviour(int percentage) {
 		if (slowable) {
-			System.out.println("Object is being slowed now");
-			ownerObject.setMaxSpeed((int)(ownerObject.getMaxSpeed()/2));
+			ownerObject.setMaxSpeed((int)(ownerObject.getMaxSpeed()*(100-percentage)/100));
 			slowable=false;
 		}
 	}

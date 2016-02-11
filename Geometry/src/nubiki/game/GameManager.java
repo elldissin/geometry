@@ -178,7 +178,7 @@ public class GameManager implements Runnable, KeyListener {
 					System.out.println("Collision happened");
 					GameObject converted = (GameObject)(collidableObjects.get(i));
 					if (converted.getBehaviour()!=null)
-						effManager.handle(converted.getBehaviour(), new SlowEffect());
+						effManager.handle(converted.getBehaviour(), new SlowEffect(10));
 //					collidableObjects.get(i).destroy();
 //					collidableObjects.get(i).destroy();
 //					collidableObjects.get(j).destroy();//empty destroy method in projectile to ignore ?

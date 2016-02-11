@@ -113,6 +113,7 @@ Updatable, Controllable, Shooting, Collidable {
 
 	public void setMaxSpeed(int maxSpeed) {
 		this.maxSpeed = maxSpeed;
+		System.out.println("player maxspeed: " + maxSpeed);
 	}
 
 	@Override

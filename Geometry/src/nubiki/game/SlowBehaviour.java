@@ -17,7 +17,13 @@ public class SlowBehaviour extends GeneralBehaviour implements Behaviour {
 
 	@Override
 	public boolean isSlowable() {
-		// TODO Auto-generated method stub
 		return slowable;
 	}
+
+	@Override
+	public boolean isVulnerable() {
+		return vulnerable;
+	}
+	
+	
 }

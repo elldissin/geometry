@@ -57,10 +57,11 @@ public class GameCamera extends JPanel {
 	public void paintComponent(Graphics g) {
 //		System.out.println("painting canvas...");
 		super.paintComponent(g);
-		g.drawString("Left top",5,10);
-		g.drawString("Right top",300,10);
-		g.drawString("Left bottom",5,570);
-		g.drawString("Right bottom",300,570);
+//		g.drawString("Left top",5,10);
+//		g.drawString("Right top",300,10);
+//		g.drawString("Left bottom",5,570);
+//		g.drawString("Right bottom",300,570);
+		g.drawRect(0, 0, 399, 600);
 		g.translate((int)-viewOffset.getX(), (int)-viewOffset.getY());
 		if(drawableObjects!=null)
 		for(int i=0; i<drawableObjects.size();i++)

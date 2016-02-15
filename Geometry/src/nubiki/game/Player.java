@@ -62,6 +62,11 @@ Updatable, Controllable, Shooting, Collidable {
 			}		
 			path.closePath();
 			g2.draw(path);
+			//drawing direction line
+			g2.drawLine((int)posX, (int)posY, (int) (posX+(objWidth*Math.cos(angle))),
+					(int) (posY+(objHeight*Math.sin(angle))));
+			//drawing life %
+			g.drawString(String.valueOf(health), (int)posX, (int)(posY-objHeight));
 		}
 //		g2.fill(path);
 	}
@@ -145,5 +150,13 @@ Updatable, Controllable, Shooting, Collidable {
 	public void update() {
 		move();
 		turn();
+	}
+
+	@Override
+	public void getHit(int amount) {
+		if(health-amount<=0)
+			health=0;
+		else 
+			health-=amount;
 	}
 }

@@ -141,4 +141,5 @@ public abstract class GameObject {
 	public abstract void turn();
 	abstract public int getMaxSpeed();
 	abstract public void setMaxSpeed(int maxSpeed);
+	abstract public void getHit(int amount);
 }

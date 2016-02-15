@@ -50,8 +50,8 @@ public class GameManager implements Runnable, KeyListener {
 		player1=new Player(100,100);
 		player2=new Player(400,100);
 		
-		player1.setBehaviour(new SlowBehaviour(player1));
-		player2.setBehaviour(new SlowBehaviour(player2));
+		player1.setBehaviour(new DmgBehaviour(player1));
+		player2.setBehaviour(new DmgBehaviour(player2));
 		
 		updatableObjects.add(player1);
 		updatableObjects.add(player2);
@@ -175,10 +175,12 @@ public class GameManager implements Runnable, KeyListener {
 		for(int i=0; i<collidableObjects.size();i++)
 			for(int j=0; j<collidableObjects.size();j++) {
 				if(collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i!=j) {
-					System.out.println("Collision happened");
+//					System.out.println("Collision happened");
 					GameObject converted = (GameObject)(collidableObjects.get(i));
-					if (converted.getBehaviour()!=null)
+//					if (converted.getBehaviour()!=null) {
 						effManager.handle(converted.getBehaviour(), new SlowEffect(10));
+						effManager.handle(converted.getBehaviour(), new DmgEffect(1));
+//					}
 //					collidableObjects.get(i).destroy();
 //					collidableObjects.get(i).destroy();
 //					collidableObjects.get(j).destroy();//empty destroy method in projectile to ignore ?

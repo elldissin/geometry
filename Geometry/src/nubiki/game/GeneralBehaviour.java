@@ -14,4 +14,15 @@ public class GeneralBehaviour {
 		slowable=false;
 		vulnerable=false;
 	}
+	
+	public void doBehaviour(int amount) {
+		if (vulnerable) {
+			System.out.println("Player got hit by " + amount +" hp");
+			ownerObject.getHit(amount);
+		}
+		if (slowable) {
+			ownerObject.setMaxSpeed((int)(ownerObject.getMaxSpeed()*(100-amount)/100));
+			slowable=false;
+		}
+	}
 }

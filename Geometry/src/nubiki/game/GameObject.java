@@ -22,6 +22,7 @@ public abstract class GameObject {
 	protected Behaviour behaviour;
 	protected ArrayList <Point> points;
 	protected ArrayList <GameObject> ignoredObjects;
+	protected ArrayList <Effect> onHitEffects;
 	
 	public double getPosX() {
 		return posX;
@@ -68,7 +69,16 @@ public abstract class GameObject {
 		obsolete=false;
 		points=new ArrayList<Point>();
 		ignoredObjects = new ArrayList <GameObject>();
+		onHitEffects = new ArrayList <Effect>();
 		behaviour=null;
+	}
+	
+	public ArrayList <Effect> getOnHitEffects() {
+		return onHitEffects;
+	}
+	
+	public void addOnHitEffect(Effect e) {
+		onHitEffects.add(e);
 	}
 	
 	public Behaviour getBehaviour() {

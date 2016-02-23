@@ -50,8 +50,8 @@ public class GameManager implements Runnable, KeyListener {
 		player1=new Player(100,100);
 		player2=new Player(400,100);
 		
-		player1.setBehaviour(new DmgBehaviour(player1));
-		player2.setBehaviour(new DmgBehaviour(player2));
+		player1.setBehaviour(new SlowBehaviour(player1));
+		player2.setBehaviour(new SlowBehaviour(player2));
 		
 		updatableObjects.add(player1);
 		updatableObjects.add(player2);
@@ -176,11 +176,14 @@ public class GameManager implements Runnable, KeyListener {
 			for(int j=0; j<collidableObjects.size();j++) {
 				if(collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i!=j) {
 //					System.out.println("Collision happened");
-					GameObject converted = (GameObject)(collidableObjects.get(i));
-//					if (converted.getBehaviour()!=null) {
-						effManager.handle(converted.getBehaviour(), new SlowEffect(10));
-						effManager.handle(converted.getBehaviour(), new DmgEffect(1));
-//					}
+					GameObject actor1 = (GameObject)(collidableObjects.get(i));
+					GameObject actor2 = (GameObject)(collidableObjects.get(j));
+					for (int k=0;k<actor2.getOnHitEffects().size();k++) {
+						effManager.handle(actor1.getBehaviour(), actor2.getOnHitEffects().get(k));
+					}
+					for (int k=0;k<actor1.getOnHitEffects().size();k++) {
+						effManager.handle(actor2.getBehaviour(), actor1.getOnHitEffects().get(k));
+					}
 //					collidableObjects.get(i).destroy();
 //					collidableObjects.get(i).destroy();
 //					collidableObjects.get(j).destroy();//empty destroy method in projectile to ignore ?

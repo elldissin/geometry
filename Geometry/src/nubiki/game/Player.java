@@ -92,6 +92,8 @@ Updatable, Controllable, Shooting, Collidable {
 	@Override
 	public void shoot() {
 		Projectile projectile = new Projectile((int)posX, (int)posY);
+		projectile.addOnHitEffect(new SlowEffect(20));
+		projectile.addOnHitEffect(new DmgEffect(1));
 		projectile.setSpeed(7);
 		projectile.setAngle(angle);
 		GameManager.addProjectile(projectile); 

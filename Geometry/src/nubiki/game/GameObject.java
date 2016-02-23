@@ -1,5 +1,6 @@
 package nubiki.game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -125,7 +126,11 @@ public abstract class GameObject {
 		obsolete=value;
 	}
 	
-	public abstract void draw(Graphics g);
+	public void draw(Graphics g) { //this displays bounding rect
+		g.setColor(Color.gray);
+		g.drawRect(boundingRect().x,boundingRect().y,boundingRect().width, boundingRect().height);
+		g.setColor(Color.black);
+	}
 	public abstract  ArrayList<Point> body();
 
 	
@@ -136,17 +141,18 @@ public abstract class GameObject {
 	
 	public boolean isColliding(Collidable o) {
 		if(!ignoredObjects.contains(o)) {
-			Rectangle2D rect1 = new Rectangle ((int)(this.getPosX()),(int)
-					(this.getPosY()),(int)(this.getObjWidth())*2,(int)(this.getObjHeight())*2);
-			Rectangle2D rect2 = new Rectangle ((int)(o.getPosX()),(int)
-					(o.getPosY()),(int)(o.getObjWidth())*2,(int)(o.getObjHeight())*2);
-			if (rect1.intersects(rect2))
+			GameObject temp=(GameObject)o;
+			if (boundingRect().intersects(temp.boundingRect()))
 				return true;
 			return false;
 		}
 		return false;
 	}
 	
+	public Rectangle boundingRect() {
+		return new Rectangle((int)(getPosX()-getObjWidth()/2),(int)
+				(getPosY()-getObjHeight()),(int)(getObjWidth())*2,(int)(getObjHeight())*2);
+	}
 	public abstract void move();
 	public abstract void turn();
 	abstract public int getMaxSpeed();

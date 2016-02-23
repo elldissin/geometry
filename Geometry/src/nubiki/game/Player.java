@@ -53,6 +53,7 @@ Updatable, Controllable, Shooting, Collidable {
 
 	//@Override
 	public void draw(Graphics g) {
+		super.draw(g); //invoked to draw the bounding rect first
 		Graphics2D g2 = (Graphics2D) g;
 		GeneralPath path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
 		if(!points.isEmpty()) {

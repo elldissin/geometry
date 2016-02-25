@@ -7,7 +7,16 @@ public class SlowBehaviour extends GeneralBehaviour implements Behaviour {
 		slowable=true;
 		vulnerable=true;
 	}
-	
+
+
+	@Override
+	public void doBehaviour(int amount) {
+		if (slowable) {
+			ownerObject.setMaxSpeed((int)(ownerObject.getMaxSpeed()*(100-amount)/100));
+			slowable=false;
+		}
+	}
+
 	@Override
 	public boolean isSlowable() {
 		return slowable;
@@ -17,6 +26,6 @@ public class SlowBehaviour extends GeneralBehaviour implements Behaviour {
 	public boolean isVulnerable() {
 		return vulnerable;
 	}
-	
-	
+
+
 }

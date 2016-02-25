@@ -12,7 +12,7 @@ public class SlowEffect extends GeneralEffect implements Effect {
 	}
 	
 	@Override
-	public void applyTo(Behaviour b) {
-		b.slowDown(amount);
+	public void applyTo(GameObject obj) {
+		obj.getBehaviour().slowDown(obj, amount);
 	}
 }

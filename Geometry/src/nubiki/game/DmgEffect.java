@@ -12,7 +12,7 @@ public class DmgEffect extends GeneralEffect implements Effect {
 	}
 	
 	@Override
-	public void applyTo(Behaviour b) {
-		b.doDamage(amount);
+	public void applyTo(GameObject obj) {
+		obj.getBehaviour().doDamage(obj, amount);
 	}
 }

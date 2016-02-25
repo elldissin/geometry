@@ -5,13 +5,10 @@ public class GeneralBehaviour implements Behaviour {
 	public boolean slowable;
 	public boolean vulnerable;
 	
-	protected GeneralBehaviour(GameObject obj) {
-		ownerObject=obj;
+	protected GeneralBehaviour() {
 		slowable=false;
 		vulnerable=false;
 	}
-	
-//	abstract public void doBehaviour(int amount);
 	
 	@Override
 	public boolean isSlowable() {
@@ -24,14 +21,14 @@ public class GeneralBehaviour implements Behaviour {
 	}
 	
 	@Override
-	public void slowDown(int amount) {
-		ownerObject.setMaxSpeed((int)(ownerObject.getMaxSpeed()*(100-amount)/100));
-		slowable=false;
+	public void slowDown(GameObject obj, int amount) {
+		obj.setMaxSpeed((int)(obj.getMaxSpeed()*(100-amount)/100));
+		slowable=false; //remove after timer implementation
 	}
 
 	@Override
-	public void doDamage(int amount) {
+	public void doDamage(GameObject obj, int amount) {
 		System.out.println("Player got hit by " + amount +" hp");
-		ownerObject.getHit(amount);
+		obj.getHit(amount);
 	}
 }

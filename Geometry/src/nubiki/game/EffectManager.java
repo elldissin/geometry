@@ -1,8 +1,8 @@
 package nubiki.game;
 
 public class EffectManager {
-	public void handle(Behaviour b, Effect e) { //create interface "EffectCarrier" or so
-		if(b!=null && e!=null && e.isApplicable(b))
-			e.applyTo(b);
+	public void handle(GameObject obj, Effect e) { //create interface "EffectCarrier" or so
+		if(obj!=null && e!=null && e.isApplicable(obj.getBehaviour()))
+			e.applyTo(obj);
 	}
 }

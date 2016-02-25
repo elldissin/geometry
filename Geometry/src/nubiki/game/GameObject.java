@@ -85,7 +85,7 @@ public abstract class GameObject {
 	public Behaviour getBehaviour() {
 		if (behaviour!=null)
 			return behaviour;
-		else return null;
+		else return new GeneralBehaviour();
 	}
 	public void setBehaviour(Behaviour behaviour) {
 		this.behaviour = behaviour;

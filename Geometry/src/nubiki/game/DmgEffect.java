@@ -1,16 +1,18 @@
 package nubiki.game;
 
-public class DmgEffect implements Effect {
-	private int amount;
+public class DmgEffect extends GeneralEffect implements Effect {
 	
 	public DmgEffect(int amount) {
-		this.amount=amount;
+		super(amount);
+	}
+
+	@Override
+	public boolean isApplicable(Behaviour b) {
+		return b.isVulnerable();
 	}
 	
 	@Override
 	public void applyTo(Behaviour b) {
-		if (b.isVulnerable()) {
-			b.doBehaviour(amount);
-		}
+		b.doDamage(amount);
 	}
 }

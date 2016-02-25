@@ -50,8 +50,8 @@ public class GameManager implements Runnable, KeyListener {
 		player1=new Player(100,100);
 		player2=new Player(400,100);
 		
-		player1.setBehaviour(new SlowBehaviour(player1));
-		player2.setBehaviour(new SlowBehaviour(player2));
+		player1.setBehaviour(new DmgBehaviour(player1)); //change constructor, remove para GameObj?
+		player2.setBehaviour(new DmgBehaviour(player2));
 		
 		updatableObjects.add(player1);
 		updatableObjects.add(player2);

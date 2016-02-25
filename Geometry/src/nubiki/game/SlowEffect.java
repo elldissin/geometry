@@ -1,15 +1,18 @@
 package nubiki.game;
 
-public class SlowEffect implements Effect {
-	private int amount;
+public class SlowEffect extends GeneralEffect implements Effect {
 	
 	public SlowEffect(int amount) {
-		this.amount=amount;
+		super(amount);
+	}
+
+	@Override
+	public boolean isApplicable(Behaviour b) {
+		return b.isSlowable();
 	}
 	
 	@Override
 	public void applyTo(Behaviour b) {
-		if (b.isSlowable())
-			b.doBehaviour(amount);
+		b.slowDown(amount);
 	}
 }

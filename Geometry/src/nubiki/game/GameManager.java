@@ -53,20 +53,24 @@ public class GameManager implements Runnable, KeyListener {
 	private void addPlayers() {
 		player1=new Player(100,100);
 		player2=new Player(400,100);
+		StaticObject obst=new StaticObject(250,50);
 		Behaviour beh = new BumpBehaviour(); //common behaviour for both players
 		player1.setBehaviour(beh);
 		player2.setBehaviour(beh);
-		player1.addOnHitEffect(new BumpEffect(0));
-		player2.addOnHitEffect(new BumpEffect(0));
+		obst.addOnHitEffect(new BumpEffect(0));
 		
 		updatableObjects.add(player1);
 		updatableObjects.add(player2);
+		updatableObjects.add(obst);
+		
 		
 		drawableObjects.add(player1);
 		drawableObjects.add(player2);
+		drawableObjects.add(obst);
 		
 		collidableObjects.add(player1);
 		collidableObjects.add(player2);
+		collidableObjects.add(obst);
 	}
 
 	protected static void addProjectile(Projectile obj) {

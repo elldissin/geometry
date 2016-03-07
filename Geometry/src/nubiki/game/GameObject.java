@@ -41,7 +41,9 @@ public abstract class GameObject {
 		return posY;
 	}
 	public void setPosY(double posY) {
+		points.clear();
 		this.posY = posY;
+		body();
 	}
 	public double getObjWidth() {
 		return objWidth;

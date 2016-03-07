@@ -1,4 +1,4 @@
-package nubiki.game;
+package nubiki.behaviour;
 
 public class DmgBehaviour extends GeneralBehaviour implements Behaviour {
 

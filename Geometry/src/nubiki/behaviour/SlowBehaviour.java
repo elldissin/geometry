@@ -1,4 +1,4 @@
-package nubiki.game;
+package nubiki.behaviour;
 
 public class SlowBehaviour extends GeneralBehaviour implements Behaviour {
 

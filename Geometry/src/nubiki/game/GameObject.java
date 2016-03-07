@@ -7,6 +7,10 @@ import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+import nubiki.behaviour.Behaviour;
+import nubiki.behaviour.Effect;
+import nubiki.behaviour.GeneralBehaviour;
+
 public abstract class GameObject {
 	private static final long serialVersionUID = 1L;
 	protected double posX;

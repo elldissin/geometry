@@ -12,6 +12,10 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import nubiki.behaviour.Behaviour;
+import nubiki.behaviour.BumpBehaviour;
+import nubiki.behaviour.BumpEffect;
+
 //import com.sun.swing.internal.plaf.synth.resources.synth;
 
 public class GameManager implements Runnable, KeyListener {
@@ -49,9 +53,11 @@ public class GameManager implements Runnable, KeyListener {
 	private void addPlayers() {
 		player1=new Player(100,100);
 		player2=new Player(400,100);
-		Behaviour beh = new DmgBehaviour(); //common behaviour for both players
+		Behaviour beh = new BumpBehaviour(); //common behaviour for both players
 		player1.setBehaviour(beh);
 		player2.setBehaviour(beh);
+		player1.addOnHitEffect(new BumpEffect(0));
+		player2.addOnHitEffect(new BumpEffect(0));
 		
 		updatableObjects.add(player1);
 		updatableObjects.add(player2);

@@ -1,4 +1,6 @@
-package nubiki.game;
+package nubiki.behaviour;
+
+import nubiki.game.GameObject;
 
 public class SlowEffect extends GeneralEffect implements Effect {
 	

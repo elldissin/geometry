@@ -1,13 +1,18 @@
-package nubiki.game;
+package nubiki.behaviour;
+
+import nubiki.game.GameObject;
+import nubiki.game.Player;
 
 public class GeneralBehaviour implements Behaviour {
 	protected GameObject ownerObject;
 	public boolean slowable;
 	public boolean vulnerable;
+	public boolean bumping;
 	
-	protected GeneralBehaviour() {
+	public GeneralBehaviour() {
 		slowable=false;
 		vulnerable=false;
+		bumping=false;
 	}
 	
 	@Override
@@ -21,6 +26,11 @@ public class GeneralBehaviour implements Behaviour {
 	}
 	
 	@Override
+	public boolean isBumping() {
+		return bumping;
+	}
+	
+	@Override
 	public void slowDown(GameObject obj, int amount) {
 		obj.setMaxSpeed((int)(obj.getMaxSpeed()*(100-amount)/100));
 		slowable=false; //remove after timer implementation
@@ -30,5 +40,12 @@ public class GeneralBehaviour implements Behaviour {
 	public void doDamage(GameObject obj, int amount) {
 		System.out.println("Player got hit by " + amount +" hp");
 		obj.getHit(amount);
+	}
+
+	@Override
+	public void bump(GameObject obj, int amount) { 
+		Player p = (Player)obj; //ensure p is of type Player or change
+		p.setStopped();
+		
 	}
 }

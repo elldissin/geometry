@@ -1,4 +1,4 @@
-package nubiki.game;
+package nubiki.behaviour;
 
 abstract public class GeneralEffect implements Effect {
 	protected int amount;

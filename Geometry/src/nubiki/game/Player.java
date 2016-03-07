@@ -8,6 +8,9 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+import nubiki.behaviour.DmgEffect;
+import nubiki.behaviour.SlowEffect;
+
 public class Player extends GameObject implements Drawable,
 Updatable, Controllable, Shooting, Collidable {
 	private static final long serialVersionUID = 1L;

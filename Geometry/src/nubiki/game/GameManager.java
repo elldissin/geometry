@@ -18,12 +18,13 @@ import nubiki.behaviour.BumpEffect;
 
 //import com.sun.swing.internal.plaf.synth.resources.synth;
 
-public class GameManager implements Runnable, KeyListener {
+public class GameManager implements Runnable {
     private static final long serialVersionUID = 1L;
     
     private boolean isRunning;
     private Thread thread;
     private GameCamera camera1, camera2;
+    private Controller controller;
     private EffectManager effManager;
     
     private Player player1,player2;
@@ -39,6 +40,7 @@ public class GameManager implements Runnable, KeyListener {
 		updatableObjects=new ArrayList<Updatable>();
 		drawableObjects=new ArrayList<Drawable>();
 		collidableObjects=new ArrayList<Collidable>();
+		controller=new Controller();
 		addPlayers();
 	}
 	
@@ -71,6 +73,9 @@ public class GameManager implements Runnable, KeyListener {
 		collidableObjects.add(player1);
 		collidableObjects.add(player2);
 		collidableObjects.add(obst);
+		
+		controller.takeControlOf(player1);
+		controller.takeControlOf(player2);
 	}
 
 	protected static void addProjectile(Projectile obj) {
@@ -94,70 +99,6 @@ public class GameManager implements Runnable, KeyListener {
 			e.printStackTrace();
 		}
 		System.exit(1);
-	}
-	
-	
-	@Override
-	public void keyPressed(KeyEvent e) {
-//		System.out.println("Key pressed...");
-		int code = e.getKeyCode();
-		if (code==KeyEvent.VK_UP){
-			player2.setMoving();
-		}
-		if (code==KeyEvent.VK_RIGHT){
-			player2.setTurningCW();
-		}
-		if (code==KeyEvent.VK_LEFT){
-			player2.setTurningCCW();
-		}
-		
-		if (code==KeyEvent.VK_W){
-			player1.setMoving();
-		}
-		if (code==KeyEvent.VK_D){
-			player1.setTurningCW();
-		}
-		if (code==KeyEvent.VK_A){
-			player1.setTurningCCW();
-		}
-		
-		if (code==KeyEvent.VK_Q) { //casting to be fixed
-			player1.shoot();
-		}
-		
-		if (code==KeyEvent.VK_CONTROL) { //casting to be fixed
-			player2.shoot();
-		}
-	}
-	
-	@Override
-	public void keyReleased(KeyEvent e) {
-		int code = e.getKeyCode();
-		//this needs to be fixed, stopping even when releasing the other key
-		if (code==KeyEvent.VK_UP){
-			player2.setStopped();;
-		}
-		if (code==KeyEvent.VK_LEFT){
-			player2.setNotTurning();
-		}
-		if (code==KeyEvent.VK_RIGHT){
-			player2.setNotTurning();
-		}
-		
-		if (code==KeyEvent.VK_W){
-			player1.setStopped();
-		}
-		if (code==KeyEvent.VK_A){
-			player1.setNotTurning();
-		}
-		if (code==KeyEvent.VK_D){
-			player1.setNotTurning();
-		}
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-
 	}
 	
 	private void render() {
@@ -252,5 +193,9 @@ public class GameManager implements Runnable, KeyListener {
 		if(number==2)
 			return camera2;
 		return new GameCamera(); //if not 1 or 2 return empty camera
+	}
+	
+	public KeyListener getController() {
+			return controller;
 	}
 }

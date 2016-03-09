@@ -18,7 +18,7 @@ public class Game {
         frame.add(game.getCamera(2), BorderLayout.LINE_END);
         frame.setVisible(true);
         frame.setFocusable(true); //important call to allow listening to keys
-        frame.addKeyListener(game);
+        frame.addKeyListener(game.getController());
         game.start();
     }
 }

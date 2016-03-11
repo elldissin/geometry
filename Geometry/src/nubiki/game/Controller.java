@@ -1,11 +1,8 @@
 package nubiki.game;
 
-import java.awt.List;
-import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Observable;
 
 public class Controller implements KeyListener {
 	

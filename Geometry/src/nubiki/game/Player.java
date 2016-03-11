@@ -16,6 +16,7 @@ Updatable, Controllable, Shooting, Collidable {
 	private static final long serialVersionUID = 1L;
 	private int health;
 	private int level;
+	Animator anim;
 
 	public Player() {
 		super(); 
@@ -32,6 +33,7 @@ Updatable, Controllable, Shooting, Collidable {
 		setPosX(x);
 		setPosY(y);
 		body();
+		anim=new Animator((int)posX, (int)posY);
 	}
 
 	public ArrayList<Point> body() {

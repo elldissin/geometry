@@ -47,6 +47,7 @@ public class Projectile extends GameObject implements  Drawable, Updatable, Coll
 	}
 	
 	public void move() {
+		super.move();
 		if(speed>0) {
 			distTravelled+=Math.sqrt(Math.pow(getSpeedX(), 2)+Math.pow(getSpeedY(), 2));
 			posX+=getSpeedX();

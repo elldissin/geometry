@@ -59,6 +59,8 @@ public class GameManager implements Runnable {
 		Behaviour beh = new BumpBehaviour(); //common behaviour for both players
 		player1.setBehaviour(beh);
 		player2.setBehaviour(beh);
+		player1.addOnHitEffect(new BumpEffect(0));
+		player2.addOnHitEffect(new BumpEffect(0));
 		obst.addOnHitEffect(new BumpEffect(0));
 		
 		updatableObjects.add(player1);

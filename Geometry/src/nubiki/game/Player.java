@@ -78,6 +78,7 @@ Updatable, Controllable, Shooting, Collidable {
 	}
 	
 	public void move() {
+		super.move();
 		speed=Math.min(speed,maxSpeed);
 		if(speed>0) {
 			posX+=getSpeedX();

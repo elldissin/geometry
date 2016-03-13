@@ -14,7 +14,14 @@ import nubiki.behaviour.GeneralBehaviour;
 public abstract class GameObject {
 	private static final long serialVersionUID = 1L;
 	protected double posX;
-	protected double posY;	
+	protected double posY;
+	protected Point prevPos;
+	public Point getPrevPos() {
+		return prevPos;
+	}
+	public void setPrevPos(Point prevPos) {
+		this.prevPos = prevPos;
+	}
 	protected double objWidth;
 	protected double objHeight;
 	protected int speedX,speedY;
@@ -36,6 +43,17 @@ public abstract class GameObject {
 		points.clear();
 		this.posX = posX;
 		body();
+	}
+	
+	public void setPos(Point p) {
+		posX=p.getX();
+		posY=p.getY();
+		points.clear();
+		body();
+	}
+	
+	public Point getPos() {
+		return new Point((int)posX, (int)posY);
 	}
 	public double getPosY() {
 		return posY;
@@ -159,7 +177,9 @@ public abstract class GameObject {
 		return new Rectangle((int)(getPosX()-getObjWidth()/2),(int)
 				(getPosY()-getObjHeight()),(int)(getObjWidth())*2,(int)(getObjHeight())*2);
 	}
-	public abstract void move();
+	public void move() {
+		setPrevPos(getPos());
+	}
 	public abstract void turn();
 	abstract public int getMaxSpeed();
 	abstract public void setMaxSpeed(int maxSpeed);

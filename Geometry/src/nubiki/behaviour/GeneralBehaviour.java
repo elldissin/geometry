@@ -1,5 +1,7 @@
 package nubiki.behaviour;
 
+import java.awt.Point;
+
 import nubiki.game.GameObject;
 import nubiki.game.Player;
 
@@ -45,7 +47,6 @@ public class GeneralBehaviour implements Behaviour {
 	@Override
 	public void bump(GameObject obj, int amount) { 
 		Player p = (Player)obj; //ensure p is of type Player or change
-		p.setStopped();
-		
+		obj.setPos(obj.getPrevPos());
 	}
 }

@@ -9,10 +9,11 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import nubiki.behaviour.DmgEffect;
+import nubiki.behaviour.ProjectileBehaviour;
 import nubiki.behaviour.SlowEffect;
 
 public class Player extends GameObject implements Drawable,
-Updatable, Controllable, Shooting, Collidable {
+Updatable, Controllable, Collidable {
 	private static final long serialVersionUID = 1L;
 	private int health;
 	private int level;
@@ -101,6 +102,7 @@ Updatable, Controllable, Shooting, Collidable {
 		Projectile projectile = new Projectile((int)posX, (int)posY);
 		projectile.addOnHitEffect(new SlowEffect(20));
 		projectile.addOnHitEffect(new DmgEffect(1));
+		projectile.setBehaviour(new ProjectileBehaviour());
 		projectile.setSpeed(7);
 		projectile.setAngle(angle);
 		GameManager.addProjectile(projectile); 

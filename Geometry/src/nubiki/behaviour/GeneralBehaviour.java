@@ -1,15 +1,13 @@
 package nubiki.behaviour;
 
-import java.awt.Point;
-
 import nubiki.game.GameObject;
 import nubiki.game.Player;
 
 public class GeneralBehaviour implements Behaviour {
-	protected GameObject ownerObject;
 	protected boolean slowable;
 	protected boolean vulnerable;
 	protected boolean bumping;
+	protected boolean destrictibleOnBump;
 	
 	public GeneralBehaviour() {
 		slowable=false;
@@ -46,8 +44,9 @@ public class GeneralBehaviour implements Behaviour {
 
 	@Override
 	public void bump(GameObject obj, int amount) { 
-		Player p = (Player)obj; //ensure p is of type Player or change
 		obj.setPos(obj.getPrevPos());
+		if(destrictibleOnBump)
+			obj.setObsolete(true);
 	}
 
 	@Override
@@ -63,5 +62,15 @@ public class GeneralBehaviour implements Behaviour {
 	@Override
 	public void setBumping(boolean value) {
 		bumping=value;
+	}
+
+	@Override
+	public boolean destructibleOnBump() {
+		return destrictibleOnBump;
+	}
+
+	@Override
+	public void setDestructibleOnBump(boolean value) {
+		destrictibleOnBump=value;
 	}
 }

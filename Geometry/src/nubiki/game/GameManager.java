@@ -53,6 +53,7 @@ public class GameManager implements Runnable {
 		Behaviour beh2 = new PlayerBehaviour();
 		player1.setBehaviour(beh1);
 		player2.setBehaviour(beh2);
+		
 		player1.addOnHitEffect(new BumpEffect(0));
 		player2.addOnHitEffect(new BumpEffect(0));
 		obst.addOnHitEffect(new BumpEffect(0));

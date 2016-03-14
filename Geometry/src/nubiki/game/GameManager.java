@@ -1,20 +1,13 @@
 package nubiki.game;
 
-import java.awt.Canvas;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
+
 import java.awt.Point;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JPanel;
-
 import nubiki.behaviour.Behaviour;
-import nubiki.behaviour.BumpBehaviour;
 import nubiki.behaviour.BumpEffect;
+import nubiki.behaviour.PlayerBehaviour;
 
 //import com.sun.swing.internal.plaf.synth.resources.synth;
 
@@ -56,17 +49,16 @@ public class GameManager implements Runnable {
 		player1=new Player(100,100);
 		player2=new Player(400,100);
 		StaticObject obst=new StaticObject(250,50);
-		Behaviour beh = new BumpBehaviour(); //common behaviour for both players
-		player1.setBehaviour(beh);
-		player2.setBehaviour(beh);
+		Behaviour beh1 = new PlayerBehaviour();
+		Behaviour beh2 = new PlayerBehaviour();
+		player1.setBehaviour(beh1);
+		player2.setBehaviour(beh2);
 		player1.addOnHitEffect(new BumpEffect(0));
 		player2.addOnHitEffect(new BumpEffect(0));
 		obst.addOnHitEffect(new BumpEffect(0));
 		
 		updatableObjects.add(player1);
 		updatableObjects.add(player2);
-		updatableObjects.add(obst);
-		
 		
 		drawableObjects.add(player1);
 		drawableObjects.add(player2);

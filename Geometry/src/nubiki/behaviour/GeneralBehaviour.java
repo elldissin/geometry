@@ -7,9 +7,9 @@ import nubiki.game.Player;
 
 public class GeneralBehaviour implements Behaviour {
 	protected GameObject ownerObject;
-	public boolean slowable;
-	public boolean vulnerable;
-	public boolean bumping;
+	protected boolean slowable;
+	protected boolean vulnerable;
+	protected boolean bumping;
 	
 	public GeneralBehaviour() {
 		slowable=false;
@@ -48,5 +48,20 @@ public class GeneralBehaviour implements Behaviour {
 	public void bump(GameObject obj, int amount) { 
 		Player p = (Player)obj; //ensure p is of type Player or change
 		obj.setPos(obj.getPrevPos());
+	}
+
+	@Override
+	public void setSlowable(boolean value) {
+		slowable=value;
+	}
+
+	@Override
+	public void setVulnerable(boolean value) {
+		vulnerable=value;
+	}
+
+	@Override
+	public void setBumping(boolean value) {
+		bumping=value;
 	}
 }

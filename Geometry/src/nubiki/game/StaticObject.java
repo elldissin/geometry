@@ -7,34 +7,17 @@ import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
 public class StaticObject extends GameObject implements 
-Drawable, Updatable, Collidable {
+Drawable, Collidable {
 private int health, level;
 	public StaticObject(int x, int y) {
 		super(); 
 		health=100;
 		level=2;
-		maxSpeed=5;
+		objWidth=50;
+		objHeight=50;
 		setPosX(x);
 		setPosY(y);
 		body();
-	}
-	
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isDestroyed() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -67,7 +50,7 @@ private int health, level;
 	}
 
 	@Override
-	public void move() {
+	public void destroy() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -95,5 +78,4 @@ private int health, level;
 		// TODO Auto-generated method stub
 		
 	}
-
 }

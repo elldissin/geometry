@@ -9,5 +9,8 @@ public interface Behaviour {
 	public void slowDown(GameObject obj, int amount);
 	public void doDamage(GameObject obj, int amount);
 	public void bump(GameObject obj, int amount);
+	public void setSlowable(boolean value);
+	public void setVulnerable(boolean value);
+	public void setBumping(boolean value);
 
 }

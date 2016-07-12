@@ -29,7 +29,7 @@ Updatable, Controllable, Collidable {
 	public Player(int x, int y) {
 		super(); 
 		health=100;
-		level=1;
+		level=5;
 		maxSpeed=5;
 		setPosX(x);
 		setPosY(y);

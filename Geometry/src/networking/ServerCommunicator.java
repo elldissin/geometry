@@ -26,7 +26,14 @@ public class ServerCommunicator {
 	}
 
 	public void closeConnection() {
-
+		try {
+			out.close();
+			in.close();
+			mySocket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void connectToServer(String hostName) {

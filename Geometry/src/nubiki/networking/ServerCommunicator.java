@@ -8,6 +8,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class ServerCommunicator {
 
@@ -16,9 +19,10 @@ public class ServerCommunicator {
 	private Socket mySocket;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
-
+	private Queue<KeyEvent> eventsQueue;
+	
 	public ServerCommunicator() {
-
+		eventsQueue = new LinkedList<KeyEvent>();
 	}
 
 	public void sendEvent(KeyEvent event) {
@@ -30,12 +34,19 @@ public class ServerCommunicator {
 				e.printStackTrace();
 			}
 	}
+	
+	public KeyEvent nextEvent() {
+		return eventsQueue.poll();
+	}
 
 	public void closeConnection() {
 		try {
-			out.close();
-			in.close();
-			mySocket.close();
+			if(out!=null)
+				out.close();
+			if(in!=null)
+				in.close();
+			if(mySocket!=null)
+				mySocket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,6 +69,7 @@ public class ServerCommunicator {
 						KeyEvent fromServer;
 						System.out.println("Server listening thread started on client");
 						while ((fromServer = (KeyEvent)in.readObject()) != null) {
+							eventsQueue.add(fromServer);
 							if (fromServer.equals("Server is stopping")) { //fix to exit properly
 								break;
 							}

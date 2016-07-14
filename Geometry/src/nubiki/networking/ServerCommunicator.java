@@ -19,13 +19,13 @@ public class ServerCommunicator {
 	private Socket mySocket;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
-	private Queue<KeyEvent> eventsQueue;
+	private Queue<NetworkMessage> eventsQueue;
 	
 	public ServerCommunicator() {
-		eventsQueue = new LinkedList<KeyEvent>();
+		eventsQueue = new LinkedList<NetworkMessage>();
 	}
 
-	public void sendEvent(KeyEvent event) {
+	public void sendMessage(NetworkMessage event) {
 		if (out!=null)
 			try {
 				out.writeObject(event);
@@ -36,7 +36,7 @@ public class ServerCommunicator {
 			}
 	}
 	
-	public KeyEvent getNextEvent() {
+	public NetworkMessage getNextMessage() {
 		return eventsQueue.poll();
 	}
 
@@ -67,9 +67,9 @@ public class ServerCommunicator {
 				@Override
 				public void run() {
 					try {
-						KeyEvent fromServer;
+						NetworkMessage fromServer;
 						System.out.println("Server listening thread started on client");
-						while ((fromServer = (KeyEvent)in.readObject()) != null) {
+						while ((fromServer = (NetworkMessage)in.readObject()) != null) {
 							eventsQueue.add(fromServer);
 							//add something to exit properly							
 						}

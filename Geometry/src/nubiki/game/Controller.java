@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import nubiki.networking.NetworkMessage;
 import nubiki.networking.ServerCommunicator;
 
 public class Controller implements KeyListener {
@@ -20,12 +21,16 @@ public class Controller implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-//		comm.sendEvent(e);
-//		e=comm.getNextEvent();
 		//		System.out.println("Key pressed...");
 		int code=0;
 		if(e!=null)
 			code = e.getKeyCode();
+		if(code!=0) {
+			comm.sendMessage(new NetworkMessage(code));
+			NetworkMessage nm=comm.getNextMessage();
+			if(nm!=null) //the message queue might yet be empty at this stage
+				code = nm.getKeyCode();
+		}
 		if(controlledArray.size()>0) {
 			if (code==KeyEvent.VK_W){
 				controlledArray.get(0).setMoving();

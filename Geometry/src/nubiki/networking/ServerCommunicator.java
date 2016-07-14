@@ -29,13 +29,14 @@ public class ServerCommunicator {
 		if (out!=null)
 			try {
 				out.writeObject(event);
+				System.out.println("Event was sent to server");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	}
 	
-	public KeyEvent nextEvent() {
+	public KeyEvent getNextEvent() {
 		return eventsQueue.poll();
 	}
 
@@ -53,7 +54,7 @@ public class ServerCommunicator {
 		}
 	}
 
-	public void connectToServer(String hostName) {
+	public void openConnectionTo(String hostName) {
 		try {
 			this.hostName = hostName;
 			mySocket = new Socket(hostName, portNumber);
@@ -70,9 +71,7 @@ public class ServerCommunicator {
 						System.out.println("Server listening thread started on client");
 						while ((fromServer = (KeyEvent)in.readObject()) != null) {
 							eventsQueue.add(fromServer);
-							if (fromServer.equals("Server is stopping")) { //fix to exit properly
-								break;
-							}
+							//add something to exit properly							
 						}
 					} catch (IOException | ClassNotFoundException e) {
 						// TODO Auto-generated catch block

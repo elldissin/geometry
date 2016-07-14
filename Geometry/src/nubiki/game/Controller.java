@@ -4,20 +4,28 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import nubiki.networking.ServerCommunicator;
+
 public class Controller implements KeyListener {
 	
+	ServerCommunicator comm;
 	protected ArrayList <Controllable> controlledArray;
 	
 	public Controller () {
 		controlledArray = new ArrayList <Controllable>();
+		comm = new ServerCommunicator();
+		comm.openConnectionTo("localhost");
 	}
 
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+//		comm.sendEvent(e);
+//		e=comm.getNextEvent();
 		//		System.out.println("Key pressed...");
-		int code = e.getKeyCode();
-
+		int code=0;
+		if(e!=null)
+			code = e.getKeyCode();
 		if(controlledArray.size()>0) {
 			if (code==KeyEvent.VK_W){
 				controlledArray.get(0).setMoving();

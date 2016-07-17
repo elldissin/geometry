@@ -39,7 +39,7 @@ public class Controller implements KeyListener {
 		
 		if(controlledArray.size()>0) {
 			if (code==KeyEvent.VK_W){
-				manager.addEvent(new MoveEvent(controlledArray.get(0)));
+				manager.addEvent(new MoveEvent(0));
 			}
 			if (code==KeyEvent.VK_D){
 				controlledArray.get(0).setTurningCW();
@@ -54,7 +54,7 @@ public class Controller implements KeyListener {
 
 		if(controlledArray.size()>1) {
 			if (code==KeyEvent.VK_UP){
-				manager.addEvent(new MoveEvent(controlledArray.get(1)));
+				manager.addEvent(new MoveEvent(1));
 			}
 			if (code==KeyEvent.VK_RIGHT){
 				controlledArray.get(1).setTurningCW();
@@ -74,7 +74,7 @@ public class Controller implements KeyListener {
 		//this needs to be fixed, stopping even when releasing the other key
 		if(controlledArray.size()>0) {
 			if (code==KeyEvent.VK_W){
-				manager.addEvent(new StopEvent(controlledArray.get(0)));
+				manager.addEvent(new StopEvent(0));
 			}
 			if (code==KeyEvent.VK_A){
 				controlledArray.get(0).setNotTurning();
@@ -85,7 +85,7 @@ public class Controller implements KeyListener {
 		}
 		if(controlledArray.size()>1) {
 			if (code==KeyEvent.VK_UP){
-				manager.addEvent(new StopEvent(controlledArray.get(1)));
+				manager.addEvent(new StopEvent(1));
 			}
 			if (code==KeyEvent.VK_LEFT){
 				controlledArray.get(1).setNotTurning();

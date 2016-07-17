@@ -117,7 +117,7 @@ public class GameManager implements Runnable {
 	private void updateState() {
 		GameEvent ev=eventManager.nextEvent();
 		if(ev!=null)
-			ev.doEvent();
+			ev.doEvent(objectManager);
 		// Handles destruction of obsolete objects
 		for (int i = 0; i < updatableObjects.size(); i++) {
 			if (updatableObjects.get(i).isDestroyed()) {

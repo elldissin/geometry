@@ -1,16 +1,20 @@
 package nubiki.events;
 
 import nubiki.game.Controllable;
+import nubiki.game.GameObjectManager;
 
-public class MoveEvent implements GameEvent {
-	private Controllable target;
+public class MoveEvent extends GameEvent {
+	private int targetID;
 	
-	public MoveEvent(Controllable target) {
-		this.target=target;
+	public MoveEvent(int targetID) {
+		super(targetID);
 	}
 	
 	@Override
-	public void doEvent() {
-		target.setMoving();
+	public void doEvent(GameObjectManager mng) {
+		if (mng.getObjectByID(targetID) instanceof Controllable) {
+			Controllable target = (Controllable)(mng.getObjectByID(targetID));
+			target.setMoving();
+		}
 	}
 }

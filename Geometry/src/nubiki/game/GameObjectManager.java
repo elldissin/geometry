@@ -11,10 +11,11 @@ public class GameObjectManager {
 	}
 
 	public GameObject createGameObject(String objType, int x, int y) {
+		int id=gameObjectsMap.size(); // size()used to get unique ID
 		switch (objType) {
 		case "player":
-			gameObjectsMap.put(1, new Player(x,y));
-			return gameObjectsMap.get(1);
+			gameObjectsMap.put(id, new Player(x,y));
+			return gameObjectsMap.get(id);
 		}
 		return null;
 	}

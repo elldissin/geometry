@@ -22,6 +22,7 @@ public class GameManager implements Runnable {
 	private Controller controller;
 	private EffectManager effManager;
 	private EventManager eventManager;
+	private GameObjectManager objectManager;
 	private Player player1, player2;
 	private static List<Updatable> updatableObjects;
 	private static List<Drawable> drawableObjects;
@@ -34,6 +35,7 @@ public class GameManager implements Runnable {
 		camera2 = new GameCamera();
 		effManager = new EffectManager();
 		eventManager = new EventManager();
+		objectManager = new GameObjectManager();
 		updatableObjects = new ArrayList<Updatable>();
 		drawableObjects = new ArrayList<Drawable>();
 		collidableObjects = new ArrayList<Collidable>();
@@ -50,8 +52,8 @@ public class GameManager implements Runnable {
 	}
 
 	private void addPlayers() {
-		player1 = new Player(100, 100);
-		player2 = new Player(400, 100);
+		player1 = (Player)objectManager.createGameObject("player", 100, 100);
+		player2 = (Player)objectManager.createGameObject("player", 400, 100);
 		StaticObject obst = new StaticObject(250, 50);
 		Behaviour beh1 = new PlayerBehaviour();
 		Behaviour beh2 = new PlayerBehaviour();

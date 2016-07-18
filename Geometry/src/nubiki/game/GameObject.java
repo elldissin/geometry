@@ -20,12 +20,9 @@ public abstract class GameObject {
 	protected Point currentPos;
 	protected Point prevPos;
 	protected int objWidth, objHeight;
-	protected int speedX, speedY;
-	protected int maxSpeed, speed;
 	protected int health;
 	protected int level;
 	protected double angle;
-	protected double turnSpeed;
 	protected boolean obsolete;
 	protected int distTravelled;
 	protected int liveDistance;
@@ -42,12 +39,7 @@ public abstract class GameObject {
 		currentPos = new Point(100, 100);
 		objWidth = 20;
 		objHeight = 20;
-		speedX = 0;
-		speedY = 0;
-		speed = 0;
-		maxSpeed = 10;
 		angle = 0;
-		turnSpeed = 0;
 		distTravelled = 0;
 		liveDistance = 400;
 		obsolete = false;
@@ -126,47 +118,12 @@ public abstract class GameObject {
 		this.behaviour = behaviour;
 	}
 
-	public double getTurnSpeed() {
-		return turnSpeed;
-	}
-
-	public void setTurnSpeed(int turnSpeed) {
-		this.turnSpeed = turnSpeed;
-	}
-
-	public int getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(int speed) {
-		if (speed <= maxSpeed)
-			this.speed = speed;
-		else
-			this.speed = maxSpeed;
-	}
-
 	public double getAngle() {
 		return angle;
 	}
 
 	public void setAngle(double angle) {
 		this.angle = angle;
-	}
-
-	public int getSpeedX() {
-		return (int) (speed * Math.cos((double) angle));
-	}
-
-	public void setSpeedX(int speedX) {
-		this.speedX = speedX;
-	}
-
-	public int getSpeedY() {
-		return speedY = (int) (speed * Math.sin((double) angle));
-	}
-
-	public void setSpeedY(int speedY) {
-		this.speedY = speedY;
 	}
 
 	public void setObsolete(boolean value) {
@@ -217,9 +174,21 @@ public abstract class GameObject {
 			mover.turn(this);
 	}
 
-	abstract public int getMaxSpeed();
-
-	abstract public void setMaxSpeed(int maxSpeed);
-
 	abstract public void getHit(int amount);
+
+	public Mover getMover() {
+		return mover;
+	}
+
+	public Renderer getRenderer() {
+		return renderer;
+	}
+
+	public void setMover(Mover mover) {
+		this.mover = mover;
+	}
+
+	public void setRenderer(Renderer renderer) {
+		this.renderer = renderer;
+	}
 }

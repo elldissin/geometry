@@ -7,7 +7,7 @@ import nubiki.game.movers.DefaultMover;
 import nubiki.game.renderers.DefaultRenderer;
 
 public class StaticObject extends GameObject implements Updatable {
-	
+
 	public StaticObject(int x, int y) {
 		super();
 		health = 100;
@@ -15,7 +15,7 @@ public class StaticObject extends GameObject implements Updatable {
 		objWidth = 50;
 		objHeight = 50;
 		mover = new DefaultMover();
-//		weapon = new DefaultWeapon();
+		// weapon = new DefaultWeapon();
 		renderer = new DefaultRenderer();
 		setPos(new Point(x, y));
 		body();
@@ -34,21 +34,8 @@ public class StaticObject extends GameObject implements Updatable {
 		return points;
 	}
 
-
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public int getMaxSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setMaxSpeed(int maxSpeed) {
 		// TODO Auto-generated method stub
 
 	}
@@ -62,7 +49,7 @@ public class StaticObject extends GameObject implements Updatable {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

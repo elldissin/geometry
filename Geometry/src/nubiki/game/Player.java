@@ -30,7 +30,6 @@ public class Player extends GameObject implements Controllable, Updatable {
 		super(); 
 		health=100;
 		level=5;
-		maxSpeed=5;
 		mover = new DefaultMover();
 //		weapon = new DefaultWeapon();
 		renderer = new DefaultRenderer();
@@ -70,22 +69,13 @@ public class Player extends GameObject implements Controllable, Updatable {
 	@Override
 	public void setMoving() {
 		// TODO Auto-generated method stub
-		setSpeed(maxSpeed);
+		mover.setSpeed(mover.getMaxSpeed());
 	}
 
 	@Override
 	public void setStopped() {
 		// TODO Auto-generated method stub
-		setSpeed(0);
-	}
-
-	public int getMaxSpeed() {
-		return maxSpeed;
-	}
-
-	public void setMaxSpeed(int maxSpeed) {
-		this.maxSpeed = maxSpeed;
-		System.out.println("player maxspeed: " + maxSpeed);
+		mover.setSpeed(0);
 	}
 
 	@Override
@@ -95,17 +85,17 @@ public class Player extends GameObject implements Controllable, Updatable {
 
 	@Override
 	public void setTurningCW() {
-		turnSpeed=0.1;
+		mover.setTurnSpeed(0.1);
 	}
 	
 	@Override
 	public void setTurningCCW() {
-		turnSpeed=-0.1;
+		mover.setTurnSpeed(-0.1);
 	}
 
 	@Override
 	public void setNotTurning() {
-		turnSpeed=0;
+		mover.setTurnSpeed(0);
 	}
 
 	@Override

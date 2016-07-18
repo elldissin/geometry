@@ -32,7 +32,7 @@ public class GeneralBehaviour implements Behaviour {
 	
 	@Override
 	public void slowDown(GameObject obj, int amount) {
-		obj.setMaxSpeed((int)(obj.getMaxSpeed()*(100-amount)/100));
+		obj.getMover().setMaxSpeed((int)(obj.getMover().getMaxSpeed()*(100-amount)/100));
 		slowable=false; //remove after timer implementation
 	}
 

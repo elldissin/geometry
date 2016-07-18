@@ -18,19 +18,19 @@ public class Projectile extends GameObject {
 		setPos(new Point(x, y));
 		objHeight = 5;
 		objWidth = 5;
+		body();
 	}
 
 	@Override
 	public ArrayList<Point> body() {
 		if (points.isEmpty()) {
-			// System.out.println("calculating projectile points");
-			Point p = new Point(currentPos.x + 5, currentPos.x + 5);
+			Point p = new Point(currentPos.x + 5, currentPos.y + 5);
 			points.add(0, p);
-			p = new Point(currentPos.x + 10, currentPos.x + 5);
+			p = new Point(currentPos.x + 10, currentPos.y + 5);
 			points.add(1, p);
-			p = new Point(currentPos.x + 10, currentPos.x + 0);
+			p = new Point(currentPos.x + 10, currentPos.y + 0);
 			points.add(2, p);
-			p = new Point(currentPos.x + 5, currentPos.x + 0);
+			p = new Point(currentPos.x + 5, currentPos.y + 0);
 			points.add(3, p);
 		}
 		return points;

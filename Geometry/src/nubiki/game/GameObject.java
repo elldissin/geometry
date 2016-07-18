@@ -10,13 +10,39 @@ import java.util.ArrayList;
 import nubiki.behaviour.Behaviour;
 import nubiki.behaviour.Effect;
 import nubiki.behaviour.GeneralBehaviour;
+import nubiki.game.movers.*;
+import nubiki.game.renderers.*;
+import nubiki.game.weapons.*;
 
 public abstract class GameObject {
 	private static final long serialVersionUID = 1L;
-	private int objectID;
-	protected double posX;
-	protected double posY;
+	protected int objectID;
+	protected Point currentPos;
 	protected Point prevPos;
+	protected int objWidth, objHeight;
+	protected int speedX, speedY;
+	protected int maxSpeed, speed;
+	protected int health;
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	protected double angle;
+	protected int turnSpeed;
+	protected boolean obsolete;
+	protected int distTravelled;
+	protected int liveDistance;
+	protected Behaviour behaviour;
+	protected Mover mover;
+	protected Weapon weapon;
+	protected Renderer renderer;
+	protected ArrayList<Point> points;
+	protected ArrayList<GameObject> ignoredObjects;
+	protected ArrayList<Effect> onHitEffects;
 
 	public Point getPrevPos() {
 		return prevPos;
@@ -26,8 +52,6 @@ public abstract class GameObject {
 		this.prevPos = prevPos;
 	}
 
-	protected double objWidth;
-
 	public int getObjectID() {
 		return objectID;
 	}
@@ -36,70 +60,35 @@ public abstract class GameObject {
 		this.objectID = objectID;
 	}
 
-	protected double objHeight;
-	protected int speedX, speedY;
-	protected int maxSpeed, speed;
-	protected double angle;
-	protected double turnSpeed;
-	protected boolean obsolete;
-	protected int distTravelled;
-	protected int liveDistance;
-	protected Behaviour behaviour;
-	protected ArrayList<Point> points;
-	protected ArrayList<GameObject> ignoredObjects;
-	protected ArrayList<Effect> onHitEffects;
-
-	public double getPosX() {
-		return posX;
-	}
-
-	public void setPosX(double posX) {
-		points.clear();
-		this.posX = posX;
-		body();
-	}
-
 	public void setPos(Point p) {
-		posX = p.getX();
-		posY = p.getY();
+		currentPos = p;
 		points.clear();
 		body();
 	}
 
 	public Point getPos() {
-		return new Point((int) posX, (int) posY);
+		return currentPos;
 	}
 
-	public double getPosY() {
-		return posY;
-	}
-
-	public void setPosY(double posY) {
-		points.clear();
-		this.posY = posY;
-		body();
-	}
-
-	public double getObjWidth() {
+	public int getObjWidth() {
 		return objWidth;
 	}
 
-	public void setObjWidth(double objWidth) {
+	public void setObjWidth(int objWidth) {
 		this.objWidth = objWidth;
 	}
 
-	public double getObjHeight() {
+	public int getObjHeight() {
 		return objHeight;
 	}
 
-	public void setObjHeight(double objHeight) {
+	public void setObjHeight(int objHeight) {
 		this.objHeight = objHeight;
 	}
 
 	public GameObject() {
 		super();
-		posX = 100.0;
-		posY = 100.0;
+		currentPos = new Point(100,100);
 		objWidth = 20;
 		objHeight = 20;
 		speedX = 0;
@@ -115,6 +104,9 @@ public abstract class GameObject {
 		ignoredObjects = new ArrayList<GameObject>();
 		onHitEffects = new ArrayList<Effect>();
 		behaviour = null;
+		mover = new DefaultMover();
+		weapon = new DefaultWeapon();
+		renderer = new DefaultRenderer();
 	}
 
 	public ArrayList<Effect> getOnHitEffects() {
@@ -136,11 +128,11 @@ public abstract class GameObject {
 		this.behaviour = behaviour;
 	}
 
-	public double getTurnSpeed() {
+	public int getTurnSpeed() {
 		return turnSpeed;
 	}
 
-	public void setTurnSpeed(double turnSpeed) {
+	public void setTurnSpeed(int turnSpeed) {
 		this.turnSpeed = turnSpeed;
 	}
 
@@ -183,11 +175,11 @@ public abstract class GameObject {
 		obsolete = value;
 	}
 
-	public void draw(Graphics g) { // this displays bounding rect
-		g.setColor(Color.gray);
-		g.drawRect(boundingRect().x, boundingRect().y, boundingRect().width, boundingRect().height);
-		g.setColor(Color.black);
-	}
+//	public void draw(Graphics g) { // this displays bounding rect
+//		g.setColor(Color.gray);
+//		g.drawRect(boundingRect().x, boundingRect().y, boundingRect().width, boundingRect().height);
+//		g.setColor(Color.black);
+//	}
 
 	public abstract ArrayList<Point> body();
 
@@ -207,7 +199,7 @@ public abstract class GameObject {
 	}
 
 	public Rectangle boundingRect() {
-		return new Rectangle((int) (getPosX() - getObjWidth() / 2), (int) (getPosY() - getObjHeight()),
+		return new Rectangle((int) (currentPos.getX() - getObjWidth() / 2), (int) (currentPos.getY() - getObjHeight()),
 				(int) (getObjWidth()) * 2, (int) (getObjHeight()) * 2);
 	}
 

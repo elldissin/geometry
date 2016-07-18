@@ -17,7 +17,7 @@ Updatable, Controllable, Collidable {
 	private static final long serialVersionUID = 1L;
 	private int health;
 	private int level;
-	Animator anim;
+//	Animator anim;
 
 	public Player() {
 		super(); 
@@ -31,10 +31,9 @@ Updatable, Controllable, Collidable {
 		health=100;
 		level=5;
 		maxSpeed=5;
-		setPosX(x);
-		setPosY(y);
+		setPos(new Point(x,y));
 		body();
-		anim=new Animator((int)posX, (int)posY);
+//		anim=new Animator((int)posX, (int)posY);
 	}
 
 	public ArrayList<Point> body() {

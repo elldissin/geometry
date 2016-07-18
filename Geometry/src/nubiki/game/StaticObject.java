@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import nubiki.game.movers.DefaultMover;
 import nubiki.game.renderers.DefaultRenderer;
 
-public class StaticObject extends GameObject implements Updatable {
+public class StaticObject extends GameObject {
 
 	public StaticObject(int x, int y) {
 		super();
@@ -42,12 +42,6 @@ public class StaticObject extends GameObject implements Updatable {
 
 	@Override
 	public void getHit(int amount) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update() {
 		// TODO Auto-generated method stub
 
 	}

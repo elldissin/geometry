@@ -4,16 +4,17 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import nubiki.game.movers.DefaultMover;
+import nubiki.game.movers.ProjectileMover;
 import nubiki.game.renderers.DefaultRenderer;
+import nubiki.game.renderers.ProjectileRenderer;
 
-public class Projectile extends GameObject implements Updatable {
+public class Projectile extends GameObject {
 	private static final long serialVersionUID = 1L;
 
 	public Projectile(int x, int y) {
 		super();
-		mover = new DefaultMover();
-		// weapon = new DefaultWeapon();
-		renderer = new DefaultRenderer();
+		mover = new ProjectileMover();
+		renderer = new ProjectileRenderer();
 		setPos(new Point(x, y));
 		objHeight = 5;
 		objWidth = 5;
@@ -43,11 +44,6 @@ public class Projectile extends GameObject implements Updatable {
 	@Override
 	public boolean isDestroyed() {
 		return obsolete;
-	}
-
-	@Override
-	public void update() {
-		move();
 	}
 
 	@Override

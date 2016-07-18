@@ -11,6 +11,7 @@ public class DefaultMover implements Mover {
 		maxSpeed = 10;
 		turnSpeed = 0;
 	}
+	
 	@Override
 	public void move(GameObject obj) {
 		obj.setPrevPos(obj.getPos());

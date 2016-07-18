@@ -13,8 +13,9 @@ import nubiki.behaviour.ProjectileBehaviour;
 import nubiki.behaviour.SlowEffect;
 import nubiki.game.movers.DefaultMover;
 import nubiki.game.renderers.DefaultRenderer;
+import nubiki.game.weapons.DefaultWeapon;
 
-public class Player extends GameObject implements Controllable, Updatable {
+public class Player extends GameObject implements Controllable {
 	private static final long serialVersionUID = 1L;
 
 //	Animator anim;
@@ -31,7 +32,7 @@ public class Player extends GameObject implements Controllable, Updatable {
 		health=100;
 		level=5;
 		mover = new DefaultMover();
-//		weapon = new DefaultWeapon();
+		weapon = new DefaultWeapon();
 		renderer = new DefaultRenderer();
 		setPos(new Point(x,y));
 		body();
@@ -101,12 +102,6 @@ public class Player extends GameObject implements Controllable, Updatable {
 	@Override
 	public boolean isDestroyed() {
 		return obsolete;
-	}
-
-	@Override
-	public void update() {
-		move();
-		turn();
 	}
 
 	@Override

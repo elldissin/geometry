@@ -1,10 +1,8 @@
 package nubiki.game;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import nubiki.behaviour.Behaviour;
@@ -14,7 +12,7 @@ import nubiki.game.movers.*;
 import nubiki.game.renderers.*;
 import nubiki.game.weapons.*;
 
-public abstract class GameObject {
+public abstract class GameObject implements Updatable {
 	private static final long serialVersionUID = 1L;
 	protected int objectID;
 	protected Point currentPos;
@@ -28,7 +26,7 @@ public abstract class GameObject {
 	protected int liveDistance;
 	protected Behaviour behaviour;
 	protected Mover mover;
-	// protected Weapon weapon;
+	 protected Weapon weapon;
 	protected Renderer renderer;
 	protected ArrayList<Point> points;
 	protected ArrayList<GameObject> ignoredObjects;
@@ -144,7 +142,7 @@ public abstract class GameObject {
 
 	public abstract ArrayList<Point> body();
 
-	void addIgnoreObject(GameObject o) {
+	public void addIgnoreObject(GameObject o) {
 		if (o != null)
 			ignoredObjects.add(o);
 	}
@@ -163,7 +161,7 @@ public abstract class GameObject {
 		return new Rectangle((int) (currentPos.getX() - getObjWidth() / 2), (int) (currentPos.getY() - getObjHeight()),
 				(int) (getObjWidth()) * 2, (int) (getObjHeight()) * 2);
 	}
-
+	
 	public void move() {
 		if (mover != null)
 			mover.move(this);
@@ -172,6 +170,11 @@ public abstract class GameObject {
 	public void turn() {
 		if (mover != null)
 			mover.turn(this);
+	}
+	
+	public void shoot() {
+		if (weapon != null)
+			weapon.shoot(this);
 	}
 
 	abstract public void getHit(int amount);
@@ -190,5 +193,19 @@ public abstract class GameObject {
 
 	public void setRenderer(Renderer renderer) {
 		this.renderer = renderer;
+	}
+	
+	public int getLiveDistance() {
+		return liveDistance;
+	}
+
+	public void setLiveDistance(int liveDistance) {
+		this.liveDistance = liveDistance;
+	}
+	
+	@Override
+	public void update() {
+		move();
+		turn();
 	}
 }

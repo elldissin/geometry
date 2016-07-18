@@ -3,19 +3,25 @@ package nubiki.game.movers;
 import nubiki.game.GameObject;
 
 public class ProjectileMover implements Mover {
+	private int speed;
+	private int distTravelled;
+
+	public ProjectileMover() {
+		speed = 7;
+	}
 
 	@Override
 	public void move(GameObject obj) {
-//		super.move();
-//		if(speed>0) {
-//			distTravelled+=Math.sqrt(Math.pow(getSpeedX(), 2)+Math.pow(getSpeedY(), 2));
-//			posX+=getSpeedX();
-//			posY+=getSpeedY();
-//			points.clear();
-//			body();
-//		}
-//		if(distTravelled>liveDistance)
-//			setObsolete(true);
+		if (speed > 0) {
+			distTravelled += Math.sqrt(Math.pow(getSpeedX(obj), 2) + Math.pow(getSpeedY(obj), 2));
+			obj.getPos().x += getSpeedX(obj);
+			obj.getPos().y += getSpeedY(obj);
+			obj.body().clear(); // no method to get points directly, body()
+								// method shall be fixed
+			obj.body();
+		}
+		if (distTravelled > obj.getLiveDistance())
+			obj.setObsolete(true);
 	}
 
 	@Override
@@ -26,14 +32,12 @@ public class ProjectileMover implements Mover {
 
 	@Override
 	public int getSpeedX(GameObject obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) (speed * Math.cos(obj.getAngle()));
 	}
 
 	@Override
 	public int getSpeedY(GameObject obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) (speed * Math.sin(obj.getAngle()));
 	}
 
 	@Override
@@ -45,7 +49,7 @@ public class ProjectileMover implements Mover {
 	@Override
 	public void setMaxSpeed(int maxSpeed) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -57,7 +61,7 @@ public class ProjectileMover implements Mover {
 	@Override
 	public void setSpeed(int speed) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -69,7 +73,7 @@ public class ProjectileMover implements Mover {
 	@Override
 	public void setTurnSpeed(double turnSpeed) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

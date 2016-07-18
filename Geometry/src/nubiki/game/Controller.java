@@ -47,8 +47,8 @@ public class Controller implements KeyListener {
 			if (code==KeyEvent.VK_A){
 				controlledArray.get(0).setTurningCCW();
 			}
-			if (code==KeyEvent.VK_Q) { //casting to be fixed
-//				controlledArray.get(0).shoot();
+			if (code==KeyEvent.VK_Q) {
+				controlledArray.get(0).shoot();
 			}
 		}
 
@@ -62,8 +62,8 @@ public class Controller implements KeyListener {
 			if (code==KeyEvent.VK_LEFT){
 				controlledArray.get(1).setTurningCCW();
 			}
-			if (code==KeyEvent.VK_CONTROL) { //casting to be fixed
-//				controlledArray.get(1).shoot();
+			if (code==KeyEvent.VK_CONTROL) {
+				controlledArray.get(1).shoot();
 			}
 		}
 	}

@@ -6,5 +6,5 @@ public interface Controllable {
 	public void setTurningCCW();
 	public void setNotTurning();
 	public void setStopped();
-//	public void shoot();
+	public void shoot();
 }

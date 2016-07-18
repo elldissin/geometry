@@ -9,9 +9,9 @@ public class MoveEvent extends GameEvent {
 	}
 	
 	@Override
-	public void doEvent(GameObjectManager mng) {
-		if (mng.getObjectByID(targetID) instanceof Controllable) {
-			Controllable target = (Controllable)(mng.getObjectByID(targetID));
+	public void doEvent() {
+		if (GameObjectManager.getObjectByID(targetID) instanceof Controllable) {
+			Controllable target = (Controllable)(GameObjectManager.getObjectByID(targetID));
 			target.setMoving();
 		}
 	}

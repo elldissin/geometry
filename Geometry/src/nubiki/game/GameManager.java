@@ -22,9 +22,9 @@ public class GameManager implements Runnable {
 	private Controller controller;
 	private EffectManager effManager;
 	private EventManager eventManager;
-	private GameObjectManager objectManager;
+//	private GameObjectManager objectManager;
 	private Player player1, player2;
-	private static List<Updatable> updatableObjects;
+	private static List<GameObject> updatableObjects;
 	private static List<GameObject> drawableObjects; //to avoid unnecessary drawing on all objects
 	private static List<Collidable> collidableObjects;
 
@@ -35,8 +35,8 @@ public class GameManager implements Runnable {
 		camera2 = new GameCamera();
 		effManager = new EffectManager();
 		eventManager = new EventManager();
-		objectManager = new GameObjectManager();
-		updatableObjects = new ArrayList<Updatable>();
+//		objectManager = new GameObjectManager();
+		updatableObjects = new ArrayList<GameObject>();
 		drawableObjects = new ArrayList<GameObject>();
 		collidableObjects = new ArrayList<Collidable>();
 		controller = new Controller(eventManager);
@@ -52,8 +52,8 @@ public class GameManager implements Runnable {
 	}
 
 	private void addPlayers() {
-		player1 = (Player)objectManager.createGameObject("player", 100, 100);
-		player2 = (Player)objectManager.createGameObject("player", 400, 100);
+		player1 = (Player)GameObjectManager.createGameObject("player", 100, 100);
+		player2 = (Player)GameObjectManager.createGameObject("player", 400, 100);
 		StaticObject obst = new StaticObject(250, 50);
 		Behaviour beh1 = new PlayerBehaviour();
 		Behaviour beh2 = new PlayerBehaviour();
@@ -79,13 +79,13 @@ public class GameManager implements Runnable {
 		controller.takeControlOf(player2);
 	}
 
-//	protected static void addProjectile(Projectile obj) {
-//		if (obj != null) {
-//			updatableObjects.add(obj);
-//			drawableObjects.add(obj);
+	public static void addProjectile(GameObject obj) {
+		if (obj != null) {
+			updatableObjects.add(obj);
+			drawableObjects.add(obj);
 //			collidableObjects.add(obj);
-//		}
-//	}
+		}
+	}
 
 	// May be required for applet
 	public synchronized void stop() {
@@ -117,7 +117,7 @@ public class GameManager implements Runnable {
 	private void updateState() {
 		GameEvent ev=eventManager.nextEvent();
 		if(ev!=null)
-			ev.doEvent(objectManager);
+			ev.doEvent();
 		// Handles destruction of obsolete objects
 		for (int i = 0; i < updatableObjects.size(); i++) {
 			if (updatableObjects.get(i).isDestroyed()) {

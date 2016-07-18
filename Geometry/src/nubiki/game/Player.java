@@ -41,8 +41,8 @@ Updatable, Controllable, Collidable {
 		if(points.isEmpty()) {
 //			System.out.println("player points recalculation...");
 			for(int i=0;i<level+2;i++) {
-				int x1=(int) (posX+(objWidth*Math.cos(2*Math.PI/(level+2)*i+angle)));
-				int y1=(int) (posY+(objHeight*Math.sin(2*Math.PI/(level+2)*i+angle)));
+				int x1=(int) (currentPos.x+(objWidth*Math.cos(2*Math.PI/(level+2)*i+angle)));
+				int y1=(int) (currentPos.y+(objHeight*Math.sin(2*Math.PI/(level+2)*i+angle)));
 				Point p = new Point(x1,y1);
 				points.add(i, p);
 			}
@@ -54,27 +54,6 @@ Updatable, Controllable, Collidable {
 	}
 	public void setHealth(int health) {
 		this.health = health;
-	}
-
-	//@Override
-	public void draw(Graphics g) {
-		super.draw(g); //invoked to draw the bounding rect first
-		Graphics2D g2 = (Graphics2D) g;
-		GeneralPath path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
-		if(!points.isEmpty()) {
-			path.moveTo(points.get(0).getX(), points.get(0).getY());
-			for(int i=1;i<points.size();i++) {
-				path.lineTo(points.get(i).getX(), points.get(i).getY());	
-			}		
-			path.closePath();
-			g2.draw(path);
-			//drawing direction line
-			g2.drawLine((int)posX, (int)posY, (int) (posX+(objWidth*Math.cos(angle))),
-					(int) (posY+(objHeight*Math.sin(angle))));
-			//drawing life %
-			g.drawString(String.valueOf(health), (int)posX, (int)(posY-objHeight));
-		}
-//		g2.fill(path);
 	}
 	
 	public void move() {

@@ -23,14 +23,6 @@ public abstract class GameObject {
 	protected int speedX, speedY;
 	protected int maxSpeed, speed;
 	protected int health;
-	public int getHealth() {
-		return health;
-	}
-
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
 	protected double angle;
 	protected int turnSpeed;
 	protected boolean obsolete;
@@ -43,6 +35,14 @@ public abstract class GameObject {
 	protected ArrayList<Point> points;
 	protected ArrayList<GameObject> ignoredObjects;
 	protected ArrayList<Effect> onHitEffects;
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
 
 	public Point getPrevPos() {
 		return prevPos;
@@ -88,7 +88,7 @@ public abstract class GameObject {
 
 	public GameObject() {
 		super();
-		currentPos = new Point(100,100);
+		currentPos = new Point(100, 100);
 		objWidth = 20;
 		objHeight = 20;
 		speedX = 0;
@@ -175,11 +175,12 @@ public abstract class GameObject {
 		obsolete = value;
 	}
 
-//	public void draw(Graphics g) { // this displays bounding rect
-//		g.setColor(Color.gray);
-//		g.drawRect(boundingRect().x, boundingRect().y, boundingRect().width, boundingRect().height);
-//		g.setColor(Color.black);
-//	}
+	// public void draw(Graphics g) { // this displays bounding rect
+	// g.setColor(Color.gray);
+	// g.drawRect(boundingRect().x, boundingRect().y, boundingRect().width,
+	// boundingRect().height);
+	// g.setColor(Color.black);
+	// }
 
 	public abstract ArrayList<Point> body();
 

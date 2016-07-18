@@ -2,8 +2,9 @@ package nubiki.game.movers;
 
 import java.awt.Point;
 
+import nubiki.game.GameObject;
+
 public interface Mover {
-	public void moveTo(Point p);
-	public void turnCW(double angle);
-	public void turnCCW(double angle);
+	public void moveTo(GameObject obj, Point p);
+	public void turn(GameObject obj);
 }

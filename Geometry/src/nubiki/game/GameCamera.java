@@ -13,7 +13,7 @@ public class GameCamera extends JPanel {
 	
 	private int viewWidth;
     private int viewHeight;
-	private List<Drawable> drawableObjects;
+	private List<GameObject> drawableObjects;
     private Point viewOffset;
     
 	public GameCamera() {
@@ -48,13 +48,13 @@ public class GameCamera extends JPanel {
 		this.viewOffset = viewOffset;
 	}
 
-	public void show(List<Drawable> objects) {
+	public void show(List<GameObject> objects) {
 		drawableObjects=objects;
 		repaint();
 	}
 	
 	@Override
-	public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) { //draws camera edges and it's objects too
 //		System.out.println("painting canvas...");
 		super.paintComponent(g);
 //		g.drawString("Left top",5,10);

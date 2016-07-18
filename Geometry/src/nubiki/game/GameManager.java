@@ -25,7 +25,7 @@ public class GameManager implements Runnable {
 	private GameObjectManager objectManager;
 	private Player player1, player2;
 	private static List<Updatable> updatableObjects;
-	private static List<Drawable> drawableObjects;
+	private static List<GameObject> drawableObjects; //to avoid unnecessary drawing on all objects
 	private static List<Collidable> collidableObjects;
 
 	public GameManager() {
@@ -37,7 +37,7 @@ public class GameManager implements Runnable {
 		eventManager = new EventManager();
 		objectManager = new GameObjectManager();
 		updatableObjects = new ArrayList<Updatable>();
-		drawableObjects = new ArrayList<Drawable>();
+		drawableObjects = new ArrayList<GameObject>();
 		collidableObjects = new ArrayList<Collidable>();
 		controller = new Controller(eventManager);
 		addPlayers();
@@ -71,21 +71,21 @@ public class GameManager implements Runnable {
 		drawableObjects.add(player2);
 		drawableObjects.add(obst);
 
-		collidableObjects.add(player1);
-		collidableObjects.add(player2);
-		collidableObjects.add(obst);
+//		collidableObjects.add(player1);
+//		collidableObjects.add(player2);
+//		collidableObjects.add(obst);
 
 		controller.takeControlOf(player1);
 		controller.takeControlOf(player2);
 	}
 
-	protected static void addProjectile(Projectile obj) {
-		if (obj != null) {
-			updatableObjects.add(obj);
-			drawableObjects.add(obj);
-			collidableObjects.add(obj);
-		}
-	}
+//	protected static void addProjectile(Projectile obj) {
+//		if (obj != null) {
+//			updatableObjects.add(obj);
+//			drawableObjects.add(obj);
+//			collidableObjects.add(obj);
+//		}
+//	}
 
 	// May be required for applet
 	public synchronized void stop() {
@@ -103,13 +103,13 @@ public class GameManager implements Runnable {
 
 	private void render() {
 		// ties camera 1 to player 1
-		Point p = new Point((int) player1.getPosX() - camera1.getViewWidth() / 2,
-				(int) player1.getPosY() - camera1.getViewHeight() / 2);
+		Point p = new Point((int) player1.getPos().x - camera1.getViewWidth() / 2,
+				(int) player1.getPos().y - camera1.getViewHeight() / 2);
 		camera1.setViewOffset(p);
 		camera1.show(drawableObjects);
 		// ties camera 2 to player 2
-		p = new Point((int) player2.getPosX() - camera2.getViewWidth() / 2,
-				(int) player2.getPosY() - camera2.getViewHeight() / 2);
+		p = new Point((int) player2.getPos().x - camera2.getViewWidth() / 2,
+				(int) player2.getPos().y - camera2.getViewHeight() / 2);
 		camera2.setViewOffset(p);
 		camera2.show(drawableObjects);
 	}

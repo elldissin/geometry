@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import nubiki.behaviour.DmgEffect;
 import nubiki.behaviour.ProjectileBehaviour;
 import nubiki.behaviour.SlowEffect;
+import nubiki.game.movers.DefaultMover;
+import nubiki.game.renderers.DefaultRenderer;
 
-public class Player extends GameObject implements Drawable,
-Updatable, Controllable, Collidable {
+public class Player extends GameObject implements Controllable, Updatable {
 	private static final long serialVersionUID = 1L;
-	private int health;
-	private int level;
+
 //	Animator anim;
 
 	public Player() {
-		super(); 
+		super();
 		health=100;
 		level=1;
 		body();
@@ -31,6 +31,9 @@ Updatable, Controllable, Collidable {
 		health=100;
 		level=5;
 		maxSpeed=5;
+		mover = new DefaultMover();
+//		weapon = new DefaultWeapon();
+		renderer = new DefaultRenderer();
 		setPos(new Point(x,y));
 		body();
 //		anim=new Animator((int)posX, (int)posY);
@@ -49,45 +52,20 @@ Updatable, Controllable, Collidable {
 		}
 		return points;
 	}
-	public int getHealth() {
-		return health;
-	}
-	public void setHealth(int health) {
-		this.health = health;
-	}
-	
-	public void move() {
-		super.move();
-		speed=Math.min(speed,maxSpeed);
-		if(speed>0) {
-			posX+=getSpeedX();
-			posY+=getSpeedY();
-			points.clear();
-			body();
-		}
-	}
-	public void turn() {
-		if(turnSpeed!=0) {
-//			System.out.println("angle"+angle);
-			angle+=turnSpeed;
-			points.clear();
-			body();
-		}
-	}
-	//try to handle projectile moving and drawing inside player
-	@Override
-	public void shoot() {
-		Projectile projectile = new Projectile((int)posX, (int)posY);
-		projectile.addOnHitEffect(new SlowEffect(20));
-		projectile.addOnHitEffect(new DmgEffect(1));
-		projectile.setBehaviour(new ProjectileBehaviour());
-		projectile.setSpeed(7);
-		projectile.setAngle(angle);
-		GameManager.addProjectile(projectile); 
-		//add each other to ignore list to avoid collisions
-		addIgnoreObject(projectile);
-		projectile.addIgnoreObject(this);
-	}
+
+//	@Override
+//	public void shoot() {
+//		Projectile projectile = new Projectile((int)posX, (int)posY);
+//		projectile.addOnHitEffect(new SlowEffect(20));
+//		projectile.addOnHitEffect(new DmgEffect(1));
+//		projectile.setBehaviour(new ProjectileBehaviour());
+//		projectile.setSpeed(7);
+//		projectile.setAngle(angle);
+//		GameManager.addProjectile(projectile); 
+//		//add each other to ignore list to avoid collisions
+//		addIgnoreObject(projectile);
+//		projectile.addIgnoreObject(this);
+//	}
 
 	@Override
 	public void setMoving() {

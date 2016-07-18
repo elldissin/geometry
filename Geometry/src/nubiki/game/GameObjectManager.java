@@ -14,7 +14,9 @@ public class GameObjectManager {
 		int id=gameObjectsMap.size(); // size()used to get unique ID
 		switch (objType) {
 		case "player":
-			gameObjectsMap.put(id, new Player(x,y));
+			Player p = new Player(x,y);
+			p.setObjectID(id);
+			gameObjectsMap.put(id, p);
 			return gameObjectsMap.get(id);
 		}
 		return null;

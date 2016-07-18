@@ -48,7 +48,7 @@ public class Controller implements KeyListener {
 				controlledArray.get(0).setTurningCCW();
 			}
 			if (code==KeyEvent.VK_Q) { //casting to be fixed
-				controlledArray.get(0).shoot();
+//				controlledArray.get(0).shoot();
 			}
 		}
 
@@ -63,7 +63,7 @@ public class Controller implements KeyListener {
 				controlledArray.get(1).setTurningCCW();
 			}
 			if (code==KeyEvent.VK_CONTROL) { //casting to be fixed
-				controlledArray.get(1).shoot();
+//				controlledArray.get(1).shoot();
 			}
 		}
 	}

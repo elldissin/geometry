@@ -23,18 +23,39 @@ public abstract class GameObject {
 	protected int speedX, speedY;
 	protected int maxSpeed, speed;
 	protected int health;
+	protected int level;
 	protected double angle;
-	protected int turnSpeed;
+	protected double turnSpeed;
 	protected boolean obsolete;
 	protected int distTravelled;
 	protected int liveDistance;
 	protected Behaviour behaviour;
 	protected Mover mover;
-	protected Weapon weapon;
+	// protected Weapon weapon;
 	protected Renderer renderer;
 	protected ArrayList<Point> points;
 	protected ArrayList<GameObject> ignoredObjects;
 	protected ArrayList<Effect> onHitEffects;
+
+	public GameObject() {
+		super();
+		currentPos = new Point(100, 100);
+		objWidth = 20;
+		objHeight = 20;
+		speedX = 0;
+		speedY = 0;
+		speed = 0;
+		maxSpeed = 10;
+		angle = 0;
+		turnSpeed = 0;
+		distTravelled = 0;
+		liveDistance = 400;
+		obsolete = false;
+		points = new ArrayList<Point>();
+		ignoredObjects = new ArrayList<GameObject>();
+		onHitEffects = new ArrayList<Effect>();
+		behaviour = null;
+	}
 
 	public int getHealth() {
 		return health;
@@ -86,29 +107,6 @@ public abstract class GameObject {
 		this.objHeight = objHeight;
 	}
 
-	public GameObject() {
-		super();
-		currentPos = new Point(100, 100);
-		objWidth = 20;
-		objHeight = 20;
-		speedX = 0;
-		speedY = 0;
-		speed = 0;
-		maxSpeed = 10;
-		angle = 0;
-		turnSpeed = 0;
-		distTravelled = 0;
-		liveDistance = 400;
-		obsolete = false;
-		points = new ArrayList<Point>();
-		ignoredObjects = new ArrayList<GameObject>();
-		onHitEffects = new ArrayList<Effect>();
-		behaviour = null;
-		mover = new DefaultMover();
-		weapon = new DefaultWeapon();
-		renderer = new DefaultRenderer();
-	}
-
 	public ArrayList<Effect> getOnHitEffects() {
 		return onHitEffects;
 	}
@@ -128,7 +126,7 @@ public abstract class GameObject {
 		this.behaviour = behaviour;
 	}
 
-	public int getTurnSpeed() {
+	public double getTurnSpeed() {
 		return turnSpeed;
 	}
 
@@ -182,6 +180,11 @@ public abstract class GameObject {
 	// g.setColor(Color.black);
 	// }
 
+	public void draw(Graphics g) {
+		if (renderer != null)
+			renderer.draw(g, this);
+	}
+
 	public abstract ArrayList<Point> body();
 
 	void addIgnoreObject(GameObject o) {
@@ -205,10 +208,14 @@ public abstract class GameObject {
 	}
 
 	public void move() {
-		setPrevPos(getPos());
+		if (mover != null)
+			mover.move(this);
 	}
 
-	public abstract void turn();
+	public void turn() {
+		if (mover != null)
+			mover.turn(this);
+	}
 
 	abstract public int getMaxSpeed();
 

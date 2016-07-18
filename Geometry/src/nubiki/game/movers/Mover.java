@@ -5,6 +5,6 @@ import java.awt.Point;
 import nubiki.game.GameObject;
 
 public interface Mover {
-	public void moveTo(GameObject obj, Point p);
+	public void move(GameObject obj);
 	public void turn(GameObject obj);
 }

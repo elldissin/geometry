@@ -4,8 +4,6 @@ import nubiki.game.Controllable;
 import nubiki.game.GameObjectManager;
 
 public class StopEvent extends GameEvent {
-	private int targetID;
-
 	public StopEvent(int targetID) {
 		super(targetID);
 	}

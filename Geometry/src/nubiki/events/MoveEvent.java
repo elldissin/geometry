@@ -4,8 +4,6 @@ import nubiki.game.Controllable;
 import nubiki.game.GameObjectManager;
 
 public class MoveEvent extends GameEvent {
-	private int targetID;
-	
 	public MoveEvent(int targetID) {
 		super(targetID);
 	}

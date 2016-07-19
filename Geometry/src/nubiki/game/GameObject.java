@@ -35,7 +35,6 @@ public abstract class GameObject implements Updatable {
 
 	public GameObject() {
 		super();
-		currentPos = new Point(100, 100);
 		objWidth = 20;
 		objHeight = 20;
 		angle = 0;
@@ -148,7 +147,7 @@ public abstract class GameObject implements Updatable {
 			ignoredObjects.add(o);
 	}
 
-	public boolean isColliding(Collidable o) {
+	public boolean isColliding(GameObject o) {
 		if (!ignoredObjects.contains(o)) {
 			GameObject temp = (GameObject) o;
 			if (boundingRect().intersects(temp.boundingRect()))

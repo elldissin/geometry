@@ -14,8 +14,8 @@ public class DefaultMover implements Mover {
 	
 	@Override
 	public void move(GameObject obj) {
-		obj.setPrevPos(obj.getPos());
 		if (getSpeed() > 0) {
+			obj.setPrevPos(obj.getPos());
 			obj.getPos().x += getSpeedX(obj);
 			obj.getPos().y += getSpeedY(obj);
 			obj.body().clear(); //no method to get points directly, body() method shall be fixed

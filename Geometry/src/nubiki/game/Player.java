@@ -20,13 +20,6 @@ public class Player extends GameObject implements Controllable {
 
 //	Animator anim;
 
-	public Player() {
-		super();
-		health=100;
-		level=1;
-		body();
-	}
-	
 	public Player(int x, int y) {
 		super(); 
 		health=100;
@@ -35,6 +28,7 @@ public class Player extends GameObject implements Controllable {
 		weapon = new DefaultWeapon();
 		renderer = new DefaultRenderer();
 		setPos(new Point(x,y));
+		setPrevPos(getPos());
 		body();
 //		anim=new Animator((int)posX, (int)posY);
 	}
@@ -42,7 +36,7 @@ public class Player extends GameObject implements Controllable {
 	public ArrayList<Point> body() {
 //		points.clear();
 		if(points.isEmpty()) {
-//			System.out.println("player points recalculation...");
+			System.out.println("Player ID:"+getObjectID()+" body() method, pos:"+currentPos);
 			for(int i=0;i<level+2;i++) {
 				int x1=(int) (currentPos.x+(objWidth*Math.cos(2*Math.PI/(level+2)*i+angle)));
 				int y1=(int) (currentPos.y+(objHeight*Math.sin(2*Math.PI/(level+2)*i+angle)));
@@ -52,20 +46,6 @@ public class Player extends GameObject implements Controllable {
 		}
 		return points;
 	}
-
-//	@Override
-//	public void shoot() {
-//		Projectile projectile = new Projectile((int)posX, (int)posY);
-//		projectile.addOnHitEffect(new SlowEffect(20));
-//		projectile.addOnHitEffect(new DmgEffect(1));
-//		projectile.setBehaviour(new ProjectileBehaviour());
-//		projectile.setSpeed(7);
-//		projectile.setAngle(angle);
-//		GameManager.addProjectile(projectile); 
-//		//add each other to ignore list to avoid collisions
-//		addIgnoreObject(projectile);
-//		projectile.addIgnoreObject(this);
-//	}
 
 	@Override
 	public void setMoving() {

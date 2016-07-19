@@ -22,11 +22,10 @@ public class GameManager implements Runnable {
 	private Controller controller;
 	private EffectManager effManager;
 	private EventManager eventManager;
-//	private GameObjectManager objectManager;
 	private Player player1, player2;
 	private static List<GameObject> updatableObjects;
 	private static List<GameObject> drawableObjects; //to avoid unnecessary drawing on all objects
-	private static List<Collidable> collidableObjects;
+	private static List<GameObject> collidableObjects;
 
 	public GameManager() {
 		super();
@@ -35,10 +34,9 @@ public class GameManager implements Runnable {
 		camera2 = new GameCamera();
 		effManager = new EffectManager();
 		eventManager = new EventManager();
-//		objectManager = new GameObjectManager();
 		updatableObjects = new ArrayList<GameObject>();
 		drawableObjects = new ArrayList<GameObject>();
-		collidableObjects = new ArrayList<Collidable>();
+		collidableObjects = new ArrayList<GameObject>();
 		controller = new Controller(eventManager);
 		addPlayers();
 	}
@@ -71,9 +69,9 @@ public class GameManager implements Runnable {
 		drawableObjects.add(player2);
 		drawableObjects.add(obst);
 
-//		collidableObjects.add(player1);
-//		collidableObjects.add(player2);
-//		collidableObjects.add(obst);
+		collidableObjects.add(player1);
+		collidableObjects.add(player2);
+		collidableObjects.add(obst);
 
 		controller.takeControlOf(player1);
 		controller.takeControlOf(player2);
@@ -83,7 +81,7 @@ public class GameManager implements Runnable {
 		if (obj != null) {
 			updatableObjects.add(obj);
 			drawableObjects.add(obj);
-//			collidableObjects.add(obj);
+			collidableObjects.add(obj);
 		}
 	}
 
@@ -129,9 +127,10 @@ public class GameManager implements Runnable {
 		for (int i = 0; i < collidableObjects.size(); i++)
 			for (int j = 0; j < collidableObjects.size(); j++) {
 				if (collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i != j) {
-					// System.out.println("Collision happened");
-					GameObject actor1 = (GameObject) (collidableObjects.get(i));
-					GameObject actor2 = (GameObject) (collidableObjects.get(j));
+//					 System.out.println("Collision happened");
+					GameObject actor1 = collidableObjects.get(i);
+					GameObject actor2 = collidableObjects.get(j);
+					System.out.println("Collision happened objects: " + actor1.getObjectID() +" "+actor2.getObjectID());
 					for (int k = 0; k < actor2.getOnHitEffects().size(); k++) {
 						effManager.handle(actor1, actor2.getOnHitEffects().get(k));
 					}

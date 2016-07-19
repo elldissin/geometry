@@ -15,6 +15,7 @@ public class GameObjectManager {
 			obj = new Player(x,y);
 			obj.setObjectID(id);
 			gameObjectsMap.put(id, obj);
+			System.out.println("Created new player with id: "+obj.getObjectID()+" at "+x+","+y);
 			return obj;
 		case "projectile":
 			obj = new Projectile(x,y);

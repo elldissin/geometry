@@ -1,5 +1,7 @@
 package nubiki.behaviour;
 
+import java.awt.Point;
+
 import nubiki.game.GameObject;
 import nubiki.game.Player;
 
@@ -43,8 +45,8 @@ public class GeneralBehaviour implements Behaviour {
 	}
 
 	@Override
-	public void bump(GameObject obj, int amount) { 
-		obj.setPos(obj.getPrevPos());
+	public void bump(GameObject obj, int amount) {
+		obj.setPos( (Point) (obj.getPrevPos().clone()) );
 		if(destrictibleOnBump)
 			obj.setObsolete(true);
 	}

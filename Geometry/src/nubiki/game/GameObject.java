@@ -33,14 +33,16 @@ public abstract class GameObject implements Updatable {
 	protected ArrayList<GameObject> ignoredObjects;
 	protected ArrayList<Effect> onHitEffects;
 
-	public GameObject() {
+	public GameObject(int x, int y) {
 		super();
 		objWidth = 20;
 		objHeight = 20;
-		angle = 0;
-		distTravelled = 0;
+//		angle = 0;
+//		distTravelled = 0;
 		liveDistance = 400;
 		obsolete = false;
+		setPos(new Point(x, y));
+		setPrevPos((Point) (getPos().clone()));
 		points = new ArrayList<Point>();
 		ignoredObjects = new ArrayList<GameObject>();
 		onHitEffects = new ArrayList<Effect>();
@@ -73,8 +75,10 @@ public abstract class GameObject implements Updatable {
 
 	public void setPos(Point p) {
 		currentPos = p;
-		points.clear();
-		body();
+		if (points != null) {
+			points.clear();
+			body();
+		}
 	}
 
 	public Point getPos() {

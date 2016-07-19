@@ -130,7 +130,7 @@ public class GameManager implements Runnable {
 //					 System.out.println("Collision happened");
 					GameObject actor1 = collidableObjects.get(i);
 					GameObject actor2 = collidableObjects.get(j);
-					System.out.println("Collision happened objects: " + actor1.getObjectID() +" "+actor2.getObjectID());
+//					System.out.println("Collision happened objects: " + actor1.getObjectID() +" "+actor2.getObjectID());
 					for (int k = 0; k < actor2.getOnHitEffects().size(); k++) {
 						effManager.handle(actor1, actor2.getOnHitEffects().get(k));
 					}

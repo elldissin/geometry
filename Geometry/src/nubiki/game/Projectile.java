@@ -12,10 +12,9 @@ public class Projectile extends GameObject {
 	private static final long serialVersionUID = 1L;
 
 	public Projectile(int x, int y) {
-		super();
+		super(x,y);
 		mover = new ProjectileMover();
 		renderer = new ProjectileRenderer();
-		setPos(new Point(x, y));
 		objHeight = 5;
 		objWidth = 5;
 		body();

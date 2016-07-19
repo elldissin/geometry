@@ -9,7 +9,7 @@ import nubiki.game.renderers.DefaultRenderer;
 public class StaticObject extends GameObject {
 
 	public StaticObject(int x, int y) {
-		super();
+		super(x,y);
 		health = 100;
 		level = 2;
 		objWidth = 50;
@@ -17,7 +17,6 @@ public class StaticObject extends GameObject {
 		mover = new DefaultMover();
 		// weapon = new DefaultWeapon();
 		renderer = new DefaultRenderer();
-		setPos(new Point(x, y));
 		body();
 	}
 

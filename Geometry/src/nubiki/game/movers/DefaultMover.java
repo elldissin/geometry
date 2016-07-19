@@ -1,5 +1,7 @@
 package nubiki.game.movers;
 
+import java.awt.Point;
+
 import nubiki.game.GameObject;
 
 public class DefaultMover implements Mover {
@@ -15,7 +17,7 @@ public class DefaultMover implements Mover {
 	@Override
 	public void move(GameObject obj) {
 		if (getSpeed() > 0) {
-			obj.setPrevPos(obj.getPos());
+			obj.setPrevPos( (Point) (obj.getPos().clone()) ); //important, do not assign, but clone
 			obj.getPos().x += getSpeedX(obj);
 			obj.getPos().y += getSpeedY(obj);
 			obj.body().clear(); //no method to get points directly, body() method shall be fixed

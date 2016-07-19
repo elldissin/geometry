@@ -1,5 +1,6 @@
 package nubiki.game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -26,7 +27,7 @@ public abstract class GameObject implements Updatable {
 	protected int liveDistance;
 	protected Behaviour behaviour;
 	protected Mover mover;
-	 protected Weapon weapon;
+	protected Weapon weapon;
 	protected Renderer renderer;
 	protected ArrayList<Point> points;
 	protected ArrayList<GameObject> ignoredObjects;
@@ -128,16 +129,16 @@ public abstract class GameObject implements Updatable {
 		obsolete = value;
 	}
 
-	// public void draw(Graphics g) { // this displays bounding rect
-	// g.setColor(Color.gray);
-	// g.drawRect(boundingRect().x, boundingRect().y, boundingRect().width,
-	// boundingRect().height);
-	// g.setColor(Color.black);
-	// }
-
 	public void draw(Graphics g) {
+		drawBoundingRect(g);
 		if (renderer != null)
 			renderer.draw(g, this);
+	}
+
+	public void drawBoundingRect(Graphics g) {
+		g.setColor(Color.gray);
+		g.drawRect(boundingRect().x, boundingRect().y, boundingRect().width, boundingRect().height);
+		g.setColor(Color.black);
 	}
 
 	public abstract ArrayList<Point> body();
@@ -158,10 +159,12 @@ public abstract class GameObject implements Updatable {
 	}
 
 	public Rectangle boundingRect() {
-		return new Rectangle((int) (currentPos.getX() - getObjWidth() / 2), (int) (currentPos.getY() - getObjHeight()),
+		Rectangle rec;
+		rec = new Rectangle((int) (currentPos.x - getObjWidth()), (int) (currentPos.y - getObjHeight()),
 				(int) (getObjWidth()) * 2, (int) (getObjHeight()) * 2);
+		return rec;
 	}
-	
+
 	public void move() {
 		if (mover != null)
 			mover.move(this);
@@ -171,7 +174,7 @@ public abstract class GameObject implements Updatable {
 		if (mover != null)
 			mover.turn(this);
 	}
-	
+
 	public void shoot() {
 		if (weapon != null)
 			weapon.shoot(this);
@@ -194,7 +197,7 @@ public abstract class GameObject implements Updatable {
 	public void setRenderer(Renderer renderer) {
 		this.renderer = renderer;
 	}
-	
+
 	public int getLiveDistance() {
 		return liveDistance;
 	}
@@ -202,7 +205,7 @@ public abstract class GameObject implements Updatable {
 	public void setLiveDistance(int liveDistance) {
 		this.liveDistance = liveDistance;
 	}
-	
+
 	@Override
 	public void update() {
 		move();

@@ -15,7 +15,7 @@ public class EventManager {
 		return eventsQueue.poll();
 	}
 	
-	public void addEvent(GameEvent ev) {
+	public synchronized void addEvent(GameEvent ev) {
 //		System.out.println("New event added to queue");
 		eventsQueue.add(ev);
 	}

@@ -10,6 +10,8 @@ import nubiki.behaviour.BumpEffect;
 import nubiki.behaviour.PlayerBehaviour;
 import nubiki.events.EventManager;
 import nubiki.events.GameEvent;
+import nubiki.networking.NetworkMessage;
+import nubiki.networking.ServerCommunicator;
 
 //import com.sun.swing.internal.plaf.synth.resources.synth;
 
@@ -22,6 +24,7 @@ public class GameManager implements Runnable {
 	private Controller controller;
 	private EffectManager effManager;
 	private EventManager eventManager;
+	private ServerCommunicator comm;
 	private Player player1, player2;
 	private static List<GameObject> updatableObjects;
 	private static List<GameObject> drawableObjects; //to avoid unnecessary drawing on all objects
@@ -37,7 +40,9 @@ public class GameManager implements Runnable {
 		updatableObjects = new ArrayList<GameObject>();
 		drawableObjects = new ArrayList<GameObject>();
 		collidableObjects = new ArrayList<GameObject>();
-		controller = new Controller(eventManager);
+		comm = new ServerCommunicator();
+		comm.openConnectionTo("localhost");
+		controller = new Controller(eventManager, comm);
 		addPlayers();
 	}
 
@@ -113,9 +118,14 @@ public class GameManager implements Runnable {
 	}
 
 	private void updateState() {
+		//here we add events from server to our eventmanager
+		NetworkMessage nm=comm.getNextMessage();
+		if(nm!=null) //the message queue might yet be empty at this stage
+			eventManager.addEvent(nm.getEvent());
+		//and immediately ask eventmanager if it has new events
 		GameEvent ev=eventManager.nextEvent();
 		if(ev!=null)
-			ev.doEvent();
+			GameEventHandler.handleEvent(ev);
 		// Handles destruction of obsolete objects
 		for (int i = 0; i < updatableObjects.size(); i++) {
 			if (updatableObjects.get(i).isDestroyed()) {

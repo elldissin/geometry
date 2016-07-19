@@ -1,18 +1,15 @@
 package nubiki.events;
 
-import nubiki.game.Controllable;
-import nubiki.game.GameObjectManager;
-
 public class StopEvent extends GameEvent {
+	private static final long serialVersionUID = 1L;
+
 	public StopEvent(int targetID) {
 		super(targetID);
+		eventType=EventType.STOP;
 	}
 
 	@Override
-	public void doEvent() {
-		if (GameObjectManager.getObjectByID(targetID) instanceof Controllable) {
-			Controllable target = (Controllable)(GameObjectManager.getObjectByID(targetID));
-			target.setStopped();
-		}
+	public EventType doEvent() {
+		return eventType;	
 	}
 }

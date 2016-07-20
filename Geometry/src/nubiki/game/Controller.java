@@ -1,10 +1,14 @@
 package nubiki.game;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.swing.Timer;
 
 import nubiki.events.EventManager;
 import nubiki.events.GameEvent;
@@ -22,12 +26,63 @@ public class Controller implements KeyListener {
 	private final Set<Integer> pressed = new HashSet<Integer>();
 	protected ArrayList<Controllable> controlledArray;
 
-	public Controller(EventManager manager, ServerCommunicator comm) {
+	public Controller(EventManager manager, final ServerCommunicator comm) {
 		controlledArray = new ArrayList<Controllable>();
 		// comm = new ServerCommunicator();
 		// comm.openConnectionTo("localhost");
 		this.manager = manager;
 		this.comm = comm;
+		//Check every 100ms if there's keys pressed
+		//(This is the Swing Timer they talk about)
+		new Timer(20, new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String keysString = "";
+				if(!pressed.isEmpty()){
+					for(Integer pressedCode: pressed) {
+						if (pressedCode == KeyEvent.VK_W) {
+							NetworkMessage msg=new NetworkMessage(pressedCode);
+							GameEvent ev = new MoveEvent(0);
+							msg.setEvent(ev);
+							comm.sendMessage(msg);
+						}
+						if (pressedCode == KeyEvent.VK_D) {
+							NetworkMessage msg=new NetworkMessage(pressedCode);
+							GameEvent ev = new TurnEventCW(0);
+							msg.setEvent(ev);
+							comm.sendMessage(msg);
+						}
+						if (pressedCode == KeyEvent.VK_A) {
+							controlledArray.get(0).setTurningCCW();
+						}
+						if (pressedCode == KeyEvent.VK_Q) {
+							controlledArray.get(0).shoot();
+						}
+
+						if (controlledArray.size() > 1) {
+							if (pressedCode == KeyEvent.VK_UP) {
+								NetworkMessage msg=new NetworkMessage(pressedCode);
+								GameEvent ev = new MoveEvent(1);
+								msg.setEvent(ev);
+								comm.sendMessage(msg);
+							}
+							if (pressedCode == KeyEvent.VK_RIGHT) {
+								NetworkMessage msg=new NetworkMessage(pressedCode);
+								GameEvent ev = new TurnEventCW(1);
+								msg.setEvent(ev);
+								comm.sendMessage(msg);
+							}
+							if (pressedCode == KeyEvent.VK_LEFT) {
+								controlledArray.get(1).setTurningCCW();
+							}
+							if (pressedCode == KeyEvent.VK_CONTROL) {
+								controlledArray.get(1).shoot();
+							}
+						}
+					}
+				} 
+			}
+		}).start();
 	}
 
 	@Override
@@ -35,87 +90,15 @@ public class Controller implements KeyListener {
 		// System.out.println("Key pressed...");
 		int code = e.getKeyCode();
 		pressed.add(code);
-		// if(code!=0) {
-		// comm.sendMessage(new NetworkMessage(code));
-		// NetworkMessage nm=comm.getNextMessage();
-		// if(nm!=null) //the message queue might yet be empty at this stage
-		// code = nm.getKeyCode();
-		// }
 
-		if (controlledArray.size() > 0) {
-			for(Integer pressedCode: pressed)
-			{
-				if (pressedCode == KeyEvent.VK_W) {
-					 System.out.println("Key W pressed...");
-					//				manager.addEvent(new MoveEvent(0));
-					NetworkMessage msg=new NetworkMessage(pressedCode);
-					GameEvent ev = new MoveEvent(0);
-					msg.setEvent(ev);
-					comm.sendMessage(msg);
-				}
-				if (pressedCode == KeyEvent.VK_D) {
-//					controlledArray.get(0).setTurningCW();
-					NetworkMessage msg=new NetworkMessage(pressedCode);
-					GameEvent ev = new TurnEventCW(0);
-					msg.setEvent(ev);
-					comm.sendMessage(msg);
-				}
-				if (pressedCode == KeyEvent.VK_A) {
-					controlledArray.get(0).setTurningCCW();
-				}
-				if (pressedCode == KeyEvent.VK_Q) {
-					controlledArray.get(0).shoot();
-				}
-			}
-		}
 
-		if (controlledArray.size() > 1) {
-			if (code == KeyEvent.VK_UP) {
-				manager.addEvent(new MoveEvent(1));
-			}
-			if (code == KeyEvent.VK_RIGHT) {
-				controlledArray.get(1).setTurningCW();
-			}
-			if (code == KeyEvent.VK_LEFT) {
-				controlledArray.get(1).setTurningCCW();
-			}
-			if (code == KeyEvent.VK_CONTROL) {
-				controlledArray.get(1).shoot();
-			}
-		}
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int code = e.getKeyCode();
 		pressed.remove(code);
-		// this needs to be fixed, stopping even when releasing the other key
-//		if (controlledArray.size() > 0) {
-//			if (code == KeyEvent.VK_W) {
-//				//				manager.addEvent(new StopEvent(0));
-//				NetworkMessage msg=new NetworkMessage(code);
-//				GameEvent ev = new StopEvent(0);
-//				msg.setEvent(ev);
-//				comm.sendMessage(msg);
-//			}
-//			if (code == KeyEvent.VK_A) {
-//				controlledArray.get(0).setNotTurning();
-//			}
-//			if (code == KeyEvent.VK_D) {
-//				controlledArray.get(0).setNotTurning();
-//			}
-//		}
-//		if (controlledArray.size() > 1) {
-//			if (code == KeyEvent.VK_UP) {
-//				manager.addEvent(new StopEvent(1));
-//			}
-//			if (code == KeyEvent.VK_LEFT) {
-//				controlledArray.get(1).setNotTurning();
-//			}
-//			if (code == KeyEvent.VK_RIGHT) {
-//				controlledArray.get(1).setNotTurning();
-//			}
-//		}
 	}
 
 	@Override

@@ -211,7 +211,7 @@ public abstract class GameObject implements Updatable {
 
 	@Override
 	public void update() {
-		move();
-		turn();
+//		move();
+//		turn();
 	}
 }

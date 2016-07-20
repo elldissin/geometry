@@ -9,20 +9,20 @@ public class DefaultMover implements Mover {
 	private double turnSpeed;
 
 	public DefaultMover() {
-		speed = 0;
+		speed = 5;
 		maxSpeed = 10;
 		turnSpeed = 0;
 	}
 	
 	@Override
 	public void move(GameObject obj) {
-		if (getSpeed() > 0) {
+//		if (getSpeed() > 0) {
 			obj.setPrevPos( (Point) (obj.getPos().clone()) ); //important, do not assign, but clone
 			obj.getPos().x += getSpeedX(obj);
 			obj.getPos().y += getSpeedY(obj);
 			obj.body().clear(); //no method to get points directly, body() method shall be fixed
 			obj.body();
-		}
+//		}
 	}
 
 	@Override
@@ -60,11 +60,11 @@ public class DefaultMover implements Mover {
 
 	@Override
 	public void turn(GameObject obj) {
-		if(turnSpeed!=0) {
-			obj.setAngle(obj.getAngle()+turnSpeed);
+//		if(turnSpeed!=0) {
+			obj.setAngle(obj.getAngle()+0.1);
 			obj.body().clear(); //no method to get points directly, body() method shall be fixed
 			obj.body();
-		}
+//		}
 	}
 	
 	@Override

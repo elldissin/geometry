@@ -11,12 +11,12 @@ public class EventManager {
 	}
 	
 	public GameEvent nextEvent() {
-//		System.out.println("New event requested from queue");
+//		System.out.println("New event requested from EventManager queue");
 		return eventsQueue.poll();
 	}
 	
 	public synchronized void addEvent(GameEvent ev) {
-//		System.out.println("New event added to queue");
+//		System.out.println("New event added to EventManager queue" + ev.doEvent());
 		eventsQueue.add(ev);
 	}
 }

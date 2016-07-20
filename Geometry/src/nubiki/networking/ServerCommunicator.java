@@ -29,7 +29,7 @@ public class ServerCommunicator {
 		if (out!=null)
 			try {
 				out.writeObject(event);
-				System.out.println("Event was sent to server");
+//				System.out.println("Event was sent to server");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

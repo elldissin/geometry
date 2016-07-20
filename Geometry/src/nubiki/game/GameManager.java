@@ -119,13 +119,17 @@ public class GameManager implements Runnable {
 
 	private void updateState() {
 		//here we add events from server to our eventmanager
-		NetworkMessage nm=comm.getNextMessage();
+		NetworkMessage nm=null;
+		while((nm=comm.getNextMessage())!=null)
+		{
+//		NetworkMessage nm=comm.getNextMessage();
 		if(nm!=null) //the message queue might yet be empty at this stage
 			eventManager.addEvent(nm.getEvent());
 		//and immediately ask eventmanager if it has new events
 		GameEvent ev=eventManager.nextEvent();
 		if(ev!=null)
 			GameEventHandler.handleEvent(ev);
+		}
 		// Handles destruction of obsolete objects
 		for (int i = 0; i < updatableObjects.size(); i++) {
 			if (updatableObjects.get(i).isDestroyed()) {

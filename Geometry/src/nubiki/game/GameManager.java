@@ -27,7 +27,9 @@ public class GameManager implements Runnable {
 	private ServerCommunicator comm;
 	private Player player1, player2;
 	private static List<GameObject> updatableObjects;
-	private static List<GameObject> drawableObjects; //to avoid unnecessary drawing on all objects
+	private static List<GameObject> drawableObjects; // to avoid unnecessary
+	// drawing on all
+	// objects
 	private static List<GameObject> collidableObjects;
 
 	public GameManager() {
@@ -55,8 +57,8 @@ public class GameManager implements Runnable {
 	}
 
 	private void addPlayers() {
-		player1 = (Player)GameObjectManager.createGameObject("player", 100, 100);
-		player2 = (Player)GameObjectManager.createGameObject("player", 400, 100);
+		player1 = (Player) GameObjectManager.createGameObject("player", 100, 100);
+		player2 = (Player) GameObjectManager.createGameObject("player", 400, 100);
 		StaticObject obst = new StaticObject(250, 50);
 		Behaviour beh1 = new PlayerBehaviour();
 		Behaviour beh2 = new PlayerBehaviour();
@@ -118,45 +120,27 @@ public class GameManager implements Runnable {
 	}
 
 	private void updateState() {
-		//here we add events from server to our eventmanager
-		NetworkMessage nm=null;
-		while((nm=comm.getNextMessage())!=null)
-		{
-//		NetworkMessage nm=comm.getNextMessage();
-		if(nm!=null) //the message queue might yet be empty at this stage
-			eventManager.addEvent(nm.getEvent());
-		//and immediately ask eventmanager if it has new events
-		GameEvent ev=eventManager.nextEvent();
-		if(ev!=null)
-			GameEventHandler.handleEvent(ev);
+		// here we add events from server to our eventmanager
+		NetworkMessage nm = null;
+		while ((nm = comm.getNextMessage()) != null) {
+			// NetworkMessage nm=comm.getNextMessage();
+			if (nm != null) // the message queue might yet be empty at this
+				// stage
+				eventManager.addEvent(nm.getEvent());
+			// and immediately ask eventmanager if it has new events
+			GameEvent ev = eventManager.nextEvent();
+			if (ev != null) {
+				GameEventHandler.handleEvent(ev);
+				checkForCollisions();
+			}
 		}
+
 		// Handles destruction of obsolete objects
 		for (int i = 0; i < updatableObjects.size(); i++) {
 			if (updatableObjects.get(i).isDestroyed()) {
 				removeFromScene(updatableObjects.get(i));
 			}
 		}
-
-		// Handles collisions
-		for (int i = 0; i < collidableObjects.size(); i++)
-			for (int j = 0; j < collidableObjects.size(); j++) {
-				if (collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i != j) {
-//					 System.out.println("Collision happened");
-					GameObject actor1 = collidableObjects.get(i);
-					GameObject actor2 = collidableObjects.get(j);
-//					System.out.println("Collision happened objects: " + actor1.getObjectID() +" "+actor2.getObjectID());
-					for (int k = 0; k < actor2.getOnHitEffects().size(); k++) {
-						effManager.handle(actor1, actor2.getOnHitEffects().get(k));
-					}
-					for (int k = 0; k < actor1.getOnHitEffects().size(); k++) {
-						effManager.handle(actor2, actor1.getOnHitEffects().get(k));
-					}
-					// collidableObjects.get(i).destroy();
-					// collidableObjects.get(i).destroy();
-					// collidableObjects.get(j).destroy();//empty destroy method
-					// in projectile to ignore ?
-				}
-			}
 
 		// Handles objects updates
 		for (int i = 0; i < updatableObjects.size(); i++) {
@@ -216,5 +200,29 @@ public class GameManager implements Runnable {
 
 	public KeyListener getController() {
 		return controller;
+	}
+
+	private void checkForCollisions() {
+		// Handles collisions
+		for (int i = 0; i < collidableObjects.size(); i++)
+			for (int j = 0; j < collidableObjects.size(); j++) {
+				if (collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i != j) {
+					// System.out.println("Collision happened");
+					GameObject actor1 = collidableObjects.get(i);
+					GameObject actor2 = collidableObjects.get(j);
+					// System.out.println("Collision happened objects: " +
+					// actor1.getObjectID() +" "+actor2.getObjectID());
+					for (int k = 0; k < actor2.getOnHitEffects().size(); k++) {
+						effManager.handle(actor1, actor2.getOnHitEffects().get(k));
+					}
+					for (int k = 0; k < actor1.getOnHitEffects().size(); k++) {
+						effManager.handle(actor2, actor1.getOnHitEffects().get(k));
+					}
+					// collidableObjects.get(i).destroy();
+					// collidableObjects.get(i).destroy();
+					// collidableObjects.get(j).destroy();//empty destroy method
+					// in projectile to ignore ?
+				}
+			}
 	}
 }

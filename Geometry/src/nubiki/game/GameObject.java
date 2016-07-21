@@ -173,9 +173,9 @@ public abstract class GameObject implements Updatable {
 			mover.move(this);
 	}
 
-	public void turn() {
+	public void turn(int dir) {
 		if (mover != null)
-			mover.turn(this);
+			mover.turn(this, dir);
 	}
 
 	public void shoot() {

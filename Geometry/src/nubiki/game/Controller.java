@@ -13,7 +13,9 @@ import javax.swing.Timer;
 import nubiki.events.EventManager;
 import nubiki.events.GameEvent;
 import nubiki.events.MoveEvent;
+import nubiki.events.ShootEvent;
 import nubiki.events.StopEvent;
+import nubiki.events.TurnEventCCW;
 import nubiki.events.TurnEventCW;
 import nubiki.networking.NetworkMessage;
 import nubiki.networking.ServerCommunicator;
@@ -53,31 +55,41 @@ public class Controller implements KeyListener {
 							comm.sendMessage(msg);
 						}
 						if (pressedCode == KeyEvent.VK_A) {
-							controlledArray.get(0).setTurningCCW();
+							NetworkMessage msg=new NetworkMessage(pressedCode);
+							GameEvent ev = new TurnEventCCW(0);
+							msg.setEvent(ev);
+							comm.sendMessage(msg);
 						}
 						if (pressedCode == KeyEvent.VK_Q) {
-							controlledArray.get(0).shoot();
+							NetworkMessage msg=new NetworkMessage(pressedCode);
+							GameEvent ev = new ShootEvent(0);
+							msg.setEvent(ev);
+							comm.sendMessage(msg);
 						}
 
-						if (controlledArray.size() > 1) {
-							if (pressedCode == KeyEvent.VK_UP) {
-								NetworkMessage msg=new NetworkMessage(pressedCode);
-								GameEvent ev = new MoveEvent(1);
-								msg.setEvent(ev);
-								comm.sendMessage(msg);
-							}
-							if (pressedCode == KeyEvent.VK_RIGHT) {
-								NetworkMessage msg=new NetworkMessage(pressedCode);
-								GameEvent ev = new TurnEventCW(1);
-								msg.setEvent(ev);
-								comm.sendMessage(msg);
-							}
-							if (pressedCode == KeyEvent.VK_LEFT) {
-								controlledArray.get(1).setTurningCCW();
-							}
-							if (pressedCode == KeyEvent.VK_CONTROL) {
-								controlledArray.get(1).shoot();
-							}
+						if (pressedCode == KeyEvent.VK_UP) {
+							NetworkMessage msg=new NetworkMessage(pressedCode);
+							GameEvent ev = new MoveEvent(1);
+							msg.setEvent(ev);
+							comm.sendMessage(msg);
+						}
+						if (pressedCode == KeyEvent.VK_RIGHT) {
+							NetworkMessage msg=new NetworkMessage(pressedCode);
+							GameEvent ev = new TurnEventCW(1);
+							msg.setEvent(ev);
+							comm.sendMessage(msg);
+						}
+						if (pressedCode == KeyEvent.VK_LEFT) {
+							NetworkMessage msg=new NetworkMessage(pressedCode);
+							GameEvent ev = new TurnEventCCW(1);
+							msg.setEvent(ev);
+							comm.sendMessage(msg);
+						}
+						if (pressedCode == KeyEvent.VK_CONTROL) {
+							NetworkMessage msg=new NetworkMessage(pressedCode);
+							GameEvent ev = new ShootEvent(1);
+							msg.setEvent(ev);
+							comm.sendMessage(msg);
 						}
 					}
 				} 
@@ -87,12 +99,8 @@ public class Controller implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// System.out.println("Key pressed...");
 		int code = e.getKeyCode();
 		pressed.add(code);
-
-
-
 	}
 
 	@Override

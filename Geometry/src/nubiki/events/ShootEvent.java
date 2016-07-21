@@ -1,15 +1,16 @@
 package nubiki.events;
 
-public class TurnEventCW extends GameEvent {
+
+public class ShootEvent extends GameEvent {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public TurnEventCW(int targetID) {
+	public ShootEvent(int targetID) {
 		super(targetID);
-		eventType=EventType.TURNCW;
+		eventType=EventType.SHOOT;
 	}
 	
 	@Override

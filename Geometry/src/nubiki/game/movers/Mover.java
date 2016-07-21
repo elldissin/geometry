@@ -6,7 +6,7 @@ import nubiki.game.GameObject;
 
 public interface Mover {
 	public void move(GameObject obj);
-	public void turn(GameObject obj);
+	public void turn(GameObject obj, int dir);
 	int getSpeedX(GameObject obj);
 	int getSpeedY(GameObject obj);
 	int getMaxSpeed();

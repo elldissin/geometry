@@ -59,9 +59,9 @@ public class DefaultMover implements Mover {
 	}
 
 	@Override
-	public void turn(GameObject obj) {
+	public void turn(GameObject obj, int dir) {
 //		if(turnSpeed!=0) {
-			obj.setAngle(obj.getAngle()+0.1);
+			obj.setAngle(obj.getAngle()+0.1*dir);
 			obj.body().clear(); //no method to get points directly, body() method shall be fixed
 			obj.body();
 //		}

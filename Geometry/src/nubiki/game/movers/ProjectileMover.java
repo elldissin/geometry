@@ -25,7 +25,7 @@ public class ProjectileMover implements Mover {
 	}
 
 	@Override
-	public void turn(GameObject obj) {
+	public void turn(GameObject obj, int dir) {
 		// TODO Auto-generated method stub
 
 	}

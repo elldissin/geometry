@@ -15,16 +15,13 @@ public class GameEventHandler {
 			obj = GameObjectManager.getObjectByID(ev.getTargetID());
 			obj.getMover().move(obj);
 			break;
-		case STOP:
-//			obj = (Controllable)GameObjectManager.getObjectByID(ev.getTargetID());
-//			obj.setStopped();
-			break;
 		case TURNCW:
-//			System.out.println("Handling event:"+ ev.doEvent());
 			obj = GameObjectManager.getObjectByID(ev.getTargetID());
-			obj.getMover().turn(obj);
+			obj.getMover().turn(obj,1);
 			break;
 		case TURNCCW:
+			obj = GameObjectManager.getObjectByID(ev.getTargetID());
+			obj.getMover().turn(obj,-1);
 			break;
 		default:
 			break;

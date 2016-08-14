@@ -2,7 +2,7 @@ package nubiki.events;
 
 import java.util.LinkedList;
 import java.util.Queue;
-
+import geometry.networking.events.GameEvent;
 public class EventManager {
 	private Queue<GameEvent> eventsQueue;
 	

@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
-
+import geometry.networking.NetworkMessage;
 public class ServerCommunicator {
 
 	private String hostName;

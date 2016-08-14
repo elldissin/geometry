@@ -9,8 +9,8 @@ import nubiki.behaviour.Behaviour;
 import nubiki.behaviour.BumpEffect;
 import nubiki.behaviour.PlayerBehaviour;
 import nubiki.events.EventManager;
-import nubiki.events.GameEvent;
-import nubiki.networking.NetworkMessage;
+import geometry.networking.events.GameEvent;
+import geometry.networking.NetworkMessage;
 import nubiki.networking.ServerCommunicator;
 
 //import com.sun.swing.internal.plaf.synth.resources.synth;

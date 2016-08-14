@@ -11,13 +11,13 @@ import java.util.Set;
 import javax.swing.Timer;
 
 import nubiki.events.EventManager;
-import nubiki.events.GameEvent;
-import nubiki.events.MoveEvent;
-import nubiki.events.ShootEvent;
-import nubiki.events.StopEvent;
-import nubiki.events.TurnEventCCW;
-import nubiki.events.TurnEventCW;
-import nubiki.networking.NetworkMessage;
+import geometry.networking.events.GameEvent;
+import geometry.networking.events.MoveEvent;
+import geometry.networking.events.ShootEvent;
+import geometry.networking.events.StopEvent;
+import geometry.networking.events.TurnEventCCW;
+import geometry.networking.events.TurnEventCW;
+import geometry.networking.NetworkMessage;
 import nubiki.networking.ServerCommunicator;
 
 public class Controller implements KeyListener {

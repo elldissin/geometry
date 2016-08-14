@@ -1,6 +1,6 @@
 package nubiki.game;
 
-import nubiki.events.GameEvent;
+import geometry.networking.events.GameEvent;
 
 public class GameEventHandler {
 	

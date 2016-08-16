@@ -23,6 +23,10 @@ public class GameEventHandler {
 			obj = GameObjectManager.getObjectByID(ev.getTargetID());
 			obj.getMover().turn(obj,-1);
 			break;
+		case SHOOT:
+			obj = GameObjectManager.getObjectByID(ev.getTargetID());
+			obj.getWeapon().shoot(obj);
+			break;
 		default:
 			break;
 		}

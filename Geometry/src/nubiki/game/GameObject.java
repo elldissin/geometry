@@ -29,6 +29,7 @@ public abstract class GameObject implements Updatable {
 	protected Mover mover;
 	protected Weapon weapon;
 	protected Renderer renderer;
+
 	protected ArrayList<Point> points;
 	protected ArrayList<GameObject> ignoredObjects;
 	protected ArrayList<Effect> onHitEffects;
@@ -37,8 +38,8 @@ public abstract class GameObject implements Updatable {
 		super();
 		objWidth = 20;
 		objHeight = 20;
-//		angle = 0;
-//		distTravelled = 0;
+		// angle = 0;
+		// distTravelled = 0;
 		liveDistance = 400;
 		obsolete = false;
 		setPos(new Point(x, y));
@@ -201,6 +202,14 @@ public abstract class GameObject implements Updatable {
 		this.renderer = renderer;
 	}
 
+	public Weapon getWeapon() {
+		return weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		this.weapon = weapon;
+	}
+
 	public int getLiveDistance() {
 		return liveDistance;
 	}
@@ -211,7 +220,7 @@ public abstract class GameObject implements Updatable {
 
 	@Override
 	public void update() {
-//		move();
-//		turn();
+		// move();
+		// turn();
 	}
 }

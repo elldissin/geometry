@@ -83,7 +83,8 @@ public class GameManager implements Runnable {
 		controller.takeControlOf(player1);
 		controller.takeControlOf(player2);
 	}
-
+	
+//Called from method, that creates the projectile as a result of shooting
 	public static void addProjectile(GameObject obj) {
 		if (obj != null) {
 			updatableObjects.add(obj);
@@ -142,10 +143,10 @@ public class GameManager implements Runnable {
 			}
 		}
 
-		// Handles objects updates
-		for (int i = 0; i < updatableObjects.size(); i++) {
-			updatableObjects.get(i).update();
-		}
+//		// Handles objects updates DOES NOTHING AT THE MOMENT
+//		for (int i = 0; i < updatableObjects.size(); i++) {
+//			updatableObjects.get(i).update();
+//		}
 	}
 
 	@Override

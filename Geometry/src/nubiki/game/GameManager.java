@@ -135,7 +135,7 @@ public class GameManager implements Runnable {
 				checkForCollisions();
 			}
 		}
-
+		checkForCollisions();
 		// Handles destruction of obsolete objects
 		for (int i = 0; i < updatableObjects.size(); i++) {
 			if (updatableObjects.get(i).isDestroyed()) {
@@ -143,10 +143,10 @@ public class GameManager implements Runnable {
 			}
 		}
 
-//		// Handles objects updates DOES NOTHING AT THE MOMENT
-//		for (int i = 0; i < updatableObjects.size(); i++) {
-//			updatableObjects.get(i).update();
-//		}
+		// Handles objects updates DOES NOTHING AT THE MOMENT
+		for (int i = 0; i < updatableObjects.size(); i++) {
+			updatableObjects.get(i).update();
+		}
 	}
 
 	@Override
@@ -208,7 +208,7 @@ public class GameManager implements Runnable {
 		for (int i = 0; i < collidableObjects.size(); i++)
 			for (int j = 0; j < collidableObjects.size(); j++) {
 				if (collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i != j) {
-					// System.out.println("Collision happened");
+					 System.out.println("Collision happened");
 					GameObject actor1 = collidableObjects.get(i);
 					GameObject actor2 = collidableObjects.get(j);
 					// System.out.println("Collision happened objects: " +

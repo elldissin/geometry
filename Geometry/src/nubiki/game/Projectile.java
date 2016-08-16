@@ -49,4 +49,9 @@ public class Projectile extends GameObject {
 	public void getHit(int amount) {
 		return;
 	}
+	
+	@Override //overriding default update() in GameObject to act without player's control
+	public void update() {
+		move();
+	}
 }

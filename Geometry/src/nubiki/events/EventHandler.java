@@ -1,8 +1,10 @@
-package nubiki.game;
+package nubiki.events;
 
 import geometry.networking.events.GameEvent;
+import nubiki.game.GameObject;
+import nubiki.game.GameObjectManager;
 
-public class GameEventHandler {
+public class EventHandler {
 	
 	public static void handleEvent(GameEvent ev) {
 //		Controllable obj;

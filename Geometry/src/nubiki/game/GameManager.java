@@ -8,6 +8,7 @@ import java.util.List;
 import nubiki.behaviour.Behaviour;
 import nubiki.behaviour.BumpEffect;
 import nubiki.behaviour.PlayerBehaviour;
+import nubiki.events.EventHandler;
 import nubiki.events.EventManager;
 import geometry.networking.events.GameEvent;
 import geometry.networking.NetworkMessage;
@@ -131,7 +132,7 @@ public class GameManager implements Runnable {
 			// and immediately ask eventmanager if it has new events
 			GameEvent ev = eventManager.nextEvent();
 			if (ev != null) {
-				GameEventHandler.handleEvent(ev);
+				EventHandler.handleEvent(ev);
 				checkForCollisions();
 			}
 		}
@@ -208,7 +209,7 @@ public class GameManager implements Runnable {
 		for (int i = 0; i < collidableObjects.size(); i++)
 			for (int j = 0; j < collidableObjects.size(); j++) {
 				if (collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i != j) {
-					 System.out.println("Collision happened");
+//					 System.out.println("Collision happened");
 					GameObject actor1 = collidableObjects.get(i);
 					GameObject actor2 = collidableObjects.get(j);
 					// System.out.println("Collision happened objects: " +

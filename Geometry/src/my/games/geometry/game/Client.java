@@ -16,7 +16,7 @@ import my.games.geometry.networking.ServerCommunicator;
 
 //import com.sun.swing.internal.plaf.synth.resources.synth;
 
-public class GameManager implements Runnable {
+public class Client implements Runnable {
 	private static final long serialVersionUID = 1L;
 
 	private boolean isRunning;
@@ -33,7 +33,7 @@ public class GameManager implements Runnable {
 	// objects
 	private static List<GameObject> collidableObjects;
 
-	public GameManager() {
+	public Client() {
 		super();
 		isRunning = false;
 		camera1 = new GameCamera();

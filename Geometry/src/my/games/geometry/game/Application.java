@@ -8,7 +8,7 @@ public class Application {
     private static final long serialVersionUID = 1L;
     public static void main(String[] args) 
     {
-    	GameManager game=new GameManager();
+    	Client game=new Client();
     	JFrame frame = new JFrame("Geometry game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);

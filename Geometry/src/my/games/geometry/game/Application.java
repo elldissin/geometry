@@ -1,11 +1,10 @@
 package my.games.geometry.game;
 
 import java.awt.BorderLayout;
-import java.awt.LayoutManager;
 
 import javax.swing.JFrame;
 
-public class Game {
+public class Application {
     private static final long serialVersionUID = 1L;
     public static void main(String[] args) 
     {

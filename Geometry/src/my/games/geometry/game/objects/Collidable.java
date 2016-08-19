@@ -1,4 +1,4 @@
-package my.games.geometry.game;
+package my.games.geometry.game.objects;
 
 public interface Collidable {
 	public boolean isColliding(Collidable obj);

@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
-import my.games.geometry.game.GameObject;
+import my.games.geometry.game.objects.GameObject;
 
 import java.awt.Point;
 

@@ -2,7 +2,7 @@ package my.games.geometry.game.movers;
 
 import java.awt.Point;
 
-import my.games.geometry.game.GameObject;
+import my.games.geometry.game.objects.GameObject;
 
 public class DefaultMover implements Mover {
 	private int maxSpeed, speed;

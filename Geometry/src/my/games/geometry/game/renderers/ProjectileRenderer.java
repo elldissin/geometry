@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
-import my.games.geometry.game.GameObject;
+import my.games.geometry.game.objects.GameObject;
 
 public class ProjectileRenderer implements Renderer {
 

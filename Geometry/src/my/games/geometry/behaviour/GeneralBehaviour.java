@@ -2,8 +2,8 @@ package my.games.geometry.behaviour;
 
 import java.awt.Point;
 
-import my.games.geometry.game.GameObject;
-import my.games.geometry.game.Player;
+import my.games.geometry.game.objects.GameObject;
+import my.games.geometry.game.objects.Player;
 
 public class GeneralBehaviour implements Behaviour {
 	protected boolean slowable;

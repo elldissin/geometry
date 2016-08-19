@@ -1,4 +1,4 @@
-package my.games.geometry.game;
+package my.games.geometry.game.objects;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;

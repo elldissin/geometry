@@ -1,8 +1,8 @@
 package my.games.geometry.events;
 
 import geometry.networking.events.GameEvent;
-import my.games.geometry.game.GameObject;
 import my.games.geometry.game.GameObjectManager;
+import my.games.geometry.game.objects.GameObject;
 
 public class EventHandler {
 	

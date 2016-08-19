@@ -12,6 +12,11 @@ import my.games.geometry.behaviour.BumpEffect;
 import my.games.geometry.behaviour.PlayerBehaviour;
 import my.games.geometry.events.EventHandler;
 import my.games.geometry.events.EventManager;
+import my.games.geometry.game.objects.Controller;
+import my.games.geometry.game.objects.GameObject;
+import my.games.geometry.game.objects.Player;
+import my.games.geometry.game.objects.StaticObject;
+import my.games.geometry.game.objects.Updatable;
 import my.games.geometry.networking.ServerCommunicator;
 
 //import com.sun.swing.internal.plaf.synth.resources.synth;

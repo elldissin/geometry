@@ -1,6 +1,6 @@
 package my.games.geometry.game.movers;
 
-import my.games.geometry.game.GameObject;
+import my.games.geometry.game.objects.GameObject;
 
 public class ProjectileMover implements Mover {
 	private int speed;

@@ -1,4 +1,4 @@
-package my.games.geometry.game;
+package my.games.geometry.game.objects;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

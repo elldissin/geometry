@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import my.games.geometry.game.objects.GameObject;
+
 public class GameCamera extends JPanel {
 
 	private static final long serialVersionUID = 1L;

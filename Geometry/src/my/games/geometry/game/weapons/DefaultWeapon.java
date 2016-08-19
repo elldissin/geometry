@@ -4,8 +4,8 @@ import my.games.geometry.behaviour.DmgEffect;
 import my.games.geometry.behaviour.ProjectileBehaviour;
 import my.games.geometry.behaviour.SlowEffect;
 import my.games.geometry.game.Client;
-import my.games.geometry.game.GameObject;
 import my.games.geometry.game.GameObjectManager;
+import my.games.geometry.game.objects.GameObject;
 
 public class DefaultWeapon implements Weapon {
 

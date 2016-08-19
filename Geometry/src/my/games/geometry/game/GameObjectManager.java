@@ -4,6 +4,10 @@ import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
+import my.games.geometry.game.objects.GameObject;
+import my.games.geometry.game.objects.Player;
+import my.games.geometry.game.objects.Projectile;
+
 public class GameObjectManager {
 	private static Map<Integer, GameObject> gameObjectsMap = new HashMap<Integer, GameObject>(); ;
 

@@ -12,21 +12,21 @@ import my.games.geometry.game.objects.GameObject;
 public class GameCamera extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int viewWidth;
-    private int viewHeight;
+	private int viewHeight;
 	private List<GameObject> drawableObjects;
-    private Point viewOffset;
-    
+	private Point viewOffset;
+
 	public GameCamera() {
 		super();
-		viewWidth=400;
-		viewHeight=600;
+		viewWidth = 400;
+		viewHeight = 600;
 		setPreferredSize(new Dimension(viewWidth, viewHeight));
-		viewOffset=new Point(0,0);
+		viewOffset = new Point(0, 0);
 	}
-	
-    public int getViewWidth() {
+
+	public int getViewWidth() {
 		return viewWidth;
 	}
 
@@ -41,7 +41,7 @@ public class GameCamera extends JPanel {
 	public void setViewHeight(int viewHeight) {
 		this.viewHeight = viewHeight;
 	}
-	
+
 	public Point getViewOffset() {
 		return viewOffset;
 	}
@@ -51,22 +51,18 @@ public class GameCamera extends JPanel {
 	}
 
 	public void show(List<GameObject> objects) {
-		drawableObjects=objects;
+		drawableObjects = objects;
 		repaint();
 	}
-	
+
 	@Override
-	public void paintComponent(Graphics g) { //draws camera edges and it's objects too
-//		System.out.println("painting canvas...");
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-//		g.drawString("Left top",5,10);
-//		g.drawString("Right top",300,10);
-//		g.drawString("Left bottom",5,570);
-//		g.drawString("Right bottom",300,570);
+		// drawing rectangle for split screen
 		g.drawRect(0, 0, 399, 600);
-		g.translate((int)-viewOffset.getX(), (int)-viewOffset.getY());
-		if(drawableObjects!=null)
-		for(int i=0; i<drawableObjects.size();i++)
-			drawableObjects.get(i).draw(g);
+		g.translate((int) -viewOffset.getX(), (int) -viewOffset.getY());
+		if (drawableObjects != null)
+			for (int i = 0; i < drawableObjects.size(); i++)
+				drawableObjects.get(i).draw(g);
 	}
 }

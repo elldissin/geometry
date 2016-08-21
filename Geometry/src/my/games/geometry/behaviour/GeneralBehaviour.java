@@ -3,20 +3,19 @@ package my.games.geometry.behaviour;
 import java.awt.Point;
 
 import my.games.geometry.game.objects.GameObject;
-import my.games.geometry.game.objects.Player;
 
 public class GeneralBehaviour implements Behaviour {
 	protected boolean slowable;
 	protected boolean vulnerable;
 	protected boolean bumping;
 	protected boolean destrictibleOnBump;
-	
+
 	public GeneralBehaviour() {
-		slowable=false;
-		vulnerable=false;
-		bumping=false;
+		slowable = false;
+		vulnerable = false;
+		bumping = false;
 	}
-	
+
 	@Override
 	public boolean isSlowable() {
 		return slowable;
@@ -26,45 +25,44 @@ public class GeneralBehaviour implements Behaviour {
 	public boolean isVulnerable() {
 		return vulnerable;
 	}
-	
+
 	@Override
 	public boolean isBumping() {
 		return bumping;
 	}
-	
+
 	@Override
 	public void slowDown(GameObject obj, int amount) {
-		obj.getMover().setSpeed((int)(obj.getMover().getSpeed()*(100-amount)/100));
-//		obj.getMover().setMaxSpeed((int)(obj.getMover().getMaxSpeed()*(100-amount)/100));
-		slowable=false; //remove after timer implementation
+		obj.getMover().setSpeed((int) (obj.getMover().getSpeed() * (100 - amount) / 100));
+		slowable = false; // remove after timer implementation
 	}
 
 	@Override
 	public void doDamage(GameObject obj, int amount) {
-		System.out.println("Player got hit by " + amount +" hp");
+		// System.out.println("Player got hit by " + amount +" hp");
 		obj.getHit(amount);
 	}
 
 	@Override
 	public void bump(GameObject obj, int amount) {
-		obj.setPos( (Point) (obj.getPrevPos().clone()) );
-		if(destrictibleOnBump)
+		obj.setPos((Point) (obj.getPrevPos().clone()));
+		if (destrictibleOnBump)
 			obj.setObsolete(true);
 	}
 
 	@Override
 	public void setSlowable(boolean value) {
-		slowable=value;
+		slowable = value;
 	}
 
 	@Override
 	public void setVulnerable(boolean value) {
-		vulnerable=value;
+		vulnerable = value;
 	}
 
 	@Override
 	public void setBumping(boolean value) {
-		bumping=value;
+		bumping = value;
 	}
 
 	@Override
@@ -74,6 +72,6 @@ public class GeneralBehaviour implements Behaviour {
 
 	@Override
 	public void setDestructibleOnBump(boolean value) {
-		destrictibleOnBump=value;
+		destrictibleOnBump = value;
 	}
 }

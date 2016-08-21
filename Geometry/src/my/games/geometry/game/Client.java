@@ -1,6 +1,5 @@
 package my.games.geometry.game;
 
-import java.awt.Point;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,8 @@ import my.games.geometry.behaviour.BumpEffect;
 import my.games.geometry.behaviour.PlayerBehaviour;
 import my.games.geometry.events.EventHandler;
 import my.games.geometry.events.EventManager;
+import my.games.geometry.game.engine.ClientRenderEngine;
+import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.Controller;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
@@ -25,28 +26,25 @@ public class Client implements Runnable {
 	private static final long serialVersionUID = 1L;
 
 	private boolean isRunning;
+	private RenderEngine renderEngine;
 	private Thread thread;
-	private GameCamera camera1, camera2;
 	private Controller controller;
 	private EffectManager effManager;
 	private EventManager eventManager;
 	private ServerCommunicator comm;
 	private Player player1, player2;
 	private static List<GameObject> updatableObjects;
-	private static List<GameObject> drawableObjects; // to avoid unnecessary
-	// drawing on all
-	// objects
+	private static List<GameObject> drawableObjects;
 	private static List<GameObject> collidableObjects;
 
 	public Client() {
 		super();
 		isRunning = false;
-		camera1 = new GameCamera();
-		camera2 = new GameCamera();
 		effManager = new EffectManager();
 		eventManager = new EventManager();
 		updatableObjects = new ArrayList<GameObject>();
 		drawableObjects = new ArrayList<GameObject>();
+		renderEngine = new ClientRenderEngine(drawableObjects);
 		collidableObjects = new ArrayList<GameObject>();
 		comm = new ServerCommunicator();
 		comm.openConnectionTo("localhost");
@@ -89,8 +87,8 @@ public class Client implements Runnable {
 		controller.takeControlOf(player1);
 		controller.takeControlOf(player2);
 	}
-	
-//Called from method, that creates the projectile as a result of shooting
+
+	// Called from method, that creates the projectile as a result of shooting
 	public static void addProjectile(GameObject obj) {
 		if (obj != null) {
 			updatableObjects.add(obj);
@@ -111,19 +109,6 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 		System.exit(1);
-	}
-
-	private void render() {
-		// ties camera 1 to player 1
-		Point p = new Point((int) player1.getPos().x - camera1.getViewWidth() / 2,
-				(int) player1.getPos().y - camera1.getViewHeight() / 2);
-		camera1.setViewOffset(p);
-		camera1.show(drawableObjects);
-		// ties camera 2 to player 2
-		p = new Point((int) player2.getPos().x - camera2.getViewWidth() / 2,
-				(int) player2.getPos().y - camera2.getViewHeight() / 2);
-		camera2.setViewOffset(p);
-		camera2.show(drawableObjects);
 	}
 
 	private void updateState() {
@@ -170,7 +155,7 @@ public class Client implements Runnable {
 			lastTime = now;
 			if (delta >= 1) {
 				updateState();
-				render();
+				renderEngine.render();
 				frames++;
 				updates++;
 				delta--;
@@ -197,14 +182,6 @@ public class Client implements Runnable {
 		collidableObjects.remove(obj);
 	}
 
-	public GameCamera getCamera(int number) {
-		if (number == 1)
-			return camera1;
-		if (number == 2)
-			return camera2;
-		return new GameCamera(); // if not 1 or 2 return empty camera
-	}
-
 	public KeyListener getController() {
 		return controller;
 	}
@@ -214,7 +191,7 @@ public class Client implements Runnable {
 		for (int i = 0; i < collidableObjects.size(); i++)
 			for (int j = 0; j < collidableObjects.size(); j++) {
 				if (collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i != j) {
-//					 System.out.println("Collision happened");
+					// System.out.println("Collision happened");
 					GameObject actor1 = collidableObjects.get(i);
 					GameObject actor2 = collidableObjects.get(j);
 					// System.out.println("Collision happened objects: " +
@@ -232,4 +209,13 @@ public class Client implements Runnable {
 				}
 			}
 	}
+
+	public RenderEngine getRenderEngine() {
+		return renderEngine;
+	}
+
+	public void setRenderEngine(RenderEngine renderEngine) {
+		this.renderEngine = renderEngine;
+	}
+
 }

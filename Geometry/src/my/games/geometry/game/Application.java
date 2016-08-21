@@ -13,8 +13,8 @@ public class Application {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setResizable(false);
-        frame.add(game.getCamera(1), BorderLayout.LINE_START);
-        frame.add(game.getCamera(2), BorderLayout.LINE_END);
+        frame.add(game.getRenderEngine().getCamera(1), BorderLayout.LINE_START);
+        frame.add(game.getRenderEngine().getCamera(2), BorderLayout.LINE_END);
         frame.setVisible(true);
         frame.setFocusable(true); //important call to allow listening to keys
         frame.addKeyListener(game.getController());

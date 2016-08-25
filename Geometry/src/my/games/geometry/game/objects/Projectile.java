@@ -9,8 +9,8 @@ import my.games.geometry.game.renderers.ProjectileRenderer;
 public class Projectile extends GameObject {
 	private static final long serialVersionUID = 1L;
 
-	public Projectile(int x, int y) {
-		super(x, y);
+	public Projectile(int x, int y, double angle) {
+		super(x, y, angle);
 		mover = new ProjectileMover();
 		renderer = new ProjectileRenderer();
 		objHeight = 5;

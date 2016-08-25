@@ -8,8 +8,8 @@ import my.games.geometry.game.renderers.DefaultRenderer;
 
 public class StaticObject extends GameObject {
 
-	public StaticObject(int x, int y) {
-		super(x,y);
+	public StaticObject(int x, int y, double angle) {
+		super(x, y, angle);
 		health = 100;
 		level = 2;
 		objWidth = 50;

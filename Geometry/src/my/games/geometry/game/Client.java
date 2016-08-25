@@ -19,8 +19,6 @@ import my.games.geometry.game.objects.Player;
 import my.games.geometry.game.objects.StaticObject;
 import my.games.geometry.networking.ServerCommunicator;
 
-//import com.sun.swing.internal.plaf.synth.resources.synth;
-
 public class Client implements Runnable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +27,6 @@ public class Client implements Runnable {
 	private World world;
 	private Thread thread;
 	private Controller controller;
-	private EffectManager effManager;
 	private EventManager eventManager;
 	private EventHandler eventHandler;
 	private ServerCommunicator comm;
@@ -42,7 +39,6 @@ public class Client implements Runnable {
 		super();
 		world = new World();
 		isRunning = false;
-		effManager = new EffectManager();
 		eventManager = new EventManager();
 		eventHandler = new EventHandler(world);
 		updatableObjects = new ArrayList<GameObject>();
@@ -64,9 +60,9 @@ public class Client implements Runnable {
 	}
 
 	private void addPlayers() {
-		player1 = (Player) world.createGameObject("player", 100, 100);
-		player2 = (Player) world.createGameObject("player", 400, 100);
-		StaticObject obst = (StaticObject) world.createGameObject("static", 250, 50);
+		player1 = (Player) world.createGameObject("player", 100, 100, 0.0);
+		player2 = (Player) world.createGameObject("player", 400, 100, 0.0);
+		StaticObject obst = (StaticObject) world.createGameObject("static", 250, 50, 0.0);
 
 		Behaviour beh1 = new PlayerBehaviour();
 		Behaviour beh2 = new PlayerBehaviour();
@@ -107,17 +103,11 @@ public class Client implements Runnable {
 			GameEvent ev = eventManager.nextEvent();
 			if (ev != null) {
 				eventHandler.handleEvent(ev);
-				checkForCollisions();
+				world.update();
+				// checkForCollisions(); // if many events within one tick, some
+				// collisions are missed
 			}
 		}
-		checkForCollisions();
-		// Handles destruction of obsolete objects - to be moved to World
-		for (int i = 0; i < world.getUpdatableObjectList().size(); i++) {
-			if (world.getUpdatableObjectList().get(i).isDestroyed()) {
-				world.removeFromWorld((world.getUpdatableObjectList().get(i)));
-			}
-		}
-
 		world.update();
 	}
 
@@ -159,30 +149,6 @@ public class Client implements Runnable {
 
 	public KeyListener getController() {
 		return controller;
-	}
-
-	private void checkForCollisions() { // to be moved to world
-		// Handles collisions
-		for (int i = 0; i < collidableObjects.size(); i++)
-			for (int j = 0; j < collidableObjects.size(); j++) {
-				if (collidableObjects.get(i).isColliding(collidableObjects.get(j)) && i != j) {
-					// System.out.println("Collision happened");
-					GameObject actor1 = collidableObjects.get(i);
-					GameObject actor2 = collidableObjects.get(j);
-					// System.out.println("Collision happened objects: " +
-					// actor1.getObjectID() +" "+actor2.getObjectID());
-					for (int k = 0; k < actor2.getOnHitEffects().size(); k++) {
-						effManager.handle(actor1, actor2.getOnHitEffects().get(k));
-					}
-					for (int k = 0; k < actor1.getOnHitEffects().size(); k++) {
-						effManager.handle(actor2, actor1.getOnHitEffects().get(k));
-					}
-					// collidableObjects.get(i).destroy();
-					// collidableObjects.get(i).destroy();
-					// collidableObjects.get(j).destroy();//empty destroy method
-					// in projectile to ignore ?
-				}
-			}
 	}
 
 	public RenderEngine getRenderEngine() {

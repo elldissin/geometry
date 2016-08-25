@@ -19,7 +19,7 @@ public class DefaultWeapon implements Weapon {
 
 	@Override
 	public void shoot(GameObject obj) {
-		Projectile projectile = new Projectile(obj.getPos().x, obj.getPos().y);
+		Projectile projectile = new Projectile(obj.getPos().x, obj.getPos().y, obj.getAngle());
 		projectile.addOnHitEffect(new SlowEffect(20));
 		projectile.addOnHitEffect(new DmgEffect(1));
 		projectile.setBehaviour(new ProjectileBehaviour());

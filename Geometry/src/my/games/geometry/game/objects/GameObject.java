@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import my.games.geometry.behaviour.Behaviour;
 import my.games.geometry.behaviour.Effect;
 import my.games.geometry.behaviour.GeneralBehaviour;
-import my.games.geometry.game.movers.*;
-import my.games.geometry.game.renderers.*;
-import my.games.geometry.game.weapons.*;
+import my.games.geometry.game.movers.Mover;
+import my.games.geometry.game.renderers.Renderer;
+import my.games.geometry.game.weapons.Weapon;
 
 public abstract class GameObject implements Updatable {
 	private static final long serialVersionUID = 1L;
@@ -34,11 +34,11 @@ public abstract class GameObject implements Updatable {
 	protected ArrayList<GameObject> ignoredObjects;
 	protected ArrayList<Effect> onHitEffects;
 
-	public GameObject(int x, int y) {
+	public GameObject(int x, int y, double angle) {
 		super();
 		objWidth = 20;
 		objHeight = 20;
-		// angle = 0;
+		this.angle = angle;
 		// distTravelled = 0;
 		liveDistance = 400;
 		obsolete = false;

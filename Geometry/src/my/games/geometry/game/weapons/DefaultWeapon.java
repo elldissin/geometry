@@ -1,24 +1,37 @@
 package my.games.geometry.game.weapons;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import my.games.geometry.behaviour.DmgEffect;
 import my.games.geometry.behaviour.ProjectileBehaviour;
 import my.games.geometry.behaviour.SlowEffect;
-import my.games.geometry.game.Client;
-import my.games.geometry.game.GameObjectManager;
 import my.games.geometry.game.objects.GameObject;
+import my.games.geometry.game.objects.Projectile;
 
 public class DefaultWeapon implements Weapon {
 
+	private List<Projectile> projectileList;
+
+	public DefaultWeapon() {
+		projectileList = new ArrayList<Projectile>();
+	}
+
 	@Override
 	public void shoot(GameObject obj) {
-		GameObject projectile = GameObjectManager.createGameObject("projectile", obj.getPos().x, obj.getPos().y);
+		Projectile projectile = new Projectile(obj.getPos().x, obj.getPos().y);
 		projectile.addOnHitEffect(new SlowEffect(20));
 		projectile.addOnHitEffect(new DmgEffect(1));
 		projectile.setBehaviour(new ProjectileBehaviour());
 		projectile.setAngle(obj.getAngle());
-		Client.addProjectile(projectile); 
-		//add each other to ignore list to avoid collisions
+		// add each other to ignore list to avoid collisions
 		obj.addIgnoreObject(projectile);
 		projectile.addIgnoreObject(obj);
+		projectileList.add(projectile);
+	}
+
+	@Override
+	public List<Projectile> getProjectileList() {
+		return projectileList;
 	}
 }

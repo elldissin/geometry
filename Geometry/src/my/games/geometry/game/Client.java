@@ -27,10 +27,12 @@ public class Client implements Runnable {
 
 	private boolean isRunning;
 	private RenderEngine renderEngine;
+	private World world;
 	private Thread thread;
 	private Controller controller;
 	private EffectManager effManager;
 	private EventManager eventManager;
+	private EventHandler eventHandler;
 	private ServerCommunicator comm;
 	private Player player1, player2;
 	private static List<GameObject> updatableObjects;
@@ -39,12 +41,14 @@ public class Client implements Runnable {
 
 	public Client() {
 		super();
+		world = new World();
 		isRunning = false;
 		effManager = new EffectManager();
 		eventManager = new EventManager();
+		eventHandler = new EventHandler(world);
 		updatableObjects = new ArrayList<GameObject>();
 		drawableObjects = new ArrayList<GameObject>();
-		renderEngine = new ClientRenderEngine(drawableObjects);
+		renderEngine = new ClientRenderEngine(world);
 		collidableObjects = new ArrayList<GameObject>();
 		comm = new ServerCommunicator();
 		comm.openConnectionTo("localhost");
@@ -61,9 +65,10 @@ public class Client implements Runnable {
 	}
 
 	private void addPlayers() {
-		player1 = (Player) GameObjectManager.createGameObject("player", 100, 100);
-		player2 = (Player) GameObjectManager.createGameObject("player", 400, 100);
-		StaticObject obst = new StaticObject(250, 50);
+		player1 = (Player) world.createGameObject("player", 100, 100);
+		player2 = (Player) world.createGameObject("player", 400, 100);
+		StaticObject obst = (StaticObject) world.createGameObject("static", 250, 50);
+
 		Behaviour beh1 = new PlayerBehaviour();
 		Behaviour beh2 = new PlayerBehaviour();
 		player1.setBehaviour(beh1);
@@ -75,10 +80,6 @@ public class Client implements Runnable {
 
 		updatableObjects.add(player1);
 		updatableObjects.add(player2);
-
-		drawableObjects.add(player1);
-		drawableObjects.add(player2);
-		drawableObjects.add(obst);
 
 		collidableObjects.add(player1);
 		collidableObjects.add(player2);
@@ -122,7 +123,7 @@ public class Client implements Runnable {
 			// and immediately ask eventmanager if it has new events
 			GameEvent ev = eventManager.nextEvent();
 			if (ev != null) {
-				EventHandler.handleEvent(ev);
+				eventHandler.handleEvent(ev);
 				checkForCollisions();
 			}
 		}

@@ -13,11 +13,15 @@ import my.games.geometry.game.objects.StaticObject;
 public class World {
 	private Map<Integer, GameObject> gameObjectsMap;
 	private List<GameObject> drawableObjectList;
+	private List<GameObject> updatableObjectList;
+	private List<GameObject> collidableObjectList;
 	private List<GameObject> shootersList;
 
 	public World() {
 		gameObjectsMap = new HashMap<Integer, GameObject>();
 		drawableObjectList = new ArrayList<GameObject>();
+		updatableObjectList = new ArrayList<GameObject>();
+		collidableObjectList = new ArrayList<GameObject>();
 		shootersList = new ArrayList<GameObject>();
 	}
 
@@ -28,29 +32,36 @@ public class World {
 		case "player":
 			obj = new Player(x, y);
 			obj.setObjectID(id);
-			gameObjectsMap.put(id, obj);
 			shootersList.add(obj);
 			break;
 		case "projectile":
 			obj = new Projectile(x, y);
 			obj.setObjectID(id);
-			gameObjectsMap.put(id, obj);
 			break;
 		case "static":
 			obj = new StaticObject(x, y);
 			obj.setObjectID(id);
-			gameObjectsMap.put(id, obj);
 			break;
 		}
-		if (obj != null)
+		if (obj != null) {
+			gameObjectsMap.put(id, obj);
 			drawableObjectList.add(obj);
-		return null;
+			collidableObjectList.add(obj);
+			updatableObjectList.add(obj);
+		}
+		return obj;
+	}
+
+	public List<GameObject> getUpdatableObjectList() {
+		return updatableObjectList;
+	}
+
+	public List<GameObject> getCollidableObjectList() {
+		return collidableObjectList;
 	}
 
 	public void addProjectile(Projectile obj) {
-		int id = gameObjectsMap.size(); // size()used to get unique ID
-		gameObjectsMap.put(id, obj);
-		drawableObjectList.add(obj);
+		createGameObject("projectile", obj.getPos().x, obj.getPos().y);
 	}
 
 	public GameObject getObjectByID(int id) {
@@ -68,5 +79,14 @@ public class World {
 				addProjectile(prj);
 			}
 		}
+
+		for (GameObject obj : updatableObjectList)
+			obj.update();
+	}
+
+	public void removeFromWorld(GameObject obj) {
+		updatableObjectList.remove(obj);
+		drawableObjectList.remove(obj);
+		collidableObjectList.remove(obj);
 	}
 }

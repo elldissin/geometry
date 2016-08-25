@@ -17,7 +17,6 @@ import my.games.geometry.game.objects.Controller;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
 import my.games.geometry.game.objects.StaticObject;
-import my.games.geometry.game.objects.Updatable;
 import my.games.geometry.networking.ServerCommunicator;
 
 //import com.sun.swing.internal.plaf.synth.resources.synth;
@@ -78,24 +77,8 @@ public class Client implements Runnable {
 		player2.addOnHitEffect(new BumpEffect(0));
 		obst.addOnHitEffect(new BumpEffect(0));
 
-		updatableObjects.add(player1);
-		updatableObjects.add(player2);
-
-		collidableObjects.add(player1);
-		collidableObjects.add(player2);
-		collidableObjects.add(obst);
-
 		controller.takeControlOf(player1);
 		controller.takeControlOf(player2);
-	}
-
-	// Called from method, that creates the projectile as a result of shooting
-	public static void addProjectile(GameObject obj) {
-		if (obj != null) {
-			updatableObjects.add(obj);
-			drawableObjects.add(obj);
-			collidableObjects.add(obj);
-		}
 	}
 
 	// May be required for applet
@@ -128,17 +111,14 @@ public class Client implements Runnable {
 			}
 		}
 		checkForCollisions();
-		// Handles destruction of obsolete objects
-		for (int i = 0; i < updatableObjects.size(); i++) {
-			if (updatableObjects.get(i).isDestroyed()) {
-				removeFromScene(updatableObjects.get(i));
+		// Handles destruction of obsolete objects - to be moved to World
+		for (int i = 0; i < world.getUpdatableObjectList().size(); i++) {
+			if (world.getUpdatableObjectList().get(i).isDestroyed()) {
+				world.removeFromWorld((world.getUpdatableObjectList().get(i)));
 			}
 		}
 
-		// Handles objects updates DOES NOTHING AT THE MOMENT
-		for (int i = 0; i < updatableObjects.size(); i++) {
-			updatableObjects.get(i).update();
-		}
+		world.update();
 	}
 
 	@Override
@@ -177,17 +157,11 @@ public class Client implements Runnable {
 		stop();
 	}
 
-	private void removeFromScene(Updatable obj) {
-		updatableObjects.remove(obj);
-		drawableObjects.remove(obj);
-		collidableObjects.remove(obj);
-	}
-
 	public KeyListener getController() {
 		return controller;
 	}
 
-	private void checkForCollisions() {
+	private void checkForCollisions() { // to be moved to world
 		// Handles collisions
 		for (int i = 0; i < collidableObjects.size(); i++)
 			for (int j = 0; j < collidableObjects.size(); j++) {

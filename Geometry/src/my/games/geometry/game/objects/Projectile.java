@@ -3,16 +3,14 @@ package my.games.geometry.game.objects;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import my.games.geometry.game.movers.DefaultMover;
 import my.games.geometry.game.movers.ProjectileMover;
-import my.games.geometry.game.renderers.DefaultRenderer;
 import my.games.geometry.game.renderers.ProjectileRenderer;
 
 public class Projectile extends GameObject {
 	private static final long serialVersionUID = 1L;
 
 	public Projectile(int x, int y) {
-		super(x,y);
+		super(x, y);
 		mover = new ProjectileMover();
 		renderer = new ProjectileRenderer();
 		objHeight = 5;
@@ -49,8 +47,9 @@ public class Projectile extends GameObject {
 	public void getHit(int amount) {
 		return;
 	}
-	
-	@Override //overriding default update() in GameObject to act without player's control
+
+	@Override // overriding default update() in GameObject to act without
+				// player's control
 	public void update() {
 		move();
 	}

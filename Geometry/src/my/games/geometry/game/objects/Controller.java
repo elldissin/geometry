@@ -11,25 +11,21 @@ import java.util.Set;
 import javax.swing.Timer;
 
 import geometry.networking.PlayerInput;
-import my.games.geometry.events.EventManager;
 import my.games.geometry.networking.ServerCommunicator;
 
 public class Controller implements KeyListener {
-	EventManager manager;
 	ServerCommunicator comm;
 	private final Set<Integer> pressed = new HashSet<Integer>();
 	protected ArrayList<Controllable> controlledArray;
 
-	public Controller(EventManager manager, final ServerCommunicator comm) {
+	public Controller(final ServerCommunicator comm) {
 		controlledArray = new ArrayList<Controllable>();
-		this.manager = manager;
 		this.comm = comm;
 		// Check every 100ms if there's keys pressed
 		// (This is the Swing Timer they talk about)
 		new Timer(20, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String keysString = "";
 				if (!pressed.isEmpty()) {
 					for (Integer pressedCode : pressed) {
 						// playerID 1 is a stub here

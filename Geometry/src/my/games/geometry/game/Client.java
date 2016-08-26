@@ -37,7 +37,7 @@ public class Client implements Runnable {
 		renderEngine = new ClientRenderEngine(world);
 		comm = new ServerCommunicator();
 		comm.openConnectionTo("localhost");
-		controller = new Controller(eventManager, comm);
+		controller = new Controller(comm);
 		addPlayers();
 	}
 

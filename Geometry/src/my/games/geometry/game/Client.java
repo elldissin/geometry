@@ -1,8 +1,6 @@
 package my.games.geometry.game;
 
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import geometry.networking.NetworkMessage;
 import geometry.networking.events.GameEvent;
@@ -14,9 +12,7 @@ import my.games.geometry.events.EventManager;
 import my.games.geometry.game.engine.ClientRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.Controller;
-import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
-import my.games.geometry.game.objects.StaticObject;
 import my.games.geometry.networking.ServerCommunicator;
 
 public class Client implements Runnable {
@@ -31,9 +27,6 @@ public class Client implements Runnable {
 	private EventHandler eventHandler;
 	private ServerCommunicator comm;
 	private Player player1, player2;
-	private static List<GameObject> updatableObjects;
-	private static List<GameObject> drawableObjects;
-	private static List<GameObject> collidableObjects;
 
 	public Client() {
 		super();
@@ -41,10 +34,7 @@ public class Client implements Runnable {
 		isRunning = false;
 		eventManager = new EventManager();
 		eventHandler = new EventHandler(world);
-		updatableObjects = new ArrayList<GameObject>();
-		drawableObjects = new ArrayList<GameObject>();
 		renderEngine = new ClientRenderEngine(world);
-		collidableObjects = new ArrayList<GameObject>();
 		comm = new ServerCommunicator();
 		comm.openConnectionTo("localhost");
 		controller = new Controller(eventManager, comm);
@@ -62,17 +52,12 @@ public class Client implements Runnable {
 	private void addPlayers() {
 		player1 = (Player) world.createGameObject("player", 100, 100, 0.0);
 		player2 = (Player) world.createGameObject("player", 400, 100, 0.0);
-		StaticObject obst = (StaticObject) world.createGameObject("static", 250, 50, 0.0);
-
 		Behaviour beh1 = new PlayerBehaviour();
 		Behaviour beh2 = new PlayerBehaviour();
 		player1.setBehaviour(beh1);
 		player2.setBehaviour(beh2);
-
 		player1.addOnHitEffect(new BumpEffect(0));
 		player2.addOnHitEffect(new BumpEffect(0));
-		obst.addOnHitEffect(new BumpEffect(0));
-
 		controller.takeControlOf(player1);
 		controller.takeControlOf(player2);
 	}

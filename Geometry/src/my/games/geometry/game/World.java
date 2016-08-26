@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import my.games.geometry.behaviour.BumpEffect;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
 import my.games.geometry.game.objects.Projectile;
@@ -25,6 +26,8 @@ public class World {
 		collidableObjectList = new ArrayList<GameObject>();
 		shootersList = new ArrayList<GameObject>();
 		effectManager = new EffectManager();
+		StaticObject obst = (StaticObject) createGameObject("static", 250, 50, 0.0);
+		obst.addOnHitEffect(new BumpEffect(0));
 	}
 
 	public GameObject createGameObject(String objType, int x, int y, double angle) {

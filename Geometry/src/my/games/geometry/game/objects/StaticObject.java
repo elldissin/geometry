@@ -3,7 +3,7 @@ package my.games.geometry.game.objects;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import my.games.geometry.game.movers.DefaultMover;
+import my.games.geometry.game.movers.NoMover;
 import my.games.geometry.game.renderers.DefaultRenderer;
 
 public class StaticObject extends GameObject {
@@ -14,7 +14,7 @@ public class StaticObject extends GameObject {
 		level = 2;
 		objWidth = 50;
 		objHeight = 50;
-		mover = new DefaultMover();
+		mover = new NoMover();
 		// weapon = new DefaultWeapon();
 		renderer = new DefaultRenderer();
 		body();

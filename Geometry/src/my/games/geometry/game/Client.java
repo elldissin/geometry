@@ -2,13 +2,13 @@ package my.games.geometry.game;
 
 import java.awt.event.KeyListener;
 
-import geometry.networking.NetworkMessage;
 import geometry.networking.events.GameEvent;
 import my.games.geometry.behaviour.Behaviour;
 import my.games.geometry.behaviour.BumpEffect;
 import my.games.geometry.behaviour.PlayerBehaviour;
 import my.games.geometry.events.EventHandler;
-import my.games.geometry.events.EventManager;
+import my.games.geometry.events.EventSource;
+import my.games.geometry.events.RemoteSource;
 import my.games.geometry.game.engine.ClientRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.Controller;
@@ -23,7 +23,7 @@ public class Client implements Runnable {
 	private World world;
 	private Thread thread;
 	private Controller controller;
-	private EventManager eventManager;
+	private EventSource eventSource;
 	private EventHandler eventHandler;
 	private ServerCommunicator comm;
 	private Player player1, player2;
@@ -32,11 +32,11 @@ public class Client implements Runnable {
 		super();
 		world = new World();
 		isRunning = false;
-		eventManager = new EventManager();
 		eventHandler = new EventHandler(world);
 		renderEngine = new ClientRenderEngine(world);
 		comm = new ServerCommunicator();
 		comm.openConnectionTo("localhost");
+		eventSource = new RemoteSource(comm);
 		controller = new Controller(comm);
 		addPlayers();
 	}
@@ -77,20 +77,13 @@ public class Client implements Runnable {
 	}
 
 	private void updateState() {
-		// here we add events from server to our eventmanager
-		NetworkMessage nm = null;
-		while ((nm = comm.getNextMessage()) != null) {
-			// NetworkMessage nm=comm.getNextMessage();
-			if (nm != null) // the message queue might yet be empty at this
-				// stage
-				eventManager.addEvent(nm.getEvent());
-			// and immediately ask eventmanager if it has new events
-			GameEvent ev = eventManager.nextEvent();
-			if (ev != null) {
-				eventHandler.handleEvent(ev);
-			}
+		// do-while is required here to have at least one world update per tick
+		do {
+			GameEvent event = eventSource.getNext();
+			if (event != null)
+				eventHandler.handleEvent(event);
 			world.update();
-		}
+		} while (eventSource.hasNext());
 	}
 
 	@Override

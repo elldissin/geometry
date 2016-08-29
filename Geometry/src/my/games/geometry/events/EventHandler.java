@@ -14,7 +14,7 @@ public class EventHandler {
 	public void handleEvent(GameEvent ev) {
 		// Controllable obj;
 		GameObject obj;
-		switch (ev.doEvent()) {
+		switch (ev.getEventType()) {
 		case MOVE:
 			// obj =
 			// (Controllable)GameObjectManager.getObjectByID(ev.getTargetID());

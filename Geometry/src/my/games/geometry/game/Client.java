@@ -88,12 +88,9 @@ public class Client implements Runnable {
 			GameEvent ev = eventManager.nextEvent();
 			if (ev != null) {
 				eventHandler.handleEvent(ev);
-				world.update();
-				// checkForCollisions(); // if many events within one tick, some
-				// collisions are missed
 			}
+			world.update();
 		}
-		world.update();
 	}
 
 	@Override

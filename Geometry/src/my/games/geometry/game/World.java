@@ -114,7 +114,7 @@ public class World {
 		for (int i = 0; i < collidableObjectList.size(); i++)
 			for (int j = 0; j < collidableObjectList.size(); j++) {
 				if (collidableObjectList.get(i).isColliding(collidableObjectList.get(j)) && i != j) {
-					System.out.println("Collision happened");
+					// System.out.println("Collision happened");
 					GameObject actor1 = collidableObjectList.get(i);
 					GameObject actor2 = collidableObjectList.get(j);
 					for (int k = 0; k < actor2.getOnHitEffects().size(); k++) {

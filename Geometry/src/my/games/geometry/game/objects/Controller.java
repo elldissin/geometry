@@ -10,7 +10,7 @@ import java.util.Set;
 
 import javax.swing.Timer;
 
-import geometry.networking.PlayerInput;
+import my.games.geometry.networking.PlayerInput;
 import my.games.geometry.networking.ServerCommunicator;
 
 public class Controller implements KeyListener {

@@ -1,7 +1,5 @@
 package my.games.geometry.events;
 
-import geometry.networking.events.GameEvent;
-
 public class LocalSource implements EventSource {
 
 	@Override

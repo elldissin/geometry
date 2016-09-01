@@ -7,9 +7,6 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import geometry.networking.NetworkMessage;
-import geometry.networking.PlayerInput;
-
 public class ServerCommunicator {
 
 	private String hostName;

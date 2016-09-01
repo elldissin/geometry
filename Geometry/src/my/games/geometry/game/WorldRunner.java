@@ -1,8 +1,8 @@
 package my.games.geometry.game;
 
-import geometry.networking.events.GameEvent;
 import my.games.geometry.events.EventHandler;
 import my.games.geometry.events.EventSource;
+import my.games.geometry.events.GameEvent;
 import my.games.geometry.game.engine.RenderEngine;
 
 public class WorldRunner implements Runnable {

@@ -1,6 +1,5 @@
 package my.games.geometry.events;
 
-import geometry.networking.events.GameEvent;
 import my.games.geometry.game.World;
 import my.games.geometry.game.objects.GameObject;
 

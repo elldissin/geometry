@@ -3,8 +3,7 @@ package my.games.geometry.events;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import geometry.networking.NetworkMessage;
-import geometry.networking.events.GameEvent;
+import my.games.geometry.networking.NetworkMessage;
 import my.games.geometry.networking.ServerCommunicator;
 
 /**

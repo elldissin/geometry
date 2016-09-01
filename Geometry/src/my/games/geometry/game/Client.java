@@ -80,10 +80,12 @@ public class Client implements Runnable {
 		// do-while is required here to have at least one world update per tick
 		do {
 			GameEvent event = eventSource.getNext();
-			if (event != null)
+			if (event != null) {
 				eventHandler.handleEvent(event);
-			world.update();
+				world.checkForCollisions();
+			}
 		} while (eventSource.hasNext());
+		world.update();
 	}
 
 	@Override

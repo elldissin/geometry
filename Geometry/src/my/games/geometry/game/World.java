@@ -110,7 +110,7 @@ public class World {
 		collidableObjectList.remove(obj);
 	}
 
-	private void checkForCollisions() {
+	public void checkForCollisions() {
 		for (int i = 0; i < collidableObjectList.size(); i++)
 			for (int j = 0; j < collidableObjectList.size(); j++) {
 				if (collidableObjectList.get(i).isColliding(collidableObjectList.get(j)) && i != j) {

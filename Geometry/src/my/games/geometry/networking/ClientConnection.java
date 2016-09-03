@@ -54,7 +54,6 @@ public class ClientConnection implements AutoCloseable, Runnable {
 			e.printStackTrace();
 		} catch (IOException e) {
 			isConnected = false;
-			e.printStackTrace();
 		}
 	}
 

@@ -64,7 +64,6 @@ public class ServerCommunicator {
 			mySocket = new Socket(hostName, portNumber);
 			out = new ObjectOutputStream(mySocket.getOutputStream());
 			in = new ObjectInputStream(mySocket.getInputStream());
-			System.out.println("Connection with server established");
 
 			// This part is continously waiting for events from server
 			Thread inputThread = new Thread(new Runnable() {

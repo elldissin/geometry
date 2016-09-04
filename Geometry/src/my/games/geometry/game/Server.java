@@ -1,7 +1,5 @@
 package my.games.geometry.game;
 
-import java.util.ArrayList;
-
 import my.games.geometry.behaviour.Behaviour;
 import my.games.geometry.behaviour.BumpEffect;
 import my.games.geometry.behaviour.PlayerBehaviour;
@@ -11,7 +9,6 @@ import my.games.geometry.events.LocalSource;
 import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.Player;
-import my.games.geometry.networking.ConnectedClient;
 
 public class Server {
 	private static final long serialVersionUID = 1L;
@@ -22,14 +19,13 @@ public class Server {
 	private EventHandler eventHandler;
 	private WorldRunner runner;
 	private Player player1, player2;
-	ArrayList<ConnectedClient> clientList = new ArrayList<ConnectedClient>();
 
 	public Server() {
 		super();
 		world = new World();
 		eventHandler = new EventHandler(world);
 		renderEngine = new NoRenderEngine();
-		eventSource = new LocalSource();
+		eventSource = new LocalSource(); // TODO change to remote
 		addPlayers();
 		runner = new WorldRunner(world, renderEngine, eventSource, eventHandler);
 	}

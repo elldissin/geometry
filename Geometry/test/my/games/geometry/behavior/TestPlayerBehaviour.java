@@ -1,4 +1,4 @@
-package nubiki.game;
+package my.games.geometry.behavior;
 
 import static org.junit.Assert.*;
 
@@ -13,17 +13,13 @@ import my.games.geometry.game.objects.GameObject;
 public class TestPlayerBehaviour {
 
 	@Test
-	public void test() {
+	public void testPlayerBehaviour() {
 		//arrange
 		PlayerBehaviour testPlayerBehaviour = new PlayerBehaviour();
-		boolean testPlayerBehaviourisVulnerable = testPlayerBehaviour.isVulnerable(); 
-		//mock?
-		World testWorld = new World();
-		GameObject testPlayer= testWorld.createGameObject("player", 100, 100, 0.0);
 		//act
-		testPlayer.setBehaviour(testPlayerBehaviour);
+		boolean testPlayerBehaviourisVulnerable = testPlayerBehaviour.isVulnerable(); 
 		//assert
-		assertTrue(testPlayerBehaviourisVulnerable == false) ;
+		assertTrue(testPlayerBehaviourisVulnerable == true) ;
 	}
 }
 

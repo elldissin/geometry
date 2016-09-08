@@ -1,14 +1,24 @@
 package my.games.geometry.game;
 
+import java.awt.event.KeyEvent;
+
 import my.games.geometry.behaviour.Behaviour;
 import my.games.geometry.behaviour.BumpEffect;
 import my.games.geometry.behaviour.PlayerBehaviour;
 import my.games.geometry.events.EventHandler;
 import my.games.geometry.events.EventSource;
+import my.games.geometry.events.GameEvent;
 import my.games.geometry.events.LocalSource;
+import my.games.geometry.events.MoveEvent;
+import my.games.geometry.events.ShootEvent;
+import my.games.geometry.events.TurnEventCCW;
+import my.games.geometry.events.TurnEventCW;
 import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.Player;
+import my.games.geometry.networking.ClientService;
+import my.games.geometry.networking.NetworkMessage;
+import my.games.geometry.networking.PlayerInput;
 
 public class Server {
 	private static final long serialVersionUID = 1L;
@@ -17,6 +27,7 @@ public class Server {
 	private World world;
 	private EventSource eventSource;
 	private EventHandler eventHandler;
+	private ClientService clientService;
 	private WorldRunner runner;
 	private Player player1, player2;
 
@@ -28,6 +39,7 @@ public class Server {
 		eventSource = new LocalSource(); // TODO change to remote
 		addPlayers();
 		runner = new WorldRunner(world, renderEngine, eventSource, eventHandler);
+		clientService = new ClientService();
 	}
 
 	private void addPlayers() {
@@ -50,7 +62,80 @@ public class Server {
 	}
 
 	public void start() {
-		runner.start();
+		// runner.start();
+		clientService.start();
+		while (true) {
+			pollAndNotifyClients();
+			try {
+				Thread.sleep(5); // To reduce CPU load
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void pollAndNotifyClients() {
+		PlayerInput input;
+		closeObsoleteClients();
+		for (int i = 0; i < clientService.getClientList().size(); i++) {
+			input = clientService.getClientList().get(i).getInput();
+			if (input != null) {
+				for (int j = 0; j < clientService.getClientList().size(); j++) {
+					clientService.getClientList().get(j).sendMessage(responceFromInput(input));
+				}
+			}
+		}
+	}
+
+	public void closeObsoleteClients() {
+		for (int i = 0; i < clientService.getClientList().size(); i++) {
+			if (!clientService.getClientList().get(i).isConnected()) {
+				System.out.println("The following client disconnected from server: "
+						+ clientService.getClientList().get(i).getClientID());
+				clientService.getClientList().remove(i);
+			}
+		}
+	}
+
+	private NetworkMessage responceFromInput(PlayerInput input) {
+		GameEvent ev;
+		NetworkMessage msg = new NetworkMessage();
+
+		switch (input.getKeyCode()) {
+		case KeyEvent.VK_W:
+			ev = new MoveEvent(1);
+			msg.setEvent(ev);
+			break;
+		case KeyEvent.VK_D:
+			ev = new TurnEventCW(1);
+			msg.setEvent(ev);
+			break;
+		case KeyEvent.VK_A:
+			ev = new TurnEventCCW(1);
+			msg.setEvent(ev);
+			break;
+		case KeyEvent.VK_Q:
+			ev = new ShootEvent(1);
+			msg.setEvent(ev);
+			break;
+		case KeyEvent.VK_UP:
+			ev = new MoveEvent(2);
+			msg.setEvent(ev);
+			break;
+		case KeyEvent.VK_RIGHT:
+			ev = new TurnEventCW(2);
+			msg.setEvent(ev);
+			break;
+		case KeyEvent.VK_LEFT:
+			ev = new TurnEventCCW(2);
+			msg.setEvent(ev);
+			break;
+		case KeyEvent.VK_CONTROL:
+			ev = new ShootEvent(2);
+			msg.setEvent(ev);
+			break;
+		}
+		return msg;
 	}
 
 }

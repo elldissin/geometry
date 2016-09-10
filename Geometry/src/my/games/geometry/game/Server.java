@@ -32,10 +32,11 @@ public class Server {
 		eventHandler = new EventHandler(world);
 		renderEngine = new NoRenderEngine();
 		eventSourceForLocalWorld = new LocalSource(); // LATER change to remote
-		addPlayers();
+
 		runner = new ServerWorldRunner(world, renderEngine, eventSourceForLocalWorld, eventHandler);
 		clientService = new ClientService();
 		clientEventNotifier = new ClientEventNotifier();
+		addPlayers();
 	}
 
 	private void addPlayers() {
@@ -47,6 +48,8 @@ public class Server {
 		player2.setBehaviour(beh2);
 		player1.addOnHitEffect(new BumpEffect(0));
 		player2.addOnHitEffect(new BumpEffect(0));
+		player1.addEventObserver(clientEventNotifier);
+		player2.addEventObserver(clientEventNotifier);
 	}
 
 	public RenderEngine getRenderEngine() {
@@ -58,7 +61,7 @@ public class Server {
 	}
 
 	public void start() {
-		// runner.start(); //LATER - enable this when ready
+		runner.start(); // LATER - enable this when ready
 		clientService.start();
 		while (true) {
 			closeObsoleteClients();
@@ -70,6 +73,7 @@ public class Server {
 				e.printStackTrace();
 			}
 		}
+
 	}
 
 	private void notifyClients() {

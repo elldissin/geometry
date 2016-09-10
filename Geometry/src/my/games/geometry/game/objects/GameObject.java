@@ -229,12 +229,14 @@ public abstract class GameObject implements Updatable {
 		// turn();
 	}
 
+	// LATER removeEventObserver required?
 	public void addEventObserver(EventObserver observer) {
 		eventObserverList.add(observer);
 	}
 
-	private void notifyObserversAbout(GameEvent event) {
+	public void notifyObserversAbout(GameEvent event) {
 		for (int i = 0; i < eventObserverList.size(); i++)
 			eventObserverList.get(i).notifyAboutEvent(this, event);
+
 	}
 }

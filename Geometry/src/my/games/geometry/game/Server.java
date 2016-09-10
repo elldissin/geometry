@@ -77,7 +77,9 @@ public class Server {
 	}
 
 	private void notifyClients() {
-		if (eventSource.hasNext())
+		if (eventSource.hasNext()) // TODO wrong! eventSource is handled in
+									// world runner, create client notifier
+									// observer class?
 			for (int j = 0; j < clientService.getClientList().size(); j++)
 				clientService.getClientList().get(j).sendMessage(createNetworkMessage(eventSource.getNext()));
 	}

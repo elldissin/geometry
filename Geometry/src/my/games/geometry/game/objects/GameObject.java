@@ -239,4 +239,8 @@ public abstract class GameObject implements Updatable {
 			eventObserverList.get(i).notifyAboutEvent(this, event);
 
 	}
+
+	public List<EventObserver> getEventObserverList() {
+		return eventObserverList;
+	}
 }

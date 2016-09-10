@@ -66,7 +66,8 @@ public class Server {
 		clientService.start();
 		while (true) {
 			closeObsoleteClients();
-			pollAndNotifyClients();
+			pollClientsForInput();
+			notifyClients();
 			try {
 				Thread.sleep(5); // To reduce CPU load
 			} catch (InterruptedException e) {
@@ -75,8 +76,7 @@ public class Server {
 		}
 	}
 
-	private void pollAndNotifyClients() {
-		pollClientsForInput();
+	private void notifyClients() {
 		if (eventSource.hasNext())
 			for (int j = 0; j < clientService.getClientList().size(); j++)
 				clientService.getClientList().get(j).sendMessage(createNetworkMessage(eventSource.getNext()));

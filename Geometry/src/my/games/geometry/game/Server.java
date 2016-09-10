@@ -65,6 +65,7 @@ public class Server {
 		// runner.start();
 		clientService.start();
 		while (true) {
+			closeObsoleteClients();
 			pollAndNotifyClients();
 			try {
 				Thread.sleep(5); // To reduce CPU load
@@ -75,18 +76,10 @@ public class Server {
 	}
 
 	private void pollAndNotifyClients() {
-		PlayerInput input;
-		closeObsoleteClients();
-
-		// TODO pollclientsforinput()
-		for (int i = 0; i < clientService.getClientList().size(); i++) {
-			input = clientService.getClientList().get(i).getInput();
-			if (input != null) {
-				for (int j = 0; j < clientService.getClientList().size(); j++) {
-					clientService.getClientList().get(j).sendMessage(responceFromInput(input));
-				}
-			}
-		}
+		pollClientsForInput();
+		if (eventSource.hasNext())
+			for (int j = 0; j < clientService.getClientList().size(); j++)
+				clientService.getClientList().get(j).sendMessage(createNetworkMessage(eventSource.getNext()));
 	}
 
 	private void pollClientsForInput() {
@@ -138,44 +131,9 @@ public class Server {
 		}
 	}
 
-	private NetworkMessage responceFromInput(PlayerInput input) {
-		GameEvent ev;
+	private NetworkMessage createNetworkMessage(GameEvent event) {
 		NetworkMessage msg = new NetworkMessage();
-
-		switch (input.getKeyCode()) {
-		case KeyEvent.VK_W:
-			ev = new MoveEvent(1);
-			msg.setEvent(ev);
-			break;
-		case KeyEvent.VK_D:
-			ev = new TurnEventCW(1);
-			msg.setEvent(ev);
-			break;
-		case KeyEvent.VK_A:
-			ev = new TurnEventCCW(1);
-			msg.setEvent(ev);
-			break;
-		case KeyEvent.VK_Q:
-			ev = new ShootEvent(1);
-			msg.setEvent(ev);
-			break;
-		case KeyEvent.VK_UP:
-			ev = new MoveEvent(2);
-			msg.setEvent(ev);
-			break;
-		case KeyEvent.VK_RIGHT:
-			ev = new TurnEventCW(2);
-			msg.setEvent(ev);
-			break;
-		case KeyEvent.VK_LEFT:
-			ev = new TurnEventCCW(2);
-			msg.setEvent(ev);
-			break;
-		case KeyEvent.VK_CONTROL:
-			ev = new ShootEvent(2);
-			msg.setEvent(ev);
-			break;
-		}
+		msg.setEvent(event);
 		return msg;
 	}
 

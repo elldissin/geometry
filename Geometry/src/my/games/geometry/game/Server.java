@@ -1,18 +1,12 @@
 package my.games.geometry.game;
 
-import java.awt.event.KeyEvent;
-
 import my.games.geometry.behaviour.Behaviour;
 import my.games.geometry.behaviour.BumpEffect;
 import my.games.geometry.behaviour.PlayerBehaviour;
 import my.games.geometry.events.EventHandler;
 import my.games.geometry.events.EventSource;
-import my.games.geometry.events.GameEvent;
+import my.games.geometry.events.InputConverter;
 import my.games.geometry.events.LocalSource;
-import my.games.geometry.events.MoveEvent;
-import my.games.geometry.events.ShootEvent;
-import my.games.geometry.events.TurnEventCCW;
-import my.games.geometry.events.TurnEventCW;
 import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.Player;
@@ -87,41 +81,10 @@ public class Server {
 		// LATER check if correct loop logic
 		for (int i = 0; i < clientService.getClientList().size(); i++) {
 			input = clientService.getClientList().get(i).getInput();
-			if (input != null && eventFromInput(input) != null) {
-				eventSourceForLocalWorld.addEvent(eventFromInput(input));
+			if (input != null && InputConverter.toEvent(input) != null) {
+				eventSourceForLocalWorld.addEvent(InputConverter.toEvent(input));
 			}
 		}
-	}
-
-	private GameEvent eventFromInput(PlayerInput input) {
-		GameEvent ev = null;
-		switch (input.getKeyCode()) {
-		case KeyEvent.VK_W:
-			ev = new MoveEvent(1);
-			break;
-		case KeyEvent.VK_D:
-			ev = new TurnEventCW(1);
-			break;
-		case KeyEvent.VK_A:
-			ev = new TurnEventCCW(1);
-			break;
-		case KeyEvent.VK_Q:
-			ev = new ShootEvent(1);
-			break;
-		case KeyEvent.VK_UP:
-			ev = new MoveEvent(2);
-			break;
-		case KeyEvent.VK_RIGHT:
-			ev = new TurnEventCW(2);
-			break;
-		case KeyEvent.VK_LEFT:
-			ev = new TurnEventCCW(2);
-			break;
-		case KeyEvent.VK_CONTROL:
-			ev = new ShootEvent(2);
-			break;
-		}
-		return ev;
 	}
 
 	public void closeObsoleteClients() {

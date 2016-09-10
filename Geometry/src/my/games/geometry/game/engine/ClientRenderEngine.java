@@ -4,14 +4,16 @@ import java.awt.Point;
 
 import my.games.geometry.game.GameCamera;
 import my.games.geometry.game.World;
+import my.games.geometry.game.objects.MenuObject;
 
 public class ClientRenderEngine implements RenderEngine {
 	private World world;
-	private GameCamera camera1, camera2;
+	private GameCamera camera1, camera2, camera3;
 
 	public ClientRenderEngine(World world) {
 		camera1 = new GameCamera();
 		camera2 = new GameCamera();
+		camera3 = new MenuObject();
 		this.world = world;
 	}
 
@@ -28,6 +30,8 @@ public class ClientRenderEngine implements RenderEngine {
 				(int) world.getObjectByID(2).getPos().y - camera2.getViewHeight() / 2);
 		camera2.setViewOffset(p);
 		camera2.show(world.getDrawableObjectList());
+
+		camera3.show(world.getDrawableObjectList());
 	}
 
 	public GameCamera getCamera(int number) {
@@ -35,6 +39,8 @@ public class ClientRenderEngine implements RenderEngine {
 			return camera1;
 		if (number == 2)
 			return camera2;
+		if (number == 3)
+			return camera3;
 		return new GameCamera();
 	}
 }

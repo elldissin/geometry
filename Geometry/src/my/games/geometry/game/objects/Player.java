@@ -75,9 +75,10 @@ public class Player extends GameObject implements Controllable {
 
 	@Override
 	public void getHit(int amount) {
-		if (health - amount <= 0)
+		if (health - amount <= 0) {
 			health = 0;
-		else
+			destroy();
+		} else
 			health -= amount;
 	}
 }

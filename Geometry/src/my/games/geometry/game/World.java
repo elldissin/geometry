@@ -18,6 +18,7 @@ public class World {
 	private List<GameObject> updatableObjectList;
 	private List<GameObject> collidableObjectList;
 	private List<GameObject> shootersList;
+	// private Controller controller;
 
 	public World() {
 		gameObjectsMap = new HashMap<Integer, GameObject>();
@@ -28,6 +29,7 @@ public class World {
 		effectManager = new EffectManager();
 		StaticObject obst = (StaticObject) createGameObject("static", 250, 50, 0.0);
 		obst.addOnHitEffect(new BumpEffect(0));
+		// this.controller = controller;
 	}
 
 	public GameObject createGameObject(String objType, int x, int y, double angle) {
@@ -108,6 +110,8 @@ public class World {
 		updatableObjectList.remove(obj);
 		drawableObjectList.remove(obj);
 		collidableObjectList.remove(obj);
+		shootersList.remove(obj);
+		// FIXME controller.stopControlOf(obj);
 	}
 
 	public void checkForCollisions() {

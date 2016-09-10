@@ -1,5 +1,7 @@
 package my.games.geometry.events;
 
+import my.games.geometry.game.World;
+import my.games.geometry.game.objects.GameObject;
 
 public class ShootEvent extends GameEvent {
 
@@ -10,12 +12,12 @@ public class ShootEvent extends GameEvent {
 
 	public ShootEvent(int targetID) {
 		super(targetID);
-		eventType=EventType.SHOOT;
 	}
-	
+
 	@Override
-	public EventType getEventType() {
-		return eventType;
+	public void applyEventToWorld(World world) {
+		GameObject obj = world.getObjectByID(targetID);
+		obj.getWeapon().shoot(obj);
 	}
 
 }

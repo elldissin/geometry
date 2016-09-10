@@ -19,7 +19,7 @@ public class RemoteSource implements EventSource {
 		this.communicator = communicator;
 	}
 
-	// TODO receives events from comm only when called
+	// LATER receives events from comm only when called
 	@Override
 	public boolean hasNext() {
 		NetworkMessage nm = null;

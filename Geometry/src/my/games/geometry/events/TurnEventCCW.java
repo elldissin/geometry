@@ -1,5 +1,8 @@
 package my.games.geometry.events;
 
+import my.games.geometry.game.World;
+import my.games.geometry.game.objects.GameObject;
+
 public class TurnEventCCW extends GameEvent {
 
 	/**
@@ -9,12 +12,11 @@ public class TurnEventCCW extends GameEvent {
 
 	public TurnEventCCW(int targetID) {
 		super(targetID);
-		eventType=EventType.TURNCCW;
-	}
-	
-	@Override
-	public EventType getEventType() {
-		return eventType;
 	}
 
+	@Override
+	public void applyEventToWorld(World world) {
+		GameObject obj = world.getObjectByID(targetID);
+		obj.getMover().turn(obj, -1);
+	}
 }

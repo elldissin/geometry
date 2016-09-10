@@ -5,10 +5,12 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.List;
 
 import my.games.geometry.behaviour.Behaviour;
 import my.games.geometry.behaviour.Effect;
 import my.games.geometry.behaviour.GeneralBehaviour;
+import my.games.geometry.events.EventObserver;
 import my.games.geometry.game.movers.Mover;
 import my.games.geometry.game.renderers.Renderer;
 import my.games.geometry.game.weapons.Weapon;
@@ -29,6 +31,7 @@ public abstract class GameObject implements Updatable {
 	protected Mover mover;
 	protected Weapon weapon;
 	protected Renderer renderer;
+	private List<EventObserver> eventObserverList;
 
 	protected ArrayList<Point> points;
 	protected ArrayList<GameObject> ignoredObjects;
@@ -47,7 +50,11 @@ public abstract class GameObject implements Updatable {
 		points = new ArrayList<Point>();
 		ignoredObjects = new ArrayList<GameObject>();
 		onHitEffects = new ArrayList<Effect>();
+		eventObserverList = new ArrayList<EventObserver>();
 		behaviour = null;
+		// for (int i = 0; i < eventObserverList.size(); i++)
+		// eventObserverList.get(i).notifyAboutEvent(this, new
+		// CreateEvent(objectID));
 	}
 
 	public int getHealth() {
@@ -55,6 +62,9 @@ public abstract class GameObject implements Updatable {
 	}
 
 	public void setHealth(int health) {
+		// for (int i = 0; i < eventObserverList.size(); i++)
+		// eventObserverList.get(i).notifyAboutEvent(this, new
+		// HealthEvent(objectID));
 		this.health = health;
 	}
 
@@ -222,5 +232,9 @@ public abstract class GameObject implements Updatable {
 	public void update() {
 		// move();
 		// turn();
+	}
+
+	public void addEventObserver(EventObserver observer) {
+		eventObserverList.add(observer);
 	}
 }

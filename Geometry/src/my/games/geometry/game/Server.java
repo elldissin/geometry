@@ -36,7 +36,7 @@ public class Server {
 		world = new World();
 		eventHandler = new EventHandler(world);
 		renderEngine = new NoRenderEngine();
-		eventSource = new LocalSource(); // TODO change to remote
+		eventSource = new LocalSource(); // LATER change to remote
 		addPlayers();
 		runner = new ServerWorldRunner(world, renderEngine, eventSource, eventHandler);
 		clientService = new ClientService();
@@ -77,7 +77,7 @@ public class Server {
 	}
 
 	private void notifyClients() {
-		if (eventSource.hasNext()) // TODO wrong! eventSource is handled in
+		if (eventSource.hasNext()) // FIXME wrong! eventSource is handled in
 									// world runner, create client notifier
 									// observer class?
 			for (int j = 0; j < clientService.getClientList().size(); j++)

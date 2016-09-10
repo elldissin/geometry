@@ -21,13 +21,13 @@ public class Projectile extends GameObject {
 	@Override
 	public ArrayList<Point> body() {
 		if (points.isEmpty()) {
-			Point p = new Point(currentPos.x + 5, currentPos.y + 5);
+			Point p = new Point(currentPos.x + objWidth / 2, currentPos.y + objHeight / 2);
 			points.add(0, p);
-			p = new Point(currentPos.x + 10, currentPos.y + 5);
+			p = new Point(currentPos.x - objWidth / 2, currentPos.y + objHeight / 2);
 			points.add(1, p);
-			p = new Point(currentPos.x + 10, currentPos.y + 0);
+			p = new Point(currentPos.x + objWidth / 2, currentPos.y - objHeight / 2);
 			points.add(2, p);
-			p = new Point(currentPos.x + 5, currentPos.y + 0);
+			p = new Point(currentPos.x - objWidth / 2, currentPos.y - objHeight / 2);
 			points.add(3, p);
 		}
 		return points;

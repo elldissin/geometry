@@ -56,4 +56,8 @@ public class Controller implements KeyListener {
 		controlledArray.add(obj);
 	}
 
+	public void stopControlOf(Controllable obj) {
+		controlledArray.remove(obj);
+	}
+
 }

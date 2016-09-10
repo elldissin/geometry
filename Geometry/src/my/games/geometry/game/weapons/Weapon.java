@@ -9,4 +9,7 @@ public interface Weapon {
 	public void shoot(GameObject obj);
 
 	public List<Projectile> getProjectileList();
+
+	public String toString();
+
 }

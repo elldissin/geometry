@@ -11,6 +11,7 @@ import my.games.geometry.behaviour.Behaviour;
 import my.games.geometry.behaviour.Effect;
 import my.games.geometry.behaviour.GeneralBehaviour;
 import my.games.geometry.events.EventObserver;
+import my.games.geometry.events.GameEvent;
 import my.games.geometry.game.movers.Mover;
 import my.games.geometry.game.renderers.Renderer;
 import my.games.geometry.game.weapons.Weapon;
@@ -52,9 +53,6 @@ public abstract class GameObject implements Updatable {
 		onHitEffects = new ArrayList<Effect>();
 		eventObserverList = new ArrayList<EventObserver>();
 		behaviour = null;
-		// for (int i = 0; i < eventObserverList.size(); i++)
-		// eventObserverList.get(i).notifyAboutEvent(this, new
-		// CreateEvent(objectID));
 	}
 
 	public int getHealth() {
@@ -62,9 +60,6 @@ public abstract class GameObject implements Updatable {
 	}
 
 	public void setHealth(int health) {
-		// for (int i = 0; i < eventObserverList.size(); i++)
-		// eventObserverList.get(i).notifyAboutEvent(this, new
-		// HealthEvent(objectID));
 		this.health = health;
 	}
 
@@ -236,5 +231,10 @@ public abstract class GameObject implements Updatable {
 
 	public void addEventObserver(EventObserver observer) {
 		eventObserverList.add(observer);
+	}
+
+	private void notifyObserversAbout(GameEvent event) {
+		for (int i = 0; i < eventObserverList.size(); i++)
+			eventObserverList.get(i).notifyAboutEvent(this, event);
 	}
 }

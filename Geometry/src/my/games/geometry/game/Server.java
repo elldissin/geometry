@@ -16,8 +16,8 @@ import my.games.geometry.events.TurnEventCW;
 import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.Player;
+import my.games.geometry.networking.ClientEventNotifier;
 import my.games.geometry.networking.ClientService;
-import my.games.geometry.networking.NetworkMessage;
 import my.games.geometry.networking.PlayerInput;
 
 public class Server {
@@ -28,6 +28,7 @@ public class Server {
 	private EventSource eventSource;
 	private EventHandler eventHandler;
 	private ClientService clientService;
+	private ClientEventNotifier clientEventNotifier;
 	private WorldRunner runner;
 	private Player player1, player2;
 
@@ -40,6 +41,7 @@ public class Server {
 		addPlayers();
 		runner = new ServerWorldRunner(world, renderEngine, eventSource, eventHandler);
 		clientService = new ClientService();
+		clientEventNotifier = new ClientEventNotifier();
 	}
 
 	private void addPlayers() {
@@ -77,11 +79,7 @@ public class Server {
 	}
 
 	private void notifyClients() {
-		if (eventSource.hasNext()) // FIXME wrong! eventSource is handled in
-									// world runner, create client notifier
-									// observer class?
-			for (int j = 0; j < clientService.getClientList().size(); j++)
-				clientService.getClientList().get(j).sendMessage(createNetworkMessage(eventSource.getNext()));
+		clientEventNotifier.notifyClients(clientService.getClientList());
 	}
 
 	private void pollClientsForInput() {
@@ -132,11 +130,4 @@ public class Server {
 			}
 		}
 	}
-
-	private NetworkMessage createNetworkMessage(GameEvent event) {
-		NetworkMessage msg = new NetworkMessage();
-		msg.setEvent(event);
-		return msg;
-	}
-
 }

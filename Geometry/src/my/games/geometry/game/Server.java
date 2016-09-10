@@ -77,6 +77,8 @@ public class Server {
 	private void pollAndNotifyClients() {
 		PlayerInput input;
 		closeObsoleteClients();
+
+		// TODO pollclientsforinput()
 		for (int i = 0; i < clientService.getClientList().size(); i++) {
 			input = clientService.getClientList().get(i).getInput();
 			if (input != null) {
@@ -85,6 +87,45 @@ public class Server {
 				}
 			}
 		}
+	}
+
+	private void pollClientsForInput() {
+		PlayerInput input = null;
+		for (int i = 0; i < clientService.getClientList().size(); i++)
+			input = clientService.getClientList().get(i).getInput();
+		if (input != null && eventFromInput(input) != null)
+			eventSource.addEvent(eventFromInput(input));
+	}
+
+	private GameEvent eventFromInput(PlayerInput input) {
+		GameEvent ev = null;
+		switch (input.getKeyCode()) {
+		case KeyEvent.VK_W:
+			ev = new MoveEvent(1);
+			break;
+		case KeyEvent.VK_D:
+			ev = new TurnEventCW(1);
+			break;
+		case KeyEvent.VK_A:
+			ev = new TurnEventCCW(1);
+			break;
+		case KeyEvent.VK_Q:
+			ev = new ShootEvent(1);
+			break;
+		case KeyEvent.VK_UP:
+			ev = new MoveEvent(2);
+			break;
+		case KeyEvent.VK_RIGHT:
+			ev = new TurnEventCW(2);
+			break;
+		case KeyEvent.VK_LEFT:
+			ev = new TurnEventCCW(2);
+			break;
+		case KeyEvent.VK_CONTROL:
+			ev = new ShootEvent(2);
+			break;
+		}
+		return ev;
 	}
 
 	public void closeObsoleteClients() {

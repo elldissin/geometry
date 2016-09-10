@@ -19,6 +19,7 @@ public class RemoteSource implements EventSource {
 		this.communicator = communicator;
 	}
 
+	// TODO receives events from comm only when called
 	@Override
 	public boolean hasNext() {
 		NetworkMessage nm = null;
@@ -35,6 +36,11 @@ public class RemoteSource implements EventSource {
 	@Override
 	public GameEvent getNext() {
 		return eventsQueue.poll();
+	}
+
+	@Override
+	public void addEvent(GameEvent event) {
+		// TODO Auto-generated method stub
 	}
 
 }

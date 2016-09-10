@@ -1,25 +1,31 @@
 package my.games.geometry.events;
 
-import my.games.geometry.game.objects.GameObject;
+import java.util.LinkedList;
+import java.util.Queue;
 
-public class LocalSource implements EventSource, EventObserver {
+public class LocalSource implements EventSource {
+
+	private Queue<GameEvent> eventsQueue;
+
+	public LocalSource() {
+		eventsQueue = new LinkedList<GameEvent>();
+	}
 
 	@Override
 	public boolean hasNext() {
-		// TODO Auto-generated method stub
+		if (eventsQueue.size() > 0)
+			return true;
 		return false;
 	}
 
 	@Override
 	public GameEvent getNext() {
-		// TODO Auto-generated method stub
-		return null;
+		return eventsQueue.poll();
 	}
 
 	@Override
-	public void notifyAboutEvent(GameObject obj) {
-		// TODO Auto-generated method stub
-
+	public void addEvent(GameEvent event) {
+		eventsQueue.add(event);
 	}
 
 }

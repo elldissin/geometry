@@ -20,7 +20,7 @@ public class Client {
 	private RenderEngine renderEngine;
 	private World world;
 	private Controller controller;
-	private EventSource eventSource;
+	private EventSource eventSourceForLocalWorld;
 	private EventHandler eventHandler;
 	private WorldRunner runner;
 	private ServerCommunicator comm;
@@ -33,10 +33,10 @@ public class Client {
 		renderEngine = new ClientRenderEngine(world);
 		comm = new ServerCommunicator();
 		comm.openConnectionTo("localhost");
-		eventSource = new RemoteSource(comm);
+		eventSourceForLocalWorld = new RemoteSource(comm);
 		controller = new Controller(comm);
 		addPlayers();
-		runner = new ClientWorldRunner(world, renderEngine, eventSource, eventHandler);
+		runner = new ClientWorldRunner(world, renderEngine, eventSourceForLocalWorld, eventHandler);
 
 	}
 

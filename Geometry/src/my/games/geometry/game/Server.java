@@ -25,7 +25,7 @@ public class Server {
 
 	private RenderEngine renderEngine;
 	private World world;
-	private EventSource eventSource;
+	private EventSource eventSourceForLocalWorld;
 	private EventHandler eventHandler;
 	private ClientService clientService;
 	private ClientEventNotifier clientEventNotifier;
@@ -37,9 +37,9 @@ public class Server {
 		world = new World();
 		eventHandler = new EventHandler(world);
 		renderEngine = new NoRenderEngine();
-		eventSource = new LocalSource(); // LATER change to remote
+		eventSourceForLocalWorld = new LocalSource(); // LATER change to remote
 		addPlayers();
-		runner = new ServerWorldRunner(world, renderEngine, eventSource, eventHandler);
+		runner = new ServerWorldRunner(world, renderEngine, eventSourceForLocalWorld, eventHandler);
 		clientService = new ClientService();
 		clientEventNotifier = new ClientEventNotifier();
 	}
@@ -64,7 +64,7 @@ public class Server {
 	}
 
 	public void start() {
-		// runner.start();
+		// runner.start(); //LATER - enable this when ready
 		clientService.start();
 		while (true) {
 			closeObsoleteClients();
@@ -84,10 +84,13 @@ public class Server {
 
 	private void pollClientsForInput() {
 		PlayerInput input = null;
-		for (int i = 0; i < clientService.getClientList().size(); i++)
+		// LATER check if correct loop logic
+		for (int i = 0; i < clientService.getClientList().size(); i++) {
 			input = clientService.getClientList().get(i).getInput();
-		if (input != null && eventFromInput(input) != null)
-			eventSource.addEvent(eventFromInput(input));
+			if (input != null && eventFromInput(input) != null) {
+				eventSourceForLocalWorld.addEvent(eventFromInput(input));
+			}
+		}
 	}
 
 	private GameEvent eventFromInput(PlayerInput input) {

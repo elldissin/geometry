@@ -38,7 +38,7 @@ public class Server {
 		renderEngine = new NoRenderEngine();
 		eventSource = new LocalSource(); // TODO change to remote
 		addPlayers();
-		runner = new WorldRunner(world, renderEngine, eventSource, eventHandler);
+		runner = new ServerWorldRunner(world, renderEngine, eventSource, eventHandler);
 		clientService = new ClientService();
 	}
 

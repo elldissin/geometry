@@ -36,7 +36,7 @@ public class Client {
 		eventSource = new RemoteSource(comm);
 		controller = new Controller(comm);
 		addPlayers();
-		runner = new WorldRunner(world, renderEngine, eventSource, eventHandler);
+		runner = new ClientWorldRunner(world, renderEngine, eventSource, eventHandler);
 
 	}
 

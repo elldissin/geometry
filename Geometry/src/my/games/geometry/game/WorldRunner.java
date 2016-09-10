@@ -2,16 +2,15 @@ package my.games.geometry.game;
 
 import my.games.geometry.events.EventHandler;
 import my.games.geometry.events.EventSource;
-import my.games.geometry.events.GameEvent;
 import my.games.geometry.game.engine.RenderEngine;
 
-public class WorldRunner implements Runnable {
-	private boolean isRunning;
-	private RenderEngine renderEngine;
-	private EventSource eventSource;
-	private EventHandler eventHandler;
+public abstract class WorldRunner implements Runnable {
+	protected boolean isRunning;
+	protected RenderEngine renderEngine;
+	protected EventSource eventSource;
+	protected EventHandler eventHandler;
 	private Thread thread;
-	private World world;
+	protected World world;
 
 	public WorldRunner(World world, RenderEngine renderEngine, EventSource eventSource, EventHandler eventHandler) {
 		isRunning = false;
@@ -43,17 +42,7 @@ public class WorldRunner implements Runnable {
 		System.exit(1);
 	}
 
-	private void updateState() {
-		// do-while is required here to have at least one world update per tick
-		do {
-			GameEvent event = eventSource.getNext();
-			if (event != null) {
-				eventHandler.handleEvent(event);
-				world.checkForCollisions();
-			}
-		} while (eventSource.hasNext());
-		world.update();
-	}
+	protected abstract void updateState();
 
 	@Override
 	public void run() {

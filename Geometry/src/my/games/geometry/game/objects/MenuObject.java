@@ -50,6 +50,7 @@ public class MenuObject extends GameCamera {
 		if (drawableObjects != null) {
 			g.drawString("Player HP:" + Integer.toString(drawableObjects.get(1).getHealth()), 0, 20);
 			g.drawString("Player weapon:" + drawableObjects.get(1).getWeapon(), 100, 20);
+			g.drawString("Player level:" + drawableObjects.get(1).getLevel(), 230, 20);
 		}
 	}
 

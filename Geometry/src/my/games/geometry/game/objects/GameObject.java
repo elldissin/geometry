@@ -60,6 +60,10 @@ public abstract class GameObject implements Updatable {
 		return health;
 	}
 
+	public int getLevel() {
+		return level;
+	}
+
 	public void setHealth(int health) {
 		this.health = health;
 	}

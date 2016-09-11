@@ -37,6 +37,10 @@ public class World {
 		// this.controller = controller;
 	}
 
+	public Map<Integer, GameObject> getGameObjectsMap() {
+		return gameObjectsMap;
+	}
+
 	public GameObject createGameObject(String objType, int x, int y, double angle) {
 		int id = gameObjectsMap.size(); // LATER size()used to get unique ID
 		GameObject obj = null;
@@ -86,8 +90,8 @@ public class World {
 	}
 
 	/**
-	 * Need this special method, do not add through createGameObject() otherwise
-	 * the projectile created will not be one generated in shoot() method
+	 * Need this special method, do not add through createGameObject() otherwise the projectile
+	 * created will not be one generated in shoot() method
 	 */
 	public void addProjectile(Projectile obj) { // FIXME add through
 												// createGameObject

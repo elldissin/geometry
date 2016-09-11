@@ -1,7 +1,5 @@
 package my.games.geometry.game.engine;
 
-import java.awt.Point;
-
 import my.games.geometry.game.GameCamera;
 import my.games.geometry.game.World;
 import my.games.geometry.game.objects.MenuObject;
@@ -19,13 +17,15 @@ public class ClientRenderEngine implements RenderEngine {
 
 	@Override
 	public void render() {
+		// FIXME enable when ID system is complete
 		// ties camera 1 to player 1
-		Point p = new Point((int) world.getObjectByID(1).getPos().x - camera1.getViewWidth() / 2,
-				(int) world.getObjectByID(1).getPos().y - camera1.getViewHeight() / 2);
-		camera1.setViewOffset(p);
+		// if ((world.getObjectByID(1)) != null) {
+		// Point p = new Point((int) world.getObjectByID(1).getPos().x - camera1.getViewWidth() / 2,
+		// (int) world.getObjectByID(1).getPos().y - camera1.getViewHeight() / 2);
+		// camera1.setViewOffset(p);
 		camera1.show(world.getDrawableObjectList());
-
 		camera3.show(world.getDrawableObjectList());
+		// }
 	}
 
 	public GameCamera getCamera(int number) {

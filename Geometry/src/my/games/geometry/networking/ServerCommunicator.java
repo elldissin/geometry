@@ -74,6 +74,7 @@ public class ServerCommunicator {
 						System.out.println("Server listening thread started on client");
 						while ((fromServer = (NetworkMessage) in.readObject()) != null) {
 							eventsQueue.add(fromServer);
+							System.out.println("communicator read stream: " + fromServer.getEvent().getCarriedObject());
 							// TODO add something to exit properly
 						}
 					} catch (IOException | ClassNotFoundException e) {

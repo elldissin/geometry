@@ -38,7 +38,6 @@ public class Server {
 		eventSourceForLocalWorld = new LocalSource();
 		runner = new ServerWorldRunner(world, renderEngine, eventSourceForLocalWorld, eventHandler);
 		clientService = new ClientService();
-
 		addPlayers();
 	}
 
@@ -67,6 +66,7 @@ public class Server {
 		runner.start(); // LATER - enable this when ready
 		clientService.start();
 		while (true) {
+			clientService.sendWorldStateToNewClients(world);
 			closeObsoleteClients();
 			pollClientsForInput();
 			notifyClients();

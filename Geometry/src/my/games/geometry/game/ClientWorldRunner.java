@@ -18,7 +18,7 @@ public class ClientWorldRunner extends WorldRunner {
 		do {
 			GameEvent event = eventSource.getNext();
 			if (event != null) {
-				// System.out.println("Event received on client:" + event);
+				System.out.println("Object received on client: " + event.getCarriedObject());
 				eventHandler.handleEvent(event);
 			}
 		} while (eventSource.hasNext());

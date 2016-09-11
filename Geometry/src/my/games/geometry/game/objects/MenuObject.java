@@ -48,11 +48,13 @@ public class MenuObject extends GameCamera {
 		// drawing rectangle for split screen
 		g.drawRect(0, 0, Width, Height);
 		if (drawableObjects != null) {
-			g.drawString("Player HP:" + Integer.toString(drawableObjects.get(1).getHealth()), 0, 20);
-			g.drawString("Player weapon:" + drawableObjects.get(1).getWeapon(), 100, 20);
-			g.drawString("Player level:" + drawableObjects.get(1).getLevel(), 230, 20);
-			g.drawString("Exp:" + drawableObjects.get(1).getCurrentExperience() + "/"
-					+ drawableObjects.get(1).getExperienceForUp(), 0, 40);
+			// FIXME enable when ID system is complete
+			// g.drawString("Player HP:" + Integer.toString(drawableObjects.get(1).getHealth()), 0,
+			// 20);
+			// g.drawString("Player weapon:" + drawableObjects.get(1).getWeapon(), 100, 20);
+			// g.drawString("Player level:" + drawableObjects.get(1).getLevel(), 230, 20);
+			// g.drawString("Exp:" + drawableObjects.get(1).getCurrentExperience() + "/"
+			// + drawableObjects.get(1).getExperienceForUp(), 0, 40);
 		}
 	}
 

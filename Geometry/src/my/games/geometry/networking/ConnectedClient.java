@@ -31,7 +31,9 @@ public class ConnectedClient {
 	public void sendMessage(NetworkMessage message) {
 		if (connection != null) {
 			try {
+				System.out.println("Writing to stream: " + message.getEvent().getCarriedObject());
 				connection.getOutputStream().writeObject(message);
+				connection.getOutputStream().reset();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

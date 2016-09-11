@@ -29,6 +29,7 @@ public class DefaultMover implements Mover {
 		obj.body();
 		// }
 		obj.notifyObserversAbout(new MoveEvent(obj.getObjectID()));
+		// FIXME add notifications to all other movers?
 	}
 
 	@Override

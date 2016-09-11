@@ -60,8 +60,14 @@ public class World {
 			drawableObjectList.add(obj);
 			collidableObjectList.add(obj);
 			updatableObjectList.add(obj);
+			registerObserversForObject(obj);
 		}
 		return obj;
+	}
+
+	private void registerObserversForObject(GameObject obj) {
+		for (int i = 0; i < eventObserverList.size(); i++)
+			obj.registerObserver(eventObserverList.get(i));
 	}
 
 	public List<GameObject> getUpdatableObjectList() {

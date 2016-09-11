@@ -22,20 +22,21 @@ public class Server {
 	private EventSource eventSourceForLocalWorld;
 	private EventHandler eventHandler;
 	private ClientService clientService;
-	private ClientEventNotifier clientEventNotifier;
+	private ClientEventNotifier clientEventNotifier; // Observer
 	private WorldRunner runner;
 	private Player player1, player2;
 
 	public Server() {
 		super();
 		world = new World();
+		clientEventNotifier = new ClientEventNotifier();
+		world.registerWorldObserver(clientEventNotifier);
 		eventHandler = new EventHandler(world);
 		renderEngine = new NoRenderEngine();
 		eventSourceForLocalWorld = new LocalSource(); // LATER change to remote
-
 		runner = new ServerWorldRunner(world, renderEngine, eventSourceForLocalWorld, eventHandler);
 		clientService = new ClientService();
-		clientEventNotifier = new ClientEventNotifier();
+
 		addPlayers();
 	}
 
@@ -48,8 +49,6 @@ public class Server {
 		player2.setBehaviour(beh2);
 		player1.addOnHitEffect(new BumpEffect(0));
 		player2.addOnHitEffect(new BumpEffect(0));
-		player1.registerObserver(clientEventNotifier);
-		player2.registerObserver(clientEventNotifier);
 	}
 
 	public RenderEngine getRenderEngine() {

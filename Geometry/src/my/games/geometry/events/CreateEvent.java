@@ -11,7 +11,6 @@ public class CreateEvent extends GameEvent {
 
 	@Override
 	public void applyEventToWorld(World world) {
-		System.out.println("applied CreateEvent to world");
 		world.createGameObject("projectile", 0, 0, 0.0);
 	}
 

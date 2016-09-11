@@ -263,4 +263,9 @@ public abstract class GameObject implements Updatable, Serializable {
 	public void setCurrentExperience(int currentExperience) {
 		this.currentExperience = currentExperience;
 	}
+
+	public void unRegisterObserver(EventObserver eventObserver) {
+		eventObserverList.remove(eventObserver);
+
+	}
 }

@@ -67,7 +67,7 @@ public class World {
 
 	public GameObject createGameObject(GameObject newObject) {
 		if (newObject != null) {
-			int id = gameObjectsMap.size();
+			int id = newObject.getObjectID();
 			gameObjectsMap.put(id, newObject);
 			drawableObjectList.add(newObject);
 			collidableObjectList.add(newObject);
@@ -75,12 +75,6 @@ public class World {
 			registerObserversForObject(newObject);
 		}
 		return newObject;
-	}
-
-	private void registerObserversForObject(GameObject obj) {
-		for (int i = 0; i < eventObserverList.size(); i++) {
-			obj.registerObserver(eventObserverList.get(i));
-		}
 	}
 
 	public List<GameObject> getUpdatableObjectList() {
@@ -92,10 +86,11 @@ public class World {
 	}
 
 	/**
-	 * Need this special method, do not add through createGameObject() otherwise the projectile
-	 * created will not be one generated in shoot() method
+	 * Need this special method, do not add through createGameObject() otherwise
+	 * the projectile created will not be one generated in shoot() method
 	 */
-	public void addProjectile(Projectile obj) { // FIXME add through createGameObject
+	public void addProjectile(Projectile obj) { // FIXME add through
+												// createGameObject
 		createGameObject("projectile", obj.getPos().x, obj.getPos().y, obj.getAngle());
 		// int id = gameObjectsMap.size(); // LATER size()used to get unique ID
 		// gameObjectsMap.put(id, obj);
@@ -158,5 +153,36 @@ public class World {
 	// LATER removeEventObserver required?
 	public void registerWorldObserver(EventObserver observer) {
 		eventObserverList.add(observer);
+	}
+
+	public void destroyGameObject(GameObject obj) {
+		if (obj != null) {
+			for (int i = 0; i < drawableObjectList.size(); i++) {
+				System.out.println("drawableObjectList before " + drawableObjectList.get(i).getObjectID());
+			}
+			// System.out.println("obj id " + obj.getObjectID());
+			gameObjectsMap.remove(obj.getObjectID(), obj);
+			drawableObjectList.remove(obj);
+			collidableObjectList.remove(obj);
+			updatableObjectList.remove(obj);
+			unRegisterObserversForObject(obj);
+			System.out.println("destroyGameObject in if");
+		}
+		for (int i = 0; i < drawableObjectList.size(); i++) {
+			System.out.println("drawableObjectList after" + drawableObjectList.get(i).getObjectID());
+		}
+	}
+
+	private void registerObserversForObject(GameObject obj) {
+		for (int i = 0; i < eventObserverList.size(); i++) {
+			obj.registerObserver(eventObserverList.get(i));
+		}
+	}
+
+	private void unRegisterObserversForObject(GameObject obj) {
+		for (int i = 0; i < eventObserverList.size(); i++) {
+			obj.unRegisterObserver(eventObserverList.get(i));
+			// System.out.println("unRegisterObserversForObject ");
+		}
 	}
 }

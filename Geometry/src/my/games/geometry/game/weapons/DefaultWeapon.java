@@ -38,7 +38,6 @@ public class DefaultWeapon implements Weapon, Serializable {
 		// Notify observers
 		GameEvent event = new CreateEvent(obj.getObjectID());
 		event.setCarriedObject(projectile);
-		System.out.println("default weapon shoots");
 		obj.notifyObserversAbout(event);
 	}
 

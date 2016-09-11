@@ -19,7 +19,7 @@ public class DefaultWeapon implements Weapon {
 	}
 
 	@Override
-	public void shoot(GameObject obj) {
+	public void shoot(GameObject obj) { // FIXME create through World
 		Projectile projectile = new Projectile(obj.getPos().x, obj.getPos().y, obj.getAngle());
 		projectile.addOnHitEffect(new SlowEffect(20));
 		projectile.addOnHitEffect(new DmgEffect(1));

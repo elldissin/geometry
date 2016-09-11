@@ -6,7 +6,7 @@ import my.games.geometry.game.objects.GameObject;
 public class ShootEvent extends GameEvent {
 
 	/**
-	 * 
+	 * ShootEvent is not sent to client, as he only creates objects
 	 */
 	private static final long serialVersionUID = 1L;
 

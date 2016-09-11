@@ -38,7 +38,7 @@ public class World {
 	}
 
 	public GameObject createGameObject(String objType, int x, int y, double angle) {
-		int id = gameObjectsMap.size(); // size()used to get unique ID
+		int id = gameObjectsMap.size(); // LATER size()used to get unique ID
 		GameObject obj = null;
 		switch (objType) {
 		case "player":
@@ -66,8 +66,9 @@ public class World {
 	}
 
 	private void registerObserversForObject(GameObject obj) {
-		for (int i = 0; i < eventObserverList.size(); i++)
+		for (int i = 0; i < eventObserverList.size(); i++) {
 			obj.registerObserver(eventObserverList.get(i));
+		}
 	}
 
 	public List<GameObject> getUpdatableObjectList() {
@@ -79,16 +80,16 @@ public class World {
 	}
 
 	/**
-	 * Need this special method, do not add through createGameObject()
-	 * *otherwise the projectile created will not be one generated in shoot()
-	 * method
+	 * Need this special method, do not add through createGameObject() otherwise the projectile
+	 * created will not be one generated in shoot() method
 	 */
-	public void addProjectile(Projectile obj) {
-		int id = gameObjectsMap.size(); // size()used to get unique ID
-		gameObjectsMap.put(id, obj);
-		drawableObjectList.add(obj);
-		collidableObjectList.add(obj);
-		updatableObjectList.add(obj);
+	public void addProjectile(Projectile obj) { // FIXME add through createGameObject
+		createGameObject("projectile", obj.getPos().x, obj.getPos().y, obj.getAngle());
+		// int id = gameObjectsMap.size(); // LATER size()used to get unique ID
+		// gameObjectsMap.put(id, obj);
+		// drawableObjectList.add(obj);
+		// collidableObjectList.add(obj);
+		// updatableObjectList.add(obj);
 	}
 
 	public GameObject getObjectByID(int id) {

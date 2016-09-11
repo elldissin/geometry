@@ -1,5 +1,6 @@
 package my.games.geometry.game.movers;
 
+import my.games.geometry.events.MoveEvent;
 import my.games.geometry.game.objects.GameObject;
 
 public class ProjectileMover implements Mover {
@@ -19,6 +20,7 @@ public class ProjectileMover implements Mover {
 			obj.body().clear(); // no method to get points directly, body()
 								// method shall be fixed
 			obj.body();
+			obj.notifyObserversAbout(new MoveEvent(obj.getObjectID()));
 		}
 		if (distTravelled > obj.getLiveDistance())
 			obj.setObsolete(true);

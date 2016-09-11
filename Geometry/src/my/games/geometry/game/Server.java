@@ -103,4 +103,8 @@ public class Server {
 			}
 		}
 	}
+
+	public World getWorld() {
+		return world;
+	}
 }

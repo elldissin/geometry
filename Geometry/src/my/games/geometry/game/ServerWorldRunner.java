@@ -17,7 +17,7 @@ public class ServerWorldRunner extends WorldRunner {
 		// do-while is required here to have at least one world update per tick
 		do {
 			GameEvent event = eventSource.getNext();
-			if (event != null) {
+			if (event != null) { // server is handling events only from Clients
 				eventHandler.handleEvent(event);
 				world.checkForCollisions();
 			}

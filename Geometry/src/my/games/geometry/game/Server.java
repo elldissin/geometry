@@ -33,7 +33,7 @@ public class Server {
 		world.registerWorldObserver(clientEventNotifier);
 		eventHandler = new EventHandler(world);
 		renderEngine = new NoRenderEngine();
-		eventSourceForLocalWorld = new LocalSource(); // LATER change to remote
+		eventSourceForLocalWorld = new LocalSource();
 		runner = new ServerWorldRunner(world, renderEngine, eventSourceForLocalWorld, eventHandler);
 		clientService = new ClientService();
 

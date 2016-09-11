@@ -1,9 +1,15 @@
 package my.games.geometry.game.movers;
 
+import java.io.Serializable;
+
 import my.games.geometry.events.MoveEvent;
 import my.games.geometry.game.objects.GameObject;
 
-public class ProjectileMover implements Mover {
+public class ProjectileMover implements Mover, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int speed;
 	private int distTravelled;
 

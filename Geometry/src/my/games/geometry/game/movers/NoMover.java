@@ -1,8 +1,15 @@
 package my.games.geometry.game.movers;
 
+import java.io.Serializable;
+
 import my.games.geometry.game.objects.GameObject;
 
-public class NoMover implements Mover {
+public class NoMover implements Mover, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void move(GameObject obj) {

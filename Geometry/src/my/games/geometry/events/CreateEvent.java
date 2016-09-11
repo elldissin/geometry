@@ -1,6 +1,7 @@
 package my.games.geometry.events;
 
 import my.games.geometry.game.World;
+import my.games.geometry.game.objects.GameObject;
 
 public class CreateEvent extends GameEvent {
 
@@ -11,7 +12,9 @@ public class CreateEvent extends GameEvent {
 
 	@Override
 	public void applyEventToWorld(World world) {
-		world.createGameObject("projectile", 0, 0, 0.0);
+		GameObject obj = getCarriedObject();
+		if (obj != null)
+			world.createGameObject("projectile", obj.getPos().x, obj.getPos().y, obj.getAngle());
 	}
 
 }

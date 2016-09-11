@@ -1,10 +1,11 @@
 package my.games.geometry.behaviour;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 import my.games.geometry.game.objects.GameObject;
 
-public class GeneralBehaviour implements Behaviour {
+public class GeneralBehaviour implements Behaviour, Serializable {
 	protected boolean slowable;
 	protected boolean vulnerable;
 	protected boolean bumping;

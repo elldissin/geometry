@@ -1,13 +1,18 @@
 package my.games.geometry.game.movers;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 import my.games.geometry.events.MoveEvent;
 import my.games.geometry.events.TurnEventCCW;
 import my.games.geometry.events.TurnEventCW;
 import my.games.geometry.game.objects.GameObject;
 
-public class DefaultMover implements Mover {
+public class DefaultMover implements Mover, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int maxSpeed, speed;
 	private double turnSpeed;
 

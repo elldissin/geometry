@@ -58,6 +58,7 @@ public class World {
 			obj = new StaticObject(x, y, angle);
 			obj.setObjectID(id);
 			break;
+		// LATER add bfgprojectile type?
 		}
 		if (obj != null) {
 			gameObjectsMap.put(id, obj);
@@ -90,8 +91,8 @@ public class World {
 	}
 
 	/**
-	 * Need this special method, do not add through createGameObject() otherwise the projectile
-	 * created will not be one generated in shoot() method
+	 * Need this special method, do not add through createGameObject() otherwise
+	 * the projectile created will not be one generated in shoot() method
 	 */
 	public void addProjectile(Projectile obj) { // FIXME add through
 												// createGameObject

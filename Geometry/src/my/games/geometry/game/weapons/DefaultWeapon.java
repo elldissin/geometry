@@ -1,5 +1,6 @@
 package my.games.geometry.game.weapons;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,11 +8,16 @@ import my.games.geometry.behaviour.DmgEffect;
 import my.games.geometry.behaviour.ProjectileBehaviour;
 import my.games.geometry.behaviour.SlowEffect;
 import my.games.geometry.events.CreateEvent;
+import my.games.geometry.events.GameEvent;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Projectile;
 
-public class DefaultWeapon implements Weapon {
+public class DefaultWeapon implements Weapon, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<Projectile> projectileList;
 
 	public DefaultWeapon() {
@@ -19,7 +25,7 @@ public class DefaultWeapon implements Weapon {
 	}
 
 	@Override
-	public void shoot(GameObject obj) { // FIXME create through World
+	public void shoot(GameObject obj) {
 		Projectile projectile = new Projectile(obj.getPos().x, obj.getPos().y, obj.getAngle());
 		projectile.addOnHitEffect(new SlowEffect(20));
 		projectile.addOnHitEffect(new DmgEffect(1));
@@ -29,7 +35,10 @@ public class DefaultWeapon implements Weapon {
 		obj.addIgnoreObject(projectile);
 		projectile.addIgnoreObject(obj);
 		projectileList.add(projectile);
-		obj.notifyObserversAbout(new CreateEvent(obj.getObjectID()));
+		// Notify observers
+		GameEvent event = new CreateEvent(obj.getObjectID());
+		event.setCarriedObject(projectile);
+		obj.notifyObserversAbout(event);
 	}
 
 	@Override

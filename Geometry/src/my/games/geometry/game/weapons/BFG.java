@@ -1,5 +1,6 @@
 package my.games.geometry.game.weapons;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,12 @@ import my.games.geometry.game.objects.BFGProjectile;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Projectile;
 
-public class BFG implements Weapon {
+public class BFG implements Weapon, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<Projectile> projectileList;
 
 	public BFG() {

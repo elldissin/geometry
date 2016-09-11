@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import my.games.geometry.game.movers.Mover;
 import my.games.geometry.game.renderers.Renderer;
 import my.games.geometry.game.weapons.Weapon;
 
-public abstract class GameObject implements Updatable {
+public abstract class GameObject implements Updatable, Serializable {
 	private static final long serialVersionUID = 1L;
 	protected int objectID;
 	protected Point currentPos;

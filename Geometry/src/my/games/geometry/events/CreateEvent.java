@@ -14,7 +14,8 @@ public class CreateEvent extends GameEvent {
 	public void applyEventToWorld(World world) {
 		GameObject obj = getCarriedObject();
 		if (obj != null)
-			world.createGameObject("projectile", obj.getPos().x, obj.getPos().y, obj.getAngle());
+			world.createGameObject(obj);
+		// world.createGameObject("projectile", obj.getPos().x, obj.getPos().y, obj.getAngle());
 	}
 
 }

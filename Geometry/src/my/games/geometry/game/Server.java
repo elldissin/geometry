@@ -9,7 +9,9 @@ import my.games.geometry.events.InputConverter;
 import my.games.geometry.events.LocalSource;
 import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
+import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
+import my.games.geometry.game.weapons.BFG;
 import my.games.geometry.networking.ClientEventNotifier;
 import my.games.geometry.networking.ClientService;
 import my.games.geometry.networking.PlayerInput;
@@ -41,7 +43,9 @@ public class Server {
 	}
 
 	private void addPlayers() {
-		player1 = (Player) world.createGameObject("player", 100, 100, 0.0);
+		GameObject obj = world.createGameObject("player", 100, 100, 0.0);
+		obj.setWeapon(new BFG());
+		player1 = (Player) obj;
 		player2 = (Player) world.createGameObject("player", 400, 100, 0.0);
 		Behaviour beh1 = new PlayerBehaviour();
 		Behaviour beh2 = new PlayerBehaviour();

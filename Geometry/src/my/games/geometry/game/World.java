@@ -65,6 +65,18 @@ public class World {
 		return obj;
 	}
 
+	public GameObject createGameObject(GameObject newObject) {
+		if (newObject != null) {
+			int id = gameObjectsMap.size();
+			gameObjectsMap.put(id, newObject);
+			drawableObjectList.add(newObject);
+			collidableObjectList.add(newObject);
+			updatableObjectList.add(newObject);
+			registerObserversForObject(newObject);
+		}
+		return newObject;
+	}
+
 	private void registerObserversForObject(GameObject obj) {
 		for (int i = 0; i < eventObserverList.size(); i++) {
 			obj.registerObserver(eventObserverList.get(i));

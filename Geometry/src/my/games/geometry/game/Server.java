@@ -48,8 +48,8 @@ public class Server {
 		player2.setBehaviour(beh2);
 		player1.addOnHitEffect(new BumpEffect(0));
 		player2.addOnHitEffect(new BumpEffect(0));
-		player1.addEventObserver(clientEventNotifier);
-		player2.addEventObserver(clientEventNotifier);
+		player1.registerObserver(clientEventNotifier);
+		player2.registerObserver(clientEventNotifier);
 	}
 
 	public RenderEngine getRenderEngine() {

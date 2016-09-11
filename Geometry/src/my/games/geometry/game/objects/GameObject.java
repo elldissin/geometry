@@ -40,6 +40,7 @@ public abstract class GameObject implements Updatable {
 
 	public GameObject(int x, int y, double angle) {
 		super();
+		eventObserverList = new ArrayList<EventObserver>();
 		objWidth = 20;
 		objHeight = 20;
 		this.angle = angle;
@@ -51,7 +52,7 @@ public abstract class GameObject implements Updatable {
 		points = new ArrayList<Point>();
 		ignoredObjects = new ArrayList<GameObject>();
 		onHitEffects = new ArrayList<Effect>();
-		eventObserverList = new ArrayList<EventObserver>();
+
 		behaviour = null;
 	}
 
@@ -229,18 +230,14 @@ public abstract class GameObject implements Updatable {
 		// turn();
 	}
 
-	// LATER removeEventObserver required?
-	public void addEventObserver(EventObserver observer) {
-		eventObserverList.add(observer);
-	}
-
 	public void notifyObserversAbout(GameEvent event) {
 		for (int i = 0; i < eventObserverList.size(); i++)
 			eventObserverList.get(i).notifyAboutEvent(this, event);
 
 	}
 
-	public List<EventObserver> getEventObserverList() {
-		return eventObserverList;
+	// LATER removeEventObserver required?
+	public void registerObserver(EventObserver observer) {
+		eventObserverList.add(observer);
 	}
 }

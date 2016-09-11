@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import my.games.geometry.behaviour.BumpEffect;
+import my.games.geometry.events.EventObserver;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
 import my.games.geometry.game.objects.Projectile;
@@ -18,6 +19,8 @@ public class World {
 	private List<GameObject> updatableObjectList;
 	private List<GameObject> collidableObjectList;
 	private List<GameObject> shootersList;
+
+	private List<EventObserver> eventObserverList;
 	// private Controller controller;
 
 	public World() {
@@ -27,6 +30,8 @@ public class World {
 		collidableObjectList = new ArrayList<GameObject>();
 		shootersList = new ArrayList<GameObject>();
 		effectManager = new EffectManager();
+		eventObserverList = new ArrayList<EventObserver>();
+		// LATER why static object created here?
 		StaticObject obst = (StaticObject) createGameObject("static", 250, 50, 0.0);
 		obst.addOnHitEffect(new BumpEffect(0));
 		// this.controller = controller;
@@ -129,5 +134,10 @@ public class World {
 					}
 				}
 			}
+	}
+
+	// LATER removeEventObserver required?
+	public void registerWorldObserver(EventObserver observer) {
+		eventObserverList.add(observer);
 	}
 }

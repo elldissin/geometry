@@ -35,7 +35,7 @@ public class GeneralBehaviour implements Behaviour, Serializable {
 	@Override
 	public void slowDown(GameObject obj, int amount) {
 		obj.getMover().setSpeed((int) (obj.getMover().getSpeed() * (100 - amount) / 100));
-		slowable = false; // remove after timer implementation
+		slowable = false; // LATER remove after timer implementation
 	}
 
 	@Override

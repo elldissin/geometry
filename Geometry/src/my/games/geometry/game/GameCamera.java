@@ -20,7 +20,7 @@ public class GameCamera extends JPanel {
 
 	public GameCamera() {
 		super();
-		viewWidth = 400;
+		viewWidth = 800;
 		viewHeight = 600;
 		setPreferredSize(new Dimension(viewWidth, viewHeight));
 		viewOffset = new Point(0, 0);
@@ -58,8 +58,6 @@ public class GameCamera extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		// drawing rectangle for split screen
-		g.drawRect(0, 0, 399, 600);
 		g.translate((int) -viewOffset.getX(), (int) -viewOffset.getY());
 		if (drawableObjects != null)
 			for (int i = 0; i < drawableObjects.size(); i++)

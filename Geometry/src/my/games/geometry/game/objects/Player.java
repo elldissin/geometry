@@ -16,6 +16,8 @@ public class Player extends GameObject implements Controllable {
 		super(x, y, angle);
 		health = 100;
 		level = 5;
+		experienceForUp = level * 1000;
+		currentExperience = 0;
 		mover = new DefaultMover();
 		weapon = new DefaultWeapon();
 		renderer = new DefaultRenderer();

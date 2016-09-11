@@ -25,6 +25,8 @@ public abstract class GameObject implements Updatable, Serializable {
 	protected int objWidth, objHeight;
 	protected int health;
 	protected int level;
+	protected int experienceForUp;
+	protected int currentExperience;
 	protected double angle;
 	protected boolean obsolete;
 	protected int distTravelled;
@@ -244,5 +246,21 @@ public abstract class GameObject implements Updatable, Serializable {
 	// LATER removeEventObserver required?
 	public void registerObserver(EventObserver observer) {
 		eventObserverList.add(observer);
+	}
+
+	public int getExperienceForUp() {
+		return experienceForUp;
+	}
+
+	public void setExperienceForUp(int experienceForUp) {
+		this.experienceForUp = experienceForUp;
+	}
+
+	public int getCurrentExperience() {
+		return currentExperience;
+	}
+
+	public void setCurrentExperience(int currentExperience) {
+		this.currentExperience = currentExperience;
 	}
 }

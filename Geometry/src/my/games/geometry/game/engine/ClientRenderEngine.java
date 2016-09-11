@@ -25,12 +25,6 @@ public class ClientRenderEngine implements RenderEngine {
 		camera1.setViewOffset(p);
 		camera1.show(world.getDrawableObjectList());
 
-		// ties camera 2 to player 2
-		p = new Point((int) world.getObjectByID(2).getPos().x - camera2.getViewWidth() / 2,
-				(int) world.getObjectByID(2).getPos().y - camera2.getViewHeight() / 2);
-		camera2.setViewOffset(p);
-		camera2.show(world.getDrawableObjectList());
-
 		camera3.show(world.getDrawableObjectList());
 	}
 

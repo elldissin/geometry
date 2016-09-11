@@ -7,7 +7,8 @@ import my.games.geometry.game.objects.GameObject;
 
 public abstract class GameEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	// FIXME bumping make a bug with bullets position (if player in the static
+	// object)
 	protected int targetID;
 	private GameObject carriedObject;
 

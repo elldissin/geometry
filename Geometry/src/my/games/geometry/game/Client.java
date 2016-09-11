@@ -11,9 +11,7 @@ import my.games.geometry.events.RemoteSource;
 import my.games.geometry.game.engine.ClientRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.Controller;
-import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
-import my.games.geometry.game.weapons.BFG;
 import my.games.geometry.networking.ServerCommunicator;
 
 public class Client {
@@ -43,9 +41,7 @@ public class Client {
 	}
 
 	private void addPlayers() {
-		GameObject obj = world.createGameObject("player", 100, 100, 0.0);
-		obj.setWeapon(new BFG());
-		player1 = (Player) obj;
+		player1 = (Player) world.createGameObject("player", 100, 100, 0.0);
 		player2 = (Player) world.createGameObject("player", 400, 100, 0.0);
 		Behaviour beh1 = new PlayerBehaviour();
 		Behaviour beh2 = new PlayerBehaviour();

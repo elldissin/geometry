@@ -45,12 +45,6 @@ public class ServerLogDisplay implements Runnable {
 		mLabelList.get(6).setText("hz");
 		mLabelList.get(7).setText("hz");
 
-		// mText[0].setText(server.getWorld().get gameObjectsMap.getSize());
-		// mText[0].setText(Integer.toString(server.getWorld().getDrawableObjectList().size()));
-		// mText[0].setText(Integer.toString(server.getWorld().getUpdatableObjectList().size()));
-		// mText[0].setText(Integer.toString(server.getWorld().getCollidableObjectList().size()));
-		// mText[0].setText(Integer.toString(server.getWorld().getDrawableObjectList().size()));
-
 		frame.setVisible(true);
 		frame.setFocusable(true);
 	}

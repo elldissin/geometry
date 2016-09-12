@@ -10,21 +10,21 @@ import my.games.geometry.game.objects.GameObject;
 public class ProjectileMoverTest {
 
 	@Test
-	public void BulletDestroyTest() {
+	public void bulletDestroyTest() {
 		// arrange
 		World worldTest = new World();
-		GameObject BulletTest = worldTest.createGameObject("projectile", 0, 0, 0.0);
+		GameObject bulletTest = worldTest.createGameObject("projectile", 0, 0, 0.0);
 
 		// act
 		for (int i = 0; i < 58; i++) {
-			BulletTest.getMover().move(BulletTest);
+			bulletTest.getMover().move(bulletTest);
 		}
 		// assert
-		System.out.println(BulletTest.getPos().x);
-		System.out.println(BulletTest.getLiveDistance());
-		System.out.println(BulletTest.isDestroyed());
+		System.out.println(bulletTest.getPos().x);
+		System.out.println(bulletTest.getLiveDistance());
+		System.out.println(bulletTest.isDestroyed());
 
-		assertTrue(BulletTest.isDestroyed());
+		assertTrue(bulletTest.isDestroyed());
 	}
 
 }

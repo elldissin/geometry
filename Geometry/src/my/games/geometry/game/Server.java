@@ -93,11 +93,11 @@ public class Server {
 					@Override
 					public void run() {
 						logDisplay.getmTextList().get(0).setText(Integer.toString(world.getGameObjectsMap().size()));
-						logDisplay.getmTextList().get(0)
+						logDisplay.getmTextList().get(1)
 								.setText(Integer.toString(world.getDrawableObjectList().size()));
-						logDisplay.getmTextList().get(0)
+						logDisplay.getmTextList().get(2)
 								.setText(Integer.toString(world.getUpdatableObjectList().size()));
-						logDisplay.getmTextList().get(0)
+						logDisplay.getmTextList().get(3)
 								.setText(Integer.toString(world.getCollidableObjectList().size()));
 					}
 				});

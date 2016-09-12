@@ -27,6 +27,7 @@ public class Server {
 	private ClientEventNotifier clientEventNotifier; // Observer
 	private WorldRunner runner;
 	private Player player1, player2;
+	private ServerLogDisplay logDisplay;
 
 	public Server() {
 		super();
@@ -102,5 +103,9 @@ public class Server {
 				clientService.getClientList().remove(i);
 			}
 		}
+	}
+
+	public void setLogDisplay(ServerLogDisplay logDisplay) {
+		this.logDisplay = logDisplay;
 	}
 }

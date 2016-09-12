@@ -28,12 +28,15 @@ public class Server {
 	private WorldRunner runner;
 	private Player player1, player2;
 	private ServerLogDisplay logDisplay;
+	private WorldChangeObserver logDisplayNotifier;
 
 	public Server() {
 		super();
 		world = new World();
 		clientEventNotifier = new ClientEventNotifier();
+		logDisplayNotifier = new LogDisplayNotifier();
 		world.registerWorldObserver(clientEventNotifier);
+		world.registerLogDisplayNotifyer(logDisplayNotifier);
 		eventHandler = new EventHandler(world);
 		renderEngine = new NoRenderEngine();
 		eventSourceForLocalWorld = new LocalSource();

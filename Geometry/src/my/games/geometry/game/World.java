@@ -21,6 +21,7 @@ public class World {
 	private List<GameObject> shootersList;
 
 	private List<EventObserver> eventObserverList;
+	private WorldChangeObserver logDisplayNotifier;
 	// private Controller controller;
 
 	public World() {
@@ -65,6 +66,8 @@ public class World {
 			collidableObjectList.add(obj);
 			updatableObjectList.add(obj);
 			registerObserversForObject(obj);
+
+			logDisplayNotifier.worldHasChanged();
 		}
 		return obj;
 	}
@@ -77,6 +80,8 @@ public class World {
 			collidableObjectList.add(newObject);
 			updatableObjectList.add(newObject);
 			registerObserversForObject(newObject);
+
+			logDisplayNotifier.worldHasChanged();
 		}
 		return newObject;
 	}
@@ -129,7 +134,7 @@ public class World {
 		checkForCollisions();
 	}
 
-	public void removeFromWorld(GameObject obj) {
+	public void removeFromWorld(GameObject obj) { // FIXME destroyGameObject is doing same?
 		updatableObjectList.remove(obj);
 		drawableObjectList.remove(obj);
 		collidableObjectList.remove(obj);
@@ -161,19 +166,13 @@ public class World {
 
 	public void destroyGameObject(GameObject obj) {
 		if (obj != null) {
-			for (int i = 0; i < drawableObjectList.size(); i++) {
-				System.out.println("drawableObjectList before " + drawableObjectList.get(i).getObjectID());
-			}
-			// System.out.println("obj id " + obj.getObjectID());
 			gameObjectsMap.remove(obj.getObjectID(), obj);
 			drawableObjectList.remove(obj);
 			collidableObjectList.remove(obj);
 			updatableObjectList.remove(obj);
 			unRegisterObserversForObject(obj);
-			System.out.println("destroyGameObject in if");
-		}
-		for (int i = 0; i < drawableObjectList.size(); i++) {
-			System.out.println("drawableObjectList after" + drawableObjectList.get(i).getObjectID());
+
+			logDisplayNotifier.worldHasChanged();
 		}
 	}
 
@@ -188,5 +187,9 @@ public class World {
 			obj.unRegisterObserver(eventObserverList.get(i));
 			// System.out.println("unRegisterObserversForObject ");
 		}
+	}
+
+	public void registerLogDisplayNotifyer(WorldChangeObserver logDisplayNotifier) {
+		this.logDisplayNotifier = logDisplayNotifier;
 	}
 }

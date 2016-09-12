@@ -40,7 +40,6 @@ public class BFG implements Weapon, Serializable {
 		// Notify observers
 		GameEvent event = new CreateEvent(obj.getObjectID());
 		event.setCarriedObject(projectile);
-		System.out.println("BFG shoots");
 		obj.notifyObserversAbout(event);
 	}
 

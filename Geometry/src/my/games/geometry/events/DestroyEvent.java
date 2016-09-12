@@ -15,7 +15,6 @@ public class DestroyEvent extends GameEvent {
 		GameObject obj = getCarriedObject();
 		if (obj != null) {
 			world.destroyGameObject(obj);
-			System.out.println("applyEventToWorld inside if");
 		}
 	}
 

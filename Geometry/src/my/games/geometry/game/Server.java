@@ -1,5 +1,7 @@
 package my.games.geometry.game;
 
+import javax.swing.SwingUtilities;
+
 import my.games.geometry.behaviour.Behaviour;
 import my.games.geometry.behaviour.BumpEffect;
 import my.games.geometry.behaviour.PlayerBehaviour;
@@ -28,7 +30,7 @@ public class Server {
 	private WorldRunner runner;
 	private Player player1, player2;
 	private ServerLogDisplay logDisplay;
-	private WorldChangeObserver logDisplayNotifier;
+	private LogDisplayNotifier logDisplayNotifier;
 
 	public Server() {
 		super();
@@ -74,6 +76,7 @@ public class Server {
 			closeObsoleteClients();
 			pollClientsForInput();
 			notifyClients();
+			notifyLogWindow();
 			try {
 				Thread.sleep(5); // To reduce CPU load
 			} catch (InterruptedException e) {
@@ -81,6 +84,25 @@ public class Server {
 			}
 		}
 
+	}
+
+	private void notifyLogWindow() {
+		if (logDisplay != null)
+			if (logDisplayNotifier.isChanged()) {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						logDisplay.getmTextList().get(0).setText(Integer.toString(world.getGameObjectsMap().size()));
+						logDisplay.getmTextList().get(0)
+								.setText(Integer.toString(world.getDrawableObjectList().size()));
+						logDisplay.getmTextList().get(0)
+								.setText(Integer.toString(world.getUpdatableObjectList().size()));
+						logDisplay.getmTextList().get(0)
+								.setText(Integer.toString(world.getCollidableObjectList().size()));
+					}
+				});
+
+			}
 	}
 
 	private void notifyClients() {
@@ -110,5 +132,6 @@ public class Server {
 
 	public void setLogDisplay(ServerLogDisplay logDisplay) {
 		this.logDisplay = logDisplay;
+		world.registerLogDisplayNotifyer(logDisplayNotifier);
 	}
 }

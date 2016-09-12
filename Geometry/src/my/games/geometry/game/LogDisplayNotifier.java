@@ -2,10 +2,17 @@ package my.games.geometry.game;
 
 public class LogDisplayNotifier implements WorldChangeObserver {
 
+	private boolean isChanged = false;
+
 	@Override
 	public void worldHasChanged() {
-		// TODO Auto-generated method stub
+		isChanged = true;
+	}
 
+	public boolean isChanged() {
+		boolean wasInState = isChanged;
+		isChanged = false;
+		return wasInState;
 	}
 
 }

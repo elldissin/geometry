@@ -32,6 +32,7 @@ public class World {
 		shootersList = new ArrayList<GameObject>();
 		effectManager = new EffectManager();
 		eventObserverList = new ArrayList<EventObserver>();
+		logDisplayNotifier = new LogDisplayNotifier();
 		// LATER why static object created here?
 		StaticObject obst = (StaticObject) createGameObject("static", 250, 50, 0.0);
 		obst.addOnHitEffect(new BumpEffect(0));

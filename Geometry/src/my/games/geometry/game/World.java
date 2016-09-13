@@ -3,8 +3,9 @@ package my.games.geometry.game;
 import java.util.ArrayList;
 import java.util.List;
 
-import my.games.geometry.behaviour.BumpEffect;
+import my.games.geometry.events.CreateEvent;
 import my.games.geometry.events.EventObserver;
+import my.games.geometry.events.GameEvent;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
 import my.games.geometry.game.objects.Projectile;
@@ -31,9 +32,6 @@ public class World {
 		effectManager = new EffectManager();
 		eventObserverList = new ArrayList<EventObserver>();
 		logDisplayNotifier = new LogDisplayNotifier();
-		// LATER why static object created here?
-		StaticObject obst = (StaticObject) createGameObject("static", 250, 50, 0.0);
-		obst.addOnHitEffect(new BumpEffect(0));
 		// this.controller = controller;
 	}
 
@@ -59,11 +57,16 @@ public class World {
 		}
 		if (obj != null) {
 			obj.setObjectID(id);
+			System.out.println("add obj on server: " + obj.getObjectID());
 			gameObjectList.add(obj);
 			drawableObjectList.add(obj);
 			collidableObjectList.add(obj);
 			updatableObjectList.add(obj);
 			registerObserversForObject(obj);
+
+			GameEvent event = new CreateEvent(obj.getObjectID());
+			event.setCarriedObject(obj);
+			obj.notifyObserversAbout(event);
 
 			logDisplayNotifier.worldHasChanged();
 		}
@@ -72,6 +75,7 @@ public class World {
 
 	public GameObject createGameObject(GameObject newObject) {
 		if (newObject != null) {
+			System.out.println("add obj on client: " + newObject.getObjectID());
 			gameObjectList.add(newObject);
 			drawableObjectList.add(newObject);
 			collidableObjectList.add(newObject);
@@ -94,14 +98,9 @@ public class World {
 	 * Need this special method, do not add through createGameObject() otherwise the projectile
 	 * created will not be one generated in shoot() method
 	 */
-	public void addProjectile(Projectile obj) { // FIXME add through
+	public void addProjectile(GameObject obj) { // FIXME add through
 												// createGameObject
 		createGameObject("projectile", obj.getPos().x, obj.getPos().y, obj.getAngle());
-		// int id = gameObjectsMap.size(); // LATER size()used to get unique ID
-		// gameObjectsMap.put(id, obj);
-		// drawableObjectList.add(obj);
-		// collidableObjectList.add(obj);
-		// updatableObjectList.add(obj);
 	}
 
 	public GameObject getObjectByID(int id) {
@@ -114,9 +113,10 @@ public class World {
 
 	public void update() {
 		// Handle shooters and their projectiles, add their projectiles to world
-		for (int i = 0; i < shootersList.size(); i++) {
+		for (int i = 0; i < shootersList.size(); i++) { // FIXME where projectile gets ID?
 			for (int j = 0; j < shootersList.get(i).getWeapon().getProjectileList().size(); j++) {
-				addProjectile(shootersList.get(i).getWeapon().getProjectileList().get(j));
+				GameObject projectile = shootersList.get(i).getWeapon().getProjectileList().get(j);
+				addProjectile(projectile);
 				shootersList.get(i).getWeapon().getProjectileList().remove(j);
 			}
 		}

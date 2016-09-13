@@ -47,7 +47,7 @@ public class Server {
 		addPlayers();
 	}
 
-	private void addPlayers() {
+	private void addPlayers() { // FIXME add players for each client separately
 		GameObject obj = world.createGameObject("player", 100, 100, 0.0);
 		obj.setWeapon(new BFG());
 		player1 = (Player) obj;
@@ -58,6 +58,9 @@ public class Server {
 		player2.setBehaviour(beh2);
 		player1.addOnHitEffect(new BumpEffect(0));
 		player2.addOnHitEffect(new BumpEffect(0));
+		// LATER why static object created here?
+		GameObject obst = world.createGameObject("static", 250, 50, 0.0);
+		obst.addOnHitEffect(new BumpEffect(0));
 	}
 
 	public RenderEngine getRenderEngine() {

@@ -5,6 +5,11 @@ import my.games.geometry.game.objects.GameObject;
 
 public class CreateEvent extends GameEvent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public CreateEvent(int targetID) {
 		super(targetID);
 		// TODO Auto-generated constructor stub
@@ -15,7 +20,6 @@ public class CreateEvent extends GameEvent {
 		GameObject obj = getCarriedObject();
 		if (obj != null)
 			world.createGameObject(obj);
-		// world.createGameObject("projectile", obj.getPos().x, obj.getPos().y, obj.getAngle());
 	}
 
 }

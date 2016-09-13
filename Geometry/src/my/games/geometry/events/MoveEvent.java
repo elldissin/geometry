@@ -14,7 +14,6 @@ public class MoveEvent extends GameEvent {
 	public void applyEventToWorld(World world) {
 		GameObject obj = world.getObjectByID(targetID);
 		if (obj != null) {
-			// System.out.println("Trying to move object: " + obj);
 			obj.move();
 		}
 	}

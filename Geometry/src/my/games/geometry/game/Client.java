@@ -8,7 +8,6 @@ import my.games.geometry.events.RemoteSource;
 import my.games.geometry.game.engine.ClientRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.Controller;
-import my.games.geometry.game.objects.Player;
 import my.games.geometry.networking.ServerCommunicator;
 
 public class Client {
@@ -21,7 +20,6 @@ public class Client {
 	private EventHandler eventHandler;
 	private WorldRunner runner;
 	private ServerCommunicator comm;
-	private Player player1, player2;
 
 	public Client() {
 		super();
@@ -33,7 +31,6 @@ public class Client {
 		eventSourceForLocalWorld = new RemoteSource(comm);
 		controller = new Controller(comm);
 		runner = new ClientWorldRunner(world, renderEngine, eventSourceForLocalWorld, eventHandler);
-
 	}
 
 	public KeyListener getController() {

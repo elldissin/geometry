@@ -7,8 +7,6 @@ import java.util.List;
 import my.games.geometry.behaviour.DmgEffect;
 import my.games.geometry.behaviour.ProjectileBehaviour;
 import my.games.geometry.behaviour.SlowEffect;
-import my.games.geometry.events.CreateEvent;
-import my.games.geometry.events.GameEvent;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Projectile;
 
@@ -35,10 +33,6 @@ public class DefaultWeapon implements Weapon, Serializable {
 		obj.addIgnoreObject(projectile);
 		projectile.addIgnoreObject(obj);
 		projectileList.add(projectile);
-		// Notify observers
-		GameEvent event = new CreateEvent(obj.getObjectID());
-		event.setCarriedObject(projectile);
-		obj.notifyObserversAbout(event);
 	}
 
 	@Override

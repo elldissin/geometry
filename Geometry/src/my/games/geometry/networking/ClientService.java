@@ -46,7 +46,8 @@ public class ClientService implements Runnable {
 		NetworkMessage msg = new NetworkMessage();
 		GameEvent event = null;
 		for (int i = 0; i < newClientList.size(); i++) {
-			for (GameObject object : world.getGameObjectsMap().values()) {
+			for (int j = 0; j < world.getGameObjectsList().size(); j++) {
+				GameObject object = world.getGameObjectsList().get(j);
 				event = new CreateEvent(object.getObjectID());
 				event.setCarriedObject(object);
 				msg.setEvent(event);
@@ -54,7 +55,7 @@ public class ClientService implements Runnable {
 			}
 			clientList.add(newClientList.get(i));
 		}
-		newClientList.clear();
+		newClientList.clear(); // consider all new clients became old (notified)
 	}
 
 	public List<ConnectedClient> getClientList() {

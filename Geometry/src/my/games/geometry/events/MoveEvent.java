@@ -13,8 +13,9 @@ public class MoveEvent extends GameEvent {
 	@Override
 	public void applyEventToWorld(World world) {
 		GameObject obj = world.getObjectByID(targetID);
-		if (obj != null) // FIXME projectile nit move, id on server != id on
-							// client
-			obj.getMover().move(obj);
+		if (obj != null) {
+			// System.out.println("Trying to move object: " + obj);
+			obj.move();
+		}
 	}
 }

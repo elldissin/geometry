@@ -17,7 +17,7 @@ public class ProjectileMoverTest {
 
 		// act
 		for (int i = 0; i < 58; i++) {
-			bulletTest.getMover().move(bulletTest);
+			bulletTest.move();
 		}
 		// assert
 		System.out.println(bulletTest.getPos().x);

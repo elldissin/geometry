@@ -92,7 +92,7 @@ public class Server {
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						logDisplay.getmTextList().get(0).setText(Integer.toString(world.getGameObjectsMap().size()));
+						logDisplay.getmTextList().get(0).setText(Integer.toString(world.getGameObjectsList().size()));
 						logDisplay.getmTextList().get(1)
 								.setText(Integer.toString(world.getDrawableObjectList().size()));
 						logDisplay.getmTextList().get(2)

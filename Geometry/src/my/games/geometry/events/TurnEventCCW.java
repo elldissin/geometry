@@ -17,6 +17,6 @@ public class TurnEventCCW extends GameEvent {
 	@Override
 	public void applyEventToWorld(World world) {
 		GameObject obj = world.getObjectByID(targetID);
-		obj.getMover().turn(obj, -1);
+		obj.turn(-1);
 	}
 }

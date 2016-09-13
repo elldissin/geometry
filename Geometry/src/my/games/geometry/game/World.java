@@ -1,9 +1,7 @@
 package my.games.geometry.game;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import my.games.geometry.behaviour.BumpEffect;
 import my.games.geometry.events.EventObserver;
@@ -14,7 +12,7 @@ import my.games.geometry.game.objects.StaticObject;
 
 public class World {
 	private EffectManager effectManager;
-	private Map<Integer, GameObject> gameObjectsMap;
+	private List<GameObject> gameObjectList;
 	private List<GameObject> drawableObjectList;
 	private List<GameObject> updatableObjectList;
 	private List<GameObject> collidableObjectList;
@@ -25,7 +23,7 @@ public class World {
 	// private Controller controller;
 
 	public World() {
-		gameObjectsMap = new HashMap<Integer, GameObject>();
+		gameObjectList = new ArrayList<GameObject>();
 		drawableObjectList = new ArrayList<GameObject>();
 		updatableObjectList = new ArrayList<GameObject>();
 		collidableObjectList = new ArrayList<GameObject>();
@@ -39,31 +37,29 @@ public class World {
 		// this.controller = controller;
 	}
 
-	public Map<Integer, GameObject> getGameObjectsMap() {
-		return gameObjectsMap;
+	public List<GameObject> getGameObjectsList() {
+		return gameObjectList;
 	}
 
 	public GameObject createGameObject(String objType, int x, int y, double angle) {
-		int id = gameObjectsMap.size(); // LATER size()used to get unique ID
+		int id = gameObjectList.size(); // LATER size()used to get unique ID
 		GameObject obj = null;
 		switch (objType) {
 		case "player":
 			obj = new Player(x, y, angle);
-			obj.setObjectID(id);
 			shootersList.add(obj);
 			break;
 		case "projectile":
 			obj = new Projectile(x, y, angle);
-			obj.setObjectID(id);
 			break;
 		case "static":
 			obj = new StaticObject(x, y, angle);
-			obj.setObjectID(id);
 			break;
 		// LATER add bfgprojectile type?
 		}
 		if (obj != null) {
-			gameObjectsMap.put(id, obj);
+			obj.setObjectID(id);
+			gameObjectList.add(obj);
 			drawableObjectList.add(obj);
 			collidableObjectList.add(obj);
 			updatableObjectList.add(obj);
@@ -76,13 +72,11 @@ public class World {
 
 	public GameObject createGameObject(GameObject newObject) {
 		if (newObject != null) {
-			int id = newObject.getObjectID();
-			gameObjectsMap.put(id, newObject);
+			gameObjectList.add(newObject);
 			drawableObjectList.add(newObject);
 			collidableObjectList.add(newObject);
 			updatableObjectList.add(newObject);
 			registerObserversForObject(newObject);
-
 			logDisplayNotifier.worldHasChanged();
 		}
 		return newObject;
@@ -111,7 +105,7 @@ public class World {
 	}
 
 	public GameObject getObjectByID(int id) {
-		return gameObjectsMap.get(id);
+		return gameObjectList.get(id);
 	}
 
 	public List<GameObject> getDrawableObjectList() {
@@ -168,7 +162,7 @@ public class World {
 
 	public void destroyGameObject(GameObject obj) {
 		if (obj != null) {
-			gameObjectsMap.remove(obj.getObjectID(), obj);
+			gameObjectList.remove(obj);
 			drawableObjectList.remove(obj);
 			collidableObjectList.remove(obj);
 			updatableObjectList.remove(obj);

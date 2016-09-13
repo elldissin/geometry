@@ -15,7 +15,7 @@ public class DefaultMoverTest {
 		World worldTest = new World();
 		GameObject playerTest = worldTest.createGameObject("player", 0, 0, 0.0);
 		// act
-		playerTest.getMover().move(playerTest);
+		playerTest.move();
 		// assert
 		assertEquals(playerTest.getPos().x, 5);
 		assertEquals(playerTest.getPos().y, 0);
@@ -27,7 +27,7 @@ public class DefaultMoverTest {
 		World worldTest = new World();
 		GameObject playerTest = worldTest.createGameObject("player", 0, 0, Math.toRadians(90));
 		// act
-		playerTest.getMover().move(playerTest);
+		playerTest.move();
 		// assert
 		assertEquals(playerTest.getPos().x, 0);
 		assertEquals(playerTest.getPos().y, 5);

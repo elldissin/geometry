@@ -19,7 +19,7 @@ public class ClientRendererTest {
 				(int) worldTest.getObjectByID(1).getPos().y - cameraTest.getViewHeight() / 2);
 		cameraTest.setViewOffset(p);
 		// assert
-		assertEquals(cameraTest.getViewOffset().x, -200);
+		assertEquals(cameraTest.getViewOffset().x, -400);
 		assertEquals(cameraTest.getViewOffset().y, -300);
 	}
 

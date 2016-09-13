@@ -1,5 +1,7 @@
 package my.games.geometry.game.engine;
 
+import javax.swing.SwingUtilities;
+
 import my.games.geometry.game.GameCamera;
 import my.games.geometry.game.World;
 import my.games.geometry.game.objects.MenuObject;
@@ -23,8 +25,14 @@ public class ClientRenderEngine implements RenderEngine {
 		// Point p = new Point((int) world.getObjectByID(1).getPos().x - camera1.getViewWidth() / 2,
 		// (int) world.getObjectByID(1).getPos().y - camera1.getViewHeight() / 2);
 		// camera1.setViewOffset(p);
-		camera1.show(world.getDrawableObjectList());
-		camera3.show(world.getDrawableObjectList());
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				camera1.show(world.getDrawableObjectList());
+				camera3.show(world.getDrawableObjectList());
+			}
+		});
+
 		// }
 	}
 

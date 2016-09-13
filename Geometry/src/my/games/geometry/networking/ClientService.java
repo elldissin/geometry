@@ -1,5 +1,7 @@
 package my.games.geometry.networking;
 
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,21 +17,33 @@ public class ClientService implements Runnable {
 	private List<ConnectedClient> clientList;
 	private List<ConnectedClient> newClientList;
 	private boolean isRunning = false;
+	private ServerSocket serverSocket = null;
+	private Socket clientSocket = null;
+	private int portNumber = 4444;
 
 	public ClientService() {
 		clientList = Collections.synchronizedList(new ArrayList<ConnectedClient>());
 		newClientList = Collections.synchronizedList(new ArrayList<ConnectedClient>());
+		try {
+			serverSocket = new ServerSocket(portNumber);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void run() {
-		Socket newConnect;
-		ConnectionWaiter waiter = new ConnectionWaiter();
 		while (true) {
-			if ((newConnect = waiter.acceptConnection()) != null) {
-				ConnectedClient client = new ConnectedClient(newConnect);
-				newClientList.add(client);
+			System.out.println("Waiting for new connection...");
+			try {
+				clientSocket = serverSocket.accept();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+			newClientList.add(new ConnectedClient(clientSocket));
+			System.out.println("New connection accepted from " + clientSocket.getInetAddress());
 			try {
 				Thread.sleep(5); // To reduce CPU load
 			} catch (InterruptedException e) {

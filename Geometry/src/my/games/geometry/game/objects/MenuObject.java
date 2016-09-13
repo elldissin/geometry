@@ -48,7 +48,7 @@ public class MenuObject extends GameCamera {
 		// drawing rectangle for split screen
 		g.drawRect(0, 0, Width, Height);
 		if (drawableObjects != null) {
-			// FIXME enable when ID system is complete
+			// LATER enable when ID system is complete
 			// g.drawString("Player HP:" + Integer.toString(drawableObjects.get(1).getHealth()), 0,
 			// 20);
 			// g.drawString("Player weapon:" + drawableObjects.get(1).getWeapon(), 100, 20);

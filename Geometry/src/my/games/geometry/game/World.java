@@ -57,7 +57,7 @@ public class World {
 		}
 		if (obj != null) {
 			obj.setObjectID(id);
-			System.out.println("add obj on server: " + obj.getObjectID());
+			System.out.println("add obj: " + obj.getObjectID());
 			gameObjectList.add(obj);
 			drawableObjectList.add(obj);
 			collidableObjectList.add(obj);
@@ -75,13 +75,14 @@ public class World {
 
 	public GameObject createGameObject(GameObject newObject) {
 		if (newObject != null) {
-			System.out.println("add obj on client: " + newObject.getObjectID());
+			System.out.println("add obj: " + newObject.getObjectID());
 			gameObjectList.add(newObject);
 			drawableObjectList.add(newObject);
 			collidableObjectList.add(newObject);
 			updatableObjectList.add(newObject);
 			registerObserversForObject(newObject);
 			logDisplayNotifier.worldHasChanged();
+
 		}
 		return newObject;
 	}
@@ -94,13 +95,14 @@ public class World {
 		return collidableObjectList;
 	}
 
-	/**
-	 * Need this special method, do not add through createGameObject() otherwise the projectile
-	 * created will not be one generated in shoot() method
-	 */
-	public void addProjectile(GameObject obj) { // FIXME add through
-												// createGameObject
-		createGameObject("projectile", obj.getPos().x, obj.getPos().y, obj.getAngle());
+	// need first to assign ID, because projectiles do not have it initially
+	public void addProjectile(GameObject obj) {
+		obj.setObjectID(gameObjectList.size());
+		createGameObject(obj);
+
+		GameEvent event = new CreateEvent(obj.getObjectID());
+		event.setCarriedObject(obj);
+		obj.notifyObserversAbout(event);
 	}
 
 	public GameObject getObjectByID(int id) {
@@ -129,14 +131,6 @@ public class World {
 
 		checkForCollisions();
 	}
-
-	// public void removeFromWorld(GameObject obj) { // FIXME destroyGameObject is doing same?
-	// updatableObjectList.remove(obj);
-	// drawableObjectList.remove(obj);
-	// collidableObjectList.remove(obj);
-	// shootersList.remove(obj);
-	// // FIXME controller.stopControlOf(obj);
-	// }
 
 	public void checkForCollisions() {
 		for (int i = 0; i < collidableObjectList.size(); i++)

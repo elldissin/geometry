@@ -16,20 +16,6 @@ public class BFGProjectileMover extends ProjectileMover {
 	}
 
 	@Override
-	public void move(GameObject obj) {
-		if (speed > 0) {
-			distTravelled += Math.sqrt(Math.pow(getSpeedX(obj), 2) + Math.pow(getSpeedY(obj), 2));
-			obj.getPos().x += getSpeedX(obj);
-			obj.getPos().y += getSpeedY(obj);
-			obj.body().clear(); // no method to get points directly, body()
-								// method shall be fixed
-			obj.body();
-		}
-		if (distTravelled > obj.getLiveDistance())
-			obj.setObsolete(true);
-	}
-
-	@Override
 	public void turn(GameObject obj, int dir) {
 		// TODO Auto-generated method stub
 

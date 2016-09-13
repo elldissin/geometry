@@ -17,7 +17,7 @@ public class ClientRenderEngine implements RenderEngine {
 
 	@Override
 	public void render() {
-		// FIXME enable when ID system is complete
+		// LATER enable when ID system is complete
 		// ties camera 1 to player 1
 		// if ((world.getObjectByID(1)) != null) {
 		// Point p = new Point((int) world.getObjectByID(1).getPos().x - camera1.getViewWidth() / 2,

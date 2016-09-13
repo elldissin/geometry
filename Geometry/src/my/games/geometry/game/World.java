@@ -97,8 +97,8 @@ public class World {
 	}
 
 	/**
-	 * Need this special method, do not add through createGameObject() otherwise
-	 * the projectile created will not be one generated in shoot() method
+	 * Need this special method, do not add through createGameObject() otherwise the projectile
+	 * created will not be one generated in shoot() method
 	 */
 	public void addProjectile(Projectile obj) { // FIXME add through
 												// createGameObject
@@ -130,19 +130,19 @@ public class World {
 		for (int i = 0; i < updatableObjectList.size(); i++) {
 			updatableObjectList.get(i).update(); // first update, then remove
 			if (updatableObjectList.get(i).isDestroyed())
-				removeFromWorld(updatableObjectList.get(i));
+				destroyGameObject(updatableObjectList.get(i));
 		}
 
 		checkForCollisions();
 	}
 
-	public void removeFromWorld(GameObject obj) { // FIXME destroyGameObject is doing same?
-		updatableObjectList.remove(obj);
-		drawableObjectList.remove(obj);
-		collidableObjectList.remove(obj);
-		shootersList.remove(obj);
-		// FIXME controller.stopControlOf(obj);
-	}
+	// public void removeFromWorld(GameObject obj) { // FIXME destroyGameObject is doing same?
+	// updatableObjectList.remove(obj);
+	// drawableObjectList.remove(obj);
+	// collidableObjectList.remove(obj);
+	// shootersList.remove(obj);
+	// // FIXME controller.stopControlOf(obj);
+	// }
 
 	public void checkForCollisions() {
 		for (int i = 0; i < collidableObjectList.size(); i++)
@@ -176,6 +176,7 @@ public class World {
 
 			logDisplayNotifier.worldHasChanged();
 		}
+		// FIXME controller.stopControlOf(obj);
 	}
 
 	private void registerObserversForObject(GameObject obj) {

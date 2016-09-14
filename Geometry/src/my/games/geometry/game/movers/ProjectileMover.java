@@ -2,8 +2,6 @@ package my.games.geometry.game.movers;
 
 import java.io.Serializable;
 
-import my.games.geometry.events.DestroyEvent;
-import my.games.geometry.events.GameEvent;
 import my.games.geometry.events.MoveEvent;
 import my.games.geometry.game.objects.GameObject;
 
@@ -31,11 +29,6 @@ public class ProjectileMover implements Mover, Serializable {
 			obj.notifyObserversAbout(new MoveEvent(obj.getObjectID()));
 		}
 		if (distTravelled > obj.getLiveDistance()) {
-
-			// Notify observers
-			GameEvent event = new DestroyEvent(obj.getObjectID());
-			event.setCarriedObject(obj);
-			obj.notifyObserversAbout(event);
 			obj.setObsolete(true);
 		}
 	}

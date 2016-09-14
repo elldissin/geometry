@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import my.games.geometry.events.CreateEvent;
+import my.games.geometry.events.DestroyEvent;
 import my.games.geometry.events.EventObserver;
 import my.games.geometry.events.GameEvent;
 import my.games.geometry.game.objects.GameObject;
@@ -125,8 +126,13 @@ public class World {
 
 		for (int i = 0; i < updatableObjectList.size(); i++) {
 			updatableObjectList.get(i).update(); // first update, then remove
-			if (updatableObjectList.get(i).isDestroyed())
+			if (updatableObjectList.get(i).isDestroyed()) {
+				// Notify observers
+				GameEvent event = new DestroyEvent(updatableObjectList.get(i).getObjectID());
+				event.setCarriedObject(updatableObjectList.get(i));
+				updatableObjectList.get(i).notifyObserversAbout(event);
 				destroyGameObject(updatableObjectList.get(i));
+			}
 		}
 
 		checkForCollisions();

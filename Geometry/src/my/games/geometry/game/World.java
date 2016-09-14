@@ -107,7 +107,13 @@ public class World {
 	}
 
 	public GameObject getObjectByID(int id) {
-		return gameObjectList.get(id);
+		for (int i = 0; i < gameObjectList.size(); i++) {
+			GameObject candidateObject = gameObjectList.get(i);
+			if (candidateObject.getObjectID() == id) {
+				return candidateObject;
+			}
+		}
+		return null;
 	}
 
 	public List<GameObject> getDrawableObjectList() {
@@ -162,13 +168,18 @@ public class World {
 
 	public void destroyGameObject(GameObject obj) {
 		if (obj != null) {
-			gameObjectList.remove(obj);
-			drawableObjectList.remove(obj);
-			collidableObjectList.remove(obj);
-			updatableObjectList.remove(obj);
-			unRegisterObserversForObject(obj);
-
-			logDisplayNotifier.worldHasChanged();
+			for (int i = 0; i < gameObjectList.size(); i++) {
+				GameObject localRemovedObject = gameObjectList.get(i);
+				if (localRemovedObject.getObjectID() == obj.getObjectID()) {
+					gameObjectList.remove(localRemovedObject);
+					drawableObjectList.remove(localRemovedObject);
+					collidableObjectList.remove(localRemovedObject);
+					updatableObjectList.remove(localRemovedObject);
+					unRegisterObserversForObject(localRemovedObject);
+					System.out.println("removing obj:" + localRemovedObject.getObjectID());
+					logDisplayNotifier.worldHasChanged();
+				}
+			}
 		}
 		// FIXME controller.stopControlOf(obj);
 	}

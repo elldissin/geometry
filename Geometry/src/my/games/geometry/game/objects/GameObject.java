@@ -148,6 +148,10 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	public void draw(Graphics g) {
 		drawBoundingRect(g);
+		Point p = (Point) (getPos().clone());
+		p.y -= getObjHeight() / 2 + 10;
+		p.x -= getObjWidth() / 2 + 20;
+		g.drawString("ID: " + getObjectID(), p.x, p.y);
 		if (renderer != null)
 			renderer.draw(g, this);
 	}

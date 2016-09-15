@@ -1,7 +1,7 @@
 package my.games.geometry.game.objects;
 
 import java.awt.Point;
-import java.util.ArrayList;
+import java.util.List;
 
 import my.games.geometry.game.movers.NoMover;
 import my.games.geometry.game.renderers.DefaultRenderer;
@@ -21,7 +21,7 @@ public class StaticObject extends GameObject {
 	}
 
 	@Override
-	public ArrayList<Point> body() {
+	public List<Point> body() {
 		if (points.isEmpty()) {
 			for (int i = 0; i < level + 2; i++) {
 				int x1 = (int) (currentPos.x + (objWidth * Math.cos(2 * Math.PI / (level + 2) * i + angle)));

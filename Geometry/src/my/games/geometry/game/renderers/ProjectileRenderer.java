@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.GeneralPath;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 import my.games.geometry.game.objects.GameObject;
 
@@ -21,7 +21,7 @@ public class ProjectileRenderer implements Renderer, Serializable {
 		// super.draw(g); //invoked to draw the bounding rect first
 		Graphics2D g2 = (Graphics2D) g;
 		GeneralPath path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
-		ArrayList<Point> points = obj.body();
+		List<Point> points = obj.body();
 		if (!points.isEmpty()) {
 			path.moveTo(points.get(0).getX(), points.get(0).getY());
 			for (int i = 1; i < points.size(); i++) {

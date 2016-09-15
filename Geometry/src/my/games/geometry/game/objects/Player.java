@@ -1,7 +1,7 @@
 package my.games.geometry.game.objects;
 
 import java.awt.Point;
-import java.util.ArrayList;
+import java.util.List;
 
 import my.games.geometry.game.movers.DefaultMover;
 import my.games.geometry.game.renderers.DefaultRenderer;
@@ -25,7 +25,7 @@ public class Player extends GameObject implements Controllable {
 		// anim=new Animator((int)posX, (int)posY);
 	}
 
-	public ArrayList<Point> body() {
+	public List<Point> body() {
 		// points.clear();
 		if (points.isEmpty()) {
 			for (int i = 0; i < level + 2; i++) {

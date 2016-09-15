@@ -1,7 +1,7 @@
 package my.games.geometry.game.objects;
 
 import java.awt.Point;
-import java.util.ArrayList;
+import java.util.List;
 
 import my.games.geometry.game.movers.ProjectileMover;
 import my.games.geometry.game.renderers.ProjectileRenderer;
@@ -19,7 +19,7 @@ public class Projectile extends GameObject {
 	}
 
 	@Override
-	public ArrayList<Point> body() {
+	public List<Point> body() {
 		if (points.isEmpty()) {
 			Point p = new Point(currentPos.x + objWidth / 2, currentPos.y + objHeight / 2);
 			points.add(0, p);

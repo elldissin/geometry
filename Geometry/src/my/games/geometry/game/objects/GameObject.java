@@ -37,9 +37,9 @@ public abstract class GameObject implements Updatable, Serializable {
 	protected Renderer renderer;
 	private List<EventObserver> eventObserverList;
 
-	protected ArrayList<Point> points;
-	protected ArrayList<GameObject> ignoredObjects;
-	protected ArrayList<Effect> onHitEffects;
+	protected List<Point> points;
+	protected List<GameObject> ignoredObjects;
+	protected List<Effect> onHitEffects;
 
 	public GameObject(int x, int y, double angle) {
 		super();
@@ -115,7 +115,7 @@ public abstract class GameObject implements Updatable, Serializable {
 		this.objHeight = objHeight;
 	}
 
-	public ArrayList<Effect> getOnHitEffects() {
+	public List<Effect> getOnHitEffects() {
 		return onHitEffects;
 	}
 
@@ -162,7 +162,7 @@ public abstract class GameObject implements Updatable, Serializable {
 		g.setColor(Color.black);
 	}
 
-	public abstract ArrayList<Point> body();
+	public abstract List<Point> body();
 
 	public void addIgnoreObject(GameObject o) {
 		if (o != null)

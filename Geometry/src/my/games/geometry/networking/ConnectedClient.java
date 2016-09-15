@@ -11,7 +11,7 @@ public class ConnectedClient {
 	private ClientConnection connection;
 
 	public ConnectedClient(Socket socket) {
-		clientID = UniqueIdProvider.getID();
+		clientID = UniqueIdProvider.getClientID();
 		try {
 			connection = new ClientConnection(socket);
 		} catch (IOException e) {

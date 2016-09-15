@@ -3,6 +3,7 @@ package my.games.geometry.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import my.games.geometry.UniqueIdProvider;
 import my.games.geometry.events.CreateEvent;
 import my.games.geometry.events.DestroyEvent;
 import my.games.geometry.events.EventObserver;
@@ -41,7 +42,7 @@ public class World {
 	}
 
 	public GameObject createGameObject(String objType, int x, int y, double angle) {
-		int id = gameObjectList.size(); // LATER size()used to get unique ID
+		int id = UniqueIdProvider.getObjectID();
 		GameObject obj = null;
 		switch (objType) {
 		case "player":

@@ -21,6 +21,7 @@ public class UniqueIdProvider {
 		while (existingSet.contains(candidateID)) {
 			candidateID++;
 		}
+		existingSet.add(candidateID);
 		return candidateID;
 	}
 }

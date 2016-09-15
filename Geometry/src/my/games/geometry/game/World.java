@@ -43,6 +43,7 @@ public class World {
 
 	public GameObject createGameObject(String objType, int x, int y, double angle) {
 		int id = UniqueIdProvider.getObjectID();
+		System.out.println("next free id is:" + id);
 		GameObject obj = null;
 		switch (objType) {
 		case "player":

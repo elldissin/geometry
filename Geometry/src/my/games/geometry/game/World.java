@@ -99,7 +99,7 @@ public class World {
 
 	// need first to assign ID, because projectiles do not have it initially
 	public void addProjectile(GameObject obj) {
-		obj.setObjectID(gameObjectList.size());
+		obj.setObjectID(UniqueIdProvider.getObjectID());
 		createGameObject(obj);
 
 		GameEvent event = new CreateEvent(obj.getObjectID());

@@ -17,7 +17,8 @@ public class TurnEventCW extends GameEvent {
 	@Override
 	public void applyEventToWorld(World world) {
 		GameObject obj = world.getObjectByID(targetID);
-		obj.turn(1);
+		if (obj != null)
+			obj.turn(1);
 	}
 
 }

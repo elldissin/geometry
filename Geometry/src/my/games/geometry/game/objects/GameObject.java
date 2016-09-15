@@ -5,8 +5,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import my.games.geometry.behaviour.Behaviour;
 import my.games.geometry.behaviour.Effect;
@@ -43,7 +43,7 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	public GameObject(int x, int y, double angle) {
 		super();
-		eventObserverList = new ArrayList<EventObserver>();
+		eventObserverList = new CopyOnWriteArrayList<EventObserver>();
 		objWidth = 20;
 		objHeight = 20;
 		this.angle = angle;
@@ -52,9 +52,9 @@ public abstract class GameObject implements Updatable, Serializable {
 		obsolete = false;
 		setPos(new Point(x, y));
 		setPrevPos((Point) (getPos().clone()));
-		points = new ArrayList<Point>();
-		ignoredObjects = new ArrayList<GameObject>();
-		onHitEffects = new ArrayList<Effect>();
+		points = new CopyOnWriteArrayList<Point>();
+		ignoredObjects = new CopyOnWriteArrayList<GameObject>();
+		onHitEffects = new CopyOnWriteArrayList<Effect>();
 
 		behaviour = null;
 	}

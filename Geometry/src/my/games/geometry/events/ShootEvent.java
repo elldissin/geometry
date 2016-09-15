@@ -17,7 +17,8 @@ public class ShootEvent extends GameEvent {
 	@Override
 	public void applyEventToWorld(World world) {
 		GameObject obj = world.getObjectByID(targetID);
-		obj.getWeapon().shoot(obj);
+		if (obj != null)
+			obj.getWeapon().shoot(obj);
 	}
 
 }

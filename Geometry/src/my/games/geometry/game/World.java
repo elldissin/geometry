@@ -60,7 +60,6 @@ public class World {
 		}
 		if (obj != null) {
 			obj.setObjectID(id);
-			System.out.println("add obj: " + obj.getObjectID());
 			gameObjectList.add(obj);
 			drawableObjectList.add(obj);
 			collidableObjectList.add(obj);
@@ -78,7 +77,6 @@ public class World {
 
 	public GameObject createGameObject(GameObject newObject) {
 		if (newObject != null) {
-			System.out.println("add obj: " + newObject.getObjectID());
 			gameObjectList.add(newObject);
 			drawableObjectList.add(newObject);
 			collidableObjectList.add(newObject);
@@ -88,6 +86,23 @@ public class World {
 
 		}
 		return newObject;
+	}
+
+	public void destroyGameObject(GameObject obj) {
+		if (obj != null) {
+			for (int i = 0; i < gameObjectList.size(); i++) {
+				GameObject localRemovedObject = gameObjectList.get(i);
+				if (localRemovedObject.getObjectID() == obj.getObjectID()) {
+					gameObjectList.remove(localRemovedObject);
+					drawableObjectList.remove(localRemovedObject);
+					collidableObjectList.remove(localRemovedObject);
+					updatableObjectList.remove(localRemovedObject);
+					unRegisterObserversForObject(localRemovedObject);
+					logDisplayNotifier.worldHasChanged();
+				}
+			}
+		}
+		// FIXME controller.stopControlOf(obj);
 	}
 
 	public List<GameObject> getUpdatableObjectList() {
@@ -166,24 +181,6 @@ public class World {
 	// LATER removeEventObserver required?
 	public void registerWorldObserver(EventObserver observer) {
 		eventObserverList.add(observer);
-	}
-
-	public void destroyGameObject(GameObject obj) {
-		if (obj != null) {
-			for (int i = 0; i < gameObjectList.size(); i++) {
-				GameObject localRemovedObject = gameObjectList.get(i);
-				if (localRemovedObject.getObjectID() == obj.getObjectID()) {
-					gameObjectList.remove(localRemovedObject);
-					drawableObjectList.remove(localRemovedObject);
-					collidableObjectList.remove(localRemovedObject);
-					updatableObjectList.remove(localRemovedObject);
-					unRegisterObserversForObject(localRemovedObject);
-					System.out.println("removing obj:" + localRemovedObject.getObjectID());
-					logDisplayNotifier.worldHasChanged();
-				}
-			}
-		}
-		// FIXME controller.stopControlOf(obj);
 	}
 
 	private void registerObserversForObject(GameObject obj) {

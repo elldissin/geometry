@@ -47,14 +47,12 @@ public class MenuObject extends GameCamera {
 		super.paintComponent(g);
 		// drawing rectangle for split screen
 		g.drawRect(0, 0, Width, Height);
-		if (drawableObjects != null) {
-			// LATER enable when ID system is complete
-			// g.drawString("Player HP:" + Integer.toString(drawableObjects.get(1).getHealth()), 0,
-			// 20);
-			// g.drawString("Player weapon:" + drawableObjects.get(1).getWeapon(), 100, 20);
-			// g.drawString("Player level:" + drawableObjects.get(1).getLevel(), 230, 20);
-			// g.drawString("Exp:" + drawableObjects.get(1).getCurrentExperience() + "/"
-			// + drawableObjects.get(1).getExperienceForUp(), 0, 40);
+		if (drawableObjects != null) { // LATER magic number 0?
+			g.drawString("Player HP:" + Integer.toString(drawableObjects.get(0).getHealth()), 0, 20);
+			g.drawString("Player weapon:" + drawableObjects.get(0).getWeapon(), 100, 20);
+			g.drawString("Player level:" + drawableObjects.get(0).getLevel(), 230, 20);
+			g.drawString("Exp:" + drawableObjects.get(0).getCurrentExperience() + "/"
+					+ drawableObjects.get(0).getExperienceForUp(), 0, 40);
 		}
 	}
 

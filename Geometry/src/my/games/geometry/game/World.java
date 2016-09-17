@@ -56,7 +56,6 @@ public class World {
 		case "static":
 			obj = new StaticObject(x, y, angle);
 			break;
-		// LATER add bfgprojectile type?
 		}
 		if (obj != null) {
 			obj.setObjectID(id);
@@ -139,7 +138,7 @@ public class World {
 
 	public void update() {
 		// Handle shooters and their projectiles, add their projectiles to world
-		for (int i = 0; i < shootersList.size(); i++) { // FIXME where projectile gets ID?
+		for (int i = 0; i < shootersList.size(); i++) {
 			for (int j = 0; j < shootersList.get(i).getWeapon().getProjectileList().size(); j++) {
 				GameObject projectile = shootersList.get(i).getWeapon().getProjectileList().get(j);
 				addProjectile(projectile);

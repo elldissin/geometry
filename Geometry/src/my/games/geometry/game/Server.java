@@ -72,7 +72,7 @@ public class Server {
 	}
 
 	public void start() {
-		runner.start(); // LATER - enable this when ready
+		runner.start();
 		clientService.start();
 		while (true) {
 			clientService.sendWorldStateToNewClients(world);

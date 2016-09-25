@@ -26,7 +26,7 @@ public class ProjectileMover implements Mover, Serializable {
 			obj.body().clear(); // no method to get points directly, body()
 								// method shall be fixed
 			obj.body();
-			obj.notifyObserversAbout(new MoveEvent(obj.getObjectID()));
+			obj.notifyObserversAbout(new MoveEvent(obj));
 		}
 		if (distTravelled > obj.getLiveDistance()) {
 			obj.setObsolete(true);

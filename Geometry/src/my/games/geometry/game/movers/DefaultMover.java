@@ -33,7 +33,7 @@ public class DefaultMover implements Mover, Serializable {
 							// shall be fixed
 		obj.body();
 		// }
-		obj.notifyObserversAbout(new MoveEvent(obj.getObjectID()));
+		obj.notifyObserversAbout(new MoveEvent(obj));
 		// FIXME add notifications to all other movers?
 	}
 
@@ -79,9 +79,9 @@ public class DefaultMover implements Mover, Serializable {
 		obj.body();
 		// }
 		if (dir == 1)
-			obj.notifyObserversAbout(new TurnEventCW(obj.getObjectID()));
+			obj.notifyObserversAbout(new TurnEventCW(obj));
 		if (dir == -1)
-			obj.notifyObserversAbout(new TurnEventCCW(obj.getObjectID()));
+			obj.notifyObserversAbout(new TurnEventCCW(obj));
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import my.games.geometry.game.objects.GameObject;
 public class MoveEvent extends GameEvent {
 	private static final long serialVersionUID = 1L;
 
-	public MoveEvent(GameObject sourceObject, long timeStamp) {
+	public MoveEvent(GameObject sourceObject) {
 		super(sourceObject);
 	}
 

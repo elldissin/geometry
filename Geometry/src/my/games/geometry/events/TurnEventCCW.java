@@ -10,7 +10,7 @@ public class TurnEventCCW extends GameEvent {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public TurnEventCCW(GameObject sourceObject, long timeStamp) {
+	public TurnEventCCW(GameObject sourceObject) {
 		super(sourceObject);
 	}
 

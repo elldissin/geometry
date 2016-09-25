@@ -5,7 +5,7 @@ import my.games.geometry.game.objects.GameObject;
 
 public class DestroyEvent extends GameEvent {
 
-	public DestroyEvent(GameObject sourceObject, long timeStamp) {
+	public DestroyEvent(GameObject sourceObject) {
 		super(sourceObject);
 	}
 

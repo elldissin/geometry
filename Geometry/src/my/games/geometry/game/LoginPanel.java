@@ -1,7 +1,7 @@
 package my.games.geometry.game;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 public class LoginPanel extends JPanel {
@@ -29,23 +30,37 @@ public class LoginPanel extends JPanel {
 		mTextList = new ArrayList<JTextPane>();
 		logButtClicked = false;
 
-		this.setLayout(new BorderLayout());
-		for (int i = 0; i < 2; i++) {
-			JTextPane anotherTextField = new JTextPane();
-			// anotherTextField.setBounds(0, (i * 50) + 25, 200, 20);
-			anotherTextField.setText("0");
-			anotherTextField.setPreferredSize(new Dimension(200, 20));
-			mTextList.add(i, anotherTextField);
-			this.add(anotherTextField, BorderLayout.PAGE_START);
+		this.setLayout(new GridLayout(2, 2, 0, 5));
 
-			JLabel anotherLabel = new JLabel();
-			// anotherLabel.setBounds(0, (i * 50), 200, 20);
-			mLabelList.add(i, anotherLabel);
-			this.add(anotherLabel, BorderLayout.PAGE_END);
-		}
+		// for (int i = 0; i < 2; i++) {
+		// JTextPane anotherTextField = new JTextPane();
+		// // anotherTextField.setBounds(0, (i * 50) + 25, 200, 20);
+		// anotherTextField.setText("0");
+		// anotherTextField.setPreferredSize(new Dimension(200, 20));
+		// mTextList.add(i, anotherTextField);
+		// this.add(anotherTextField, BorderLayout.PAGE_START);
+		//
+		// anotherLabel.setBounds(0, (i * 50), 200, 20);
+		// mLabelList.add(i, anotherLabel);
+		JLabel anotherLabel = new JLabel();
+		anotherLabel.setText("login");
+		anotherLabel.setPreferredSize(new Dimension(70, 30));
+		this.add(anotherLabel);
+		JTextField loginField = new JTextField();
+		loginField.setPreferredSize(new Dimension(70, 30));
+		this.add(loginField);
 
-		mLabelList.get(0).setText("Login:");
-		mLabelList.get(1).setText("Password");
+		JLabel anotherLabel1 = new JLabel();
+		anotherLabel1.setText("Password");
+		anotherLabel1.setPreferredSize(new Dimension(70, 30));
+		this.add(anotherLabel1);
+		JTextField passwordField = new JTextField();
+		passwordField.setPreferredSize(new Dimension(70, 30));
+		this.add(passwordField);
+		// }
+		//
+		// mLabelList.get(0).setText("Login:");
+		// mLabelList.get(1).setText("Password");
 
 		// LoginButtonListener loginButtonListener = new
 		// LoginButtonListener(client, clientwindow);
@@ -54,10 +69,10 @@ public class LoginPanel extends JPanel {
 		// loginButt.addActionListener(loginButtonListener);
 		// this.add(loginButt);
 
-		viewWidth = 800;
-		viewHeight = 600;
-		setPreferredSize(new Dimension(viewWidth, viewHeight));
-		this.setLayout(null);
+		// viewWidth = 800;
+		// viewHeight = 600;
+		// setPreferredSize(new Dimension(viewWidth, viewHeight));
+		// this.setLayout(null);
 
 	}
 

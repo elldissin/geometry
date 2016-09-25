@@ -23,9 +23,9 @@ public class ClientWindow extends JFrame implements Runnable {
 		if (client != null) {
 			// JFrame frame = new JFrame("Geometry game");
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			this.setSize(800, 700);
-			this.setResizable(false);
-			this.getContentPane().setLayout(new BorderLayout());
+			this.setPreferredSize(new Dimension(800, 700));
+			this.setResizable(true);
+			this.setLayout(new BorderLayout());
 			// this.add(clientToDisplay.getRenderEngine().getCamera(1),
 			// BorderLayout.LINE_START);
 			// this.add(clientToDisplay.getRenderEngine().getCamera(2),
@@ -33,13 +33,13 @@ public class ClientWindow extends JFrame implements Runnable {
 			// this.add(clientToDisplay.getRenderEngine().getCamera(3),
 			// BorderLayout.PAGE_END);
 			LoginPanel loginpanel = new LoginPanel(client, this);
-			loginpanel.setPreferredSize(new Dimension(800, 700));
-			this.getContentPane().add(loginpanel, BorderLayout.PAGE_START);
-			this.getContentPane().add(loginpanel, BorderLayout.PAGE_END);
-			this.setVisible(true);
+			loginpanel.setPreferredSize(new Dimension(70, 65));
+			this.add(loginpanel, BorderLayout.PAGE_START);
 			this.setFocusable(true); // important call to allow listening to
 										// keys
 			this.addKeyListener(client.getController());
+			this.pack();
+			this.setVisible(true);
 		} else
 			System.out.println("Client to display was not set");
 	}

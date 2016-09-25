@@ -1,6 +1,7 @@
 package my.games.geometry.game;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
@@ -31,7 +32,10 @@ public class ClientWindow extends JFrame implements Runnable {
 			// BorderLayout.LINE_END);
 			// this.add(clientToDisplay.getRenderEngine().getCamera(3),
 			// BorderLayout.PAGE_END);
-			this.getContentPane().add(new LoginPanel(client, this), BorderLayout.LINE_START);
+			LoginPanel loginpanel = new LoginPanel(client, this);
+			loginpanel.setPreferredSize(new Dimension(800, 700));
+			this.getContentPane().add(loginpanel, BorderLayout.PAGE_START);
+			this.getContentPane().add(loginpanel, BorderLayout.PAGE_END);
 			this.setVisible(true);
 			this.setFocusable(true); // important call to allow listening to
 										// keys

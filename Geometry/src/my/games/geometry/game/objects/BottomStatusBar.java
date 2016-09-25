@@ -16,7 +16,7 @@ public class BottomStatusBar extends GameCamera {
 	public BottomStatusBar() {
 		super();
 		Width = 800;
-		Height = 50;
+		Height = 65;
 		setPreferredSize(new Dimension(Width, Height));
 	}
 
@@ -39,15 +39,13 @@ public class BottomStatusBar extends GameCamera {
 	public void show(List<GameObject> objects) {
 		drawableObjects = objects;
 		repaint();
-		System.out.println("btb paint");
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		// drawing rectangle for split screen
-		g.drawRect(0, 0, Width, Height);
-		System.out.println("btb paint");
+		g.drawRect(1, 1, Width - 1, Height - 10);
 		if (drawableObjects != null) { // LATER magic number 0?
 			g.drawString("Player HP:" + Integer.toString(drawableObjects.get(0).getHealth()), 0, 20);
 			g.drawString("Player weapon:" + drawableObjects.get(0).getWeapon(), 100, 20);

@@ -1,8 +1,10 @@
 package my.games.geometry.game;
 
-import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JPanel;
 
 public class LoginButtonListener implements ActionListener {
 	private ClientWindow clientWindow;
@@ -19,10 +21,14 @@ public class LoginButtonListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		JPanel bottomStatusBar = client.getRenderEngine().getCamera(3);
+		bottomStatusBar.setPreferredSize(new Dimension(800, 65));
 		clientWindow.getContentPane().removeAll();
-		clientWindow.getContentPane().add(client.getRenderEngine().getCamera(3), BorderLayout.PAGE_START);
-		clientWindow.getContentPane().add(client.getRenderEngine().getCamera(1), BorderLayout.PAGE_END);
+		clientWindow.add(bottomStatusBar);
+		clientWindow.add(client.getRenderEngine().getCamera(1));
 		clientWindow.repaint();
+		clientWindow.pack();
+		clientWindow.setVisible(true);
 	}
 
 }

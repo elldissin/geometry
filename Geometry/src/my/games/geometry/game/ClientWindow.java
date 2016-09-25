@@ -1,7 +1,7 @@
 package my.games.geometry.game;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 
@@ -25,7 +25,7 @@ public class ClientWindow extends JFrame implements Runnable {
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.setPreferredSize(new Dimension(800, 700));
 			this.setResizable(true);
-			this.setLayout(new BorderLayout());
+			this.setLayout(new GridLayout(2, 1));
 			// this.add(clientToDisplay.getRenderEngine().getCamera(1),
 			// BorderLayout.LINE_START);
 			// this.add(clientToDisplay.getRenderEngine().getCamera(2),
@@ -34,7 +34,7 @@ public class ClientWindow extends JFrame implements Runnable {
 			// BorderLayout.PAGE_END);
 			LoginPanel loginpanel = new LoginPanel(client, this);
 			loginpanel.setPreferredSize(new Dimension(70, 95));
-			this.add(loginpanel, BorderLayout.PAGE_START);
+			this.add(loginpanel);
 			this.setFocusable(true); // important call to allow listening to
 										// keys
 			this.addKeyListener(client.getController());

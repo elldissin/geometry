@@ -114,11 +114,13 @@ public class Server {
 
 	private void pollClientsForInput() {
 		PlayerInput input = null;
+		GameObject sourcePlayer = null;
 		// LATER check if correct loop logic
 		for (int i = 0; i < clientService.getClientList().size(); i++) {
 			input = clientService.getClientList().get(i).getInput();
-			if (input != null && InputConverter.toEvent(input) != null) {
-				eventSourceForLocalWorld.addEvent(InputConverter.toEvent(input));
+			sourcePlayer = world.getObjectByID(input.getPlayerID());
+			if (input != null) {
+				eventSourceForLocalWorld.addEvent(InputConverter.toEvent(input, sourcePlayer));
 			}
 		}
 	}

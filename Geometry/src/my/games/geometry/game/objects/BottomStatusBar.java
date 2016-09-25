@@ -15,10 +15,9 @@ public class BottomStatusBar extends GameCamera {
 
 	public BottomStatusBar() {
 		super();
-		Width = 1000;
+		Width = 800;
 		Height = 50;
 		setPreferredSize(new Dimension(Width, Height));
-		this.setLayout(null);
 	}
 
 	public int getWidth() {

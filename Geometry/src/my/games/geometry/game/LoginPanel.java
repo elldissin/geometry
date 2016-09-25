@@ -16,7 +16,6 @@ public class LoginPanel extends JPanel {
 	private List<JLabel> mLabelList;
 	private List<JTextPane> mTextList;
 	private volatile boolean logButtClicked;
-	JButton loginButt = new JButton();
 
 	private Client client;
 	private int viewWidth;
@@ -30,18 +29,8 @@ public class LoginPanel extends JPanel {
 		mTextList = new ArrayList<JTextPane>();
 		logButtClicked = false;
 
-		this.setLayout(new GridLayout(2, 2, 0, 5));
+		this.setLayout(new GridLayout(3, 2, 0, 5));
 
-		// for (int i = 0; i < 2; i++) {
-		// JTextPane anotherTextField = new JTextPane();
-		// // anotherTextField.setBounds(0, (i * 50) + 25, 200, 20);
-		// anotherTextField.setText("0");
-		// anotherTextField.setPreferredSize(new Dimension(200, 20));
-		// mTextList.add(i, anotherTextField);
-		// this.add(anotherTextField, BorderLayout.PAGE_START);
-		//
-		// anotherLabel.setBounds(0, (i * 50), 200, 20);
-		// mLabelList.add(i, anotherLabel);
 		JLabel anotherLabel = new JLabel();
 		anotherLabel.setText("login");
 		anotherLabel.setPreferredSize(new Dimension(70, 30));
@@ -57,22 +46,13 @@ public class LoginPanel extends JPanel {
 		JTextField passwordField = new JTextField();
 		passwordField.setPreferredSize(new Dimension(70, 30));
 		this.add(passwordField);
-		// }
-		//
-		// mLabelList.get(0).setText("Login:");
-		// mLabelList.get(1).setText("Password");
 
-		// LoginButtonListener loginButtonListener = new
-		// LoginButtonListener(client, clientwindow);
-		// loginButt.setText("Log in");
-		// loginButt.setBounds(215, 205, 70, 30);
-		// loginButt.addActionListener(loginButtonListener);
-		// this.add(loginButt);
-
-		// viewWidth = 800;
-		// viewHeight = 600;
-		// setPreferredSize(new Dimension(viewWidth, viewHeight));
-		// this.setLayout(null);
+		JButton loginButt = new JButton();
+		LoginButtonListener loginButtonListener = new LoginButtonListener(client, clientwindow);
+		loginButt.setText("Log in");
+		loginButt.addActionListener(loginButtonListener);
+		loginButt.setPreferredSize(new Dimension(30, 30));
+		this.add(loginButt);
 
 	}
 

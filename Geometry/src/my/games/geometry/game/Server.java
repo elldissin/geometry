@@ -118,8 +118,8 @@ public class Server {
 		// LATER check if correct loop logic
 		for (int i = 0; i < clientService.getClientList().size(); i++) {
 			input = clientService.getClientList().get(i).getInput();
-			sourcePlayer = world.getObjectByID(input.getPlayerID());
 			if (input != null) {
+				sourcePlayer = world.getObjectByID(input.getPlayerID());
 				eventSourceForLocalWorld.addEvent(InputConverter.toEvent(input, sourcePlayer));
 			}
 		}

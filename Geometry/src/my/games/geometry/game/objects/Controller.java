@@ -28,8 +28,8 @@ public class Controller implements KeyListener {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!pressed.isEmpty()) {
 					for (Integer pressedCode : pressed) {
-						// playerID 1 is a stub here
-						comm.sendInput(new PlayerInput(1, pressedCode));
+						// FIXME playerID is manually given, need to get from login window
+						comm.sendInput(new PlayerInput(0, pressedCode));
 					}
 				}
 			}

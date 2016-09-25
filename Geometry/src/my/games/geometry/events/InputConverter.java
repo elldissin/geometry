@@ -10,9 +10,7 @@ import my.games.geometry.networking.PlayerInput;
  */
 public class InputConverter {
 
-	public static GameEvent toEvent(PlayerInput input, GameObject sourceObject) { // LATER magic
-																					// numbers (0)
-																					// (1)
+	public static GameEvent toEvent(PlayerInput input, GameObject sourceObject) {
 		GameEvent ev = null;
 		switch (input.getKeyCode()) {
 		case KeyEvent.VK_W:

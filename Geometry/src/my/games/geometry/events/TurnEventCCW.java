@@ -10,13 +10,13 @@ public class TurnEventCCW extends GameEvent {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public TurnEventCCW(int targetID) {
-		super(targetID);
+	public TurnEventCCW(GameObject sourceObject, long timeStamp) {
+		super(sourceObject, timeStamp);
 	}
 
 	@Override
 	public void applyEventToWorld(World world) {
-		GameObject obj = world.getObjectByID(targetID);
+		GameObject obj = world.getObjectByID(sourceObject.getObjectID());
 		if (obj != null)
 			obj.turn(-1);
 	}

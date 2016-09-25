@@ -63,7 +63,7 @@ public class ClientService implements Runnable {
 			for (int j = 0; j < world.getGameObjectsList().size(); j++) {
 				GameObject object = world.getGameObjectsList().get(j);
 				event = new CreateEvent(object.getObjectID());
-				event.setCarriedObject(object);
+				event.setSourceObject(object);
 				msg.setEvent(event);
 				newClientList.get(i).sendMessage(msg);
 			}

@@ -66,7 +66,7 @@ public class World {
 			registerObserversForObject(obj);
 
 			GameEvent event = new CreateEvent(obj.getObjectID());
-			event.setCarriedObject(obj);
+			event.setSourceObject(obj);
 			obj.notifyObserversAbout(event);
 
 			logDisplayNotifier.worldHasChanged();
@@ -118,7 +118,7 @@ public class World {
 		createGameObject(obj);
 
 		GameEvent event = new CreateEvent(obj.getObjectID());
-		event.setCarriedObject(obj);
+		event.setSourceObject(obj);
 		obj.notifyObserversAbout(event);
 	}
 
@@ -151,7 +151,7 @@ public class World {
 			if (updatableObjectList.get(i).isDestroyed()) {
 				// Notify observers
 				GameEvent event = new DestroyEvent(updatableObjectList.get(i).getObjectID());
-				event.setCarriedObject(updatableObjectList.get(i));
+				event.setSourceObject(updatableObjectList.get(i));
 				updatableObjectList.get(i).notifyObserversAbout(event);
 				destroyGameObject(updatableObjectList.get(i));
 			}

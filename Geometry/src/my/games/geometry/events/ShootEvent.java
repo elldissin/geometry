@@ -10,13 +10,13 @@ public class ShootEvent extends GameEvent {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ShootEvent(int targetID) {
-		super(targetID);
+	public ShootEvent(GameObject sourceObject, long timeStamp) {
+		super(sourceObject, timeStamp);
 	}
 
 	@Override
 	public void applyEventToWorld(World world) {
-		GameObject obj = world.getObjectByID(targetID);
+		GameObject obj = world.getObjectByID(sourceObject.getObjectID());
 		if (obj != null)
 			obj.getWeapon().shoot(obj);
 	}

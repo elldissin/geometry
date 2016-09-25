@@ -10,14 +10,13 @@ public class CreateEvent extends GameEvent {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public CreateEvent(int targetID) {
-		super(targetID);
-		// TODO Auto-generated constructor stub
+	public CreateEvent(GameObject sourceObject, long timeStamp) {
+		super(sourceObject, timeStamp);
 	}
 
 	@Override
 	public void applyEventToWorld(World world) {
-		GameObject obj = getCarriedObject();
+		GameObject obj = getSourceObject();
 		if (obj != null)
 			world.createGameObject(obj);
 	}

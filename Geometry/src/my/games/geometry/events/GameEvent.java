@@ -9,25 +9,25 @@ public abstract class GameEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// FIXME bumping make a bug with bullets position (if player in the static
 	// object)
-	protected int targetID;
-	private GameObject carriedObject;
+	protected GameObject sourceObject;
+	protected long timeStamp;
 
-	public GameObject getCarriedObject() {
-		return carriedObject;
+	public GameEvent(GameObject sourceObject, long timeStamp) {
+
+		this.sourceObject = sourceObject;
 	}
 
-	public void setCarriedObject(GameObject carriedObject) {
-		this.carriedObject = carriedObject;
+	public GameObject getSourceObject() {
+		return sourceObject;
 	}
 
-	public GameEvent(int targetID) {
-		this.targetID = targetID;
-	}
-
-	public int getTargetID() {
-		return targetID;
+	public void setSourceObject(GameObject carriedObject) {
+		this.sourceObject = carriedObject;
 	}
 
 	public abstract void applyEventToWorld(World world);
 
+	public long getTimeStamp() {
+		return timeStamp;
+	}
 }

@@ -11,7 +11,7 @@ public class TurnEventCW extends GameEvent {
 	private static final long serialVersionUID = 1L;
 
 	public TurnEventCW(GameObject sourceObject, long timeStamp) {
-		super(sourceObject, timeStamp);
+		super(sourceObject);
 	}
 
 	@Override

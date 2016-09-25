@@ -11,7 +11,7 @@ public class ShootEvent extends GameEvent {
 	private static final long serialVersionUID = 1L;
 
 	public ShootEvent(GameObject sourceObject, long timeStamp) {
-		super(sourceObject, timeStamp);
+		super(sourceObject);
 	}
 
 	@Override

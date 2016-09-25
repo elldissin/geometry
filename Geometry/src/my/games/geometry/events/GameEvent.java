@@ -12,8 +12,8 @@ public abstract class GameEvent implements Serializable {
 	protected GameObject sourceObject;
 	protected long timeStamp;
 
-	public GameEvent(GameObject sourceObject, long timeStamp) {
-
+	public GameEvent(GameObject sourceObject) {
+		timeStamp = System.currentTimeMillis();
 		this.sourceObject = sourceObject;
 	}
 

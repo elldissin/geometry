@@ -11,7 +11,7 @@ public class CreateEvent extends GameEvent {
 	private static final long serialVersionUID = 1L;
 
 	public CreateEvent(GameObject sourceObject, long timeStamp) {
-		super(sourceObject, timeStamp);
+		super(sourceObject);
 	}
 
 	@Override

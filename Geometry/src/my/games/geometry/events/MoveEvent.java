@@ -7,7 +7,7 @@ public class MoveEvent extends GameEvent {
 	private static final long serialVersionUID = 1L;
 
 	public MoveEvent(GameObject sourceObject, long timeStamp) {
-		super(sourceObject, timeStamp);
+		super(sourceObject);
 	}
 
 	@Override

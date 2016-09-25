@@ -24,14 +24,14 @@ public class ClientWindow extends JFrame implements Runnable {
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.setSize(800, 700);
 			this.setResizable(false);
-			this.setLayout(new BorderLayout());
+			this.getContentPane().setLayout(new BorderLayout());
 			// this.add(clientToDisplay.getRenderEngine().getCamera(1),
 			// BorderLayout.LINE_START);
 			// this.add(clientToDisplay.getRenderEngine().getCamera(2),
 			// BorderLayout.LINE_END);
 			// this.add(clientToDisplay.getRenderEngine().getCamera(3),
 			// BorderLayout.PAGE_END);
-			this.add(new LoginPanel(client, this), BorderLayout.LINE_START);
+			this.getContentPane().add(new LoginPanel(client, this), BorderLayout.LINE_START);
 			this.setVisible(true);
 			this.setFocusable(true); // important call to allow listening to
 										// keys

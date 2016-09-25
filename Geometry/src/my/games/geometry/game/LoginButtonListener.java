@@ -20,7 +20,7 @@ public class LoginButtonListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		clientWindow.getContentPane().removeAll();
-		clientWindow.getContentPane().add(client.getRenderEngine().getCamera(1), BorderLayout.LINE_START);
+		clientWindow.getContentPane().add(client.getRenderEngine().getCamera(3), BorderLayout.PAGE_START);
 		clientWindow.getContentPane().add(client.getRenderEngine().getCamera(3), BorderLayout.PAGE_END);
 		// JButton loginButt1 = new JButton();
 		// loginButt1.setText("Log in");

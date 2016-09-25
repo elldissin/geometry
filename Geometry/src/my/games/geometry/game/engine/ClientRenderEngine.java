@@ -6,7 +6,7 @@ import javax.swing.SwingUtilities;
 
 import my.games.geometry.game.GameCamera;
 import my.games.geometry.game.World;
-import my.games.geometry.game.objects.MenuObject;
+import my.games.geometry.game.objects.BottomStatusBar;
 
 public class ClientRenderEngine implements RenderEngine {
 	private World world;
@@ -15,7 +15,7 @@ public class ClientRenderEngine implements RenderEngine {
 	public ClientRenderEngine(World world) {
 		camera1 = new GameCamera();
 		camera2 = new GameCamera();
-		camera3 = new MenuObject();
+		camera3 = new BottomStatusBar();
 		this.world = world;
 	}
 
@@ -32,6 +32,7 @@ public class ClientRenderEngine implements RenderEngine {
 			public void run() {
 				camera1.show(world.getDrawableObjectList());
 				camera3.show(world.getDrawableObjectList());
+				// System.out.println(world.getDrawableObjectList().size());
 			}
 		});
 

@@ -4,12 +4,12 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
-public class ClientWindow implements Runnable {
+public class ClientWindow extends JFrame implements Runnable {
 
-	private Client clientToDisplay;
+	private Client client;
 
 	public ClientWindow(Client client) {
-		clientToDisplay = client;
+		this.client = client;
 	}
 
 	@SuppressWarnings("unused")
@@ -19,17 +19,23 @@ public class ClientWindow implements Runnable {
 
 	@Override
 	public void run() {
-		if (clientToDisplay != null) {
-			JFrame frame = new JFrame("Geometry game");
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setSize(800, 700);
-			frame.setResizable(false);
-			frame.add(clientToDisplay.getRenderEngine().getCamera(1), BorderLayout.LINE_START);
-			frame.add(clientToDisplay.getRenderEngine().getCamera(2), BorderLayout.LINE_END);
-			frame.add(clientToDisplay.getRenderEngine().getCamera(3), BorderLayout.PAGE_END);
-			frame.setVisible(true);
-			frame.setFocusable(true); // important call to allow listening to keys
-			frame.addKeyListener(clientToDisplay.getController());
+		if (client != null) {
+			// JFrame frame = new JFrame("Geometry game");
+			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			this.setSize(800, 700);
+			this.setResizable(false);
+			this.setLayout(new BorderLayout());
+			// this.add(clientToDisplay.getRenderEngine().getCamera(1),
+			// BorderLayout.LINE_START);
+			// this.add(clientToDisplay.getRenderEngine().getCamera(2),
+			// BorderLayout.LINE_END);
+			// this.add(clientToDisplay.getRenderEngine().getCamera(3),
+			// BorderLayout.PAGE_END);
+			this.add(new LoginPanel(client, this), BorderLayout.LINE_START);
+			this.setVisible(true);
+			this.setFocusable(true); // important call to allow listening to
+										// keys
+			this.addKeyListener(client.getController());
 		} else
 			System.out.println("Client to display was not set");
 	}

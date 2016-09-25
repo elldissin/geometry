@@ -3,6 +3,7 @@ package my.games.geometry.game;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -24,6 +25,7 @@ public class GameCamera extends JPanel {
 		viewHeight = 600;
 		setPreferredSize(new Dimension(viewWidth, viewHeight));
 		viewOffset = new Point(0, 0);
+		drawableObjects = new ArrayList<GameObject>();
 	}
 
 	public int getViewWidth() {
@@ -63,4 +65,5 @@ public class GameCamera extends JPanel {
 			for (int i = 0; i < drawableObjects.size(); i++)
 				drawableObjects.get(i).draw(g);
 	}
+
 }

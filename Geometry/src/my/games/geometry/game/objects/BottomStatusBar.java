@@ -6,19 +6,19 @@ import java.util.List;
 
 import my.games.geometry.game.GameCamera;
 
-public class MenuObject extends GameCamera {
+public class BottomStatusBar extends GameCamera {
 
 	private static final long serialVersionUID = 1L;
-
 	private int Width;
 	private int Height;
 	private List<GameObject> drawableObjects;
 
-	public MenuObject() {
+	public BottomStatusBar() {
 		super();
 		Width = 1000;
 		Height = 50;
 		setPreferredSize(new Dimension(Width, Height));
+		this.setLayout(null);
 	}
 
 	public int getWidth() {
@@ -40,6 +40,7 @@ public class MenuObject extends GameCamera {
 	public void show(List<GameObject> objects) {
 		drawableObjects = objects;
 		repaint();
+		System.out.println("btb paint");
 	}
 
 	@Override
@@ -47,6 +48,7 @@ public class MenuObject extends GameCamera {
 		super.paintComponent(g);
 		// drawing rectangle for split screen
 		g.drawRect(0, 0, Width, Height);
+		System.out.println("btb paint");
 		if (drawableObjects != null) { // LATER magic number 0?
 			g.drawString("Player HP:" + Integer.toString(drawableObjects.get(0).getHealth()), 0, 20);
 			g.drawString("Player weapon:" + drawableObjects.get(0).getWeapon(), 100, 20);

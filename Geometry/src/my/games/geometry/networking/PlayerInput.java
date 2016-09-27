@@ -11,8 +11,8 @@ public class PlayerInput implements Serializable {
 	private int clientID;
 	private int keyCode;
 
-	public PlayerInput(int playerID, int keyCode) {
-		this.clientID = playerID;
+	public PlayerInput(int clientID, int keyCode) {
+		this.clientID = clientID;
 		this.keyCode = keyCode;
 	}
 

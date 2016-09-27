@@ -17,6 +17,7 @@ import my.games.geometry.game.objects.Player;
 import my.games.geometry.networking.ClientEventNotifier;
 import my.games.geometry.networking.ClientService;
 import my.games.geometry.networking.PlayerInput;
+import my.games.geometry.ui.ServerLogDisplay;
 
 public class Server {
 	private static final long serialVersionUID = 1L;

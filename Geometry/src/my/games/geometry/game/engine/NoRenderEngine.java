@@ -1,6 +1,6 @@
 package my.games.geometry.game.engine;
 
-import my.games.geometry.game.GameCamera;
+import my.games.geometry.ui.GameCameraPanel;
 
 public class NoRenderEngine implements RenderEngine {
 
@@ -14,8 +14,8 @@ public class NoRenderEngine implements RenderEngine {
 	}
 
 	@Override
-	public GameCamera getCamera(int cameraNum) {
-		return new GameCamera(); // empty camera to show nothing
+	public GameCameraPanel getCamera(int cameraNum) {
+		return new GameCameraPanel(); // empty camera to show nothing
 	}
 
 }

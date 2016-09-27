@@ -1,4 +1,4 @@
-package my.games.geometry.game;
+package my.games.geometry.ui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import my.games.geometry.game.Client;
 
 public class LoginPanel extends JPanel {
 

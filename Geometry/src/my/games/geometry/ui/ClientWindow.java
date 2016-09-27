@@ -1,9 +1,11 @@
-package my.games.geometry.game;
+package my.games.geometry.ui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+
+import my.games.geometry.game.Client;
 
 public class ClientWindow extends JFrame implements Runnable {
 

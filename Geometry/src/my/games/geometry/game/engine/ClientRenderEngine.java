@@ -2,18 +2,18 @@ package my.games.geometry.game.engine;
 
 import javax.swing.SwingUtilities;
 
-import my.games.geometry.game.GameCamera;
 import my.games.geometry.game.World;
-import my.games.geometry.game.objects.BottomStatusBar;
+import my.games.geometry.ui.GameStatusPanel;
+import my.games.geometry.ui.GameCameraPanel;
 
 public class ClientRenderEngine implements RenderEngine {
 	private World world;
-	private GameCamera camera1, camera2, camera3;
+	private GameCameraPanel camera1, camera2, camera3;
 
 	public ClientRenderEngine(World world) {
-		camera1 = new GameCamera();
-		camera2 = new GameCamera();
-		camera3 = new BottomStatusBar();
+		camera1 = new GameCameraPanel();
+		camera2 = new GameCameraPanel();
+		camera3 = new GameStatusPanel();
 		this.world = world;
 	}
 
@@ -37,13 +37,13 @@ public class ClientRenderEngine implements RenderEngine {
 		// }
 	}
 
-	public GameCamera getCamera(int number) {
+	public GameCameraPanel getCamera(int number) {
 		if (number == 1)
 			return camera1;
 		if (number == 2)
 			return camera2;
 		if (number == 3)
 			return camera3;
-		return new GameCamera();
+		return new GameCameraPanel();
 	}
 }

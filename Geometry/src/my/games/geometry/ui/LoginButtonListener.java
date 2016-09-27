@@ -1,10 +1,12 @@
-package my.games.geometry.game;
+package my.games.geometry.ui;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+
+import my.games.geometry.game.Client;
 
 public class LoginButtonListener implements ActionListener {
 	private ClientWindow clientWindow;

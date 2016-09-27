@@ -1,4 +1,4 @@
-package my.games.geometry.game;
+package my.games.geometry.ui;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 import my.games.geometry.game.objects.GameObject;
 
-public class GameCamera extends JPanel {
+public class GameCameraPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class GameCamera extends JPanel {
 	private List<GameObject> drawableObjects;
 	private Point viewOffset;
 
-	public GameCamera() {
+	public GameCameraPanel() {
 		super();
 		viewWidth = 800;
 		viewHeight = 600;

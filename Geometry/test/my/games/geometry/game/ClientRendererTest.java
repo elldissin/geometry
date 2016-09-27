@@ -6,13 +6,15 @@ import java.awt.Point;
 
 import org.junit.Test;
 
+import my.games.geometry.ui.GameCameraPanel;
+
 public class ClientRendererTest {
 
 	@Test
 	public void cameraViewOffsetTest() {
 		// arrange
 		World worldTest = new World();
-		GameCamera cameraTest = new GameCamera();
+		GameCameraPanel cameraTest = new GameCameraPanel();
 		worldTest.createGameObject("player", 0, 0, 0.0);
 		// act
 		Point p = new Point((int) worldTest.getObjectByID(1).getPos().x - cameraTest.getViewWidth() / 2,

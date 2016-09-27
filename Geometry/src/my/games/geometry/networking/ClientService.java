@@ -3,9 +3,8 @@ package my.games.geometry.networking;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import my.games.geometry.events.CreateEvent;
 import my.games.geometry.events.GameEvent;
@@ -22,8 +21,8 @@ public class ClientService implements Runnable {
 	private int portNumber = 4444;
 
 	public ClientService() {
-		clientList = Collections.synchronizedList(new ArrayList<ConnectedClient>());
-		newClientList = Collections.synchronizedList(new ArrayList<ConnectedClient>());
+		clientList = new CopyOnWriteArrayList<ConnectedClient>();
+		newClientList = new CopyOnWriteArrayList<ConnectedClient>();
 		try {
 			serverSocket = new ServerSocket(portNumber);
 		} catch (IOException e) {

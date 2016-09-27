@@ -1,5 +1,8 @@
 package my.games.geometry.game;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.SwingUtilities;
 
 import my.games.geometry.behaviour.BumpEffect;
@@ -28,6 +31,7 @@ public class Server {
 	private Player player1, player2;
 	private ServerLogDisplay logDisplay;
 	private LogDisplayNotifier logDisplayNotifier;
+	private Map<Integer, Integer> clientToPlayerMap;
 
 	public Server() {
 		super();
@@ -41,6 +45,7 @@ public class Server {
 		eventSourceForLocalWorld = new LocalSource();
 		runner = new ServerWorldRunner(world, renderEngine, eventSourceForLocalWorld, eventHandler);
 		clientService = new ClientService();
+		clientToPlayerMap = new HashMap<Integer, Integer>();
 		addPlayers();
 	}
 
@@ -125,5 +130,9 @@ public class Server {
 	public void setLogDisplay(ServerLogDisplay logDisplay) {
 		this.logDisplay = logDisplay;
 		world.registerLogDisplayNotifyer(logDisplayNotifier);
+	}
+
+	private int clientIDtoPlayerID(int clientID) {
+		return clientToPlayerMap.get(clientID);
 	}
 }

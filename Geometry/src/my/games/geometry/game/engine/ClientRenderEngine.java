@@ -1,7 +1,5 @@
 package my.games.geometry.game.engine;
 
-import java.awt.Point;
-
 import javax.swing.SwingUtilities;
 
 import my.games.geometry.game.GameCamera;
@@ -21,12 +19,12 @@ public class ClientRenderEngine implements RenderEngine {
 
 	@Override
 	public void render() {
-		// ties camera 1 to player 1
-		if ((world.getObjectByID(1)) != null) {
-			Point p = new Point((int) world.getObjectByID(1).getPos().x - camera1.getViewWidth() / 2,
-					(int) world.getObjectByID(1).getPos().y - camera1.getViewHeight() / 2);
-			camera1.setViewOffset(p);
-		}
+		// FIXME disabled camera lock until client knowns his object id
+		// if ((world.getObjectByID(1)) != null) {
+		// Point p = new Point((int) world.getObjectByID(1).getPos().x - camera1.getViewWidth() / 2,
+		// (int) world.getObjectByID(1).getPos().y - camera1.getViewHeight() / 2);
+		// camera1.setViewOffset(p);
+		// }
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {

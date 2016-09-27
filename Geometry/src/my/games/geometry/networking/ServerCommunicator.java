@@ -24,7 +24,6 @@ public class ServerCommunicator {
 		if (out != null)
 			try {
 				out.writeObject(event);
-				// System.out.println("Event was sent to server");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -34,7 +33,6 @@ public class ServerCommunicator {
 		if (out != null)
 			try {
 				out.writeObject(input);
-				// System.out.println("Event was sent to server");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

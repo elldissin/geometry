@@ -26,18 +26,12 @@ public class ClientWindow extends JFrame implements Runnable {
 			this.setPreferredSize(new Dimension(800, 700));
 			this.setResizable(true);
 			this.setLayout(new GridLayout(2, 1));
-			// this.add(clientToDisplay.getRenderEngine().getCamera(1),
-			// BorderLayout.LINE_START);
-			// this.add(clientToDisplay.getRenderEngine().getCamera(2),
-			// BorderLayout.LINE_END);
-			// this.add(clientToDisplay.getRenderEngine().getCamera(3),
-			// BorderLayout.PAGE_END);
+
 			LoginPanel loginpanel = new LoginPanel(client, this);
 			loginpanel.setPreferredSize(new Dimension(70, 95));
 			this.add(loginpanel);
 			this.setFocusable(true); // important call to allow listening to
 										// keys
-			this.addKeyListener(client.getController());
 			this.pack();
 			this.setVisible(true);
 		} else

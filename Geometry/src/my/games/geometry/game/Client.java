@@ -20,6 +20,7 @@ public class Client {
 	private EventHandler eventHandler;
 	private WorldRunner runner;
 	private ServerCommunicator comm;
+	private int clientID;
 
 	public Client() {
 		super();
@@ -27,9 +28,7 @@ public class Client {
 		eventHandler = new EventHandler(world);
 		renderEngine = new ClientRenderEngine(world);
 		comm = new ServerCommunicator();
-		comm.openConnectionTo("localhost");
 		eventSourceForLocalWorld = new RemoteSource(comm);
-		controller = new Controller(comm);
 		runner = new ClientWorldRunner(world, renderEngine, eventSourceForLocalWorld, eventHandler);
 	}
 
@@ -45,8 +44,14 @@ public class Client {
 		this.renderEngine = renderEngine;
 	}
 
-	public void start() {
+	public void start() { // The ID must be already given to client before this call
+		controller = new Controller(comm, clientID);
+		comm.openConnectionTo("localhost", clientID);
 		runner.start();
+	}
+
+	public void setClientID(int clientID) {
+		this.clientID = clientID;
 	}
 
 }

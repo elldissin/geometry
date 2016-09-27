@@ -9,14 +9,12 @@ import javax.swing.JPanel;
 public class LoginButtonListener implements ActionListener {
 	private ClientWindow clientWindow;
 	private Client client;
+	private LoginPanel panel;
 
-	// public ClientWindow(Client client) {
-	// clientToDisplay = client;
-	// }
-
-	public LoginButtonListener(Client client, ClientWindow clientWindow) {
+	public LoginButtonListener(Client client, ClientWindow clientWindow, LoginPanel panel) {
 		this.client = client;
 		this.clientWindow = clientWindow;
+		this.panel = panel;
 	}
 
 	@Override
@@ -29,6 +27,8 @@ public class LoginButtonListener implements ActionListener {
 		clientWindow.repaint();
 		clientWindow.pack();
 		clientWindow.setVisible(true);
+		client.setClientID(Integer.parseInt(panel.loginField.getText()));
+		client.start(); // first set the ID, then start!
 	}
 
 }

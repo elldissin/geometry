@@ -58,12 +58,13 @@ public class ServerCommunicator {
 		}
 	}
 
-	public void openConnectionTo(String hostName) {
+	public void openConnectionTo(String hostName, int clientID) {
 		try {
 			this.hostName = hostName;
 			mySocket = new Socket(hostName, portNumber);
 			out = new ObjectOutputStream(mySocket.getOutputStream());
 			in = new ObjectInputStream(mySocket.getInputStream());
+			out.writeObject(clientID);
 
 			// This part is continously waiting for events from server
 			Thread inputThread = new Thread(new Runnable() {

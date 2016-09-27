@@ -3,18 +3,17 @@ package my.games.geometry.networking;
 import java.io.IOException;
 import java.net.Socket;
 
-import my.games.geometry.UniqueIdProvider;
-
 //TODO add code to close connections on exceptions
 public class ConnectedClient {
 	private int clientID;
 	private ClientConnection connection;
 
 	public ConnectedClient(Socket socket) {
-		clientID = UniqueIdProvider.getClientID();
 		try {
 			connection = new ClientConnection(socket);
-		} catch (IOException e) {
+			clientID = (Integer) (connection.getInputStream().readObject());
+			System.out.println("New client with ID=" + clientID + " is connected.");
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		new Thread(connection).start();

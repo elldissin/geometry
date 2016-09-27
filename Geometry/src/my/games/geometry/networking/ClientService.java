@@ -42,7 +42,8 @@ public class ClientService implements Runnable {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			newClientList.add(new ConnectedClient(clientSocket));
+			ConnectedClient newClient = new ConnectedClient(clientSocket);
+			newClientList.add(newClient);
 			System.out.println("New connection accepted from " + clientSocket.getInetAddress());
 			try {
 				Thread.sleep(5); // To reduce CPU load

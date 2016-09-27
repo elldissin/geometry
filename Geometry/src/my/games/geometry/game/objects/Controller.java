@@ -18,7 +18,7 @@ public class Controller implements KeyListener {
 	private final Set<Integer> pressed = new HashSet<Integer>();
 	protected ArrayList<Controllable> controlledArray;
 
-	public Controller(final ServerCommunicator comm) {
+	public Controller(final ServerCommunicator comm, final int clientID) {
 		controlledArray = new ArrayList<Controllable>();
 		this.comm = comm;
 		// Check every 100ms if there's keys pressed
@@ -29,7 +29,7 @@ public class Controller implements KeyListener {
 				if (!pressed.isEmpty()) {
 					for (Integer pressedCode : pressed) {
 						// FIXME playerID is manually given, need to get from login window
-						comm.sendInput(new PlayerInput(0, pressedCode));
+						comm.sendInput(new PlayerInput(clientID, pressedCode));
 					}
 				}
 			}

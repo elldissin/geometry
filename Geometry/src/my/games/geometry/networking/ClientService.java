@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import my.games.geometry.events.CreateEvent;
@@ -55,10 +56,11 @@ public class ClientService implements Runnable {
 		new Thread(this).start();
 	}
 
-	public void sendWorldStateToNewClients(World world) {
+	public void sendWorldStateToNewClients(World world, Map<Integer, Integer> clientToPlayerMap) {
 		NetworkMessage msg = new NetworkMessage();
 		GameEvent event = null;
 		for (int i = 0; i < newClientList.size(); i++) {
+			createPlayerForClient(newClientList.get(i), world, clientToPlayerMap);
 			for (int j = 0; j < world.getGameObjectsList().size(); j++) {
 				GameObject object = world.getGameObjectsList().get(j);
 				event = new CreateEvent(object);
@@ -69,6 +71,11 @@ public class ClientService implements Runnable {
 			clientList.add(newClientList.get(i));
 		}
 		newClientList.clear(); // consider all new clients became old (notified)
+	}
+
+	private void createPlayerForClient(ConnectedClient client, World world, Map<Integer, Integer> clientToPlayerMap) {
+		GameObject newPlayer = world.addNewConnectedPlayer(client.getClientID());
+		clientToPlayerMap.put(client.getClientID(), newPlayer.getObjectID());
 	}
 
 	public List<ConnectedClient> getClientList() {

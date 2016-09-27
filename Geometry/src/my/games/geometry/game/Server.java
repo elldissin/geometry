@@ -67,7 +67,7 @@ public class Server {
 		runner.start();
 		clientService.start();
 		while (true) {
-			clientService.sendWorldStateToNewClients(world);
+			clientService.sendWorldStateToNewClients(world, clientToPlayerMap);
 			closeObsoleteClients();
 			pollClientsForInput();
 			notifyClients();

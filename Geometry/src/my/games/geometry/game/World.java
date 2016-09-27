@@ -115,11 +115,12 @@ public class World {
 		return collidableObjectList;
 	}
 
-	public void addNewConnectedPlayer(int clientID) {
+	public GameObject addNewConnectedPlayer(int clientID) {
 		GameObject newPlayer = createGameObject("player", 100, 100, 0.0); // FIXME free position?
 		newPlayer.setWeapon(new BFG());
 		newPlayer.setBehaviour(new PlayerBehaviour());
 		newPlayer.addOnHitEffect(new BumpEffect(0));
+		return newPlayer;
 	}
 
 	// need first to assign ID, because projectiles do not have it initially

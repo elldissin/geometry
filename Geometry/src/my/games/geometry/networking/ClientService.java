@@ -76,6 +76,7 @@ public class ClientService implements Runnable {
 	private void createPlayerForClient(ConnectedClient client, World world, Map<Integer, Integer> clientToPlayerMap) {
 		GameObject newPlayer = world.addNewConnectedPlayer(client.getClientID());
 		clientToPlayerMap.put(client.getClientID(), newPlayer.getObjectID());
+		System.out.println("Created new player by clientService");
 	}
 
 	public List<ConnectedClient> getClientList() {

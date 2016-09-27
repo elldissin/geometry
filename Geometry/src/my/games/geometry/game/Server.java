@@ -111,7 +111,8 @@ public class Server {
 		for (int i = 0; i < clientService.getClientList().size(); i++) {
 			input = clientService.getClientList().get(i).getInput();
 			if (input != null) {
-				sourcePlayer = world.getObjectByID(input.getClientID());
+				int idToBeFound = clientIDtoPlayerID(input.getClientID());
+				sourcePlayer = world.getObjectByID(idToBeFound);
 				eventSourceForLocalWorld.addEvent(InputConverter.toEvent(input, sourcePlayer));
 			}
 		}

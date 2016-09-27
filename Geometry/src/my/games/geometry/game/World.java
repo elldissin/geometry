@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import my.games.geometry.UniqueIdProvider;
+import my.games.geometry.behaviour.BumpEffect;
+import my.games.geometry.behaviour.PlayerBehaviour;
 import my.games.geometry.events.CreateEvent;
 import my.games.geometry.events.DestroyEvent;
 import my.games.geometry.events.EventObserver;
@@ -12,6 +14,7 @@ import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
 import my.games.geometry.game.objects.Projectile;
 import my.games.geometry.game.objects.StaticObject;
+import my.games.geometry.game.weapons.BFG;
 
 public class World {
 	private EffectManager effectManager;
@@ -110,6 +113,13 @@ public class World {
 
 	public List<GameObject> getCollidableObjectList() {
 		return collidableObjectList;
+	}
+
+	public void addNewConnectedPlayer(int clientID) {
+		GameObject newPlayer = createGameObject("player", 100, 100, 0.0); // FIXME free position?
+		newPlayer.setWeapon(new BFG());
+		newPlayer.setBehaviour(new PlayerBehaviour());
+		newPlayer.addOnHitEffect(new BumpEffect(0));
 	}
 
 	// need first to assign ID, because projectiles do not have it initially

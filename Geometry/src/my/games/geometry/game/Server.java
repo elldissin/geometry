@@ -2,9 +2,7 @@ package my.games.geometry.game;
 
 import javax.swing.SwingUtilities;
 
-import my.games.geometry.behaviour.Behaviour;
 import my.games.geometry.behaviour.BumpEffect;
-import my.games.geometry.behaviour.PlayerBehaviour;
 import my.games.geometry.events.EventHandler;
 import my.games.geometry.events.EventSource;
 import my.games.geometry.events.InputConverter;
@@ -13,7 +11,6 @@ import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
-import my.games.geometry.game.weapons.BFG;
 import my.games.geometry.networking.ClientEventNotifier;
 import my.games.geometry.networking.ClientService;
 import my.games.geometry.networking.PlayerInput;
@@ -48,16 +45,6 @@ public class Server {
 	}
 
 	private void addPlayers() { // FIXME add players for each client separately
-		GameObject obj = world.createGameObject("player", 100, 100, 0.0);
-		obj.setWeapon(new BFG());
-		player1 = (Player) obj;
-		player2 = (Player) world.createGameObject("player", 400, 100, 0.0);
-		Behaviour beh1 = new PlayerBehaviour();
-		Behaviour beh2 = new PlayerBehaviour();
-		player1.setBehaviour(beh1);
-		player2.setBehaviour(beh2);
-		player1.addOnHitEffect(new BumpEffect(0));
-		player2.addOnHitEffect(new BumpEffect(0));
 		// LATER why static object created here?
 		GameObject obst = world.createGameObject("static", 250, 50, 0.0);
 		obst.addOnHitEffect(new BumpEffect(0));
@@ -119,7 +106,7 @@ public class Server {
 		for (int i = 0; i < clientService.getClientList().size(); i++) {
 			input = clientService.getClientList().get(i).getInput();
 			if (input != null) {
-				sourcePlayer = world.getObjectByID(input.getPlayerID());
+				sourcePlayer = world.getObjectByID(input.getClientID());
 				eventSourceForLocalWorld.addEvent(InputConverter.toEvent(input, sourcePlayer));
 			}
 		}

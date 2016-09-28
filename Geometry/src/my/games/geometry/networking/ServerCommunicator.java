@@ -14,10 +14,10 @@ public class ServerCommunicator {
 	private Socket mySocket;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
-	private Queue<NetworkMessage> eventsQueue;
+	private Queue<NetworkMessage> messageQueue;
 
 	public ServerCommunicator() {
-		eventsQueue = new LinkedList<NetworkMessage>();
+		messageQueue = new LinkedList<NetworkMessage>();
 	}
 
 	public void sendMessage(NetworkMessage event) {
@@ -39,7 +39,7 @@ public class ServerCommunicator {
 	}
 
 	public NetworkMessage getNextMessage() {
-		return eventsQueue.poll();
+		return messageQueue.poll();
 	}
 
 	public void closeConnection() {
@@ -69,9 +69,11 @@ public class ServerCommunicator {
 				@Override
 				public void run() {
 					try {
-						NetworkMessage fromServer;
-						while ((fromServer = (NetworkMessage) in.readObject()) != null) {
-							eventsQueue.add(fromServer);
+						NetworkMessagePacket messagePacketFromServer;
+						NetworkMessage msg = null;
+						while ((messagePacketFromServer = (NetworkMessagePacket) in.readObject()) != null) {
+							while ((msg = messagePacketFromServer.getNextMessage()) != null)
+								messageQueue.add(msg);
 							// TODO add something to exit properly
 						}
 					} catch (IOException | ClassNotFoundException e) {

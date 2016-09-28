@@ -1,9 +1,14 @@
 package my.games.geometry.networking;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BufferedEventSender {
+public class BufferedEventSender implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	NetworkMessagePacket messagePacket;
 	List<ConnectedClient> clientList;
 

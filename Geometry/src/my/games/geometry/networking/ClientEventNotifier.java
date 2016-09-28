@@ -10,7 +10,7 @@ import my.games.geometry.events.GameEvent;
 import my.games.geometry.game.objects.GameObject;
 
 public class ClientEventNotifier implements EventObserver, Serializable {
-
+	// LATER why ClientEventNotifier is sent over network too?
 	private Queue<GameEvent> eventsQueue;
 	private BufferedEventSender bufferedSender;
 

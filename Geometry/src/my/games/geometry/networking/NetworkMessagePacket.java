@@ -24,4 +24,8 @@ public class NetworkMessagePacket implements Serializable {
 	public void addMessage(NetworkMessage message) {
 		messageQueue.add(message);
 	}
+
+	public void clear() {
+		messageQueue.clear();
+	}
 }

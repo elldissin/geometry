@@ -62,13 +62,15 @@ public class ClientService implements Runnable {
 		GameEvent event = null;
 		for (int i = 0; i < newClientList.size(); i++) {
 			createPlayerForClient(newClientList.get(i), world, clientToPlayerMap);
+			NetworkMessagePacket messagePacket = new NetworkMessagePacket();
 			for (int j = 0; j < world.getGameObjectsList().size(); j++) {
 				GameObject object = world.getGameObjectsList().get(j);
 				event = new CreateEvent(object);
 				event.setSourceObject(object);
 				msg.setEvent(event);
-				newClientList.get(i).sendMessage(msg);
+				messagePacket.addMessage(msg);
 			}
+			newClientList.get(i).sendMessagePacket(messagePacket);
 			clientList.add(newClientList.get(i));
 		}
 		newClientList.clear(); // consider all new clients became old (notified)

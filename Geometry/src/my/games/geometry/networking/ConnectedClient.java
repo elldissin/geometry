@@ -27,23 +27,23 @@ public class ConnectedClient {
 		this.clientID = clientID;
 	}
 
-	public void sendMessage(NetworkMessage message) {
-		if (connection != null) {
-			try {
-				connection.getOutputStream().writeObject(message);
-				connection.getOutputStream().reset();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	public PlayerInput getInput() {
 		return connection.getInput();
 	}
 
 	public boolean isConnected() {
 		return connection.isConnected();
+	}
+
+	public void sendMessagePacket(NetworkMessagePacket messagePacket) {
+		if (connection != null) {
+			try {
+				connection.getOutputStream().writeObject(messagePacket);
+				connection.getOutputStream().reset();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

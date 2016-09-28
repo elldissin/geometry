@@ -12,9 +12,11 @@ import my.games.geometry.game.objects.GameObject;
 public class ClientEventNotifier implements EventObserver, Serializable {
 
 	private Queue<GameEvent> eventsQueue;
+	private BufferedEventSender bufferedSender;
 
 	public ClientEventNotifier() {
 		eventsQueue = new LinkedList<GameEvent>();
+		bufferedSender = new BufferedEventSender();
 	}
 
 	@Override
@@ -26,8 +28,8 @@ public class ClientEventNotifier implements EventObserver, Serializable {
 		NetworkMessage msg = new NetworkMessage();
 		if (eventsQueue.size() > 0) {
 			msg.setEvent(eventsQueue.poll());
-			for (int i = 0; i < clientList.size(); i++)
-				clientList.get(i).sendMessage(msg);
+			bufferedSender.sendMessageTo(msg, clientList);
+
 		}
 	}
 

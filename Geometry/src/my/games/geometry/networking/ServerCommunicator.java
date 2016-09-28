@@ -70,7 +70,6 @@ public class ServerCommunicator {
 				public void run() {
 					try {
 						NetworkMessage fromServer;
-						System.out.println("Server listening thread started on client");
 						while ((fromServer = (NetworkMessage) in.readObject()) != null) {
 							eventsQueue.add(fromServer);
 							// TODO add something to exit properly

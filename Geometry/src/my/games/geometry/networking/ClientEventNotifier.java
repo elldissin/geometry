@@ -22,10 +22,13 @@ public class ClientEventNotifier implements EventObserver, Serializable {
 	}
 
 	public Queue<GameEvent> processEventQueue() {
-		// LATER check for multithreading issues etc
-		Queue<GameEvent> copyOfEventQueue = new LinkedList<GameEvent>(eventsQueue);
-		eventsQueue.clear();
-		return copyOfEventQueue;
+		// FIXME check for multithreading issues etc
+		if (eventsQueue.size() > 0) {
+			Queue<GameEvent> copyOfEventQueue = new LinkedList<GameEvent>(eventsQueue);
+			eventsQueue.clear();
+			return copyOfEventQueue;
+		}
+		return new LinkedList<GameEvent>();
 	}
 
 }

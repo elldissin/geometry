@@ -32,10 +32,13 @@ public class BufferedEventSender {
 	}
 
 	private void sendBufferToClients() {
-		for (int i = 0; i < clientList.size(); i++) {
-			clientList.get(i).sendMessagePacket(messagePacket);
+		if (messagePacket.size() > 0) {
+			for (int i = 0; i < clientList.size(); i++) {
+				clientList.get(i).sendMessagePacket(messagePacket);
+			}
+			System.out.println("Sent package to clients of size:" + messagePacket.size());
+			messagePacket.clear();
 		}
-		messagePacket.clear();
 	}
 
 	public void sendMessageTo(NetworkMessage message, List<ConnectedClient> clientList) {

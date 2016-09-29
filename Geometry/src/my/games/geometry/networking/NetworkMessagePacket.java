@@ -28,4 +28,8 @@ public class NetworkMessagePacket implements Serializable {
 	public void clear() {
 		messageQueue.clear();
 	}
+
+	public int size() {
+		return messageQueue.size();
+	}
 }

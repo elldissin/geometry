@@ -28,7 +28,6 @@ public class Controller implements KeyListener {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!pressed.isEmpty()) {
 					for (Integer pressedCode : pressed) {
-						// FIXME playerID is manually given, need to get from login window
 						comm.sendInput(new PlayerInput(clientID, pressedCode));
 					}
 				}

@@ -2,12 +2,11 @@ package my.games.geometry.networking;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 import java.util.List;
 
 import javax.swing.Timer;
 
-public class BufferedEventSender implements Serializable {
+public class BufferedEventSender {
 
 	/**
 	 * 

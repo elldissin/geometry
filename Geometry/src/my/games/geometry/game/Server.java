@@ -2,20 +2,24 @@ package my.games.geometry.game;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Queue;
 
 import javax.swing.SwingUtilities;
 
 import my.games.geometry.behaviour.BumpEffect;
 import my.games.geometry.events.EventHandler;
 import my.games.geometry.events.EventSource;
+import my.games.geometry.events.GameEvent;
 import my.games.geometry.events.InputConverter;
 import my.games.geometry.events.LocalSource;
 import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
+import my.games.geometry.networking.BufferedEventSender;
 import my.games.geometry.networking.ClientEventNotifier;
 import my.games.geometry.networking.ClientService;
+import my.games.geometry.networking.NetworkMessage;
 import my.games.geometry.networking.PlayerInput;
 import my.games.geometry.ui.ServerLogDisplay;
 
@@ -28,6 +32,7 @@ public class Server {
 	private EventHandler eventHandler;
 	private ClientService clientService;
 	private ClientEventNotifier clientEventNotifier; // Observer
+	private BufferedEventSender bufferedSender;
 	private WorldRunner runner;
 	private Player player1, player2;
 	private ServerLogDisplay logDisplay;
@@ -47,6 +52,7 @@ public class Server {
 		runner = new ServerWorldRunner(world, renderEngine, eventSourceForLocalWorld, eventHandler);
 		clientService = new ClientService();
 		clientToPlayerMap = new HashMap<Integer, Integer>();
+		bufferedSender = new BufferedEventSender();
 		addPlayers();
 	}
 
@@ -102,7 +108,12 @@ public class Server {
 	}
 
 	private void notifyClients() {
-		clientEventNotifier.notifyClients(clientService.getClientList());
+		Queue<GameEvent> eventsQueue = clientEventNotifier.processEventQueue();
+		NetworkMessage msg = new NetworkMessage();
+		for (int i = 0; i < eventsQueue.size(); i++) {
+			msg.setEvent(eventsQueue.poll());
+			bufferedSender.sendMessageTo(msg, clientService.getClientList());
+		}
 	}
 
 	private void pollClientsForInput() {

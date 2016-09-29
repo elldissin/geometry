@@ -6,7 +6,6 @@ import java.util.Queue;
 
 import javax.swing.SwingUtilities;
 
-import my.games.geometry.behaviour.BumpEffect;
 import my.games.geometry.events.EventHandler;
 import my.games.geometry.events.EventSource;
 import my.games.geometry.events.GameEvent;
@@ -15,7 +14,6 @@ import my.games.geometry.events.LocalSource;
 import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.GameObject;
-import my.games.geometry.game.objects.Player;
 import my.games.geometry.networking.BufferedEventSender;
 import my.games.geometry.networking.ClientEventNotifier;
 import my.games.geometry.networking.ClientService;
@@ -34,7 +32,6 @@ public class Server {
 	private ClientEventNotifier clientEventNotifier; // Observer
 	private BufferedEventSender bufferedSender;
 	private WorldRunner runner;
-	private Player player1, player2;
 	private ServerLogDisplay logDisplay;
 	private LogDisplayNotifier logDisplayNotifier;
 	private Map<Integer, Integer> clientToPlayerMap;
@@ -53,13 +50,6 @@ public class Server {
 		clientService = new ClientService();
 		clientToPlayerMap = new HashMap<Integer, Integer>();
 		bufferedSender = new BufferedEventSender();
-		addPlayers();
-	}
-
-	private void addPlayers() { // FIXME add players for each client separately
-		// LATER why static object created here?
-		GameObject obst = world.createGameObject("static", 250, 50, 0.0);
-		obst.addOnHitEffect(new BumpEffect(0));
 	}
 
 	public RenderEngine getRenderEngine() {

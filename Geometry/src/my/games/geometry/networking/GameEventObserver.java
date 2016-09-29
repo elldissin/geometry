@@ -8,11 +8,11 @@ import my.games.geometry.events.EventObserver;
 import my.games.geometry.events.GameEvent;
 import my.games.geometry.game.objects.GameObject;
 
-public class ClientEventNotifier implements EventObserver, Serializable {
+public class GameEventObserver implements EventObserver, Serializable {
 	// LATER why ClientEventNotifier is sent over network too?
 	private Queue<GameEvent> eventsQueue;
 
-	public ClientEventNotifier() {
+	public GameEventObserver() {
 		eventsQueue = new LinkedList<GameEvent>();
 	}
 

@@ -15,7 +15,7 @@ import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.networking.BufferedEventSender;
-import my.games.geometry.networking.ClientEventNotifier;
+import my.games.geometry.networking.GameEventObserver;
 import my.games.geometry.networking.ClientService;
 import my.games.geometry.networking.NetworkMessage;
 import my.games.geometry.networking.PlayerInput;
@@ -29,7 +29,7 @@ public class Server {
 	private EventSource eventSourceForLocalWorld;
 	private EventHandler eventHandler;
 	private ClientService clientService;
-	private ClientEventNotifier clientEventNotifier; // Observer
+	private GameEventObserver clientEventNotifier; // Observer
 	private BufferedEventSender bufferedSender;
 	private WorldRunner runner;
 	private ServerLogDisplay logDisplay;
@@ -39,7 +39,7 @@ public class Server {
 	public Server() {
 		super();
 		world = new World();
-		clientEventNotifier = new ClientEventNotifier();
+		clientEventNotifier = new GameEventObserver();
 		logDisplayNotifier = new LogDisplayNotifier();
 		world.registerWorldObserver(clientEventNotifier);
 		world.registerLogDisplayNotifyer(logDisplayNotifier);

@@ -26,7 +26,6 @@ public class World {
 
 	private List<EventObserver> eventObserverList;
 	private WorldChangeObserver logDisplayNotifier;
-	// private Controller controller;
 
 	public World() {
 		gameObjectList = new ArrayList<GameObject>();

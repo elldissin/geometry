@@ -21,8 +21,8 @@ public abstract class GameEvent implements Serializable {
 		return sourceObject;
 	}
 
-	public void setSourceObject(GameObject carriedObject) {
-		this.sourceObject = carriedObject;
+	public void setSourceObject(GameObject sourceObject) {
+		this.sourceObject = sourceObject;
 	}
 
 	public abstract void applyEventToWorld(World world);

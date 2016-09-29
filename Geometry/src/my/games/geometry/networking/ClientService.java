@@ -59,14 +59,16 @@ public class ClientService implements Runnable {
 
 	public void sendWorldStateToNewClients(World world, Map<Integer, Integer> clientToPlayerMap) {
 		for (int i = 0; i < newClientList.size(); i++) {
-			createPlayerForClient(newClientList.get(i), world, clientToPlayerMap);
+			GameObject newPlayer = createPlayerForClient(newClientList.get(i), world, clientToPlayerMap);
 			NetworkMessagePacket messagePacket = new NetworkMessagePacket();
 			for (int j = 0; j < world.getGameObjectsList().size(); j++) {
-				NetworkMessage msg = new NetworkMessage();
 				GameObject object = world.getGameObjectsList().get(j);
-				GameEvent event = new CreateEvent(object);
-				msg.setEvent(event);
-				messagePacket.addMessage(msg);
+				if (newPlayer != object) { // don't sent created player twice
+					NetworkMessage msg = new NetworkMessage();
+					GameEvent event = new CreateEvent(object);
+					msg.setEvent(event);
+					messagePacket.addMessage(msg);
+				}
 			}
 			newClientList.get(i).sendMessagePacket(messagePacket);
 			clientList.add(newClientList.get(i));
@@ -74,9 +76,11 @@ public class ClientService implements Runnable {
 		newClientList.clear(); // consider all new clients became old (notified)
 	}
 
-	private void createPlayerForClient(ConnectedClient client, World world, Map<Integer, Integer> clientToPlayerMap) {
+	private GameObject createPlayerForClient(ConnectedClient client, World world,
+			Map<Integer, Integer> clientToPlayerMap) { // LATER map parameter unnecessary here?
 		GameObject newPlayer = world.addNewConnectedPlayer(client.getClientID());
 		clientToPlayerMap.put(client.getClientID(), newPlayer.getObjectID());
+		return newPlayer;
 	}
 
 	public List<ConnectedClient> getClientList() {

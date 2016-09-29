@@ -37,8 +37,8 @@ public class BufferedEventSender {
 				clientList.get(i).sendMessagePacket(messagePacket);
 			}
 			System.out.println("Sent package to clients of size:" + messagePacket.size());
-			messagePacket.clear();
 		}
+		messagePacket.clear();
 	}
 
 	public void sendMessageTo(NetworkMessage message, List<ConnectedClient> clientList) {

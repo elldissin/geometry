@@ -58,14 +58,13 @@ public class ClientService implements Runnable {
 	}
 
 	public void sendWorldStateToNewClients(World world, Map<Integer, Integer> clientToPlayerMap) {
-		NetworkMessage msg = new NetworkMessage();
-		GameEvent event = null;
 		for (int i = 0; i < newClientList.size(); i++) {
 			createPlayerForClient(newClientList.get(i), world, clientToPlayerMap);
 			NetworkMessagePacket messagePacket = new NetworkMessagePacket();
 			for (int j = 0; j < world.getGameObjectsList().size(); j++) {
+				NetworkMessage msg = new NetworkMessage();
 				GameObject object = world.getGameObjectsList().get(j);
-				event = new CreateEvent(object);
+				GameEvent event = new CreateEvent(object);
 				msg.setEvent(event);
 				messagePacket.addMessage(msg);
 			}

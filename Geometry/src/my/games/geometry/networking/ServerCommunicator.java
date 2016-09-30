@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ServerCommunicator {
 
@@ -17,7 +17,7 @@ public class ServerCommunicator {
 	private Queue<NetworkMessage> messageQueue;
 
 	public ServerCommunicator() {
-		messageQueue = new LinkedList<NetworkMessage>();
+		messageQueue = new ConcurrentLinkedQueue<NetworkMessage>();
 	}
 
 	public void sendMessage(NetworkMessage event) {

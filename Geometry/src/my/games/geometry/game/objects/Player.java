@@ -7,10 +7,8 @@ import my.games.geometry.game.movers.DefaultMover;
 import my.games.geometry.game.renderers.DefaultRenderer;
 import my.games.geometry.game.weapons.DefaultWeapon;
 
-public class Player extends GameObject implements Controllable {
+public class Player extends GameObject {
 	private static final long serialVersionUID = 1L;
-
-	// Animator anim;
 
 	public Player(int x, int y, double angle) {
 		super(x, y, angle);
@@ -22,7 +20,6 @@ public class Player extends GameObject implements Controllable {
 		weapon = new DefaultWeapon();
 		renderer = new DefaultRenderer();
 		body();
-		// anim=new Animator((int)posX, (int)posY);
 	}
 
 	public List<Point> body() {
@@ -39,35 +36,8 @@ public class Player extends GameObject implements Controllable {
 	}
 
 	@Override
-	public void setMoving() {
-		// TODO Auto-generated method stub
-		mover.setSpeed(mover.getMaxSpeed());
-	}
-
-	@Override
-	public void setStopped() {
-		// TODO Auto-generated method stub
-		mover.setSpeed(0);
-	}
-
-	@Override
 	public void destroy() {
 		setObsolete(true);
-	}
-
-	@Override
-	public void setTurningCW() {
-		mover.setTurnSpeed(0.1);
-	}
-
-	@Override
-	public void setTurningCCW() {
-		mover.setTurnSpeed(-0.1);
-	}
-
-	@Override
-	public void setNotTurning() {
-		mover.setTurnSpeed(0);
 	}
 
 	@Override

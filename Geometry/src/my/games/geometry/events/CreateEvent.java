@@ -19,7 +19,6 @@ public class CreateEvent extends GameEvent {
 		GameObject obj = getSourceObject();
 		if (obj != null)
 			world.createGameObject(obj);
-		System.out.println("CreateEvent: created on client: " + obj);
 	}
 
 }

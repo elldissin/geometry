@@ -3,6 +3,7 @@ package my.games.geometry.networking;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import my.games.geometry.events.EventObserver;
 import my.games.geometry.events.GameEvent;
@@ -13,7 +14,7 @@ public class GameEventObserver implements EventObserver, Serializable {
 	private Queue<GameEvent> eventsQueue;
 
 	public GameEventObserver() {
-		eventsQueue = new LinkedList<GameEvent>();
+		eventsQueue = new ConcurrentLinkedQueue<GameEvent>();
 	}
 
 	@Override

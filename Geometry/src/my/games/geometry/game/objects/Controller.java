@@ -23,7 +23,7 @@ public class Controller implements KeyListener {
 		this.comm = comm;
 		// Check every 100ms if there's keys pressed
 		// (This is the Swing Timer they talk about)
-		new Timer(20, new ActionListener() {
+		new Timer(300, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (!pressed.isEmpty()) {

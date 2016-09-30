@@ -11,9 +11,8 @@ public class DestroyEvent extends GameEvent {
 
 	@Override
 	public void applyEventToWorld(World world) {
-		GameObject obj = getSourceObject();
-		if (obj != null) {
-			world.destroyGameObject(obj);
+		if (sourceObject != null) {
+			world.destroyGameObject(world.getObjectByID(sourceObject.getObjectID()));
 		}
 	}
 

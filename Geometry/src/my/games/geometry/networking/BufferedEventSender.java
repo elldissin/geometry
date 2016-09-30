@@ -35,7 +35,6 @@ public class BufferedEventSender {
 		if (messagePacket.size() > 0) {
 			for (int i = 0; i < clientList.size(); i++) {
 				clientList.get(i).sendMessagePacket(messagePacket);
-				System.out.println("buffer sent:" + messagePacket.size());
 			}
 		}
 		messagePacket.clear();
@@ -44,8 +43,5 @@ public class BufferedEventSender {
 	public void sendMessageTo(NetworkMessage message, List<ConnectedClient> clientList) {
 		this.clientList = clientList;
 		messagePacket.addMessage(message);
-		messagePacket.addMessage(message);
-		System.out.println("message with event added to buffer: " + message.getEvent() + " , obj:"
-				+ message.getEvent().getSourceObject());
 	}
 }

@@ -19,15 +19,19 @@ public class GameEventObserver implements EventObserver, Serializable {
 
 	@Override
 	public void notifyAboutEvent(GameObject obj, GameEvent event) {
-		eventsQueue.add(event);
+		synchronized (eventsQueue) {
+			eventsQueue.add(event);
+		}
 	}
 
 	public Queue<GameEvent> processEventQueue() {
-		// FIXME check for multithreading issues etc
-		if (eventsQueue.size() > 0) {
-			Queue<GameEvent> copyOfEventQueue = new LinkedList<GameEvent>(eventsQueue);
-			eventsQueue.clear();
-			return copyOfEventQueue;
+		// FIXME deep copy the queue before clearing
+		synchronized (eventsQueue) {
+			if (eventsQueue.size() > 0) {
+				Queue<GameEvent> copyOfEventQueue = new LinkedList<GameEvent>(eventsQueue);
+				eventsQueue.clear();
+				return copyOfEventQueue;
+			}
 		}
 		return new LinkedList<GameEvent>();
 	}

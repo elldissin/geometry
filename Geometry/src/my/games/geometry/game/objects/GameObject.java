@@ -10,7 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import my.games.geometry.behaviour.Behaviour;
 import my.games.geometry.behaviour.Effect;
-import my.games.geometry.behaviour.GeneralBehaviour;
+import my.games.geometry.behaviour.PlayerBehaviour;
 import my.games.geometry.events.EventObserver;
 import my.games.geometry.events.GameEvent;
 import my.games.geometry.game.movers.Mover;
@@ -128,7 +128,7 @@ public abstract class GameObject implements Updatable, Serializable {
 		if (behaviour != null)
 			return behaviour;
 		else
-			return new GeneralBehaviour();
+			return new PlayerBehaviour(); // LATER create NoBehaviour?
 	}
 
 	public void setBehaviour(Behaviour behaviour) {

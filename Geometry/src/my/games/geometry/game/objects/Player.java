@@ -76,13 +76,14 @@ public class Player extends GameObject {
 		copy.renderer = this.renderer.copy();
 
 		for (int i = 0; i < this.eventObserverList.size(); i++) {
-			copy.eventObserverList.add(this.eventObserverList.get(i.copy()));
+			copy.eventObserverList.add(this.eventObserverList.get(i).copy());
 		}
 		for (int i = 0; i < this.ignoredObjects.size(); i++) {
-			copy.ignoredObjects.add(this.ignoredObjects.get(i.copy()));
+			copy.ignoredObjects.add(this.ignoredObjects.get(i).copy());
 		}
 		for (int i = 0; i < this.onHitEffects.size(); i++) {
-			copy.onHitEffects.add(this.onHitEffects.get(i.copy()));
+			copy.onHitEffects.add(this.onHitEffects.get(i).copy());
+			;
 		}
 		for (int i = 0; i < this.points.size(); i++) {
 			copy.points.add(new Point(this.points.get(i)));

@@ -24,5 +24,6 @@ public interface Behaviour {
 	public void setBumping(boolean value);
 
 	public void setDestructibleOnBump(boolean value);
-	// test
+
+	public Behaviour copy();
 }

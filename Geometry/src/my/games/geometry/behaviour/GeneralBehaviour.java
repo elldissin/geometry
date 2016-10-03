@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 import my.games.geometry.game.objects.GameObject;
 
-public class GeneralBehaviour implements Behaviour, Serializable {
+public abstract class GeneralBehaviour implements Behaviour, Serializable {
 	protected boolean slowable;
 	protected boolean vulnerable;
 	protected boolean bumping;
@@ -75,4 +75,7 @@ public class GeneralBehaviour implements Behaviour, Serializable {
 	public void setDestructibleOnBump(boolean value) {
 		destrictibleOnBump = value;
 	}
+
+	@Override
+	public abstract Behaviour copy();
 }

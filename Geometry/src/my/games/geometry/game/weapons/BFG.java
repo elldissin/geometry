@@ -17,7 +17,7 @@ public class BFG implements Weapon, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<Projectile> projectileList;
+	private List<Projectile> projectileList; // lATER why not GameObject here?
 
 	public BFG() {
 		projectileList = new ArrayList<Projectile>();
@@ -44,6 +44,15 @@ public class BFG implements Weapon, Serializable {
 
 	public String toString() {
 		return "BFG";
+	}
+
+	@Override
+	public Weapon copy() {
+		BFG copy = new BFG();
+		for (int i = 0; i < this.projectileList.size(); i++) {
+			copy.projectileList.add((Projectile) projectileList.get(i).copy());
+		}
+		return copy;
 	}
 
 }

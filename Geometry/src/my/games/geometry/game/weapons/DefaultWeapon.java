@@ -43,4 +43,13 @@ public class DefaultWeapon implements Weapon, Serializable {
 	public String toString() {
 		return "DefaultWeapon";
 	}
+
+	@Override
+	public Weapon copy() {
+		DefaultWeapon copy = new DefaultWeapon();
+		for (int i = 0; i < this.projectileList.size(); i++) {
+			copy.projectileList.add((Projectile) projectileList.get(i).copy());
+		}
+		return copy;
+	}
 }

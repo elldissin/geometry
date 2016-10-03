@@ -35,7 +35,7 @@ public abstract class GameObject implements Updatable, Serializable {
 	protected Mover mover;
 	protected Weapon weapon;
 	protected Renderer renderer;
-	private List<EventObserver> eventObserverList;
+	protected List<EventObserver> eventObserverList;
 
 	protected List<Point> points;
 	protected List<GameObject> ignoredObjects;
@@ -52,7 +52,8 @@ public abstract class GameObject implements Updatable, Serializable {
 		obsolete = false;
 		setPos(new Point(x, y));
 		setPrevPos((Point) (getPos().clone()));
-		points = new CopyOnWriteArrayList<Point>(); // LATER fix CopyOnWrite later
+		points = new CopyOnWriteArrayList<Point>(); // LATER fix CopyOnWrite
+													// later
 		ignoredObjects = new CopyOnWriteArrayList<GameObject>();
 		onHitEffects = new CopyOnWriteArrayList<Effect>();
 
@@ -272,4 +273,6 @@ public abstract class GameObject implements Updatable, Serializable {
 		eventObserverList.remove(eventObserver);
 
 	}
+
+	public abstract GameObject copy();
 }

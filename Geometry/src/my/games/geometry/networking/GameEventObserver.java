@@ -1,7 +1,6 @@
 package my.games.geometry.networking;
 
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -26,14 +25,13 @@ public class GameEventObserver implements EventObserver, Serializable {
 
 	public Queue<GameEvent> processEventQueue() {
 		// FIXME deep copy the queue before clearing
+		Queue<GameEvent> copyOfEventQueue = new ConcurrentLinkedQueue<GameEvent>();
 		synchronized (eventsQueue) {
-			if (eventsQueue.size() > 0) {
-				Queue<GameEvent> copyOfEventQueue = new LinkedList<GameEvent>(eventsQueue);
-				eventsQueue.clear();
-				return copyOfEventQueue;
+			while (eventsQueue.size() > 0) {
+				copyOfEventQueue.add(eventsQueue.poll().copy());
 			}
 		}
-		return new LinkedList<GameEvent>();
+		return copyOfEventQueue;
 	}
 
 }

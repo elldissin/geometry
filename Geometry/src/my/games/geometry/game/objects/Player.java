@@ -70,14 +70,17 @@ public class Player extends GameObject {
 		copy.liveDistance = this.liveDistance;
 		copy.prevPos.x = this.prevPos.x;
 		copy.prevPos.y = this.prevPos.y;
-		copy.behaviour = this.behaviour.copy();
-		copy.mover = this.mover.copy();
-		copy.weapon = this.weapon.copy();
+		if (this.behaviour != null)
+			copy.behaviour = this.behaviour.copy();
+		if (this.mover != null)
+			copy.mover = this.mover.copy();
+		if (this.weapon != null)
+			copy.weapon = this.weapon.copy();
 		// no need to copy renderer copy.renderer = this.renderer.copy();
 		// no need to copy EventObservers
-		for (int i = 0; i < this.ignoredObjects.size(); i++) {
-			copy.ignoredObjects.add(this.ignoredObjects.get(i).copy());
-		}
+		// for (int i = 0; i < this.ignoredObjects.size(); i++) {
+		// copy.ignoredObjects.add(this.ignoredObjects.get(i).copy());
+		// }
 		for (int i = 0; i < this.onHitEffects.size(); i++) {
 			copy.onHitEffects.add(this.onHitEffects.get(i).copy());
 			;

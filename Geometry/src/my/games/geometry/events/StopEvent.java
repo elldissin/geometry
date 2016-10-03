@@ -16,9 +16,9 @@ public class StopEvent extends GameEvent {
 	}
 
 	@Override
-	public GameEvent copy(GameEvent toBeCopied) {
-		GameEvent copy = new StopEvent(toBeCopied.sourceObject.copy());
-		copy.timeStamp = toBeCopied.timeStamp;
+	public GameEvent copy() {
+		GameEvent copy = new StopEvent(this.sourceObject.copy());
+		copy.timeStamp = this.timeStamp;
 		return copy;
 	}
 }

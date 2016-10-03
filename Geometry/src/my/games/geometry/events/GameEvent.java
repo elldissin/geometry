@@ -31,5 +31,5 @@ public abstract class GameEvent implements Serializable {
 		return timeStamp;
 	}
 
-	public abstract GameEvent copy(GameEvent toBeCopied);
+	public abstract GameEvent copy();
 }

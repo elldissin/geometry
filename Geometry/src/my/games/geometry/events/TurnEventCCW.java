@@ -22,9 +22,9 @@ public class TurnEventCCW extends GameEvent {
 	}
 
 	@Override
-	public GameEvent copy(GameEvent toBeCopied) {
-		GameEvent copy = new TurnEventCCW(toBeCopied.sourceObject.copy());
-		copy.timeStamp = toBeCopied.timeStamp;
+	public GameEvent copy() {
+		GameEvent copy = new TurnEventCCW(this.sourceObject.copy());
+		copy.timeStamp = this.timeStamp;
 		return copy;
 	}
 }

@@ -19,9 +19,9 @@ public class MoveEvent extends GameEvent {
 	}
 
 	@Override
-	public GameEvent copy(GameEvent toBeCopied) {
-		GameEvent copy = new MoveEvent(toBeCopied.sourceObject.copy());
-		copy.timeStamp = toBeCopied.timeStamp;
+	public GameEvent copy() {
+		GameEvent copy = new MoveEvent(this.sourceObject.copy());
+		copy.timeStamp = this.timeStamp;
 		return copy;
 	}
 }

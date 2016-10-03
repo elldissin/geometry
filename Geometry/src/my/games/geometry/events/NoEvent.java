@@ -4,8 +4,8 @@ import my.games.geometry.game.World;
 import my.games.geometry.game.objects.GameObject;
 
 /**
- * @author LCrystal Special subclass that represents empty event, required to avoid null in
- *         GameEvent returning methods
+ * @author LCrystal Special subclass that represents empty event, required to
+ *         avoid null in GameEvent returning methods
  */
 public class NoEvent extends GameEvent {
 
@@ -16,6 +16,13 @@ public class NoEvent extends GameEvent {
 	@Override
 	public void applyEventToWorld(World world) {
 
+	}
+
+	@Override
+	public GameEvent copy(GameEvent toBeCopied) {
+		GameEvent copy = new NoEvent(toBeCopied.sourceObject.copy());
+		copy.timeStamp = toBeCopied.timeStamp;
+		return copy;
 	}
 
 }

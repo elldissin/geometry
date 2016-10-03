@@ -21,4 +21,11 @@ public class TurnEventCW extends GameEvent {
 			obj.turn(1);
 	}
 
+	@Override
+	public GameEvent copy(GameEvent toBeCopied) {
+		GameEvent copy = new TurnEventCW(toBeCopied.sourceObject.copy());
+		copy.timeStamp = toBeCopied.timeStamp;
+		return copy;
+	}
+
 }

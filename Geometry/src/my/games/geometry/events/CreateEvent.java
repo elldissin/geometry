@@ -20,4 +20,11 @@ public class CreateEvent extends GameEvent {
 			world.createGameObject(sourceObject);
 	}
 
+	@Override
+	public GameEvent copy(GameEvent toBeCopied) {
+		GameEvent copy = new CreateEvent(toBeCopied.sourceObject.copy());
+		copy.timeStamp = toBeCopied.timeStamp;
+		return copy;
+	}
+
 }

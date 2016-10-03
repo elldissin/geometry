@@ -30,4 +30,6 @@ public abstract class GameEvent implements Serializable {
 	public long getTimeStamp() {
 		return timeStamp;
 	}
+
+	public abstract GameEvent copy(GameEvent toBeCopied);
 }

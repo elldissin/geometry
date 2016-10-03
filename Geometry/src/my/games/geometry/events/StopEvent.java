@@ -14,4 +14,11 @@ public class StopEvent extends GameEvent {
 	public void applyEventToWorld(World world) {
 		// REMOVE remove stop event ?
 	}
+
+	@Override
+	public GameEvent copy(GameEvent toBeCopied) {
+		GameEvent copy = new StopEvent(toBeCopied.sourceObject.copy());
+		copy.timeStamp = toBeCopied.timeStamp;
+		return copy;
+	}
 }

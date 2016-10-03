@@ -21,4 +21,11 @@ public class ShootEvent extends GameEvent {
 			obj.getWeapon().shoot(obj);
 	}
 
+	@Override
+	public GameEvent copy(GameEvent toBeCopied) {
+		GameEvent copy = new ShootEvent(toBeCopied.sourceObject.copy());
+		copy.timeStamp = toBeCopied.timeStamp;
+		return copy;
+	}
+
 }

@@ -16,4 +16,11 @@ public class DestroyEvent extends GameEvent {
 		}
 	}
 
+	@Override
+	public GameEvent copy(GameEvent toBeCopied) {
+		GameEvent copy = new DestroyEvent(toBeCopied.sourceObject.copy());
+		copy.timeStamp = toBeCopied.timeStamp;
+		return copy;
+	}
+
 }

@@ -93,4 +93,13 @@ public class DefaultMover implements Mover, Serializable {
 	public void setTurnSpeed(double turnSpeed) {
 		this.turnSpeed = turnSpeed;
 	}
+
+	@Override
+	public Mover copy() {
+		DefaultMover copy = new DefaultMover();
+		copy.speed = this.speed;
+		copy.maxSpeed = this.maxSpeed;
+		copy.turnSpeed = this.turnSpeed;
+		return copy;
+	}
 }

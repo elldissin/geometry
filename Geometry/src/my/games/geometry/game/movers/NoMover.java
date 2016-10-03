@@ -71,4 +71,10 @@ public class NoMover implements Mover, Serializable {
 
 	}
 
+	@Override
+	public Mover copy() {
+		NoMover copy = new NoMover();
+		return copy;
+	}
+
 }

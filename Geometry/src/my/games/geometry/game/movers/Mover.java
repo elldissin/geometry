@@ -22,4 +22,6 @@ public interface Mover {
 	double getTurnSpeed();
 
 	void setTurnSpeed(double turnSpeed);
+
+	public Mover copy();
 }

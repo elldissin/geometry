@@ -85,4 +85,12 @@ public class ProjectileMover implements Mover, Serializable {
 
 	}
 
+	@Override
+	public Mover copy() {
+		ProjectileMover copy = new ProjectileMover();
+		copy.speed = this.speed;
+		copy.distTravelled = this.distTravelled;
+		return copy;
+	}
+
 }

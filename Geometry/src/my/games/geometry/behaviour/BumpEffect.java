@@ -12,10 +12,16 @@ public class BumpEffect extends GeneralEffect implements Effect {
 	public boolean isApplicable(Behaviour b) {
 		return b.isBumping();
 	}
-	
+
 	@Override
 	public void applyTo(GameObject obj) {
 		obj.getBehaviour().bump(obj, amount);
+	}
+
+	@Override
+	public Effect copy() {
+		BumpEffect copy = new BumpEffect(this.amount);
+		return copy;
 	}
 
 }

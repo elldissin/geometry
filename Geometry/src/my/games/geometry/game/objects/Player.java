@@ -53,4 +53,41 @@ public class Player extends GameObject {
 		} else
 			health -= amount;
 	}
+
+	@Override
+	public GameObject copy() {
+		GameObject copy = new Player(this.currentPos.x, this.currentPos.y, this.angle);
+		// angle, x and y are already copied above by constructor;
+		copy.objectID = this.objectID;
+		copy.objWidth = this.objWidth;
+		copy.objHeight = this.objHeight;
+		copy.health = this.health;
+		copy.level = this.level;
+		copy.experienceForUp = this.experienceForUp;
+		copy.currentExperience = this.currentExperience;
+		copy.obsolete = this.obsolete;
+		copy.distTravelled = this.distTravelled;
+		copy.liveDistance = this.liveDistance;
+		copy.prevPos.x = this.prevPos.x;
+		copy.prevPos.y = this.prevPos.y;
+		copy.behaviour = this.behaviour.copy();
+		copy.mover = this.mover.copy();
+		copy.weapon = this.weapon.copy();
+		copy.renderer = this.renderer.copy();
+
+		for (int i = 0; i < this.eventObserverList.size(); i++) {
+			copy.eventObserverList.add(this.eventObserverList.get(i.copy()));
+		}
+		for (int i = 0; i < this.ignoredObjects.size(); i++) {
+			copy.ignoredObjects.add(this.ignoredObjects.get(i.copy()));
+		}
+		for (int i = 0; i < this.onHitEffects.size(); i++) {
+			copy.onHitEffects.add(this.onHitEffects.get(i.copy()));
+		}
+		for (int i = 0; i < this.points.size(); i++) {
+			copy.points.add(new Point(this.points.get(i)));
+		}
+
+		return copy;
+	}
 }

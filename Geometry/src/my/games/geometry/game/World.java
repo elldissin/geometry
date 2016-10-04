@@ -1,5 +1,6 @@
 package my.games.geometry.game;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class World {
 	}
 
 	private void initializeWorld() {
-		GameObject obst = createGameObject("static", 250, 50, 0.0);
+		GameObject obst = createGameObject("static", new Point(250, 50), 0.0);
 		obst.addOnHitEffect(new BumpEffect(0));
 	}
 
@@ -48,19 +49,19 @@ public class World {
 		return gameObjectList;
 	}
 
-	public GameObject createGameObject(String objType, int x, int y, double angle) {
+	public GameObject createGameObject(String objType, Point position, double angle) {
 		int id = UniqueIdProvider.getObjectID();
 		GameObject obj = null;
 		switch (objType) {
 		case "player":
-			obj = new Player(x, y, angle);
+			obj = new Player(position, angle);
 			shootersList.add(obj);
 			break;
 		case "projectile":
-			obj = new Projectile(x, y, angle);
+			obj = new Projectile(position, angle);
 			break;
 		case "static":
-			obj = new StaticObject(x, y, angle);
+			obj = new StaticObject(position, angle);
 			break;
 		}
 		if (obj != null) {
@@ -118,7 +119,9 @@ public class World {
 	}
 
 	public GameObject addNewConnectedPlayer(int clientID) {
-		GameObject newPlayer = createGameObject("player", 100, 100, 0.0); // FIXME free position?
+		GameObject newPlayer = createGameObject("player", new Point(100, 100), 0.0); // FIXME
+		// free
+		// position?
 		newPlayer.setWeapon(new BFG());
 		newPlayer.setBehaviour(new PlayerBehaviour());
 		newPlayer.addOnHitEffect(new BumpEffect(0));

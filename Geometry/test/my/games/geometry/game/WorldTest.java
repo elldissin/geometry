@@ -15,7 +15,7 @@ public class WorldTest {
 		// arrange
 		World worldTest = new World();
 		// act
-		GameObject playerTest = worldTest.createGameObject("player", 0, 0, 0.0);
+		GameObject playerTest = worldTest.createGameObject("player", new Point(0, 0), 0.0);
 		// assert
 		Point playerPositionTest = playerTest.getPos();
 		assertEquals(playerPositionTest.x, 0);

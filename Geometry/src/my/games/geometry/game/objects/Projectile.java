@@ -9,8 +9,8 @@ import my.games.geometry.game.renderers.ProjectileRenderer;
 public class Projectile extends GameObject {
 	private static final long serialVersionUID = 1L;
 
-	public Projectile(int x, int y, double angle) {
-		super(x, y, angle);
+	public Projectile(Point position, double angle) {
+		super(position, angle);
 		mover = new ProjectileMover();
 		renderer = new ProjectileRenderer();
 		objHeight = 5;
@@ -56,7 +56,7 @@ public class Projectile extends GameObject {
 
 	@Override
 	public GameObject copy() {
-		GameObject copy = new Projectile(this.currentPos.x, this.currentPos.y, this.angle);
+		GameObject copy = new Projectile((Point) (this.currentPos.clone()), this.angle);
 		// angle, x and y are already copied above by constructor;
 		copy.objectID = this.objectID;
 		copy.objWidth = this.objWidth;

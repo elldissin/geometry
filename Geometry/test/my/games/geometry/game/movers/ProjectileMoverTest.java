@@ -2,6 +2,8 @@ package my.games.geometry.game.movers;
 
 import static org.junit.Assert.assertTrue;
 
+import java.awt.Point;
+
 import org.junit.Test;
 
 import my.games.geometry.game.World;
@@ -13,7 +15,7 @@ public class ProjectileMoverTest {
 	public void bulletDestroyTest() {
 		// arrange
 		World worldTest = new World();
-		GameObject bulletTest = worldTest.createGameObject("projectile", 0, 0, 0.0);
+		GameObject bulletTest = worldTest.createGameObject("projectile", new Point(0, 0), 0.0);
 
 		// act
 		for (int i = 0; i < 58; i++) {

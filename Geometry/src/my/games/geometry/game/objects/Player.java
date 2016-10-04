@@ -10,8 +10,8 @@ import my.games.geometry.game.weapons.DefaultWeapon;
 public class Player extends GameObject {
 	private static final long serialVersionUID = 1L;
 
-	public Player(int x, int y, double angle) {
-		super(x, y, angle);
+	public Player(Point position, double angle) {
+		super(position, angle);
 		health = 100;
 		level = 5;
 		experienceForUp = level * 1000;
@@ -56,7 +56,7 @@ public class Player extends GameObject {
 
 	@Override
 	public GameObject copy() {
-		GameObject copy = new Player(this.currentPos.x, this.currentPos.y, this.angle);
+		GameObject copy = new Player((Point) (this.currentPos.clone()), this.angle);
 		// angle, x and y are already copied above by constructor;
 		copy.objectID = this.objectID;
 		copy.objWidth = this.objWidth;

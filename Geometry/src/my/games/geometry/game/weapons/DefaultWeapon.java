@@ -1,5 +1,6 @@
 package my.games.geometry.game.weapons;
 
+import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class DefaultWeapon implements Weapon, Serializable {
 
 	@Override
 	public void shoot(GameObject obj) {
-		Projectile projectile = new Projectile(obj.getPos().x, obj.getPos().y, obj.getAngle());
+		Projectile projectile = new Projectile((Point) (obj.getPos().clone()), obj.getAngle());
 		projectile.addOnHitEffect(new SlowEffect(20));
 		projectile.addOnHitEffect(new DmgEffect(1));
 		projectile.setBehaviour(new ProjectileBehaviour());

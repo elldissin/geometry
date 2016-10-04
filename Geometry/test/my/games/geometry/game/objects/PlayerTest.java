@@ -3,6 +3,8 @@ package my.games.geometry.game.objects;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.Point;
+
 import org.junit.Test;
 
 import my.games.geometry.game.World;
@@ -13,7 +15,7 @@ public class PlayerTest {
 	public void PlayerHPTest() {
 		// arrange
 		World worldTest = new World();
-		GameObject playerTest = worldTest.createGameObject("player", 0, 0, 0.0);
+		GameObject playerTest = worldTest.createGameObject("player", new Point(0, 0), 0.0);
 		// act
 		playerTest.getHit(101);
 		// assert

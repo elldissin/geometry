@@ -41,22 +41,20 @@ public abstract class GameObject implements Updatable, Serializable {
 	protected List<GameObject> ignoredObjects;
 	protected List<Effect> onHitEffects;
 
-	public GameObject(int x, int y, double angle) {
+	public GameObject(Point position, double angle) {
 		super();
 		eventObserverList = new CopyOnWriteArrayList<EventObserver>();
 		objWidth = 20;
 		objHeight = 20;
 		this.angle = angle;
-		// distTravelled = 0;
 		liveDistance = 400;
 		obsolete = false;
-		setPos(new Point(x, y));
+		setPos(position);
 		setPrevPos((Point) (getPos().clone()));
 		points = new CopyOnWriteArrayList<Point>(); // LATER fix CopyOnWrite
 													// later
 		ignoredObjects = new CopyOnWriteArrayList<GameObject>();
 		onHitEffects = new CopyOnWriteArrayList<Effect>();
-
 		behaviour = null;
 	}
 

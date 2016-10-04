@@ -8,8 +8,8 @@ import my.games.geometry.game.renderers.DefaultRenderer;
 
 public class StaticObject extends GameObject {
 
-	public StaticObject(int x, int y, double angle) {
-		super(x, y, angle);
+	public StaticObject(Point position, double angle) {
+		super(position, angle);
 		health = 100;
 		level = 2;
 		objWidth = 50;
@@ -53,7 +53,7 @@ public class StaticObject extends GameObject {
 
 	@Override
 	public GameObject copy() {
-		GameObject copy = new StaticObject(this.currentPos.x, this.currentPos.y, this.angle);
+		GameObject copy = new StaticObject((Point) (this.currentPos.clone()), this.angle);
 		// angle, x and y are already copied above by constructor;
 		copy.objectID = this.objectID;
 		copy.objWidth = this.objWidth;

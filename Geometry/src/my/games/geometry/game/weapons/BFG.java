@@ -1,5 +1,6 @@
 package my.games.geometry.game.weapons;
 
+import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class BFG implements Weapon, Serializable {
 
 	@Override
 	public void shoot(GameObject obj) {
-		Projectile projectile = new BFGProjectile(obj.getPos().x, obj.getPos().y, obj.getAngle());
+		Projectile projectile = new BFGProjectile((Point) (obj.getPos().clone()), obj.getAngle());
 		projectile.addOnHitEffect(new SlowEffect(20));
 		projectile.addOnHitEffect(new DmgEffect(10));
 		projectile.setBehaviour(new ProjectileBehaviour());

@@ -28,12 +28,6 @@ public class BufferedEventSender {
 		timer.start();
 	}
 
-	public void sendMessage(NetworkMessage message) {
-		synchronized (messagePacket) {
-			messagePacket.addMessage(message);
-		}
-	}
-
 	private void sendBufferToClients() {
 		synchronized (messagePacket) {
 			if (messagePacket.size() > 0) {
@@ -48,7 +42,9 @@ public class BufferedEventSender {
 	}
 
 	public void sendMessageTo(NetworkMessage message, List<ConnectedClient> clientList) {
-		this.clientList = clientList;
-		messagePacket.addMessage(message);
+		synchronized (messagePacket) {
+			this.clientList = clientList;
+			messagePacket.addMessage(message);
+		}
 	}
 }

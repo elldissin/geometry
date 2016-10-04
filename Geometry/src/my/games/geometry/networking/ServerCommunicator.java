@@ -11,6 +11,7 @@ public class ServerCommunicator {
 
 	private String hostName;
 	private int portNumber = 4444;
+	private int totalEventsCount;
 	private Socket mySocket;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
@@ -39,7 +40,9 @@ public class ServerCommunicator {
 	}
 
 	public NetworkMessage getNextMessage() {
-		return messageQueue.poll();
+		synchronized (messageQueue) {
+			return messageQueue.poll();
+		}
 	}
 
 	public void closeConnection() {
@@ -72,8 +75,13 @@ public class ServerCommunicator {
 						NetworkMessagePacket messagePacketFromServer;
 						NetworkMessage msg = null;
 						while ((messagePacketFromServer = (NetworkMessagePacket) in.readObject()) != null) {
-							while ((msg = messagePacketFromServer.getNextMessage()) != null)
-								messageQueue.add(msg);
+							totalEventsCount += messagePacketFromServer.size();
+							System.out.println("Total received:" + totalEventsCount);
+							while ((msg = messagePacketFromServer.getNextMessage()) != null) {
+								synchronized (messageQueue) {
+									messageQueue.add(msg);
+								}
+							}
 							// TODO add something to exit properly
 						}
 					} catch (IOException | ClassNotFoundException e) {

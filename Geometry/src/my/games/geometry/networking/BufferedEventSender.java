@@ -15,6 +15,7 @@ public class BufferedEventSender {
 	private NetworkMessagePacket messagePacket;
 	private List<ConnectedClient> clientList;
 	private Timer timer;
+	private int totalEventsCount;
 
 	public BufferedEventSender() {
 		messagePacket = new NetworkMessagePacket();
@@ -28,16 +29,22 @@ public class BufferedEventSender {
 	}
 
 	public void sendMessage(NetworkMessage message) {
-		messagePacket.addMessage(message);
+		synchronized (messagePacket) {
+			messagePacket.addMessage(message);
+		}
 	}
 
 	private void sendBufferToClients() {
-		if (messagePacket.size() > 0) {
-			for (int i = 0; i < clientList.size(); i++) {
-				clientList.get(i).sendMessagePacket(messagePacket);
+		synchronized (messagePacket) {
+			if (messagePacket.size() > 0) {
+				totalEventsCount += messagePacket.size();
+				System.out.println("Total sent:" + totalEventsCount);
+				for (int i = 0; i < clientList.size(); i++) {
+					clientList.get(i).sendMessagePacket(messagePacket);
+				}
 			}
+			messagePacket.clear();
 		}
-		messagePacket.clear();
 	}
 
 	public void sendMessageTo(NetworkMessage message, List<ConnectedClient> clientList) {

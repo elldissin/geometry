@@ -24,7 +24,7 @@ public class ServerLogDisplay implements Runnable {
 		frame.setSize(500, 500);
 		frame.setResizable(false);
 
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 5; i++) {
 			JTextPane anotherTextField = new JTextPane();
 			anotherTextField.setBounds(0, (i * 50) + 25, 200, 20);
 			anotherTextField.setText("0");
@@ -41,9 +41,6 @@ public class ServerLogDisplay implements Runnable {
 		mLabelList.get(2).setText("updatableObjectList");
 		mLabelList.get(3).setText("collidableObjectList");
 		mLabelList.get(4).setText("shootersList");
-		mLabelList.get(5).setText("hz");
-		mLabelList.get(6).setText("hz");
-		mLabelList.get(7).setText("hz");
 
 		frame.setVisible(true);
 		frame.setFocusable(true);

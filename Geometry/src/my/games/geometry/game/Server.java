@@ -15,8 +15,8 @@ import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.networking.BufferedEventSender;
-import my.games.geometry.networking.GameEventObserver;
 import my.games.geometry.networking.ClientService;
+import my.games.geometry.networking.GameEventObserver;
 import my.games.geometry.networking.NetworkMessage;
 import my.games.geometry.networking.PlayerInput;
 import my.games.geometry.ui.ServerLogDisplay;
@@ -29,7 +29,7 @@ public class Server {
 	private EventSource eventSourceForLocalWorld;
 	private EventHandler eventHandler;
 	private ClientService clientService;
-	private GameEventObserver clientEventNotifier; // Observer
+	private GameEventObserver gameEventObserver; // Observer
 	private BufferedEventSender bufferedSender;
 	private WorldRunner runner;
 	private ServerLogDisplay logDisplay;
@@ -39,9 +39,9 @@ public class Server {
 	public Server() {
 		super();
 		world = new World();
-		clientEventNotifier = new GameEventObserver();
+		gameEventObserver = new GameEventObserver();
 		logDisplayNotifier = new LogDisplayNotifier();
-		world.registerWorldObserver(clientEventNotifier);
+		world.registerWorldObserver(gameEventObserver);
 		world.registerLogDisplayNotifyer(logDisplayNotifier);
 		eventHandler = new EventHandler(world);
 		renderEngine = new NoRenderEngine();
@@ -98,10 +98,11 @@ public class Server {
 	}
 
 	private void notifyClients() {
-		Queue<GameEvent> eventsQueue = clientEventNotifier.processEventQueue();
-		NetworkMessage msg = new NetworkMessage();
-		for (int i = 0; i < eventsQueue.size(); i++) {
-			msg.setEvent(eventsQueue.poll());
+		Queue<GameEvent> eventsQueue = gameEventObserver.processEventQueue();
+		while (eventsQueue.size() > 0) {
+			NetworkMessage msg = new NetworkMessage();
+			GameEvent ev = eventsQueue.poll().copy();
+			msg.setEvent(ev);
 			bufferedSender.sendMessageTo(msg, clientService.getClientList());
 		}
 	}

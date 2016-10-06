@@ -32,7 +32,6 @@ public class BufferedEventSender {
 		synchronized (messagePacket) {
 			if (messagePacket.size() > 0) {
 				totalEventsCount += messagePacket.size();
-				System.out.println("Total sent:" + totalEventsCount);
 				for (int i = 0; i < clientList.size(); i++) {
 					clientList.get(i).sendMessagePacket(messagePacket);
 				}

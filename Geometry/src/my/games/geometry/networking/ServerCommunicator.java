@@ -76,7 +76,6 @@ public class ServerCommunicator {
 						NetworkMessage msg = null;
 						while ((messagePacketFromServer = (NetworkMessagePacket) in.readObject()) != null) {
 							totalEventsCount += messagePacketFromServer.size();
-							System.out.println("Total received:" + totalEventsCount);
 							while ((msg = messagePacketFromServer.getNextMessage()) != null) {
 								synchronized (messageQueue) {
 									messageQueue.add(msg);

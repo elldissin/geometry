@@ -58,37 +58,7 @@ public class Projectile extends GameObject {
 	public GameObject copy() {
 		GameObject copy = new Projectile((Point) (this.currentPos.clone()), this.angle);
 		// angle, x and y are already copied above by constructor;
-		copy.objectID = this.objectID;
-		copy.objWidth = this.objWidth;
-		copy.objHeight = this.objHeight;
-		copy.health = this.health;
-		copy.level = this.level;
-		copy.experienceForUp = this.experienceForUp;
-		copy.currentExperience = this.currentExperience;
-		copy.obsolete = this.obsolete;
-		copy.distTravelled = this.distTravelled;
-		copy.liveDistance = this.liveDistance;
-		copy.prevPos.x = this.prevPos.x;
-		copy.prevPos.y = this.prevPos.y;
-		if (this.behaviour != null)
-			copy.behaviour = this.behaviour.copy();
-		if (this.mover != null)
-			copy.mover = this.mover.copy();
-		if (this.weapon != null)
-			copy.weapon = this.weapon.copy();
-		// no need to copy renderer copy.renderer = this.renderer.copy();
-		// no need to copy EventObservers
-		// for (int i = 0; i < this.ignoredObjects.size(); i++) {
-		// copy.ignoredObjects.add(this.ignoredObjects.get(i).copy());
-		// }
-		for (int i = 0; i < this.onHitEffects.size(); i++) {
-			copy.onHitEffects.add(this.onHitEffects.get(i).copy());
-			;
-		}
-		for (int i = 0; i < this.points.size(); i++) {
-			copy.points.add(new Point(this.points.get(i)));
-		}
-
+		super.finishCopy(copy);
 		return copy;
 	}
 }

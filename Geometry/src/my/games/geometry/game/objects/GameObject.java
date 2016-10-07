@@ -273,4 +273,38 @@ public abstract class GameObject implements Updatable, Serializable {
 	}
 
 	public abstract GameObject copy();
+
+	protected void finishCopy(GameObject copyToWorkWith) {
+		copyToWorkWith.objectID = this.objectID;
+		copyToWorkWith.objWidth = this.objWidth;
+		copyToWorkWith.objHeight = this.objHeight;
+		copyToWorkWith.health = this.health;
+		copyToWorkWith.level = this.level;
+		copyToWorkWith.experienceForUp = this.experienceForUp;
+		copyToWorkWith.currentExperience = this.currentExperience;
+		copyToWorkWith.obsolete = this.obsolete;
+		copyToWorkWith.distTravelled = this.distTravelled;
+		copyToWorkWith.liveDistance = this.liveDistance;
+		copyToWorkWith.prevPos.x = this.prevPos.x;
+		copyToWorkWith.prevPos.y = this.prevPos.y;
+		if (this.behaviour != null)
+			copyToWorkWith.behaviour = this.behaviour.copy();
+		if (this.mover != null)
+			copyToWorkWith.mover = this.mover.copy();
+		if (this.weapon != null)
+			copyToWorkWith.weapon = this.weapon.copy();
+		// no need to copy renderer copy.renderer = this.renderer.copy();
+		// no need to copy EventObservers
+		// for (int i = 0; i < this.ignoredObjects.size(); i++) {
+		// copy.ignoredObjects.add(this.ignoredObjects.get(i).copy());
+		// }
+		for (int i = 0; i < this.onHitEffects.size(); i++) {
+			copyToWorkWith.onHitEffects.add(this.onHitEffects.get(i).copy());
+			;
+		}
+		for (int i = 0; i < this.points.size(); i++) {
+			copyToWorkWith.points.add(new Point(this.points.get(i)));
+		}
+
+	}
 }

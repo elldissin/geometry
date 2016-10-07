@@ -1,6 +1,11 @@
 package my.games.geometry.behaviour;
 
 public class ProjectileBehaviour extends GeneralBehaviour implements Behaviour {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ProjectileBehaviour() {
 		super();
 		bumping = true;
@@ -10,10 +15,7 @@ public class ProjectileBehaviour extends GeneralBehaviour implements Behaviour {
 	@Override
 	public Behaviour copy() {
 		ProjectileBehaviour copy = new ProjectileBehaviour();
-		copy.slowable = this.slowable;
-		copy.vulnerable = this.vulnerable;
-		copy.bumping = this.bumping;
-		copy.destrictibleOnBump = this.destrictibleOnBump;
+		finishCopy(copy);
 		return copy;
 	}
 }

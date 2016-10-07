@@ -16,10 +16,10 @@ public abstract class GeneralWeapon {
 		return projectileList;
 	}
 
-	public void finishCopy(Weapon copy) {
+	public void finishCopy(GeneralWeapon copy) {
 		synchronized (projectileList) {
 			for (int i = 0; i < this.projectileList.size(); i++) {
-				copy.getProjectileList().add((Projectile) projectileList.get(i).copy());
+				copy.projectileList.add((Projectile) projectileList.get(i).copy());
 			}
 		}
 	}

@@ -1,6 +1,11 @@
 package my.games.geometry.behaviour;
 
 public class PlayerBehaviour extends GeneralBehaviour implements Behaviour {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public PlayerBehaviour() {
 		super();
 		bumping = true;
@@ -11,10 +16,7 @@ public class PlayerBehaviour extends GeneralBehaviour implements Behaviour {
 	@Override
 	public Behaviour copy() {
 		PlayerBehaviour copy = new PlayerBehaviour();
-		copy.slowable = this.slowable;
-		copy.vulnerable = this.vulnerable;
-		copy.bumping = this.bumping;
-		copy.destrictibleOnBump = this.destrictibleOnBump;
+		finishCopy(copy);
 		return copy;
 	}
 }

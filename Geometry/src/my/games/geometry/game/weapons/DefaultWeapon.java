@@ -33,7 +33,9 @@ public class DefaultWeapon implements Weapon, Serializable {
 		// add each other to ignore list to avoid collisions
 		obj.addIgnoreObject(projectile);
 		projectile.addIgnoreObject(obj);
-		projectileList.add(projectile);
+		synchronized (projectileList) {
+			projectileList.add(projectile);
+		}
 	}
 
 	@Override
@@ -48,8 +50,10 @@ public class DefaultWeapon implements Weapon, Serializable {
 	@Override
 	public Weapon copy() {
 		DefaultWeapon copy = new DefaultWeapon();
-		for (int i = 0; i < this.projectileList.size(); i++) {
-			copy.projectileList.add((Projectile) projectileList.get(i).copy());
+		synchronized (projectileList) {
+			for (int i = 0; i < this.projectileList.size(); i++) {
+				copy.projectileList.add((Projectile) projectileList.get(i).copy());
+			}
 		}
 		return copy;
 	}

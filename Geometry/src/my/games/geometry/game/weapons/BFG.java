@@ -2,8 +2,6 @@ package my.games.geometry.game.weapons;
 
 import java.awt.Point;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import my.games.geometry.behaviour.DmgEffect;
 import my.games.geometry.behaviour.ProjectileBehaviour;
@@ -12,16 +10,15 @@ import my.games.geometry.game.objects.BFGProjectile;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Projectile;
 
-public class BFG implements Weapon, Serializable {
+public class BFG extends GeneralWeapon implements Weapon, Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<Projectile> projectileList; // lATER why not GameObject here?
 
 	public BFG() {
-		projectileList = new ArrayList<Projectile>();
+		super();
 	}
 
 	@Override
@@ -39,24 +36,14 @@ public class BFG implements Weapon, Serializable {
 		}
 	}
 
-	@Override
-	public List<Projectile> getProjectileList() {
-		// TODO Auto-generated method stub
-		return projectileList;
-	}
-
 	public String toString() {
 		return "BFG";
 	}
 
 	@Override
 	public Weapon copy() {
-		BFG copy = new BFG();
-		synchronized (projectileList) {
-			for (int i = 0; i < this.projectileList.size(); i++) {
-				copy.projectileList.add((Projectile) projectileList.get(i).copy());
-			}
-		}
+		Weapon copy = new BFG();
+		finishCopy(copy);
 		return copy;
 	}
 

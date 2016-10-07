@@ -2,8 +2,6 @@ package my.games.geometry.game.weapons;
 
 import java.awt.Point;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import my.games.geometry.behaviour.DmgEffect;
 import my.games.geometry.behaviour.ProjectileBehaviour;
@@ -11,16 +9,15 @@ import my.games.geometry.behaviour.SlowEffect;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Projectile;
 
-public class DefaultWeapon implements Weapon, Serializable {
+public class DefaultWeapon extends GeneralWeapon implements Weapon, Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<Projectile> projectileList;
 
 	public DefaultWeapon() {
-		projectileList = new ArrayList<Projectile>();
+		super();
 	}
 
 	@Override
@@ -38,23 +35,15 @@ public class DefaultWeapon implements Weapon, Serializable {
 		}
 	}
 
-	@Override
-	public List<Projectile> getProjectileList() {
-		return projectileList;
-	}
-
 	public String toString() {
 		return "DefaultWeapon";
 	}
 
 	@Override
 	public Weapon copy() {
-		DefaultWeapon copy = new DefaultWeapon();
-		synchronized (projectileList) {
-			for (int i = 0; i < this.projectileList.size(); i++) {
-				copy.projectileList.add((Projectile) projectileList.get(i).copy());
-			}
-		}
+		Weapon copy = new DefaultWeapon();
+		finishCopy(copy);
 		return copy;
 	}
+
 }

@@ -9,25 +9,17 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ServerCommunicator {
 
+	private int objectIDassignedByServer;
 	private String hostName;
 	private int portNumber = 4444;
 	private int totalEventsCount;
-	private Socket mySocket;
+	private Socket serverConnectSocket;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private Queue<NetworkMessage> messageQueue;
 
 	public ServerCommunicator() {
 		messageQueue = new ConcurrentLinkedQueue<NetworkMessage>();
-	}
-
-	public void sendMessage(NetworkMessage event) {
-		if (out != null)
-			try {
-				out.writeObject(event);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 	}
 
 	public void sendInput(PlayerInput input) {
@@ -51,8 +43,8 @@ public class ServerCommunicator {
 				out.close();
 			if (in != null)
 				in.close();
-			if (mySocket != null)
-				mySocket.close();
+			if (serverConnectSocket != null)
+				serverConnectSocket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,11 +54,10 @@ public class ServerCommunicator {
 	public void openConnectionTo(String hostName, int clientID) {
 		try {
 			this.hostName = hostName;
-			mySocket = new Socket(hostName, portNumber);
-			out = new ObjectOutputStream(mySocket.getOutputStream());
-			in = new ObjectInputStream(mySocket.getInputStream());
-			out.writeObject(clientID);
-
+			serverConnectSocket = new Socket(hostName, portNumber);
+			out = new ObjectOutputStream(serverConnectSocket.getOutputStream());
+			in = new ObjectInputStream(serverConnectSocket.getInputStream());
+			registerClientOnServer(clientID);
 			// This part is continously waiting for events from server
 			Thread inputThread = new Thread(new Runnable() {
 				@Override
@@ -91,7 +82,18 @@ public class ServerCommunicator {
 			inputThread.start();
 		} catch (IOException e) {
 			System.out.println("Couldn't get I/O for the connection to " + hostName);
+			System.out.println("Server not started?");
+			closeConnection();
 			System.exit(1);
 		}
+	}
+
+	private void registerClientOnServer(int clientID) throws IOException {
+		out.writeObject(clientID);
+		objectIDassignedByServer = in.readInt();
+	}
+
+	public int getObjectIDassignedByServer() {
+		return objectIDassignedByServer;
 	}
 }

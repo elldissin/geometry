@@ -44,9 +44,11 @@ public class Client {
 		this.renderEngine = renderEngine;
 	}
 
-	public void start() { // The ID must be already given to client before this call
+	public void start() { // The ID must be already given to client before this
+							// call
 		controller = new Controller(comm, clientID);
 		comm.openConnectionTo("localhost", clientID);
+		renderEngine.lockCameraOn(comm.getObjectIDassignedByServer());
 		runner.start();
 	}
 

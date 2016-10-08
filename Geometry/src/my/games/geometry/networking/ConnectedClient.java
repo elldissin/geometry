@@ -46,4 +46,15 @@ public class ConnectedClient {
 		}
 	}
 
+	public void sendAssignedObjectID(int id) {
+		if (connection != null) {
+			try {
+				connection.getOutputStream().writeInt(id);
+				connection.getOutputStream().reset();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

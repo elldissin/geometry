@@ -86,6 +86,7 @@ public class ClientService implements Runnable {
 														// unnecessary here?
 		GameObject newPlayer = world.addNewConnectedPlayer(client.getClientID());
 		clientToPlayerMap.put(client.getClientID(), newPlayer.getObjectID());
+		client.sendAssignedObjectID(newPlayer.getObjectID());
 		return newPlayer;
 	}
 

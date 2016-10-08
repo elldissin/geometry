@@ -21,7 +21,7 @@ public class LoginButtonListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JPanel bottomStatusBar = client.getRenderEngine().getCamera(3);
+		JPanel bottomStatusBar = client.getRenderEngine().getCamera(2);
 		JPanel gamePanel = client.getRenderEngine().getCamera(1);
 		bottomStatusBar.setPreferredSize(new Dimension(800, 55));
 		gamePanel.setPreferredSize(new Dimension(800, 600));

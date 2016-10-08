@@ -18,4 +18,9 @@ public class NoRenderEngine implements RenderEngine {
 		return new GameCameraPanel(); // empty camera to show nothing
 	}
 
+	@Override
+	public void lockCameraOn(int objID) {
+
+	}
+
 }

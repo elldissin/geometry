@@ -6,4 +6,6 @@ public interface RenderEngine {
 	public void render();
 
 	public GameCameraPanel getCamera(int cameraNum);
+
+	public void lockCameraOn(int objID);
 }

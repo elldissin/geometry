@@ -1,35 +1,37 @@
 package my.games.geometry.game.engine;
 
+import java.awt.Point;
+
 import javax.swing.SwingUtilities;
 
 import my.games.geometry.game.World;
-import my.games.geometry.ui.GameStatusPanel;
 import my.games.geometry.ui.GameCameraPanel;
+import my.games.geometry.ui.GameStatusPanel;
 
 public class ClientRenderEngine implements RenderEngine {
 	private World world;
-	private GameCameraPanel camera1, camera2, camera3;
+	private GameCameraPanel camera, statusBar;
+	private int cameraLockObjID;
 
 	public ClientRenderEngine(World world) {
-		camera1 = new GameCameraPanel();
-		camera2 = new GameCameraPanel();
-		camera3 = new GameStatusPanel();
+		camera = new GameCameraPanel();
+		statusBar = new GameStatusPanel();
 		this.world = world;
 	}
 
 	@Override
 	public void render() {
 		// FIXME disabled camera lock until client knowns his object id
-		// if ((world.getObjectByID(1)) != null) {
-		// Point p = new Point((int) world.getObjectByID(1).getPos().x - camera1.getViewWidth() / 2,
-		// (int) world.getObjectByID(1).getPos().y - camera1.getViewHeight() / 2);
-		// camera1.setViewOffset(p);
-		// }
+		if ((world.getObjectByID(cameraLockObjID)) != null) {
+			Point p = new Point((int) world.getObjectByID(cameraLockObjID).getPos().x - camera.getViewWidth() / 2,
+					(int) world.getObjectByID(cameraLockObjID).getPos().y - camera.getViewHeight() / 2);
+			camera.setViewOffset(p);
+		}
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				camera1.show(world.getDrawableObjectList());
-				camera3.show(world.getDrawableObjectList());
+				camera.show(world.getDrawableObjectList());
+				statusBar.show(world.getDrawableObjectList());
 				// System.out.println(world.getDrawableObjectList().size());
 			}
 		});
@@ -39,11 +41,13 @@ public class ClientRenderEngine implements RenderEngine {
 
 	public GameCameraPanel getCamera(int number) {
 		if (number == 1)
-			return camera1;
+			return camera;
 		if (number == 2)
-			return camera2;
-		if (number == 3)
-			return camera3;
+			return statusBar;
 		return new GameCameraPanel();
+	}
+
+	public void lockCameraOn(int objID) {
+		cameraLockObjID = objID;
 	}
 }

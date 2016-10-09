@@ -10,7 +10,8 @@ import my.games.geometry.ui.GameStatusPanel;
 
 public class ClientRenderEngine implements RenderEngine {
 	private World world;
-	private GameCameraPanel camera, statusBar;
+	private GameCameraPanel camera;
+	private GameStatusPanel statusBar;
 	private int cameraLockObjID;
 
 	public ClientRenderEngine(World world) {
@@ -27,6 +28,7 @@ public class ClientRenderEngine implements RenderEngine {
 					(int) world.getObjectByID(cameraLockObjID).getPos().y - camera.getViewHeight() / 2);
 			camera.setViewOffset(p);
 		}
+		statusBar.setDisplayedObject(world.getObjectByID(cameraLockObjID));
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {

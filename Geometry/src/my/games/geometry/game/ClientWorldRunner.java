@@ -13,7 +13,7 @@ public class ClientWorldRunner extends WorldRunner {
 	}
 
 	@Override
-	protected void updateState() { // FIXME lag when multiple projectiles?
+	protected void updateState() {
 		// do-while is required here to have at least one world update per tick
 		do {
 			GameEvent event = eventSource.getNext();

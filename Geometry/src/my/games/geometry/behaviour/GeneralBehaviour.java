@@ -40,6 +40,7 @@ public abstract class GeneralBehaviour implements Serializable {
 	}
 
 	public void bump(GameObject obj, int amount) {
+		// FIXME have to create MoveEvent, but setPos() it not same as move()
 		obj.setPos((Point) (obj.getPrevPos().clone()));
 		if (destrictibleOnBump)
 			obj.setObsolete(true);

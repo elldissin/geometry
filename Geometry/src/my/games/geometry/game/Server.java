@@ -10,13 +10,13 @@ import my.games.geometry.events.GameEvent;
 import my.games.geometry.events.streams.ClientEventStream;
 import my.games.geometry.events.streams.EventStream;
 import my.games.geometry.events.util.EventHandler;
+import my.games.geometry.events.util.GameEventObserver;
 import my.games.geometry.events.util.InputConverter;
 import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.networking.BufferedEventSender;
 import my.games.geometry.networking.ClientService;
-import my.games.geometry.networking.GameEventObserver;
 import my.games.geometry.networking.NetworkMessage;
 import my.games.geometry.networking.PlayerInput;
 import my.games.geometry.ui.ServerLogDisplay;
@@ -98,7 +98,7 @@ public class Server {
 	}
 
 	private void notifyClients() {
-		Queue<GameEvent> eventsQueue = gameEventObserver.processEventQueue();
+		Queue<GameEvent> eventsQueue = gameEventObserver.getCopyForProcessing();
 		while (eventsQueue.size() > 0) {
 			NetworkMessage msg = new NetworkMessage();
 			GameEvent ev = eventsQueue.poll().copy();

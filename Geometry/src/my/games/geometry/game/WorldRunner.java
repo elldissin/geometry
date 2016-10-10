@@ -1,7 +1,7 @@
 package my.games.geometry.game;
 
-import my.games.geometry.events.EventHandler;
 import my.games.geometry.events.streams.EventStream;
+import my.games.geometry.events.util.EventHandler;
 import my.games.geometry.game.engine.RenderEngine;
 
 public abstract class WorldRunner implements Runnable {

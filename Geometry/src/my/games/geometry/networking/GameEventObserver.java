@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import my.games.geometry.events.EventObserver;
 import my.games.geometry.events.GameEvent;
+import my.games.geometry.events.util.EventObserver;
 import my.games.geometry.game.objects.GameObject;
 
 public class GameEventObserver implements EventObserver, Serializable {

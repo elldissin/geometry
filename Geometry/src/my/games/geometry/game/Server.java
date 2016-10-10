@@ -6,10 +6,10 @@ import java.util.Queue;
 
 import javax.swing.SwingUtilities;
 
-import my.games.geometry.events.EventHandler;
 import my.games.geometry.events.GameEvent;
 import my.games.geometry.events.streams.ClientEventStream;
 import my.games.geometry.events.streams.EventStream;
+import my.games.geometry.events.util.EventHandler;
 import my.games.geometry.events.util.InputConverter;
 import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;

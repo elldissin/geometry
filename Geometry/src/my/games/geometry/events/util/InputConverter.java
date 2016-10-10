@@ -1,7 +1,13 @@
-package my.games.geometry.events;
+package my.games.geometry.events.util;
 
 import java.awt.event.KeyEvent;
 
+import my.games.geometry.events.GameEvent;
+import my.games.geometry.events.MoveEvent;
+import my.games.geometry.events.NoEvent;
+import my.games.geometry.events.ShootEvent;
+import my.games.geometry.events.TurnEventCCW;
+import my.games.geometry.events.TurnEventCW;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.networking.PlayerInput;
 

@@ -1,8 +1,9 @@
-package my.games.geometry.events;
+package my.games.geometry.events.streams;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
+import my.games.geometry.events.GameEvent;
 import my.games.geometry.networking.NetworkMessage;
 import my.games.geometry.networking.ServerCommunicator;
 
@@ -10,11 +11,11 @@ import my.games.geometry.networking.ServerCommunicator;
  * Represents a source of events affecting the game world taken from remote
  * server (can be local server as well)
  */
-public class RemoteSource implements EventSource {
+public class ServerEventStream implements EventStream {
 	private ServerCommunicator communicator;
 	private Queue<GameEvent> eventsQueue;
 
-	public RemoteSource(ServerCommunicator communicator) {
+	public ServerEventStream(ServerCommunicator communicator) {
 		eventsQueue = new LinkedList<GameEvent>();
 		this.communicator = communicator;
 	}

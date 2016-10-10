@@ -1,13 +1,15 @@
-package my.games.geometry.events;
+package my.games.geometry.events.streams;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class LocalSource implements EventSource {
+import my.games.geometry.events.GameEvent;
+
+public class ClientEventStream implements EventStream {
 
 	private Queue<GameEvent> eventsQueue;
 
-	public LocalSource() {
+	public ClientEventStream() {
 		eventsQueue = new LinkedList<GameEvent>();
 	}
 

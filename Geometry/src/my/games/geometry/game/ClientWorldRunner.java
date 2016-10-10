@@ -1,13 +1,13 @@
 package my.games.geometry.game;
 
 import my.games.geometry.events.EventHandler;
-import my.games.geometry.events.EventSource;
 import my.games.geometry.events.GameEvent;
+import my.games.geometry.events.streams.EventStream;
 import my.games.geometry.game.engine.RenderEngine;
 
 public class ClientWorldRunner extends WorldRunner {
 
-	public ClientWorldRunner(World world, RenderEngine renderEngine, EventSource eventSource,
+	public ClientWorldRunner(World world, RenderEngine renderEngine, EventStream eventSource,
 			EventHandler eventHandler) {
 		super(world, renderEngine, eventSource, eventHandler);
 	}

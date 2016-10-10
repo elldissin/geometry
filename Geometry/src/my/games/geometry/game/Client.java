@@ -3,8 +3,8 @@ package my.games.geometry.game;
 import java.awt.event.KeyListener;
 
 import my.games.geometry.events.EventHandler;
-import my.games.geometry.events.EventSource;
-import my.games.geometry.events.RemoteSource;
+import my.games.geometry.events.streams.EventStream;
+import my.games.geometry.events.streams.ServerEventStream;
 import my.games.geometry.game.engine.ClientRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.Controller;
@@ -16,7 +16,7 @@ public class Client {
 	private RenderEngine renderEngine;
 	private World world;
 	private Controller controller;
-	private EventSource eventSourceForLocalWorld;
+	private EventStream eventSourceForLocalWorld;
 	private EventHandler eventHandler;
 	private WorldRunner runner;
 	private ServerCommunicator comm;
@@ -28,7 +28,7 @@ public class Client {
 		eventHandler = new EventHandler(world);
 		renderEngine = new ClientRenderEngine(world);
 		comm = new ServerCommunicator();
-		eventSourceForLocalWorld = new RemoteSource(comm);
+		eventSourceForLocalWorld = new ServerEventStream(comm);
 		runner = new ClientWorldRunner(world, renderEngine, eventSourceForLocalWorld, eventHandler);
 	}
 

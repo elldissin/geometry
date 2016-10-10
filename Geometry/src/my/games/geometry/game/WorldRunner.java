@@ -1,18 +1,18 @@
 package my.games.geometry.game;
 
 import my.games.geometry.events.EventHandler;
-import my.games.geometry.events.EventSource;
+import my.games.geometry.events.streams.EventStream;
 import my.games.geometry.game.engine.RenderEngine;
 
 public abstract class WorldRunner implements Runnable {
 	protected boolean isRunning;
 	protected RenderEngine renderEngine;
-	protected EventSource eventSource;
+	protected EventStream eventSource;
 	protected EventHandler eventHandler;
 	private Thread thread;
 	protected World world;
 
-	public WorldRunner(World world, RenderEngine renderEngine, EventSource eventSource, EventHandler eventHandler) {
+	public WorldRunner(World world, RenderEngine renderEngine, EventStream eventSource, EventHandler eventHandler) {
 		isRunning = false;
 		this.world = world;
 		this.eventSource = eventSource;

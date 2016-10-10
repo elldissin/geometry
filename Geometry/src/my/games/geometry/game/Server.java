@@ -7,10 +7,10 @@ import java.util.Queue;
 import javax.swing.SwingUtilities;
 
 import my.games.geometry.events.EventHandler;
-import my.games.geometry.events.EventSource;
 import my.games.geometry.events.GameEvent;
-import my.games.geometry.events.InputConverter;
-import my.games.geometry.events.LocalSource;
+import my.games.geometry.events.streams.ClientEventStream;
+import my.games.geometry.events.streams.EventStream;
+import my.games.geometry.events.util.InputConverter;
 import my.games.geometry.game.engine.NoRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.GameObject;
@@ -26,7 +26,7 @@ public class Server {
 
 	private RenderEngine renderEngine;
 	private World world;
-	private EventSource eventSourceForLocalWorld;
+	private EventStream eventSourceForLocalWorld;
 	private EventHandler eventHandler;
 	private ClientService clientService;
 	private GameEventObserver gameEventObserver; // Observer
@@ -45,7 +45,7 @@ public class Server {
 		world.registerLogDisplayNotifyer(logDisplayNotifier);
 		eventHandler = new EventHandler(world);
 		renderEngine = new NoRenderEngine();
-		eventSourceForLocalWorld = new LocalSource();
+		eventSourceForLocalWorld = new ClientEventStream();
 		runner = new ServerWorldRunner(world, renderEngine, eventSourceForLocalWorld, eventHandler);
 		clientService = new ClientService();
 		clientToPlayerMap = new HashMap<Integer, Integer>();

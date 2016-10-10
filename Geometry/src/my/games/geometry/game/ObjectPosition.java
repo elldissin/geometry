@@ -9,6 +9,10 @@ public class ObjectPosition {
 	private double x, y;
 	private final double MAX_VALUE = 9999.9;
 
+	public ObjectPosition() {
+		checkAndAssignValues(0.0, 0.0);
+	}
+
 	public ObjectPosition(double x, double y) {
 		checkAndAssignValues(x, y);
 	}
@@ -51,6 +55,12 @@ public class ObjectPosition {
 		} else {
 			throw new WrongPositionException();
 		}
+	}
+
+	public ObjectPosition copy() {
+		ObjectPosition copy = new ObjectPosition();
+		copy.setPos(this);
+		return copy;
 	}
 
 }

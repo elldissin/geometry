@@ -37,7 +37,7 @@ public class ObjectPosition {
 	}
 
 	public int getIntY() {
-		return (int) x;
+		return (int) Math.round(y);
 	}
 
 	private void checkAndAssignValues(double x, double y) {

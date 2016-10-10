@@ -24,8 +24,8 @@ public class ClientRenderEngine implements RenderEngine {
 	public void render() {
 		// FIXME disabled camera lock until client knowns his object id
 		if ((world.getObjectByID(cameraLockObjID)) != null) {
-			Point p = new Point((int) world.getObjectByID(cameraLockObjID).getPos().x - camera.getViewWidth() / 2,
-					(int) world.getObjectByID(cameraLockObjID).getPos().y - camera.getViewHeight() / 2);
+			Point p = new Point((int) world.getObjectByID(cameraLockObjID).getPos().getX() - camera.getViewWidth() / 2,
+					(int) world.getObjectByID(cameraLockObjID).getPos().getY() - camera.getViewHeight() / 2);
 			camera.setViewOffset(p);
 		}
 		statusBar.setDisplayedObject(world.getObjectByID(cameraLockObjID));

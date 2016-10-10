@@ -3,13 +3,14 @@ package my.games.geometry.game.objects;
 import java.awt.Point;
 import java.util.List;
 
+import my.games.geometry.game.ObjectPosition;
 import my.games.geometry.game.movers.ProjectileMover;
 import my.games.geometry.game.renderers.ProjectileRenderer;
 
 public class Projectile extends GameObject {
 	private static final long serialVersionUID = 1L;
 
-	public Projectile(Point position, double angle) {
+	public Projectile(ObjectPosition position, double angle) {
 		super(position, angle);
 		mover = new ProjectileMover();
 		renderer = new ProjectileRenderer();
@@ -21,13 +22,13 @@ public class Projectile extends GameObject {
 	@Override
 	public List<Point> body() {
 		if (points.isEmpty()) {
-			Point p = new Point(currentPos.x + objWidth / 2, currentPos.y + objHeight / 2);
+			Point p = new Point(currentPos.getIntX() + objWidth / 2, currentPos.getIntY() + objHeight / 2);
 			points.add(0, p);
-			p = new Point(currentPos.x - objWidth / 2, currentPos.y + objHeight / 2);
+			p = new Point(currentPos.getIntX() - objWidth / 2, currentPos.getIntY() + objHeight / 2);
 			points.add(1, p);
-			p = new Point(currentPos.x + objWidth / 2, currentPos.y - objHeight / 2);
+			p = new Point(currentPos.getIntX() + objWidth / 2, currentPos.getIntY() - objHeight / 2);
 			points.add(2, p);
-			p = new Point(currentPos.x - objWidth / 2, currentPos.y - objHeight / 2);
+			p = new Point(currentPos.getIntX() - objWidth / 2, currentPos.getIntY() - objHeight / 2);
 			points.add(3, p);
 		}
 		return points;
@@ -56,7 +57,7 @@ public class Projectile extends GameObject {
 
 	@Override
 	public GameObject copy() {
-		GameObject copy = new Projectile((Point) (this.currentPos.clone()), this.angle);
+		GameObject copy = new Projectile(this.currentPos.copy(), this.angle);
 		// angle, x and y are already copied above by constructor;
 		super.finishCopy(copy);
 		return copy;

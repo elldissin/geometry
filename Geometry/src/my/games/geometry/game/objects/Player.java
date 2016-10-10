@@ -3,6 +3,7 @@ package my.games.geometry.game.objects;
 import java.awt.Point;
 import java.util.List;
 
+import my.games.geometry.game.ObjectPosition;
 import my.games.geometry.game.movers.DefaultMover;
 import my.games.geometry.game.renderers.DefaultRenderer;
 import my.games.geometry.game.weapons.DefaultWeapon;
@@ -10,7 +11,7 @@ import my.games.geometry.game.weapons.DefaultWeapon;
 public class Player extends GameObject {
 	private static final long serialVersionUID = 1L;
 
-	public Player(Point position, double angle) {
+	public Player(ObjectPosition position, double angle) {
 		super(position, angle);
 		health = 100;
 		level = 5;
@@ -26,8 +27,8 @@ public class Player extends GameObject {
 		// points.clear();
 		if (points.isEmpty()) {
 			for (int i = 0; i < level + 2; i++) {
-				int x1 = (int) (currentPos.x + (objWidth * Math.cos(2 * Math.PI / (level + 2) * i + angle)));
-				int y1 = (int) (currentPos.y + (objHeight * Math.sin(2 * Math.PI / (level + 2) * i + angle)));
+				int x1 = (int) (currentPos.getIntX() + (objWidth * Math.cos(2 * Math.PI / (level + 2) * i + angle)));
+				int y1 = (int) (currentPos.getIntY() + (objHeight * Math.sin(2 * Math.PI / (level + 2) * i + angle)));
 				Point p = new Point(x1, y1);
 				points.add(i, p);
 			}
@@ -56,7 +57,7 @@ public class Player extends GameObject {
 
 	@Override
 	public GameObject copy() {
-		GameObject copy = new Player((Point) (this.currentPos.clone()), this.angle);
+		GameObject copy = new Player(this.currentPos.copy(), this.angle);
 		// angle, x and y are already copied above by constructor;
 		super.finishCopy(copy);
 		return copy;

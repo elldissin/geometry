@@ -13,6 +13,7 @@ import my.games.geometry.behaviour.Effect;
 import my.games.geometry.behaviour.PlayerBehaviour;
 import my.games.geometry.events.EventObserver;
 import my.games.geometry.events.GameEvent;
+import my.games.geometry.game.ObjectPosition;
 import my.games.geometry.game.movers.Mover;
 import my.games.geometry.game.renderers.Renderer;
 import my.games.geometry.game.weapons.Weapon;
@@ -20,8 +21,8 @@ import my.games.geometry.game.weapons.Weapon;
 public abstract class GameObject implements Updatable, Serializable {
 	private static final long serialVersionUID = 1L;
 	protected int objectID;
-	protected Point currentPos;
-	protected Point prevPos;
+	protected ObjectPosition currentPos;
+	protected ObjectPosition prevPos;
 	protected int objWidth, objHeight;
 	protected int health;
 	protected int level;
@@ -41,7 +42,7 @@ public abstract class GameObject implements Updatable, Serializable {
 	protected List<GameObject> ignoredObjects;
 	protected List<Effect> onHitEffects;
 
-	public GameObject(Point position, double angle) {
+	public GameObject(ObjectPosition position, double angle) {
 		super();
 		eventObserverList = new CopyOnWriteArrayList<EventObserver>();
 		objWidth = 20;
@@ -50,7 +51,7 @@ public abstract class GameObject implements Updatable, Serializable {
 		liveDistance = 400;
 		obsolete = false;
 		setPos(position);
-		setPrevPos((Point) (getPos().clone()));
+		setPrevPos(getPos().copy());
 		points = new CopyOnWriteArrayList<Point>(); // LATER fix CopyOnWrite
 													// later
 		ignoredObjects = new CopyOnWriteArrayList<GameObject>();
@@ -70,11 +71,11 @@ public abstract class GameObject implements Updatable, Serializable {
 		this.health = health;
 	}
 
-	public Point getPrevPos() {
+	public ObjectPosition getPrevPos() {
 		return prevPos;
 	}
 
-	public void setPrevPos(Point prevPos) {
+	public void setPrevPos(ObjectPosition prevPos) {
 		this.prevPos = prevPos;
 	}
 
@@ -86,15 +87,15 @@ public abstract class GameObject implements Updatable, Serializable {
 		this.objectID = objectID;
 	}
 
-	public void setPos(Point p) {
-		currentPos = p;
+	public void setPos(ObjectPosition position) {
+		currentPos = position;
 		if (points != null) {
 			points.clear();
 			body();
 		}
 	}
 
-	public Point getPos() {
+	public ObjectPosition getPos() {
 		return currentPos;
 	}
 
@@ -147,10 +148,9 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	public void draw(Graphics g) {
 		drawBoundingRect(g);
-		Point p = (Point) (getPos().clone());
-		p.y -= getObjHeight() / 2 + 10;
-		p.x -= getObjWidth() / 2 + 20;
-		g.drawString("ID: " + getObjectID(), p.x, p.y);
+		ObjectPosition p = getPos().copy();
+		p.setPos(p.getX() - getObjHeight() / 2 + 10, p.getY() - getObjWidth() / 2 + 20);
+		g.drawString("ID: " + getObjectID(), p.getIntX(), p.getIntY());
 		if (renderer != null)
 			renderer.draw(g, this);
 	}
@@ -180,7 +180,7 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	public Rectangle boundingRect() {
 		Rectangle rec;
-		rec = new Rectangle((int) (currentPos.x - getObjWidth()), (int) (currentPos.y - getObjHeight()),
+		rec = new Rectangle(currentPos.getIntX() - getObjWidth(), currentPos.getIntY() - getObjHeight(),
 				(int) (getObjWidth()) * 2, (int) (getObjHeight()) * 2);
 		return rec;
 	}
@@ -285,8 +285,7 @@ public abstract class GameObject implements Updatable, Serializable {
 		copyToWorkWith.obsolete = this.obsolete;
 		copyToWorkWith.distTravelled = this.distTravelled;
 		copyToWorkWith.liveDistance = this.liveDistance;
-		copyToWorkWith.prevPos.x = this.prevPos.x;
-		copyToWorkWith.prevPos.y = this.prevPos.y;
+		copyToWorkWith.prevPos = this.prevPos.copy();
 		if (this.behaviour != null)
 			copyToWorkWith.behaviour = this.behaviour.copy();
 		if (this.mover != null)

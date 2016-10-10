@@ -1,13 +1,20 @@
 package my.games.geometry.game;
 
+import java.io.Serializable;
+
 import my.games.geometry.exceptions.WrongPositionException;
 
 /**
  * @author LCrystal Represents game object 2D position within a model, using double precision.
  */
-public class ObjectPosition {
+public class ObjectPosition implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double x, y;
 	private final double MAX_VALUE = 9999.9;
+	private final double MIN_VALUE = -9999.9;
 
 	public ObjectPosition() {
 		checkAndAssignValues(0.0, 0.0);
@@ -45,7 +52,7 @@ public class ObjectPosition {
 	}
 
 	private void checkAndAssignValues(double x, double y) {
-		if (x >= 0.0 && y >= 0.0) {
+		if (x >= MIN_VALUE && y >= MIN_VALUE) {
 			if (x <= MAX_VALUE && y <= MAX_VALUE) {
 				this.x = x;
 				this.y = y;

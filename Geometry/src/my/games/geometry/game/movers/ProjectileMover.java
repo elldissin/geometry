@@ -3,6 +3,7 @@ package my.games.geometry.game.movers;
 import java.io.Serializable;
 
 import my.games.geometry.events.MoveEvent;
+import my.games.geometry.game.ObjectPosition;
 import my.games.geometry.game.objects.GameObject;
 
 public class ProjectileMover implements Mover, Serializable {
@@ -21,8 +22,10 @@ public class ProjectileMover implements Mover, Serializable {
 	public void move(GameObject obj) {
 		if (speed > 0) {
 			distTravelled += Math.sqrt(Math.pow(getSpeedX(obj), 2) + Math.pow(getSpeedY(obj), 2));
-			obj.getPos().x += getSpeedX(obj);
-			obj.getPos().y += getSpeedY(obj);
+			double newX = obj.getPos().getX() + getSpeedX(obj);
+			double newY = obj.getPos().getY() + getSpeedY(obj);
+			ObjectPosition newPos = new ObjectPosition(newX, newY);
+			obj.setPos(newPos);
 			obj.body().clear(); // no method to get points directly, body()
 								// method shall be fixed
 			obj.body();

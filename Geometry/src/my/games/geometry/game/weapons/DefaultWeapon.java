@@ -1,6 +1,5 @@
 package my.games.geometry.game.weapons;
 
-import java.awt.Point;
 import java.io.Serializable;
 
 import my.games.geometry.behaviour.DmgEffect;
@@ -22,7 +21,7 @@ public class DefaultWeapon extends GeneralWeapon implements Weapon, Serializable
 
 	@Override
 	public void shoot(GameObject obj) {
-		Projectile projectile = new Projectile((Point) (obj.getPos().clone()), obj.getAngle());
+		Projectile projectile = new Projectile(obj.getPos().copy(), obj.getAngle());
 		projectile.addOnHitEffect(new SlowEffect(20));
 		projectile.addOnHitEffect(new DmgEffect(1));
 		projectile.setBehaviour(new ProjectileBehaviour());

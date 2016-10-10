@@ -30,7 +30,7 @@ public class DefaultRenderer implements Renderer, Serializable {
 			path.closePath();
 			g2.draw(path);
 			// drawing direction line
-			Point pos = obj.getPos();
+			Point pos = new Point(obj.getPos().getIntX(), obj.getPos().getIntY());
 			int objWidth = obj.getObjWidth();
 			int objHeight = obj.getObjHeight();
 			double angle = obj.getAngle();

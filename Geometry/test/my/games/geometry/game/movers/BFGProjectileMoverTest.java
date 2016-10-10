@@ -3,10 +3,9 @@ package my.games.geometry.game.movers;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.awt.Point;
-
 import org.junit.Test;
 
+import my.games.geometry.game.ObjectPosition;
 import my.games.geometry.game.objects.BFGProjectile;
 
 public class BFGProjectileMoverTest {
@@ -14,14 +13,14 @@ public class BFGProjectileMoverTest {
 	@Test
 	public void bfgBulletDestroyTest() {
 		// arrange
-		BFGProjectile bfgProjectileTest = new BFGProjectile(new Point(0, 0), 0.0);
+		BFGProjectile bfgProjectileTest = new BFGProjectile(new ObjectPosition(0, 0), 0.0);
 
 		// act
 		for (int i = 0; i < 101; i++) {
 			bfgProjectileTest.move();
 		}
 		// assert
-		System.out.println(bfgProjectileTest.getPos().x);
+		System.out.println(bfgProjectileTest.getPos().getX());
 		System.out.println(bfgProjectileTest.getLiveDistance());
 		System.out.println(bfgProjectileTest.isDestroyed());
 
@@ -31,11 +30,11 @@ public class BFGProjectileMoverTest {
 	@Test
 	public void bfgBulletPositionTest() {
 		// arrange
-		BFGProjectile bfgProjectileTest = new BFGProjectile(new Point(0, 0), Math.toRadians(180));
+		BFGProjectile bfgProjectileTest = new BFGProjectile(new ObjectPosition(0, 0), Math.toRadians(180));
 		// act
 		bfgProjectileTest.move();
 		// assert
-		assertEquals(bfgProjectileTest.getPos().x, -4);
+		assertEquals(bfgProjectileTest.getPos().getIntX(), -4);
 	}
 
 }

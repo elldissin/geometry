@@ -1,6 +1,5 @@
 package my.games.geometry.game.weapons;
 
-import java.awt.Point;
 import java.io.Serializable;
 
 import my.games.geometry.behaviour.DmgEffect;
@@ -23,7 +22,7 @@ public class BFG extends GeneralWeapon implements Weapon, Serializable {
 
 	@Override
 	public void shoot(GameObject obj) {
-		Projectile projectile = new BFGProjectile((Point) (obj.getPos().clone()), obj.getAngle());
+		Projectile projectile = new BFGProjectile(obj.getPos().copy(), obj.getAngle());
 		projectile.addOnHitEffect(new SlowEffect(20));
 		projectile.addOnHitEffect(new DmgEffect(10));
 		projectile.setBehaviour(new ProjectileBehaviour());

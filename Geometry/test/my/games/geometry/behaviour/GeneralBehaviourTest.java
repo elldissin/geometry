@@ -2,10 +2,9 @@ package my.games.geometry.behaviour;
 
 import static org.junit.Assert.assertEquals;
 
-import java.awt.Point;
-
 import org.junit.Test;
 
+import my.games.geometry.game.ObjectPosition;
 import my.games.geometry.game.World;
 import my.games.geometry.game.objects.GameObject;
 
@@ -15,7 +14,7 @@ public class GeneralBehaviourTest {
 	public void slowDownTest() {
 		// arrange
 		World worldTest = new World();
-		GameObject playerTest = worldTest.createGameObject("player", new Point(0, 0), 0.0);
+		GameObject playerTest = worldTest.createGameObject("player", new ObjectPosition(0, 0), 0.0);
 		// act
 		playerTest.getMover().setSpeed((int) (playerTest.getMover().getSpeed() * (100 - 50) / 100));
 		// assert

@@ -1,6 +1,5 @@
 package my.games.geometry.behaviour;
 
-import java.awt.Point;
 import java.io.Serializable;
 
 import my.games.geometry.game.objects.GameObject;
@@ -41,7 +40,7 @@ public abstract class GeneralBehaviour implements Serializable {
 
 	public void bump(GameObject obj, int amount) {
 		// FIXME have to create MoveEvent, but setPos() it not same as move()
-		obj.setPos((Point) (obj.getPrevPos().clone()));
+		obj.setPos(obj.getPrevPos().copy());
 		if (destrictibleOnBump)
 			obj.setObsolete(true);
 	}

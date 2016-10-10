@@ -3,7 +3,6 @@ package my.games.geometry.game;
 import java.util.ArrayList;
 import java.util.List;
 
-import my.games.geometry.UniqueIdProvider;
 import my.games.geometry.behaviour.BumpEffect;
 import my.games.geometry.behaviour.PlayerBehaviour;
 import my.games.geometry.events.CreateEvent;
@@ -15,6 +14,7 @@ import my.games.geometry.game.objects.Player;
 import my.games.geometry.game.objects.Projectile;
 import my.games.geometry.game.objects.StaticObject;
 import my.games.geometry.game.weapons.BFG;
+import my.games.geometry.util.UniqueIdProvider;
 
 public class World {
 	private EffectManager effectManager;

@@ -1,4 +1,4 @@
-package my.games.geometry;
+package my.games.geometry.util;
 
 import java.util.HashSet;
 import java.util.Set;

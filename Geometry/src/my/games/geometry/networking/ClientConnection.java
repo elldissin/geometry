@@ -48,7 +48,9 @@ public class ClientConnection implements AutoCloseable, Runnable {
 		PlayerInput inputFromPlayer = null;
 		try {
 			while ((inputFromPlayer = (PlayerInput) in.readObject()) != null) {
-				inputQueue.add(inputFromPlayer);
+				synchronized (inputQueue) {
+					inputQueue.add(inputFromPlayer);
+				}
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -58,7 +60,9 @@ public class ClientConnection implements AutoCloseable, Runnable {
 	}
 
 	public PlayerInput getInput() {
-		return inputQueue.poll();
+		synchronized (inputQueue) {
+			return inputQueue.poll();
+		}
 	}
 
 	public boolean isConnected() {

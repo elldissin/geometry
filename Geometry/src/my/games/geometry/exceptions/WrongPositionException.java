@@ -8,7 +8,7 @@ public class WrongPositionException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	public WrongPositionException() {
-		super("Negative position assignment attempt!");
+		super("Illegal position assignment attempt!");
 	}
 
 }

@@ -7,6 +7,7 @@ import my.games.geometry.exceptions.WrongPositionException;
  */
 public class ObjectPosition {
 	private double x, y;
+	private final double MAX_VALUE = 9999.9;
 
 	public ObjectPosition(double x, double y) {
 		checkAndAssignValues(x, y);
@@ -28,7 +29,7 @@ public class ObjectPosition {
 	}
 
 	public int getIntX() {
-		return (int) x;
+		return (int) Math.round(x);
 	}
 
 	public double getY() {
@@ -41,8 +42,12 @@ public class ObjectPosition {
 
 	private void checkAndAssignValues(double x, double y) {
 		if (x >= 0.0 && y >= 0.0) {
-			this.x = x;
-			this.y = y;
+			if (x <= MAX_VALUE && y <= MAX_VALUE) {
+				this.x = x;
+				this.y = y;
+			} else {
+				throw new WrongPositionException();
+			}
 		} else {
 			throw new WrongPositionException();
 		}

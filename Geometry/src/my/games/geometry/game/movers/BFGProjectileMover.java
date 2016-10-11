@@ -13,4 +13,10 @@ public class BFGProjectileMover extends ProjectileMover {
 		speed = 4;
 	}
 
+	public Mover copy() {
+		ProjectileMover copy = new BFGProjectileMover(objectToMove.copy());
+		finishCopy(copy);
+		return copy;
+	}
+
 }

@@ -286,12 +286,13 @@ public abstract class GameObject implements Updatable, Serializable {
 		copyToWorkWith.currentExperience = this.currentExperience;
 		copyToWorkWith.obsolete = this.obsolete;
 		copyToWorkWith.prevPos = this.prevPos.copy();
-		if (this.behaviour != null)
-			copyToWorkWith.behaviour = this.behaviour.copy();
-		if (this.mover != null)
-			copyToWorkWith.mover = this.mover.copy();
-		if (this.weapon != null)
-			copyToWorkWith.weapon = this.weapon.copy();
+		// LATER need to copy objects below or not?
+		// if (this.behaviour != null)
+		// copyToWorkWith.behaviour = this.behaviour.copy();
+		// if (this.mover != null)
+		// copyToWorkWith.mover = this.mover.copy();
+		// if (this.weapon != null)
+		// copyToWorkWith.weapon = this.weapon.copy();
 		// no need to copy renderer copy.renderer = this.renderer.copy();
 		// no need to copy EventObservers
 		// for (int i = 0; i < this.ignoredObjects.size(); i++) {

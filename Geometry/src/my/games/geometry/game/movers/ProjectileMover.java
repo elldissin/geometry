@@ -16,6 +16,7 @@ public class ProjectileMover extends GeneralMover implements Mover, Serializable
 		super(objectToMove);
 		liveDistance = 400;
 		speed = 7;
+		isMoving = true;
 	}
 
 	@Override
@@ -25,6 +26,7 @@ public class ProjectileMover extends GeneralMover implements Mover, Serializable
 			distTravelled += Math.sqrt(Math.pow(getSpeedX(), 2) + Math.pow(getSpeedY(), 2));
 		}
 		if (distTravelled > liveDistance) {
+			isMoving = false;
 			objectToMove.setObsolete(true);
 		}
 	}

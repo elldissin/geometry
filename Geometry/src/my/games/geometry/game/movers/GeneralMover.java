@@ -2,9 +2,7 @@ package my.games.geometry.game.movers;
 
 import java.io.Serializable;
 
-import my.games.geometry.events.MoveEvent;
-import my.games.geometry.events.TurnEventCCW;
-import my.games.geometry.events.TurnEventCW;
+import my.games.geometry.events.ObjectUpdatedEvent;
 import my.games.geometry.game.ObjectPosition;
 import my.games.geometry.game.objects.GameObject;
 
@@ -47,7 +45,7 @@ public abstract class GeneralMover implements Mover, Serializable {
 			objectToMove.setPos(newPos);
 			objectToMove.body().clear(); // LATER need to call twice
 			objectToMove.body();
-			objectToMove.notifyObserversAbout(new MoveEvent(objectToMove));
+			objectToMove.notifyObserversAbout(new ObjectUpdatedEvent(objectToMove));
 		}
 	}
 
@@ -73,11 +71,11 @@ public abstract class GeneralMover implements Mover, Serializable {
 	public void turn() {
 		if (isTurningCW) {
 			turnDir(1);
-			objectToMove.notifyObserversAbout(new TurnEventCW(objectToMove));
+			objectToMove.notifyObserversAbout(new ObjectUpdatedEvent(objectToMove));
 		}
 		if (isTurningCCW) {
 			turnDir(-1);
-			objectToMove.notifyObserversAbout(new TurnEventCCW(objectToMove));
+			objectToMove.notifyObserversAbout(new ObjectUpdatedEvent(objectToMove));
 		}
 	}
 

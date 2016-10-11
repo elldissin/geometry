@@ -36,7 +36,7 @@ public abstract class GeneralMover implements Mover, Serializable {
 	}
 
 	@Override
-	public void move() {
+	public void moveIfMoving() {
 		if (isMoving) {
 			objectToMove.setPrevPos(objectToMove.getPos().copy()); // do not assign, but clone
 			double newX = objectToMove.getPos().getX() + getSpeedX();
@@ -68,7 +68,7 @@ public abstract class GeneralMover implements Mover, Serializable {
 	}
 
 	@Override
-	public void turn() {
+	public void turnIfTurning() {
 		if (isTurningCW) {
 			turnDir(1);
 			objectToMove.notifyObserversAbout(new ObjectUpdatedEvent(objectToMove));

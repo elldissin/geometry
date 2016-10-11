@@ -137,6 +137,10 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	public void setAngle(double angle) {
 		this.angle = angle;
+		if (points != null) {
+			points.clear();
+			body();
+		}
 	}
 
 	public void setObsolete(boolean value) {
@@ -182,14 +186,12 @@ public abstract class GameObject implements Updatable, Serializable {
 		return rec;
 	}
 
-	public void move() {
-		if (mover != null)
-			mover.move();
+	public void setMoving(boolean value) {
+		mover.setMoving(value);
 	}
 
-	public void turn(int dir) {
-		if (mover != null)
-			mover.turn();
+	public void setTurning(Mover.TurnDirection dir) {
+		mover.setTurning(dir);
 	}
 
 	public void shoot() {
@@ -225,14 +227,25 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	@Override
 	public void update() {
-		// move();
-		// turn();
+		mover.moveIfMoving();
+		mover.turnIfTurning();
+		// weapon.shootIFShooting(); //FIXME
 	}
 
 	public void notifyObserversAbout(GameEvent event) {
 		for (int i = 0; i < eventObserverList.size(); i++)
 			eventObserverList.get(i).notifyAboutEvent(this, event);
 
+	}
+
+	@Override
+	public boolean isDestroyed() {
+		return obsolete;
+	}
+
+	@Override
+	public void destroy() {
+		setObsolete(true);
 	}
 
 	// LATER removeEventObserver required?
@@ -293,4 +306,5 @@ public abstract class GameObject implements Updatable, Serializable {
 		}
 
 	}
+
 }

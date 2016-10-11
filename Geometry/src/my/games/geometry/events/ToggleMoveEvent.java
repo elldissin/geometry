@@ -3,25 +3,27 @@ package my.games.geometry.events;
 import my.games.geometry.game.World;
 import my.games.geometry.game.objects.GameObject;
 
-public class StartMoveEvent extends GameEvent {
+public class ToggleMoveEvent extends GameEvent {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private boolean moving;
 
-	public StartMoveEvent(GameObject sourceObject) {
+	public ToggleMoveEvent(GameObject sourceObject, boolean value) {
 		super(sourceObject);
+		this.moving = value;
 	}
 
 	@Override
 	public void applyEventToWorld(World world) {
-		sourceObject.setMoving(true);
+		sourceObject.setMoving(moving);
 	}
 
 	@Override
 	public GameEvent copy() {
-		GameEvent copy = new StartMoveEvent(this.sourceObject.copy());
+		GameEvent copy = new ToggleMoveEvent(this.sourceObject.copy(), this.moving);
 		copy.timeStamp = this.timeStamp;
 		return copy;
 	}

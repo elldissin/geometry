@@ -10,9 +10,9 @@ public interface Mover {
 
 	public void setTurning(TurnDirection value);
 
-	void move();
+	void moveIfMoving();
 
-	void turn();
+	void turnIfTurning();
 
 	int getSpeedX();
 

@@ -49,12 +49,6 @@ public class Projectile extends GameObject {
 		return;
 	}
 
-	@Override // overriding default update() in GameObject to act without
-				// player's control
-	public void update() {
-		move();
-	}
-
 	@Override
 	public GameObject copy() {
 		GameObject copy = new Projectile(this.currentPos.copy(), this.angle);

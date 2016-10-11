@@ -20,9 +20,9 @@ public class ProjectileMover extends GeneralMover implements Mover, Serializable
 	}
 
 	@Override
-	public void move() {
+	public void moveIfMoving() {
 		if (isMoving) {
-			super.move();
+			super.moveIfMoving();
 			distTravelled += Math.sqrt(Math.pow(getSpeedX(), 2) + Math.pow(getSpeedY(), 2));
 		}
 		if (distTravelled > liveDistance) {

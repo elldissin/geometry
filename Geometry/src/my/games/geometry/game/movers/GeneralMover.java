@@ -5,7 +5,6 @@ import java.io.Serializable;
 import my.games.geometry.events.MoveEvent;
 import my.games.geometry.events.TurnEventCCW;
 import my.games.geometry.events.TurnEventCW;
-import my.games.geometry.exceptions.NullGameObjectException;
 import my.games.geometry.game.ObjectPosition;
 import my.games.geometry.game.objects.GameObject;
 
@@ -24,9 +23,6 @@ public abstract class GeneralMover implements Mover, Serializable {
 	protected GameObject objectToMove;
 
 	public GeneralMover(GameObject objectToMove) {
-		if (objectToMove == null) {
-			throw new NullGameObjectException();
-		}
 		this.objectToMove = objectToMove;
 		isMoving = false;
 		isTurningCW = false;

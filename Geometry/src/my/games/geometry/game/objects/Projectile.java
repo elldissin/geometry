@@ -12,7 +12,7 @@ public class Projectile extends GameObject {
 
 	public Projectile(ObjectPosition position, double angle) {
 		super(position, angle);
-		mover = new ProjectileMover();
+		mover = new ProjectileMover(this);
 		renderer = new ProjectileRenderer();
 		objHeight = 5;
 		objWidth = 5;

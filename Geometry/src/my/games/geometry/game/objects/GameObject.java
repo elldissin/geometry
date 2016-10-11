@@ -30,8 +30,6 @@ public abstract class GameObject implements Updatable, Serializable {
 	protected int currentExperience;
 	protected double angle;
 	protected boolean obsolete;
-	protected int distTravelled;
-	protected int liveDistance;
 	protected Behaviour behaviour;
 	protected Mover mover;
 	protected Weapon weapon;
@@ -48,7 +46,6 @@ public abstract class GameObject implements Updatable, Serializable {
 		objWidth = 20;
 		objHeight = 20;
 		this.angle = angle;
-		liveDistance = 400;
 		obsolete = false;
 		setPos(position);
 		setPrevPos(getPos().copy());
@@ -187,12 +184,12 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	public void move() {
 		if (mover != null)
-			mover.move(this);
+			mover.move();
 	}
 
 	public void turn(int dir) {
 		if (mover != null)
-			mover.turn(this, dir);
+			mover.turn();
 	}
 
 	public void shoot() {
@@ -224,14 +221,6 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
-	}
-
-	public int getLiveDistance() {
-		return liveDistance;
-	}
-
-	public void setLiveDistance(int liveDistance) {
-		this.liveDistance = liveDistance;
 	}
 
 	@Override
@@ -283,8 +272,6 @@ public abstract class GameObject implements Updatable, Serializable {
 		copyToWorkWith.experienceForUp = this.experienceForUp;
 		copyToWorkWith.currentExperience = this.currentExperience;
 		copyToWorkWith.obsolete = this.obsolete;
-		copyToWorkWith.distTravelled = this.distTravelled;
-		copyToWorkWith.liveDistance = this.liveDistance;
 		copyToWorkWith.prevPos = this.prevPos.copy();
 		if (this.behaviour != null)
 			copyToWorkWith.behaviour = this.behaviour.copy();

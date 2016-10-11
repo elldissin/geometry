@@ -1,15 +1,22 @@
 package my.games.geometry.game.movers;
 
-import my.games.geometry.game.objects.GameObject;
-
 public interface Mover {
-	public void move(GameObject obj);
 
-	public void turn(GameObject obj, int dir); // LATER change radians to deg
+	public enum TurnDirection {
+		NODIR, CW, CCW
+	}
 
-	int getSpeedX(GameObject obj);
+	public void setMoving(boolean value);
 
-	int getSpeedY(GameObject obj);
+	public void setTurning(TurnDirection value);
+
+	void move();
+
+	void turn();
+
+	int getSpeedX();
+
+	int getSpeedY();
 
 	int getMaxSpeed();
 

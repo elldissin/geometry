@@ -3,28 +3,27 @@ package my.games.geometry.events;
 import my.games.geometry.game.World;
 import my.games.geometry.game.objects.GameObject;
 
-public class TurnEventCCW extends GameEvent {
+public class StopMoveEvent extends GameEvent {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public TurnEventCCW(GameObject sourceObject) {
+	public StopMoveEvent(GameObject sourceObject) {
 		super(sourceObject);
 	}
 
 	@Override
 	public void applyEventToWorld(World world) {
-		GameObject obj = world.getObjectByID(sourceObject.getObjectID());
-		if (obj != null)
-			obj.turn(-1);
+		sourceObject.setMoving(false);
 	}
 
 	@Override
 	public GameEvent copy() {
-		GameEvent copy = new TurnEventCCW(this.sourceObject.copy());
+		GameEvent copy = new StopMoveEvent(this.sourceObject.copy());
 		copy.timeStamp = this.timeStamp;
 		return copy;
 	}
+
 }

@@ -3,25 +3,27 @@ package my.games.geometry.events;
 import my.games.geometry.game.World;
 import my.games.geometry.game.objects.GameObject;
 
-public class MoveEvent extends GameEvent {
+public class StartMoveEvent extends GameEvent {
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
-	public MoveEvent(GameObject sourceObject) {
+	public StartMoveEvent(GameObject sourceObject) {
 		super(sourceObject);
 	}
 
 	@Override
 	public void applyEventToWorld(World world) {
-		GameObject obj = world.getObjectByID(sourceObject.getObjectID());
-		if (obj != null) {
-			obj.move();
-		}
+		sourceObject.setMoving(true);
 	}
 
 	@Override
 	public GameEvent copy() {
-		GameEvent copy = new MoveEvent(this.sourceObject.copy());
+		GameEvent copy = new StartMoveEvent(this.sourceObject.copy());
 		copy.timeStamp = this.timeStamp;
 		return copy;
 	}
+
 }

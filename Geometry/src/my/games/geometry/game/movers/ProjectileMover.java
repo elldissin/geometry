@@ -33,6 +33,7 @@ public class ProjectileMover extends GeneralMover implements Mover, Serializable
 	public Mover copy() {
 		ProjectileMover copy = new ProjectileMover(objectToMove.copy());
 		copy.liveDistance = this.liveDistance;
+		copy.distTravelled = this.distTravelled;
 		finishCopy(copy);
 		return copy;
 	}

@@ -190,8 +190,8 @@ public abstract class GameObject implements Updatable, Serializable {
 		mover.setMoving(value);
 	}
 
-	public void setTurning(Mover.TurnDirection dir) {
-		mover.setTurning(dir);
+	public void setTurning(Mover.TurnDirection dir, boolean value) {
+		mover.setTurning(dir, value);
 	}
 
 	public void shoot() {

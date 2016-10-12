@@ -50,19 +50,15 @@ public abstract class GeneralMover implements Mover, Serializable {
 	}
 
 	@Override
-	public void setTurning(TurnDirection value) {
-		switch (value) {
+	public void setTurning(TurnDirection dir, boolean value) {
+		switch (dir) {
 		case CW:
-			isTurningCW = true;
+			isTurningCW = value;
 			isTurningCCW = false;
 			break;
 		case CCW:
 			isTurningCW = false;
-			isTurningCCW = true;
-			break;
-		case NODIR:
-			isTurningCW = false;
-			isTurningCCW = false;
+			isTurningCCW = value;
 			break;
 		}
 	}

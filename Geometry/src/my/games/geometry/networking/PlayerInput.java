@@ -10,10 +10,12 @@ public class PlayerInput implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int clientID;
 	private int keyCode;
+	private boolean isKeyPressed;
 
-	public PlayerInput(int clientID, int keyCode) {
+	public PlayerInput(int clientID, int keyCode, boolean isKeyPressed) {
 		this.clientID = clientID;
 		this.keyCode = keyCode;
+		this.isKeyPressed = isKeyPressed;
 	}
 
 	public int getClientID() {
@@ -24,11 +26,7 @@ public class PlayerInput implements Serializable {
 		return keyCode;
 	}
 
-	public void setClientID(int playerID) {
-		this.clientID = playerID;
-	}
-
-	public void setKeyCode(int keyCode) {
-		this.keyCode = keyCode;
+	public boolean isKeyPressed() {
+		return isKeyPressed;
 	}
 }

@@ -3,12 +3,12 @@ package my.games.geometry.game.movers;
 public interface Mover {
 
 	public enum TurnDirection {
-		NODIR, CW, CCW
+		CW, CCW
 	}
 
 	public void setMoving(boolean value);
 
-	public void setTurning(TurnDirection value);
+	public void setTurning(TurnDirection dir, boolean value);
 
 	void moveIfMoving();
 

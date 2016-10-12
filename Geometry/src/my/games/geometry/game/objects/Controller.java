@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.swing.Timer;
@@ -15,17 +16,28 @@ import my.games.geometry.networking.ServerCommunicator;
 public class Controller implements KeyListener {
 	ServerCommunicator comm;
 	private final Set<Integer> pressed = new HashSet<Integer>();
+	private final Set<Integer> released = new HashSet<Integer>();
 
 	public Controller(final ServerCommunicator comm, final int clientID) {
 		this.comm = comm;
-		// Check every 100ms if there's keys pressed
-		// (This is the Swing Timer they talk about)
 		new Timer(20, new ActionListener() {
-			@Override
+			@Override // LATER add filtering for repeating input?
 			public void actionPerformed(ActionEvent arg0) {
 				if (!pressed.isEmpty()) {
-					for (Integer pressedCode : pressed) {
-						comm.sendInput(new PlayerInput(clientID, pressedCode));
+					for (Iterator<Integer> i = pressed.iterator(); i.hasNext();) {
+						Integer pressedCode = i.next();
+						comm.sendInput(new PlayerInput(clientID, pressedCode, true));
+						System.out.println("sending keyPress event to server");
+						i.remove();
+					}
+				}
+				if (!released.isEmpty()) {
+					for (Iterator<Integer> i = released.iterator(); i.hasNext();) {
+						Integer releasedCode = i.next();
+						comm.sendInput(new PlayerInput(clientID, releasedCode, false));
+						i.remove();
+						pressed.remove(releasedCode);
+						System.out.println("sending release event to server");
 					}
 				}
 			}
@@ -41,7 +53,8 @@ public class Controller implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int code = e.getKeyCode();
-		pressed.remove(code);
+		released.add(code);
+		System.out.println("keyRelesed");
 	}
 
 	@Override

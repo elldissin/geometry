@@ -1,7 +1,0 @@
-package my.games.geometry.game.objects;
-
-import java.awt.Graphics;
-
-public interface Drawable {
-	public void draw(Graphics g);
-}

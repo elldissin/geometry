@@ -1,4 +1,4 @@
-package my.games.geometry.game.objects;
+package my.games.geometry.game.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +27,6 @@ public class Controller implements KeyListener {
 					for (Iterator<Integer> i = pressed.iterator(); i.hasNext();) {
 						Integer pressedCode = i.next();
 						comm.sendInput(new PlayerInput(clientID, pressedCode, true));
-						System.out.println("sending keyPress event to server");
 						i.remove();
 					}
 				}
@@ -36,8 +35,7 @@ public class Controller implements KeyListener {
 						Integer releasedCode = i.next();
 						comm.sendInput(new PlayerInput(clientID, releasedCode, false));
 						i.remove();
-						pressed.remove(releasedCode);
-						System.out.println("sending release event to server");
+						pressed.remove(releasedCode); // remove as not removed until next press
 					}
 				}
 			}
@@ -54,7 +52,6 @@ public class Controller implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		int code = e.getKeyCode();
 		released.add(code);
-		System.out.println("keyRelesed");
 	}
 
 	@Override

@@ -5,9 +5,9 @@ import java.awt.event.KeyListener;
 import my.games.geometry.events.streams.EventStream;
 import my.games.geometry.events.streams.ServerEventStream;
 import my.games.geometry.events.util.EventHandler;
+import my.games.geometry.game.controller.Controller;
 import my.games.geometry.game.engine.ClientRenderEngine;
 import my.games.geometry.game.engine.RenderEngine;
-import my.games.geometry.game.objects.Controller;
 import my.games.geometry.networking.ServerCommunicator;
 
 public class Client {

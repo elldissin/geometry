@@ -18,11 +18,10 @@ public class ProjectileMoverTest {
 
 		// act
 		for (int i = 0; i < 58; i++) {
-			bulletTest.move();
+			bulletTest.getMover().moveIfMoving();
 		}
 		// assert
 		System.out.println(bulletTest.getPos().getX());
-		System.out.println(bulletTest.getLiveDistance());
 		System.out.println(bulletTest.isDestroyed());
 
 		assertTrue(bulletTest.isDestroyed());

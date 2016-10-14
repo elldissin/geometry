@@ -150,7 +150,7 @@ public class World {
 		return drawableObjectList;
 	}
 
-	public void update() {
+	public void update(double delta) {
 		// Handle shooters and their projectiles, add their projectiles to world
 		for (int i = 0; i < shootersList.size(); i++) {
 			for (int j = 0; j < shootersList.get(i).getWeapon().getProjectileList().size(); j++) {
@@ -161,7 +161,7 @@ public class World {
 		}
 
 		for (int i = 0; i < updatableObjectList.size(); i++) {
-			updatableObjectList.get(i).update(); // first update, then remove
+			updatableObjectList.get(i).update(delta); // first update, then remove
 			if (updatableObjectList.get(i).isDestroyed()) {
 				// Notify observers
 				GameEvent event = new DestroyEvent(updatableObjectList.get(i));

@@ -6,5 +6,5 @@ package my.games.geometry.game;
  *
  */
 public interface ObjectSystem {
-	void function();
+	void function(double delta);
 }

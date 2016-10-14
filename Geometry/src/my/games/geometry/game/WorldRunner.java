@@ -42,7 +42,7 @@ public abstract class WorldRunner implements Runnable {
 		System.exit(1);
 	}
 
-	protected abstract void updateState();
+	protected abstract void updateState(double delta);
 
 	@Override
 	public void run() {
@@ -58,7 +58,7 @@ public abstract class WorldRunner implements Runnable {
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 			if (delta >= 1) {
-				updateState();
+				updateState(delta);
 				renderEngine.render();
 				frames++;
 				updates++;

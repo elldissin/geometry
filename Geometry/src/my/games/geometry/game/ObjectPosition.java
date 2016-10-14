@@ -40,7 +40,7 @@ public class ObjectPosition implements Serializable {
 	}
 
 	public int getIntX() {
-		return (int) Math.round(x);
+		return (int) x;
 	}
 
 	public double getY() {
@@ -48,7 +48,7 @@ public class ObjectPosition implements Serializable {
 	}
 
 	public int getIntY() {
-		return (int) Math.round(y);
+		return (int) y;
 	}
 
 	private void checkAndAssignValues(double x, double y) {

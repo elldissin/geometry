@@ -21,7 +21,7 @@ public class BFG extends GeneralWeapon implements Weapon, Serializable {
 	}
 
 	@Override
-	public void shootIfShooting() {
+	public void shootIfShooting(double delta) {
 		if (shooting) {
 			Projectile projectile = new BFGProjectile(ownerObject.getPos().copy(), ownerObject.getAngle());
 			projectile.addOnHitEffect(new SlowEffect(20));

@@ -13,7 +13,7 @@ public class ClientWorldRunner extends WorldRunner {
 	}
 
 	@Override
-	protected void updateState() {
+	protected void updateState(double delta) {
 		// do-while is required here to have at least one world update per tick
 		do {
 			GameEvent event = eventSource.getNext();

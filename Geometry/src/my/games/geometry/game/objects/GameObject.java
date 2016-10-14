@@ -226,11 +226,11 @@ public abstract class GameObject implements Updatable, Serializable {
 	}
 
 	@Override
-	public void update() { // LATER use array of ObjectSystem ?
+	public void update(double delta) { // LATER use array of ObjectSystem ?
 		if (mover != null)
-			mover.function();
+			mover.function(delta);
 		if (weapon != null)
-			weapon.function();
+			weapon.function(delta);
 	}
 
 	public void notifyObserversAbout(GameEvent event) {

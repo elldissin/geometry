@@ -1,7 +1,7 @@
 package my.games.geometry.game.objects;
 
 public interface Updatable {
-	public void update();
+	public void update(double delta);
 
 	public void destroy();
 

@@ -22,11 +22,11 @@ public abstract class GeneralWeapon implements Weapon, Serializable {
 	}
 
 	@Override
-	public void function() {
-		shootIfShooting();
+	public void function(double delta) {
+		shootIfShooting(delta);
 	}
 
-	protected void shootIfShooting() {
+	protected void shootIfShooting(double delta) {
 		if (shooting) {
 			Projectile projectile = new Projectile(ownerObject.getPos().copy(), ownerObject.getAngle());
 			projectile.addOnHitEffect(new SlowEffect(20));

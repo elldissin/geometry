@@ -16,7 +16,7 @@ public class DefaultMoverTest {
 		World worldTest = new World();
 		GameObject playerTest = worldTest.createGameObject("player", new ObjectPosition(0, 0), 0.0);
 		// act
-		playerTest.getMover().function();
+		playerTest.getMover().function(1);
 		// assert
 		assertEquals(playerTest.getPos().getIntX(), 5);
 		assertEquals(playerTest.getPos().getIntY(), 0);
@@ -28,7 +28,7 @@ public class DefaultMoverTest {
 		World worldTest = new World();
 		GameObject playerTest = worldTest.createGameObject("player", new ObjectPosition(0, 0), Math.toRadians(90));
 		// act
-		playerTest.getMover().function();
+		playerTest.getMover().function(1);
 		// assert
 		assertEquals(playerTest.getPos().getIntX(), 0);
 		assertEquals(playerTest.getPos().getIntY(), 5);
@@ -40,7 +40,7 @@ public class DefaultMoverTest {
 		World worldTest = new World();
 		GameObject playerTest = worldTest.createGameObject("player", new ObjectPosition(0, 0), 0.0);
 		// act
-		playerTest.getMover().function();
+		playerTest.getMover().function(1);
 		// assert
 		assertEquals(playerTest.getAngle(), -0.1, 0.001);
 

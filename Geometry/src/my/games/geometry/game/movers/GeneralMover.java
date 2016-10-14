@@ -31,9 +31,9 @@ public abstract class GeneralMover implements Mover, Serializable {
 	}
 
 	@Override
-	public void function() {
-		moveIfMoving();
-		turnIfTurning();
+	public void function(double delta) {
+		moveIfMoving(delta);
+		turnIfTurning(delta);
 	}
 
 	@Override
@@ -41,11 +41,11 @@ public abstract class GeneralMover implements Mover, Serializable {
 		isMoving = value;
 	}
 
-	protected void moveIfMoving() {
+	protected void moveIfMoving(double delta) {
 		if (isMoving) {
 			objectToMove.setPrevPos(objectToMove.getPos().copy()); // do not assign, but clone
-			double newX = objectToMove.getPos().getX() + getSpeedX();
-			double newY = objectToMove.getPos().getY() + getSpeedY();
+			double newX = objectToMove.getPos().getX() + getSpeedX() * delta;
+			double newY = objectToMove.getPos().getY() + getSpeedY() * delta;
 			ObjectPosition newPos = new ObjectPosition(newX, newY);
 			objectToMove.setPos(newPos);
 			objectToMove.body().clear(); // LATER need to call twice
@@ -68,19 +68,19 @@ public abstract class GeneralMover implements Mover, Serializable {
 		}
 	}
 
-	protected void turnIfTurning() {
+	protected void turnIfTurning(double delta) {
 		if (isTurningCW) {
-			turnDir(1);
+			turnDir(1, delta);
 			objectToMove.notifyObserversAbout(new ObjectUpdatedEvent(objectToMove));
 		}
 		if (isTurningCCW) {
-			turnDir(-1);
+			turnDir(-1, delta);
 			objectToMove.notifyObserversAbout(new ObjectUpdatedEvent(objectToMove));
 		}
 	}
 
-	private void turnDir(int dir) {
-		objectToMove.setAngle(objectToMove.getAngle() + turnSpeed * dir);
+	private void turnDir(int dir, double delta) {
+		objectToMove.setAngle(objectToMove.getAngle() + turnSpeed * dir * delta);
 		objectToMove.body().clear(); // LATER called twice
 		objectToMove.body();
 	}

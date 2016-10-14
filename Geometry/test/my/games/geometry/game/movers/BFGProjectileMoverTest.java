@@ -18,7 +18,7 @@ public class BFGProjectileMoverTest {
 
 		// act
 		for (int i = 0; i < 101; i++) {
-			bfgProjectileTest.getMover().function();
+			bfgProjectileTest.getMover().function(1);
 		}
 		// assert
 		System.out.println(bfgProjectileTest.getPos().getX());
@@ -32,7 +32,7 @@ public class BFGProjectileMoverTest {
 		// arrange
 		GameObject bfgProjectileTest = new BFGProjectile(new ObjectPosition(0, 0), Math.toRadians(180));
 		// act
-		bfgProjectileTest.getMover().function();
+		bfgProjectileTest.getMover().function(1);
 		// assert
 		assertEquals(bfgProjectileTest.getPos().getIntX(), -4);
 	}

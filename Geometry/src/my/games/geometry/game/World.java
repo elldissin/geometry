@@ -13,7 +13,7 @@ import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
 import my.games.geometry.game.objects.Projectile;
 import my.games.geometry.game.objects.StaticObject;
-import my.games.geometry.game.weapons.BFG;
+import my.games.geometry.game.weapons.DefaultWeapon;
 import my.games.geometry.util.UniqueIdProvider;
 
 public class World {
@@ -121,7 +121,7 @@ public class World {
 		GameObject newPlayer = createGameObject("player", new ObjectPosition(100, 100), 0.0); // FIXME
 		// free
 		// position?
-		newPlayer.setWeapon(new BFG(newPlayer));
+		newPlayer.setWeapon(new DefaultWeapon(newPlayer));
 		newPlayer.setBehaviour(new PlayerBehaviour());
 		newPlayer.addOnHitEffect(new BumpEffect(0));
 		return newPlayer;

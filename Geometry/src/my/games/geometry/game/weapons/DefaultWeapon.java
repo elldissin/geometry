@@ -2,7 +2,11 @@ package my.games.geometry.game.weapons;
 
 import java.io.Serializable;
 
+import my.games.geometry.behaviour.DmgEffect;
+import my.games.geometry.behaviour.ProjectileBehaviour;
+import my.games.geometry.behaviour.SlowEffect;
 import my.games.geometry.game.objects.GameObject;
+import my.games.geometry.game.objects.Projectile;
 
 public class DefaultWeapon extends GeneralWeapon implements Weapon, Serializable {
 
@@ -13,6 +17,7 @@ public class DefaultWeapon extends GeneralWeapon implements Weapon, Serializable
 
 	public DefaultWeapon(GameObject ownerObject) {
 		super(ownerObject);
+		shootingDelay = 5;
 	}
 
 	public String toString() {
@@ -24,6 +29,16 @@ public class DefaultWeapon extends GeneralWeapon implements Weapon, Serializable
 		DefaultWeapon copy = new DefaultWeapon(this.ownerObject.copy());
 		finishCopy(copy);
 		return copy;
+	}
+
+	@Override
+	protected Projectile createProjectile() {
+		Projectile projectile = new Projectile(ownerObject.getPos().copy(), ownerObject.getAngle());
+		projectile.addOnHitEffect(new SlowEffect(20));
+		projectile.addOnHitEffect(new DmgEffect(1));
+		projectile.setBehaviour(new ProjectileBehaviour());
+		projectile.setAngle(ownerObject.getAngle());
+		return projectile;
 	}
 
 }

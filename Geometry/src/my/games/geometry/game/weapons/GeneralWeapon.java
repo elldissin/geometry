@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import my.games.geometry.behaviour.DmgEffect;
-import my.games.geometry.behaviour.ProjectileBehaviour;
-import my.games.geometry.behaviour.SlowEffect;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Projectile;
 
@@ -14,11 +11,14 @@ public abstract class GeneralWeapon implements Weapon, Serializable {
 	protected List<Projectile> projectileList; // LATER why not GameObject here?
 	protected boolean shooting;
 	protected GameObject ownerObject;
+	protected int shootingDelay;
+	protected double deltasCounter;
 
 	public GeneralWeapon(GameObject ownerObject) {
 		this.ownerObject = ownerObject;
 		projectileList = new ArrayList<Projectile>();
 		shooting = false;
+		deltasCounter = 0;
 	}
 
 	@Override
@@ -27,20 +27,22 @@ public abstract class GeneralWeapon implements Weapon, Serializable {
 	}
 
 	protected void shootIfShooting(double delta) {
+		deltasCounter += delta;
 		if (shooting) {
-			Projectile projectile = new Projectile(ownerObject.getPos().copy(), ownerObject.getAngle());
-			projectile.addOnHitEffect(new SlowEffect(20));
-			projectile.addOnHitEffect(new DmgEffect(1));
-			projectile.setBehaviour(new ProjectileBehaviour());
-			projectile.setAngle(ownerObject.getAngle());
-			// add each other to ignore list to avoid collisions
-			ownerObject.addIgnoreObject(projectile);
-			projectile.addIgnoreObject(ownerObject);
-			synchronized (projectileList) {
-				projectileList.add(projectile);
+			if (deltasCounter > shootingDelay) {
+				deltasCounter = 0;
+				Projectile projectile = createProjectile();
+				// add each other to ignore list to avoid collisions
+				ownerObject.addIgnoreObject(projectile);
+				projectile.addIgnoreObject(ownerObject);
+				synchronized (projectileList) {
+					projectileList.add(projectile);
+				}
 			}
 		}
 	}
+
+	protected abstract Projectile createProjectile();
 
 	@Override
 	public void setShooting(boolean value) {

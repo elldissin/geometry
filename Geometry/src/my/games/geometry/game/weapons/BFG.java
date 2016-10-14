@@ -16,22 +16,24 @@ public class BFG extends GeneralWeapon implements Weapon, Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public BFG() {
-		super();
+	public BFG(GameObject ownerObject) {
+		super(ownerObject);
 	}
 
 	@Override
-	public void shoot(GameObject obj) {
-		Projectile projectile = new BFGProjectile(obj.getPos().copy(), obj.getAngle());
-		projectile.addOnHitEffect(new SlowEffect(20));
-		projectile.addOnHitEffect(new DmgEffect(10));
-		projectile.setBehaviour(new ProjectileBehaviour());
-		projectile.setAngle(obj.getAngle());
-		// add each other to ignore list to avoid collisions
-		obj.addIgnoreObject(projectile);
-		projectile.addIgnoreObject(obj);
-		synchronized (projectileList) {
-			projectileList.add(projectile);
+	public void shootIfShooting() {
+		if (shooting) {
+			Projectile projectile = new BFGProjectile(ownerObject.getPos().copy(), ownerObject.getAngle());
+			projectile.addOnHitEffect(new SlowEffect(20));
+			projectile.addOnHitEffect(new DmgEffect(10));
+			projectile.setBehaviour(new ProjectileBehaviour());
+			projectile.setAngle(ownerObject.getAngle());
+			// add each other to ignore list to avoid collisions
+			ownerObject.addIgnoreObject(projectile);
+			projectile.addIgnoreObject(ownerObject);
+			synchronized (projectileList) {
+				projectileList.add(projectile);
+			}
 		}
 	}
 
@@ -41,7 +43,7 @@ public class BFG extends GeneralWeapon implements Weapon, Serializable {
 
 	@Override
 	public Weapon copy() {
-		BFG copy = new BFG();
+		BFG copy = new BFG(this.ownerObject.copy());
 		finishCopy(copy);
 		return copy;
 	}

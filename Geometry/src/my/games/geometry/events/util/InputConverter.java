@@ -4,8 +4,8 @@ import java.awt.event.KeyEvent;
 
 import my.games.geometry.events.GameEvent;
 import my.games.geometry.events.NoEvent;
-import my.games.geometry.events.ShootEvent;
 import my.games.geometry.events.ToggleMoveEvent;
+import my.games.geometry.events.ToggleShootEvent;
 import my.games.geometry.events.ToggleTurnEvent;
 import my.games.geometry.game.movers.Mover;
 import my.games.geometry.game.objects.GameObject;
@@ -29,7 +29,7 @@ public class InputConverter {
 			ev = new ToggleTurnEvent(sourceObject, Mover.TurnDirection.CCW, input.isKeyPressed());
 			return ev;
 		case KeyEvent.VK_Q:
-			ev = new ShootEvent(sourceObject);
+			ev = new ToggleShootEvent(sourceObject, input.isKeyPressed());
 			return ev;
 		}
 		return new NoEvent(sourceObject);

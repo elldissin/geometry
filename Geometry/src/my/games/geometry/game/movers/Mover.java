@@ -1,6 +1,8 @@
 package my.games.geometry.game.movers;
 
-public interface Mover {
+import my.games.geometry.game.ObjectSystem;
+
+public interface Mover extends ObjectSystem {
 
 	public enum TurnDirection {
 		CW, CCW
@@ -9,10 +11,6 @@ public interface Mover {
 	public void setMoving(boolean value);
 
 	public void setTurning(TurnDirection dir, boolean value);
-
-	void moveIfMoving();
-
-	void turnIfTurning();
 
 	int getSpeedX();
 

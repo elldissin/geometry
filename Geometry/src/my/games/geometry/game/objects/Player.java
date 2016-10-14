@@ -18,7 +18,7 @@ public class Player extends GameObject {
 		experienceForUp = level * 1000;
 		currentExperience = 0;
 		mover = new DefaultMover(this);
-		weapon = new DefaultWeapon();
+		weapon = new DefaultWeapon(this);
 		renderer = new DefaultRenderer();
 		body();
 	}

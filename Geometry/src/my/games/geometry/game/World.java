@@ -121,7 +121,7 @@ public class World {
 		GameObject newPlayer = createGameObject("player", new ObjectPosition(100, 100), 0.0); // FIXME
 		// free
 		// position?
-		newPlayer.setWeapon(new BFG());
+		newPlayer.setWeapon(new BFG(newPlayer));
 		newPlayer.setBehaviour(new PlayerBehaviour());
 		newPlayer.addOnHitEffect(new BumpEffect(0));
 		return newPlayer;

@@ -2,11 +2,12 @@ package my.games.geometry.game.weapons;
 
 import java.util.List;
 
-import my.games.geometry.game.objects.GameObject;
+import my.games.geometry.game.ObjectSystem;
 import my.games.geometry.game.objects.Projectile;
 
-public interface Weapon {
-	public void shoot(GameObject obj);
+public interface Weapon extends ObjectSystem {
+
+	void setShooting(boolean value);
 
 	public List<Projectile> getProjectileList();
 

@@ -194,9 +194,9 @@ public abstract class GameObject implements Updatable, Serializable {
 		mover.setTurning(dir, value);
 	}
 
-	public void shoot() {
+	public void setShooting(boolean value) {
 		if (weapon != null)
-			weapon.shoot(this);
+			weapon.setShooting(value);
 	}
 
 	abstract public void getHit(int amount);
@@ -226,10 +226,11 @@ public abstract class GameObject implements Updatable, Serializable {
 	}
 
 	@Override
-	public void update() {
-		mover.moveIfMoving();
-		mover.turnIfTurning();
-		// weapon.shootIFShooting(); //FIXME
+	public void update() { // LATER use array of ObjectSystem ?
+		if (mover != null)
+			mover.function();
+		if (weapon != null)
+			weapon.function();
 	}
 
 	public void notifyObserversAbout(GameEvent event) {

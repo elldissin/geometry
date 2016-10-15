@@ -44,6 +44,10 @@ public class Client {
 		this.renderEngine = renderEngine;
 	}
 
+	public World getWorld() {
+		return world;
+	}
+
 	public void start() { // The ID must be already given to client before this
 							// call
 		controller = new Controller(comm, clientID);

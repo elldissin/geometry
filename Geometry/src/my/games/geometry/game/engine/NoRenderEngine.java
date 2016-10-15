@@ -23,4 +23,10 @@ public class NoRenderEngine implements RenderEngine {
 
 	}
 
+	@Override
+	public int getCameraLockedID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

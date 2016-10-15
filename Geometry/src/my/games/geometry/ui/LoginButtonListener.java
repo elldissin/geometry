@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import my.games.geometry.game.Client;
+import my.games.geometry.game.objects.GameObject;
 
 public class LoginButtonListener implements ActionListener {
 	private ClientWindow clientWindow;
@@ -21,12 +22,14 @@ public class LoginButtonListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JPanel bottomStatusBar = client.getRenderEngine().getCamera(2);
 		JPanel gamePanel = client.getRenderEngine().getCamera(1);
-		bottomStatusBar.setPreferredSize(new Dimension(800, 55));
+		GameObject statusPanelDisplayedObj = client.getWorld()
+				.getObjectByID(client.getRenderEngine().getCameraLockedID());
+		GameStatusPanel gameStatusPanel = new GameStatusPanel(statusPanelDisplayedObj);
+		gameStatusPanel.setPreferredSize(new Dimension(800, 55));
 		gamePanel.setPreferredSize(new Dimension(800, 600));
 		clientWindow.getContentPane().removeAll();
-		clientWindow.add(bottomStatusBar);
+		clientWindow.add(gameStatusPanel);
 		clientWindow.add(gamePanel);
 		clientWindow.repaint();
 		clientWindow.pack();

@@ -20,6 +20,10 @@ public class GameStatusPanel extends DisplayElement {
 		viewWidth = 800;
 		viewHeight = 65;
 		setPreferredSize(new Dimension(viewWidth, viewHeight));
+		this.add(playerHPLabel);
+		this.add(playerWeaponLabel);
+		this.add(playerLevelLabel);
+		this.add(playerExpLabel);
 	}
 
 	public void show(List<GameObject> objects) {
@@ -29,11 +33,8 @@ public class GameStatusPanel extends DisplayElement {
 			playerLevelLabel.setText("Player level:" + focusedObject.getLevel());
 			playerExpLabel
 					.setText("Exp:" + focusedObject.getCurrentExperience() + "/" + focusedObject.getExperienceForUp());
-			this.add(playerHPLabel);
-			this.add(playerWeaponLabel);
-			this.add(playerLevelLabel);
-			this.add(playerExpLabel);
 		}
+		repaint();
 	}
 
 }

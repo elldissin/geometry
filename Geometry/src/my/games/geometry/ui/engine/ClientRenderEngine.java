@@ -15,13 +15,14 @@ public class ClientRenderEngine implements RenderEngine {
 	public ClientRenderEngine(World world) {
 		camera = new GameCameraPanel();
 		statusBar = new GameStatusPanel();
-		camera.setFocusedObject(world.getObjectByID(focusedObjectID));
-		statusBar.setFocusedObject(world.getObjectByID(focusedObjectID));
 		this.world = world;
 	}
 
 	@Override
 	public void render() {
+		camera.setFocusedObject(world.getObjectByID(focusedObjectID));
+		statusBar.setFocusedObject(world.getObjectByID(focusedObjectID));
+
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {

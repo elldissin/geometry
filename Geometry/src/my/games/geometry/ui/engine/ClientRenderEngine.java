@@ -46,7 +46,4 @@ public class ClientRenderEngine implements RenderEngine {
 		focusedObjectID = objID;
 	}
 
-	public int getCameraLockedID() {
-		return focusedObjectID;
-	}
 }

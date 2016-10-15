@@ -25,12 +25,6 @@ public class NoRenderEngine implements RenderEngine {
 	}
 
 	@Override
-	public int getCameraLockedID() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public GameStatusPanel getStatusBar() {
 		return new GameStatusPanel();
 	}

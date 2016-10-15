@@ -4,6 +4,7 @@ import my.games.geometry.ui.GameCameraPanel;
 import my.games.geometry.ui.GameStatusPanel;
 
 public interface RenderEngine {
+
 	public void render();
 
 	public GameCameraPanel getCamera();
@@ -11,6 +12,4 @@ public interface RenderEngine {
 	public GameStatusPanel getStatusBar();
 
 	public void setFocusedObjectID(int objID);
-
-	public int getCameraLockedID();
 }

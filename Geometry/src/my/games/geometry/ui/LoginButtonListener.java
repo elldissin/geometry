@@ -1,13 +1,9 @@
 package my.games.geometry.ui;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
-
 import my.games.geometry.game.engine.Client;
-import my.games.geometry.game.objects.GameObject;
 
 public class LoginButtonListener implements ActionListener {
 	private ClientWindow clientWindow;
@@ -22,15 +18,11 @@ public class LoginButtonListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JPanel gamePanel = client.getRenderEngine().getCamera(1);
-		GameObject statusPanelDisplayedObj = client.getWorld()
-				.getObjectByID(client.getRenderEngine().getCameraLockedID());
-		GameStatusPanel gameStatusPanel = new GameStatusPanel(statusPanelDisplayedObj);
-		gameStatusPanel.setPreferredSize(new Dimension(800, 55));
-		gamePanel.setPreferredSize(new Dimension(800, 600));
+		DisplayElement gameCameraPanel = client.getRenderEngine().getCamera();
+		DisplayElement gameStatusPanel = client.getRenderEngine().getStatusBar();
 		clientWindow.getContentPane().removeAll();
 		clientWindow.add(gameStatusPanel);
-		clientWindow.add(gamePanel);
+		clientWindow.add(gameCameraPanel);
 		clientWindow.repaint();
 		clientWindow.pack();
 		clientWindow.setVisible(true);

@@ -1,7 +1,6 @@
 package my.games.geometry.game;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import java.awt.event.KeyListener;
 
@@ -17,12 +16,8 @@ public class ClientTest {
 	@Test
 	public void getCameraTest() {
 		Client clientTest = new Client();
-		GameCameraPanel cam1 = clientTest.getRenderEngine().getCamera(1);
-		GameCameraPanel cam2 = clientTest.getRenderEngine().getCamera(2);
-		GameCameraPanel cam3 = clientTest.getRenderEngine().getCamera(3);
-		assertNull("Camera 3 must not exists", cam3);
+		GameCameraPanel cam1 = clientTest.getRenderEngine().getCamera();
 		assertNotNull(cam1);
-		assertNotNull(cam2);
 		// fail("Not yet implemented");
 	}
 

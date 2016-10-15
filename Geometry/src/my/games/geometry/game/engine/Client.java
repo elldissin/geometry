@@ -52,7 +52,7 @@ public class Client {
 							// call
 		controller = new Controller(comm, clientID);
 		comm.openConnectionTo("localhost", clientID);
-		renderEngine.lockCameraOn(comm.getObjectIDassignedByServer());
+		renderEngine.setFocusedObjectID(comm.getObjectIDassignedByServer());
 		runner.start();
 	}
 

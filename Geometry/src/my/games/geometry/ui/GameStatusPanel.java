@@ -1,33 +1,34 @@
 package my.games.geometry.ui;
 
 import java.awt.Dimension;
+import java.util.List;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import my.games.geometry.game.objects.GameObject;
 
-public class GameStatusPanel extends JPanel {
+public class GameStatusPanel extends DisplayElement {
 
 	private static final long serialVersionUID = 1L;
-	private GameObject displayedObject;
-	private int width = 800;
-	private int height = 65;
 	JLabel playerHPLabel = new JLabel();
 	JLabel playerWeaponLabel = new JLabel();
 	JLabel playerLevelLabel = new JLabel();
 	JLabel playerExpLabel = new JLabel();
 
-	public GameStatusPanel(GameObject displayedObject) {
+	public GameStatusPanel() {
 		super();
-		this.displayedObject = displayedObject;
-		setPreferredSize(new Dimension(width, height));
-		if (displayedObject != null) {
-			playerHPLabel.setText("Player HP:" + Integer.toString(displayedObject.getHealth()));
-			playerWeaponLabel.setText("Player weapon:" + displayedObject.getWeapon());
-			playerLevelLabel.setText("Player level:" + displayedObject.getLevel());
-			playerExpLabel.setText(
-					"Exp:" + displayedObject.getCurrentExperience() + "/" + displayedObject.getExperienceForUp());
+		viewWidth = 800;
+		viewHeight = 65;
+		setPreferredSize(new Dimension(viewWidth, viewHeight));
+	}
+
+	public void show(List<GameObject> objects) {
+		if (focusedObject != null) {
+			playerHPLabel.setText("Player HP:" + Integer.toString(focusedObject.getHealth()));
+			playerWeaponLabel.setText("Player weapon:" + focusedObject.getWeapon());
+			playerLevelLabel.setText("Player level:" + focusedObject.getLevel());
+			playerExpLabel
+					.setText("Exp:" + focusedObject.getCurrentExperience() + "/" + focusedObject.getExperienceForUp());
 			this.add(playerHPLabel);
 			this.add(playerWeaponLabel);
 			this.add(playerLevelLabel);

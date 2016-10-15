@@ -6,16 +6,11 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JPanel;
-
 import my.games.geometry.game.objects.GameObject;
 
-public class GameCameraPanel extends JPanel {
+public class GameCameraPanel extends DisplayElement {
 
 	private static final long serialVersionUID = 1L;
-
-	private int viewWidth;
-	private int viewHeight;
 	private List<GameObject> drawableObjects;
 	private Point viewOffset;
 
@@ -28,22 +23,6 @@ public class GameCameraPanel extends JPanel {
 		drawableObjects = new ArrayList<GameObject>();
 	}
 
-	public int getViewWidth() {
-		return viewWidth;
-	}
-
-	public void setViewWidth(int viewWidth) {
-		this.viewWidth = viewWidth;
-	}
-
-	public int getViewHeight() {
-		return viewHeight;
-	}
-
-	public void setViewHeight(int viewHeight) {
-		this.viewHeight = viewHeight;
-	}
-
 	public Point getViewOffset() {
 		return viewOffset;
 	}
@@ -52,7 +31,13 @@ public class GameCameraPanel extends JPanel {
 		this.viewOffset = viewOffset;
 	}
 
+	@Override
 	public void show(List<GameObject> objects) {
+		if (focusedObject != null) {
+			Point p = new Point((int) focusedObject.getPos().getX() - getViewWidth() / 2,
+					(int) focusedObject.getPos().getY() - getViewHeight() / 2);
+			setViewOffset(p);
+		}
 		drawableObjects = objects;
 		repaint();
 	}

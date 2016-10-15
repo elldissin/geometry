@@ -1,52 +1,51 @@
 package my.games.geometry.ui.engine;
 
-import java.awt.Point;
-
 import javax.swing.SwingUtilities;
 
 import my.games.geometry.game.engine.World;
 import my.games.geometry.ui.GameCameraPanel;
+import my.games.geometry.ui.GameStatusPanel;
 
 public class ClientRenderEngine implements RenderEngine {
 	private World world;
 	private GameCameraPanel camera;
-	private int cameraLockObjID;
+	private GameStatusPanel statusBar;
+	private int focusedObjectID;
 
 	public ClientRenderEngine(World world) {
 		camera = new GameCameraPanel();
+		statusBar = new GameStatusPanel();
+		camera.setFocusedObject(world.getObjectByID(focusedObjectID));
+		statusBar.setFocusedObject(world.getObjectByID(focusedObjectID));
 		this.world = world;
 	}
 
 	@Override
 	public void render() {
-		// FIXME disabled camera lock until client knowns his object id
-		if ((world.getObjectByID(cameraLockObjID)) != null) {
-			Point p = new Point((int) world.getObjectByID(cameraLockObjID).getPos().getX() - camera.getViewWidth() / 2,
-					(int) world.getObjectByID(cameraLockObjID).getPos().getY() - camera.getViewHeight() / 2);
-			camera.setViewOffset(p);
-		}
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				camera.show(world.getDrawableObjectList());
-				// System.out.println(world.getDrawableObjectList().size());
+				statusBar.show(world.getDrawableObjectList());
 			}
 		});
-
-		// }
 	}
 
-	public GameCameraPanel getCamera(int number) {
-		if (number == 1)
-			return camera;
-		return new GameCameraPanel();
+	@Override
+	public GameCameraPanel getCamera() {
+		return camera;
 	}
 
-	public void lockCameraOn(int objID) {
-		cameraLockObjID = objID;
+	@Override
+	public GameStatusPanel getStatusBar() {
+		return statusBar;
+	}
+
+	public void setFocusedObjectID(int objID) {
+		focusedObjectID = objID;
 	}
 
 	public int getCameraLockedID() {
-		return cameraLockObjID;
+		return focusedObjectID;
 	}
 }

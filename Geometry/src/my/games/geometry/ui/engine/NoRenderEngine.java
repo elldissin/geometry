@@ -1,6 +1,7 @@
 package my.games.geometry.ui.engine;
 
 import my.games.geometry.ui.GameCameraPanel;
+import my.games.geometry.ui.GameStatusPanel;
 
 public class NoRenderEngine implements RenderEngine {
 
@@ -14,12 +15,12 @@ public class NoRenderEngine implements RenderEngine {
 	}
 
 	@Override
-	public GameCameraPanel getCamera(int cameraNum) {
+	public GameCameraPanel getCamera() {
 		return new GameCameraPanel(); // empty camera to show nothing
 	}
 
 	@Override
-	public void lockCameraOn(int objID) {
+	public void setFocusedObjectID(int objID) {
 
 	}
 
@@ -27,6 +28,11 @@ public class NoRenderEngine implements RenderEngine {
 	public int getCameraLockedID() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public GameStatusPanel getStatusBar() {
+		return new GameStatusPanel();
 	}
 
 }

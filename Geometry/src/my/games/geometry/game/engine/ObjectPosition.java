@@ -64,6 +64,10 @@ public class ObjectPosition implements Serializable {
 		}
 	}
 
+	public String toString() {
+		return "(" + Math.round(x) + "," + Math.round(y) + ")";
+	}
+
 	public ObjectPosition copy() {
 		ObjectPosition copy = new ObjectPosition();
 		copy.setPos(this);

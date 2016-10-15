@@ -14,6 +14,7 @@ public class GameStatusPanel extends DisplayElement {
 	JLabel playerWeaponLabel = new JLabel();
 	JLabel playerLevelLabel = new JLabel();
 	JLabel playerExpLabel = new JLabel();
+	JLabel playerPositionLabel = new JLabel();
 
 	public GameStatusPanel() {
 		super();
@@ -24,6 +25,7 @@ public class GameStatusPanel extends DisplayElement {
 		this.add(playerWeaponLabel);
 		this.add(playerLevelLabel);
 		this.add(playerExpLabel);
+		this.add(playerPositionLabel);
 	}
 
 	public void show(List<GameObject> objects) {
@@ -33,6 +35,7 @@ public class GameStatusPanel extends DisplayElement {
 			playerLevelLabel.setText("Player level:" + focusedObject.getLevel());
 			playerExpLabel
 					.setText("Exp:" + focusedObject.getCurrentExperience() + "/" + focusedObject.getExperienceForUp());
+			playerPositionLabel.setText("Position: " + focusedObject.getPos());
 		}
 		repaint();
 	}

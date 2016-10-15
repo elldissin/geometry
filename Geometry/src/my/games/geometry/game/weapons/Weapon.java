@@ -2,7 +2,7 @@ package my.games.geometry.game.weapons;
 
 import java.util.List;
 
-import my.games.geometry.game.ObjectSystem;
+import my.games.geometry.game.engine.ObjectSystem;
 import my.games.geometry.game.objects.Projectile;
 
 public interface Weapon extends ObjectSystem {

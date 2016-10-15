@@ -6,6 +6,8 @@ import java.awt.Point;
 
 import org.junit.Test;
 
+import my.games.geometry.game.engine.ObjectPosition;
+import my.games.geometry.game.engine.World;
 import my.games.geometry.ui.GameCameraPanel;
 
 public class ClientRendererTest {

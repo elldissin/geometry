@@ -1,4 +1,4 @@
-package my.games.geometry.game;
+package my.games.geometry.game.engine;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,14 +12,14 @@ import my.games.geometry.events.streams.EventStream;
 import my.games.geometry.events.util.EventHandler;
 import my.games.geometry.events.util.GameEventObserver;
 import my.games.geometry.events.util.InputConverter;
-import my.games.geometry.game.engine.NoRenderEngine;
-import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.networking.BufferedEventSender;
 import my.games.geometry.networking.ClientService;
 import my.games.geometry.networking.NetworkMessage;
 import my.games.geometry.networking.PlayerInput;
 import my.games.geometry.ui.ServerLogDisplay;
+import my.games.geometry.ui.engine.NoRenderEngine;
+import my.games.geometry.ui.engine.RenderEngine;
 
 public class Server {
 	private static final long serialVersionUID = 1L;

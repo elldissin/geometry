@@ -1,7 +1,7 @@
 package my.games.geometry.events.util;
 
 import my.games.geometry.events.GameEvent;
-import my.games.geometry.game.World;
+import my.games.geometry.game.engine.World;
 
 /**
  * 

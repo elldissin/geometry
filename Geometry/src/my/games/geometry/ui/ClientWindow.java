@@ -5,7 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 
-import my.games.geometry.game.Client;
+import my.games.geometry.game.engine.Client;
 
 public class ClientWindow extends JFrame implements Runnable {
 

@@ -3,7 +3,7 @@ package my.games.geometry.game.movers;
 import java.io.Serializable;
 
 import my.games.geometry.events.ObjectUpdatedEvent;
-import my.games.geometry.game.ObjectPosition;
+import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.objects.GameObject;
 
 /**

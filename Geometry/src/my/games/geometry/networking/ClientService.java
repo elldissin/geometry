@@ -9,7 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import my.games.geometry.events.CreateEvent;
 import my.games.geometry.events.GameEvent;
-import my.games.geometry.game.World;
+import my.games.geometry.game.engine.World;
 import my.games.geometry.game.objects.GameObject;
 
 public class ClientService implements Runnable {

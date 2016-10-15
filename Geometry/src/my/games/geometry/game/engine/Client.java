@@ -1,4 +1,4 @@
-package my.games.geometry.game;
+package my.games.geometry.game.engine;
 
 import java.awt.event.KeyListener;
 
@@ -6,9 +6,9 @@ import my.games.geometry.events.streams.EventStream;
 import my.games.geometry.events.streams.ServerEventStream;
 import my.games.geometry.events.util.EventHandler;
 import my.games.geometry.game.controller.Controller;
-import my.games.geometry.game.engine.ClientRenderEngine;
-import my.games.geometry.game.engine.RenderEngine;
 import my.games.geometry.networking.ServerCommunicator;
+import my.games.geometry.ui.engine.ClientRenderEngine;
+import my.games.geometry.ui.engine.RenderEngine;
 
 public class Client {
 	private static final long serialVersionUID = 1L;

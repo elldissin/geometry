@@ -1,4 +1,4 @@
-package my.games.geometry.game.engine;
+package my.games.geometry.ui.engine;
 
 import my.games.geometry.ui.GameCameraPanel;
 

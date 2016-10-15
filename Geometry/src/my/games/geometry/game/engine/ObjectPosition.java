@@ -1,4 +1,4 @@
-package my.games.geometry.game;
+package my.games.geometry.game.engine;
 
 import java.io.Serializable;
 

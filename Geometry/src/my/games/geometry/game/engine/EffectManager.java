@@ -1,4 +1,4 @@
-package my.games.geometry.game;
+package my.games.geometry.game.engine;
 
 import my.games.geometry.behaviour.Effect;
 import my.games.geometry.game.objects.GameObject;

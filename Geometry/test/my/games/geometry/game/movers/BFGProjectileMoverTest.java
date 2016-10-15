@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import my.games.geometry.game.ObjectPosition;
+import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.objects.BFGProjectile;
 import my.games.geometry.game.objects.GameObject;
 

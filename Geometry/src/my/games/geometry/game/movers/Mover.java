@@ -1,6 +1,6 @@
 package my.games.geometry.game.movers;
 
-import my.games.geometry.game.ObjectSystem;
+import my.games.geometry.game.engine.ObjectSystem;
 
 public interface Mover extends ObjectSystem {
 

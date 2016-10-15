@@ -1,6 +1,6 @@
 package my.games.geometry.events;
 
-import my.games.geometry.game.World;
+import my.games.geometry.game.engine.World;
 import my.games.geometry.game.objects.GameObject;
 
 public class CreateEvent extends GameEvent {

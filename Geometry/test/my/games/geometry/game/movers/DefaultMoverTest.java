@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import my.games.geometry.game.ObjectPosition;
-import my.games.geometry.game.World;
+import my.games.geometry.game.engine.ObjectPosition;
+import my.games.geometry.game.engine.World;
 import my.games.geometry.game.objects.GameObject;
 
 public class DefaultMoverTest {

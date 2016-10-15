@@ -1,10 +1,10 @@
-package my.games.geometry.game.engine;
+package my.games.geometry.ui.engine;
 
 import java.awt.Point;
 
 import javax.swing.SwingUtilities;
 
-import my.games.geometry.game.World;
+import my.games.geometry.game.engine.World;
 import my.games.geometry.ui.GameCameraPanel;
 
 public class ClientRenderEngine implements RenderEngine {

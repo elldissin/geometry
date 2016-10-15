@@ -1,4 +1,4 @@
-package my.games.geometry.game;
+package my.games.geometry.game.engine;
 
 /**
  * @author LCrystal Represents system that each object may or may not have. Object is therefore

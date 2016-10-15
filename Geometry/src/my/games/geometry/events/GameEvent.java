@@ -2,7 +2,7 @@ package my.games.geometry.events;
 
 import java.io.Serializable;
 
-import my.games.geometry.game.World;
+import my.games.geometry.game.engine.World;
 import my.games.geometry.game.objects.GameObject;
 
 public abstract class GameEvent implements Serializable {

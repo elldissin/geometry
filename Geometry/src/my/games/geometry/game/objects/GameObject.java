@@ -13,7 +13,7 @@ import my.games.geometry.behaviour.Effect;
 import my.games.geometry.behaviour.PlayerBehaviour;
 import my.games.geometry.events.GameEvent;
 import my.games.geometry.events.util.EventObserver;
-import my.games.geometry.game.ObjectPosition;
+import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.movers.Mover;
 import my.games.geometry.game.renderers.Renderer;
 import my.games.geometry.game.weapons.Weapon;

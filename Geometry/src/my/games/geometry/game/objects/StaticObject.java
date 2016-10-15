@@ -3,7 +3,7 @@ package my.games.geometry.game.objects;
 import java.awt.Point;
 import java.util.List;
 
-import my.games.geometry.game.ObjectPosition;
+import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.movers.NoMover;
 import my.games.geometry.game.renderers.DefaultRenderer;
 

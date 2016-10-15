@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import my.games.geometry.game.Client;
+import my.games.geometry.game.engine.Client;
 import my.games.geometry.game.objects.GameObject;
 
 public class LoginButtonListener implements ActionListener {

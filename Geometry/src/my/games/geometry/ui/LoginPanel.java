@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import my.games.geometry.game.Client;
+import my.games.geometry.game.engine.Client;
 
 public class LoginPanel extends JPanel {
 

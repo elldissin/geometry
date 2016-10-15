@@ -1,6 +1,6 @@
 package my.games.geometry.game.objects;
 
-import my.games.geometry.game.ObjectPosition;
+import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.movers.BFGProjectileMover;
 import my.games.geometry.game.renderers.ProjectileRenderer;
 

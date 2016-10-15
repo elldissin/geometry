@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import my.games.geometry.game.engine.Client;
 import my.games.geometry.ui.GameCameraPanel;
 
 public class ClientTest {

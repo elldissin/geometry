@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import my.games.geometry.game.ObjectPosition;
-import my.games.geometry.game.World;
+import my.games.geometry.game.engine.ObjectPosition;
+import my.games.geometry.game.engine.World;
 
 public class PlayerTest {
 

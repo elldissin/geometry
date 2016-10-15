@@ -1,9 +1,9 @@
-package my.games.geometry.game;
+package my.games.geometry.game.engine;
 
 import my.games.geometry.events.GameEvent;
 import my.games.geometry.events.streams.EventStream;
 import my.games.geometry.events.util.EventHandler;
-import my.games.geometry.game.engine.RenderEngine;
+import my.games.geometry.ui.engine.RenderEngine;
 
 public class ClientWorldRunner extends WorldRunner {
 

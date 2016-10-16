@@ -48,8 +48,6 @@ public abstract class GeneralMover implements Mover, Serializable {
 			double newY = objectToMove.getPos().getY() + getSpeedY() * delta;
 			ObjectPosition newPos = new ObjectPosition(newX, newY);
 			objectToMove.setPos(newPos);
-			objectToMove.body().clear(); // LATER need to call twice
-			objectToMove.body();
 			objectToMove.notifyObserversAbout(new ObjectUpdatedEvent(objectToMove));
 		}
 	}
@@ -81,8 +79,6 @@ public abstract class GeneralMover implements Mover, Serializable {
 
 	private void turnDir(int dir, double delta) {
 		objectToMove.setAngle(objectToMove.getAngle() + turnSpeed * dir * delta);
-		objectToMove.body().clear(); // LATER called twice
-		objectToMove.body();
 	}
 
 	@Override

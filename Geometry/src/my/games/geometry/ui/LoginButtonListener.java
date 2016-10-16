@@ -27,6 +27,7 @@ public class LoginButtonListener implements ActionListener {
 		clientWindow.pack();
 		clientWindow.setVisible(true);
 		client.setClientID(Integer.parseInt(panel.loginField.getText()));
+		client.setServerIP(panel.serverIPField.getText());
 		client.start(); // first set the ID, then start!
 		clientWindow.addKeyListener(client.getController()); // add controller
 																// from running

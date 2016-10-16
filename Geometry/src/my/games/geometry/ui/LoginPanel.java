@@ -15,14 +15,14 @@ public class LoginPanel extends JPanel {
 
 	private Client client;
 	private ClientWindow clientwindow;
-	private JLabel loginLabel, passwordLabel;
-	public JTextField loginField, passwordField;
+	private JLabel loginLabel, passwordLabel, serverIPLabel;
+	public JTextField loginField, passwordField, serverIPField;
 
 	LoginPanel(Client client, ClientWindow clientwindow) {
 		this.clientwindow = clientwindow;
 		this.client = client;
 
-		this.setLayout(new GridLayout(3, 2, 0, 5));
+		this.setLayout(new GridLayout(4, 2, 0, 5));
 
 		loginLabel = new JLabel("Login(numeric):");
 		loginLabel.setPreferredSize(new Dimension(70, 30));
@@ -39,6 +39,14 @@ public class LoginPanel extends JPanel {
 		passwordField = new JTextField();
 		passwordField.setPreferredSize(new Dimension(70, 30));
 		this.add(passwordField);
+
+		serverIPLabel = new JLabel("Server IP:");
+		serverIPLabel.setPreferredSize(new Dimension(70, 30));
+		this.add(serverIPLabel);
+
+		serverIPField = new JTextField();
+		serverIPField.setPreferredSize(new Dimension(70, 30));
+		this.add(serverIPField);
 
 		JButton loginButt = new JButton();
 		LoginButtonListener loginButtonListener = new LoginButtonListener(client, clientwindow, this);

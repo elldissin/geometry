@@ -21,6 +21,7 @@ public class Client {
 	private WorldRunner runner;
 	private ServerCommunicator comm;
 	private int clientID;
+	private String hostName;
 
 	public Client() {
 		super();
@@ -51,13 +52,18 @@ public class Client {
 	public void start() { // The ID must be already given to client before this
 							// call
 		controller = new Controller(comm, clientID);
-		comm.openConnectionTo("localhost", clientID);
+		comm.openConnectionTo(hostName, clientID);
 		renderEngine.setFocusedObjectID(comm.getObjectIDassignedByServer());
 		runner.start();
 	}
 
 	public void setClientID(int clientID) {
 		this.clientID = clientID;
+	}
+
+	public void setServerIP(String hostName) {
+		this.hostName = hostName;
+
 	}
 
 }

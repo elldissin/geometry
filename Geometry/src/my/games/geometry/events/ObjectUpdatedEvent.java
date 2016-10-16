@@ -21,6 +21,7 @@ public class ObjectUpdatedEvent extends GameEvent {
 			if (objToBeUpdated != null) {
 				objToBeUpdated.setPos(sourceObject.getPos());
 				objToBeUpdated.setAngle(sourceObject.getAngle());
+				objToBeUpdated.setHealth(sourceObject.getHealth());
 			}
 		}
 	}

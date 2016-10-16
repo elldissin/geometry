@@ -3,6 +3,7 @@ package my.games.geometry.game.objects;
 import java.awt.Point;
 import java.util.List;
 
+import my.games.geometry.events.ObjectUpdatedEvent;
 import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.movers.DefaultMover;
 import my.games.geometry.game.renderers.DefaultRenderer;
@@ -53,6 +54,8 @@ public class Player extends GameObject {
 			destroy();
 		} else
 			health -= amount;
+		ObjectUpdatedEvent objectUpdatedEvent = new ObjectUpdatedEvent(this);
+		this.notifyObserversAbout(objectUpdatedEvent);
 	}
 
 	@Override

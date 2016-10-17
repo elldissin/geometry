@@ -1,4 +1,4 @@
-package my.games.geometry.ui.engine;
+package my.games.geometry.game.renderers;
 
 import java.awt.Point;
 import java.util.ArrayList;

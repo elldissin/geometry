@@ -30,6 +30,7 @@ public class LoginPanel extends JPanel {
 
 		loginField = new JTextField();
 		loginField.setPreferredSize(new Dimension(70, 30));
+		loginField.setText("" + (int) (Math.random() * 1000));
 		this.add(loginField);
 
 		passwordLabel = new JLabel("Password:");
@@ -46,6 +47,7 @@ public class LoginPanel extends JPanel {
 
 		serverIPField = new JTextField();
 		serverIPField.setPreferredSize(new Dimension(70, 30));
+		serverIPField.setText("localhost");
 		this.add(serverIPField);
 
 		JButton loginButt = new JButton();

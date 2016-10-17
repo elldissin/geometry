@@ -30,7 +30,8 @@ public class LoginPanel extends JPanel {
 
 		loginField = new JTextField();
 		loginField.setPreferredSize(new Dimension(70, 30));
-		loginField.setText("" + (int) (Math.random() * 1000));
+		Integer i = (int) (Math.random() * 1000);
+		loginField.setText(i.toString());
 		this.add(loginField);
 
 		passwordLabel = new JLabel("Password:");

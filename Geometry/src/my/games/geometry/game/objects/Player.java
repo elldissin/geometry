@@ -20,7 +20,7 @@ public class Player extends GameObject {
 		currentExperience = 0;
 		mover = new DefaultMover(this);
 		weapon = new DefaultWeapon(this);
-		renderer = new DefaultRenderer();
+		renderer = new DefaultRenderer(this);
 		body();
 	}
 

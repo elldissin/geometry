@@ -13,7 +13,7 @@ public class Projectile extends GameObject {
 	public Projectile(ObjectPosition position, double angle) {
 		super(position, angle);
 		mover = new ProjectileMover(this);
-		renderer = new ProjectileRenderer();
+		renderer = new ProjectileRenderer(this);
 		objHeight = 5;
 		objWidth = 5;
 		body();
@@ -26,9 +26,9 @@ public class Projectile extends GameObject {
 			points.add(0, p);
 			p = new Point(currentPos.getIntX() - objWidth / 2, currentPos.getIntY() + objHeight / 2);
 			points.add(1, p);
-			p = new Point(currentPos.getIntX() + objWidth / 2, currentPos.getIntY() - objHeight / 2);
-			points.add(2, p);
 			p = new Point(currentPos.getIntX() - objWidth / 2, currentPos.getIntY() - objHeight / 2);
+			points.add(2, p);
+			p = new Point(currentPos.getIntX() + objWidth / 2, currentPos.getIntY() - objHeight / 2);
 			points.add(3, p);
 		}
 		return points;

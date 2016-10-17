@@ -17,7 +17,7 @@ public class StaticObject extends GameObject {
 		objHeight = 50;
 		mover = new NoMover(this);
 		// weapon = new DefaultWeapon(); //LATER add NoWeapon ?
-		renderer = new DefaultRenderer();
+		renderer = new DefaultRenderer(this);
 		body();
 	}
 

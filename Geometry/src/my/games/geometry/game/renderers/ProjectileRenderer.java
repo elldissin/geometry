@@ -15,13 +15,17 @@ public class ProjectileRenderer implements Renderer, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	protected GameObject objectToDraw;
+
+	public ProjectileRenderer(GameObject objectToDraw) {
+		this.objectToDraw = objectToDraw;
+	}
 
 	@Override
-	public void draw(Graphics g, GameObject obj) {
-		// super.draw(g); //invoked to draw the bounding rect first
+	public void draw(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		GeneralPath path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
-		List<Point> points = obj.body();
+		List<Point> points = objectToDraw.body();
 		if (!points.isEmpty()) {
 			path.moveTo(points.get(0).getX(), points.get(0).getY());
 			for (int i = 1; i < points.size(); i++) {
@@ -29,17 +33,7 @@ public class ProjectileRenderer implements Renderer, Serializable {
 			}
 			path.closePath();
 			g2.draw(path);
-			// //drawing direction line
-			// Point pos = obj.getPos();
-			// int objWidth = obj.getObjWidth();
-			// int objHeight = obj.getObjHeight();
-			// double angle = obj.getAngle();
-			// g2.drawLine(pos.x, pos.y, (int) (pos.x+(objWidth*Math.cos(angle))),
-			// (int) (pos.y+(objHeight*Math.sin(angle))));
-			// //drawing life %
-			// g.drawString(String.valueOf(obj.getHealth()), pos.x, (pos.y-objHeight));
 		}
-		// g2.fill(path);
 	}
 
 }

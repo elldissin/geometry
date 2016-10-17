@@ -1,6 +1,5 @@
 package my.games.geometry.game.objects;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -148,18 +147,8 @@ public abstract class GameObject implements Updatable, Serializable {
 	}
 
 	public void draw(Graphics g) {
-		drawBoundingRect(g);
-		ObjectPosition p = getPos().copy();
-		p.setPos(p.getX() - getObjHeight() / 2 + 10, p.getY() - getObjWidth() / 2 + 20);
-		g.drawString("ID: " + getObjectID(), p.getIntX(), p.getIntY());
 		if (renderer != null)
-			renderer.draw(g, this);
-	}
-
-	public void drawBoundingRect(Graphics g) {
-		g.setColor(Color.gray);
-		g.drawRect(boundingRect().x, boundingRect().y, boundingRect().width, boundingRect().height);
-		g.setColor(Color.black);
+			renderer.draw(g);
 	}
 
 	public abstract List<Point> body();

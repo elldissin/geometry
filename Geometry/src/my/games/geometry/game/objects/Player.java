@@ -28,8 +28,8 @@ public class Player extends GameObject {
 		// points.clear();
 		if (points.isEmpty()) {
 			for (int i = 0; i < level + 2; i++) {
-				int x1 = (int) (currentPos.getIntX() + (objWidth * Math.cos(2 * Math.PI / (level + 2) * i + angle)));
-				int y1 = (int) (currentPos.getIntY() + (objHeight * Math.sin(2 * Math.PI / (level + 2) * i + angle)));
+				int x1 = (int) (currentPos.getX() + (objWidth * Math.cos(2 * Math.PI / (level + 2) * i + angle)));
+				int y1 = (int) (currentPos.getY() + (objHeight * Math.sin(2 * Math.PI / (level + 2) * i + angle)));
 				Point p = new Point(x1, y1);
 				points.add(i, p);
 			}

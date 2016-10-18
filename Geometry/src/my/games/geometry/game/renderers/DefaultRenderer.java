@@ -18,6 +18,7 @@ public class DefaultRenderer implements Renderer, Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	protected GameObject objectToDraw;
+	private Animator animator = new Animator();
 
 	public DefaultRenderer(GameObject objectToDraw) {
 		this.objectToDraw = objectToDraw;
@@ -31,7 +32,10 @@ public class DefaultRenderer implements Renderer, Serializable {
 		g.drawString("ID: " + objectToDraw.getObjectID(), p.getIntX(), p.getIntY());
 		Graphics2D g2 = (Graphics2D) g;
 		GeneralPath path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
-		List<Point> points = objectToDraw.body();
+		List<Point> origPoints = objectToDraw.body();
+		List<Point> points = animator.animatePoints(origPoints,
+				new Point(objectToDraw.getPos().getIntX(), objectToDraw.getPos().getIntY()));
+
 		if (!points.isEmpty()) {
 			path.moveTo(points.get(0).getX(), points.get(0).getY());
 			for (int i = 1; i < points.size(); i++) {

@@ -18,14 +18,16 @@ public class Animator implements Serializable {
 		pointsForCurrentFrame = new ArrayList<Point>();
 	}
 
-	public List<Point> animatePoints(List<Point> initialPoints) {
+	public List<Point> animatePoints(List<Point> initialPoints, Point center) {
 		pointsForCurrentFrame.clear();
 		frameCounter++;
-		if (frameCounter > 10)
+		if (frameCounter > 360) {
 			frameCounter = 0;
+		}
+		double angle = Math.toRadians(frameCounter) * 2;
 		for (int i = 0; i < initialPoints.size(); i++) {
 			Point p = (Point) initialPoints.get(i).clone();
-			p.setLocation(p.getX() * 0.5, p.getY() * 0.5);
+			RotateTransform.transform(p, center, angle);
 			pointsForCurrentFrame.add(p);
 		}
 		return pointsForCurrentFrame;

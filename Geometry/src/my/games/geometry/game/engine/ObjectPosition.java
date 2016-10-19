@@ -1,5 +1,6 @@
 package my.games.geometry.game.engine;
 
+import java.awt.Point;
 import java.io.Serializable;
 
 import my.games.geometry.exceptions.WrongPositionException;
@@ -62,6 +63,10 @@ public class ObjectPosition implements Serializable {
 		} else {
 			throw new WrongPositionException();
 		}
+	}
+
+	public Point toPoint() {
+		return new Point(getIntX(), getIntY());
 	}
 
 	public String toString() {

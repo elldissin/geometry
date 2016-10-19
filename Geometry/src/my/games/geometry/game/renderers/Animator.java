@@ -5,13 +5,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Animator implements Serializable {
+public abstract class Animator implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<Point> pointsForCurrentFrame;
-	private int frameCounter;
+	protected List<Point> pointsForCurrentFrame;
+	protected int frameCounter;
 
 	public Animator() {
 		frameCounter = 0;
@@ -24,12 +24,9 @@ public class Animator implements Serializable {
 		if (frameCounter > 360) {
 			frameCounter = 0;
 		}
-		double angle = Math.toRadians(frameCounter) * 2;
-		for (int i = 0; i < initialPoints.size(); i++) {
-			Point p = (Point) initialPoints.get(i).clone();
-			RotateTransform.transform(p, center, angle);
-			pointsForCurrentFrame.add(p);
-		}
+		modifyPoints(initialPoints, center);
 		return pointsForCurrentFrame;
 	}
+
+	protected abstract void modifyPoints(List<Point> initialPoints, Point center);
 }

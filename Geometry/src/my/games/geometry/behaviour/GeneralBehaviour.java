@@ -5,44 +5,42 @@ import java.io.Serializable;
 import my.games.geometry.game.objects.GameObject;
 
 public abstract class GeneralBehaviour implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected boolean slowable;
 	protected boolean vulnerable;
 	protected boolean bumping;
 	protected boolean destrictibleOnBump;
+	protected GameObject ownerObject;
 
-	public GeneralBehaviour() {
+	public GeneralBehaviour(GameObject ownerObject) {
+		this.ownerObject = ownerObject;
 		slowable = false;
 		vulnerable = false;
 		bumping = false;
 	}
 
-	public boolean isSlowable() {
-		return slowable;
-	}
-
-	public boolean isVulnerable() {
-		return vulnerable;
-	}
-
-	public boolean isBumping() {
-		return bumping;
-	}
-
-	public void slowDown(GameObject obj, int amount) {
-		obj.getMover().setSpeed((int) (obj.getMover().getSpeed() * (100 - amount) / 100));
+	public void slowDown(int amount) {
+		if (slowable) {
+			ownerObject.getMover().setSpeed((int) (ownerObject.getMover().getSpeed() * (100 - amount) / 100));
+		}
 		slowable = false; // LATER remove after timer implementation
 	}
 
-	public void doDamage(GameObject obj, int amount) {
-		// System.out.println("Player got hit by " + amount +" hp");
-		obj.getHit(amount);
+	public void doDamage(int amount) {
+		if (vulnerable) {
+			ownerObject.getHit(amount);
+		}
 	}
 
-	public void bump(GameObject obj, int amount) {
-		// FIXME have to create MoveEvent, but setPos() it not same as move()
-		obj.setPos(obj.getPrevPos().copy());
-		if (destrictibleOnBump)
-			obj.setObsolete(true);
+	public void bump(int amount) {
+		if (bumping) {
+			ownerObject.setPos(ownerObject.getPrevPos().copy());
+			if (destrictibleOnBump)
+				ownerObject.setObsolete(true);
+		}
 	}
 
 	public void setSlowable(boolean value) {
@@ -55,10 +53,6 @@ public abstract class GeneralBehaviour implements Serializable {
 
 	public void setBumping(boolean value) {
 		bumping = value;
-	}
-
-	public boolean destructibleOnBump() {
-		return destrictibleOnBump;
 	}
 
 	public void setDestructibleOnBump(boolean value) {

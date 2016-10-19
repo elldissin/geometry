@@ -37,7 +37,7 @@ public class BFG extends GeneralWeapon implements Weapon, Serializable {
 		Projectile projectile = new BFGProjectile(ownerObject.getPos().copy(), ownerObject.getAngle());
 		projectile.addOnHitEffect(new SlowEffect(20));
 		projectile.addOnHitEffect(new DmgEffect(10));
-		projectile.setBehaviour(new ProjectileBehaviour());
+		projectile.setBehaviour(new ProjectileBehaviour(projectile));
 		projectile.setAngle(ownerObject.getAngle());
 		return projectile;
 	}

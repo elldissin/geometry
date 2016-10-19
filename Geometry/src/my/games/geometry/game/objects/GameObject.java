@@ -9,7 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import my.games.geometry.behaviour.Behaviour;
 import my.games.geometry.behaviour.Effect;
-import my.games.geometry.behaviour.PlayerBehaviour;
+import my.games.geometry.behaviour.NoBehaviour;
 import my.games.geometry.events.GameEvent;
 import my.games.geometry.events.util.EventObserver;
 import my.games.geometry.game.engine.ObjectPosition;
@@ -123,7 +123,7 @@ public abstract class GameObject implements Updatable, Serializable {
 		if (behaviour != null)
 			return behaviour;
 		else
-			return new PlayerBehaviour(); // LATER create NoBehaviour?
+			return new NoBehaviour(this);
 	}
 
 	public void setBehaviour(Behaviour behaviour) {

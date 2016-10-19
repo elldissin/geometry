@@ -1,21 +1,12 @@
 package my.games.geometry.behaviour;
 
-import my.games.geometry.game.objects.GameObject;
-
 public interface Behaviour {
-	public boolean isSlowable();
 
-	public boolean isVulnerable();
+	public void slowDown(int amount);
 
-	public boolean isBumping();
+	public void doDamage(int amount);
 
-	public boolean destructibleOnBump();
-
-	public void slowDown(GameObject obj, int amount);
-
-	public void doDamage(GameObject obj, int amount);
-
-	public void bump(GameObject obj, int amount);
+	public void bump(int amount);
 
 	public void setSlowable(boolean value);
 

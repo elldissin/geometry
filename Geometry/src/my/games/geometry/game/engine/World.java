@@ -122,7 +122,7 @@ public class World {
 		// free
 		// position?
 		newPlayer.setWeapon(new DefaultWeapon(newPlayer));
-		newPlayer.setBehaviour(new PlayerBehaviour());
+		newPlayer.setBehaviour(new PlayerBehaviour(newPlayer));
 		newPlayer.addOnHitEffect(new BumpEffect(0));
 		return newPlayer;
 	}

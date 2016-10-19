@@ -3,6 +3,7 @@ package my.games.geometry.game.objects;
 import java.awt.Point;
 import java.util.List;
 
+import my.games.geometry.behaviour.NoBehaviour;
 import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.movers.NoMover;
 import my.games.geometry.game.renderers.DefaultRenderer;
@@ -19,6 +20,7 @@ public class StaticObject extends GameObject {
 		mover = new NoMover(this);
 		weapon = new NoWeapon(this);
 		renderer = new DefaultRenderer(this);
+		behaviour = new NoBehaviour(this);
 		body();
 	}
 

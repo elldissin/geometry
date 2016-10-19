@@ -3,6 +3,7 @@ package my.games.geometry.game.objects;
 import java.awt.Point;
 import java.util.List;
 
+import my.games.geometry.behaviour.PlayerBehaviour;
 import my.games.geometry.events.ObjectUpdatedEvent;
 import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.movers.DefaultMover;
@@ -21,6 +22,7 @@ public class Player extends GameObject {
 		mover = new DefaultMover(this);
 		weapon = new DefaultWeapon(this);
 		renderer = new DefaultRenderer(this);
+		behaviour = new PlayerBehaviour(this);
 		body();
 	}
 

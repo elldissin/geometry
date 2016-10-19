@@ -3,6 +3,7 @@ package my.games.geometry.game.objects;
 import java.awt.Point;
 import java.util.List;
 
+import my.games.geometry.behaviour.ProjectileBehaviour;
 import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.movers.ProjectileMover;
 import my.games.geometry.game.renderers.ProjectileRenderer;
@@ -16,6 +17,7 @@ public class Projectile extends GameObject {
 		mover = new ProjectileMover(this);
 		renderer = new ProjectileRenderer(this);
 		weapon = new NoWeapon(this);
+		behaviour = new ProjectileBehaviour(this);
 		objHeight = 5;
 		objWidth = 5;
 		body();

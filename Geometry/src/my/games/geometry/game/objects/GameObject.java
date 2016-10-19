@@ -49,10 +49,8 @@ public abstract class GameObject implements Updatable, Serializable {
 		setPos(position);
 		setPrevPos(getPos().copy());
 		points = new CopyOnWriteArrayList<Point>(); // LATER fix CopyOnWrite
-													// later
 		ignoredObjects = new CopyOnWriteArrayList<GameObject>();
 		onHitEffects = new CopyOnWriteArrayList<Effect>();
-		behaviour = null;
 	}
 
 	public int getHealth() {

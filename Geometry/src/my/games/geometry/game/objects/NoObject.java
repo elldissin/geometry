@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import my.games.geometry.game.engine.ObjectPosition;
+import my.games.geometry.game.movers.NoMover;
+import my.games.geometry.game.renderers.NoRenderer;
+import my.games.geometry.game.weapons.NoWeapon;
 
 public class NoObject extends GameObject {
 	/**
@@ -14,6 +17,10 @@ public class NoObject extends GameObject {
 
 	public NoObject(ObjectPosition position, double angle) {
 		super(position, angle);
+		mover = new NoMover(this);
+		weapon = new NoWeapon(this);
+		renderer = new NoRenderer(this);
+		setObsolete(true); // to remove itself
 	}
 
 	@Override

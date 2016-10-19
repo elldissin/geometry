@@ -8,7 +8,7 @@ import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Projectile;
 
 public abstract class GeneralWeapon implements Weapon, Serializable {
-	protected List<Projectile> projectileList; // LATER why not GameObject here?
+	protected List<GameObject> projectileList;
 	protected boolean shooting;
 	protected GameObject ownerObject;
 	protected int shootingDelay;
@@ -16,7 +16,7 @@ public abstract class GeneralWeapon implements Weapon, Serializable {
 
 	public GeneralWeapon(GameObject ownerObject) {
 		this.ownerObject = ownerObject;
-		projectileList = new ArrayList<Projectile>();
+		projectileList = new ArrayList<GameObject>();
 		shooting = false;
 		deltasCounter = 0;
 	}
@@ -31,7 +31,7 @@ public abstract class GeneralWeapon implements Weapon, Serializable {
 		if (shooting) {
 			if (deltasCounter > shootingDelay) {
 				deltasCounter = 0;
-				Projectile projectile = createProjectile();
+				GameObject projectile = createProjectile();
 				// add each other to ignore list to avoid collisions
 				ownerObject.addIgnoreObject(projectile);
 				projectile.addIgnoreObject(ownerObject);
@@ -42,7 +42,7 @@ public abstract class GeneralWeapon implements Weapon, Serializable {
 		}
 	}
 
-	protected abstract Projectile createProjectile();
+	protected abstract GameObject createProjectile();
 
 	@Override
 	public void setShooting(boolean value) {
@@ -50,7 +50,7 @@ public abstract class GeneralWeapon implements Weapon, Serializable {
 	}
 
 	@Override
-	public List<Projectile> getProjectileList() {
+	public List<GameObject> getProjectileList() {
 		return projectileList;
 	}
 

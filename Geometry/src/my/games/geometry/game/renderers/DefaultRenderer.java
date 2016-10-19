@@ -18,7 +18,7 @@ public class DefaultRenderer implements Renderer, Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	protected GameObject objectToDraw;
-	private Animator animator = new OrbitingAnimator();
+	private Animator animator = new RotatingAnimator();
 
 	public DefaultRenderer(GameObject objectToDraw) {
 		this.objectToDraw = objectToDraw;

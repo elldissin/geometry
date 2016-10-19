@@ -19,16 +19,16 @@ public class InputConverter {
 	public static GameEvent toEvent(PlayerInput input, GameObject sourceObject) {
 		GameEvent ev = null;
 		switch (input.getKeyCode()) {
-		case KeyEvent.VK_W:
+		case KeyEvent.VK_UP:
 			ev = new ToggleMoveEvent(sourceObject, input.isKeyPressed());
 			return ev;
-		case KeyEvent.VK_D:
+		case KeyEvent.VK_RIGHT:
 			ev = new ToggleTurnEvent(sourceObject, Mover.TurnDirection.CW, input.isKeyPressed());
 			return ev;
-		case KeyEvent.VK_A:
+		case KeyEvent.VK_LEFT:
 			ev = new ToggleTurnEvent(sourceObject, Mover.TurnDirection.CCW, input.isKeyPressed());
 			return ev;
-		case KeyEvent.VK_Q:
+		case KeyEvent.VK_CONTROL:
 			ev = new ToggleShootEvent(sourceObject, input.isKeyPressed());
 			return ev;
 		}

@@ -15,7 +15,7 @@ public class Player extends GameObject {
 	public Player(ObjectPosition position, double angle) {
 		super(position, angle);
 		health = 100;
-		level = 5;
+		level = 1;
 		experienceForUp = level * 1000;
 		currentExperience = 0;
 		mover = new DefaultMover(this);

@@ -6,6 +6,7 @@ import java.util.List;
 import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.movers.ProjectileMover;
 import my.games.geometry.game.renderers.ProjectileRenderer;
+import my.games.geometry.game.weapons.NoWeapon;
 
 public class Projectile extends GameObject {
 	private static final long serialVersionUID = 1L;
@@ -14,6 +15,7 @@ public class Projectile extends GameObject {
 		super(position, angle);
 		mover = new ProjectileMover(this);
 		renderer = new ProjectileRenderer(this);
+		weapon = new NoWeapon(this);
 		objHeight = 5;
 		objWidth = 5;
 		body();

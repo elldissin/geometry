@@ -6,6 +6,7 @@ import java.util.List;
 import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.movers.NoMover;
 import my.games.geometry.game.renderers.DefaultRenderer;
+import my.games.geometry.game.weapons.NoWeapon;
 
 public class StaticObject extends GameObject {
 
@@ -16,7 +17,7 @@ public class StaticObject extends GameObject {
 		objWidth = 50;
 		objHeight = 50;
 		mover = new NoMover(this);
-		// weapon = new DefaultWeapon(); //LATER add NoWeapon ?
+		weapon = new NoWeapon(this);
 		renderer = new DefaultRenderer(this);
 		body();
 	}

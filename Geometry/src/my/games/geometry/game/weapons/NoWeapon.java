@@ -5,6 +5,10 @@ import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.NoObject;
 
 public class NoWeapon extends GeneralWeapon implements Weapon {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public NoWeapon(GameObject ownerObject) {
 		super(ownerObject);

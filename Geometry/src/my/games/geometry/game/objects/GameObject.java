@@ -140,10 +140,6 @@ public abstract class GameObject implements Updatable, Serializable {
 		}
 	}
 
-	public void setObsolete(boolean value) {
-		obsolete = value;
-	}
-
 	public void draw(Graphics g) {
 		if (renderer != null)
 			renderer.draw(g);
@@ -231,7 +227,7 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	@Override
 	public void destroy() {
-		setObsolete(true);
+		obsolete = true;
 	}
 
 	// LATER removeEventObserver required?

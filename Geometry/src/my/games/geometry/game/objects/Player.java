@@ -40,11 +40,6 @@ public class Player extends GameObject {
 	}
 
 	@Override
-	public void destroy() {
-		setObsolete(true);
-	}
-
-	@Override
 	public boolean isDestroyed() {
 		return obsolete;
 	}

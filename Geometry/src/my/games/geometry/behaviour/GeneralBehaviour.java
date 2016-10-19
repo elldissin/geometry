@@ -39,7 +39,7 @@ public abstract class GeneralBehaviour implements Serializable {
 		if (bumping) {
 			ownerObject.setPos(ownerObject.getPrevPos().copy());
 			if (destrictibleOnBump)
-				ownerObject.setObsolete(true);
+				ownerObject.destroy();
 		}
 	}
 

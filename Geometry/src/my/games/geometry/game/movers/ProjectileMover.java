@@ -27,7 +27,7 @@ public class ProjectileMover extends GeneralMover implements Mover, Serializable
 		}
 		if (distTravelled > liveDistance) {
 			isMoving = false;
-			objectToMove.setObsolete(true);
+			objectToMove.destroy();
 		}
 	}
 

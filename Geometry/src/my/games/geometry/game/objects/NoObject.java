@@ -20,7 +20,7 @@ public class NoObject extends GameObject {
 		mover = new NoMover(this);
 		weapon = new NoWeapon(this);
 		renderer = new NoRenderer(this);
-		setObsolete(true); // to remove itself
+		destroy(); // to remove itself
 	}
 
 	@Override

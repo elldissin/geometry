@@ -141,8 +141,7 @@ public abstract class GameObject implements Updatable, Serializable {
 	}
 
 	public void draw(Graphics g) {
-		if (renderer != null)
-			renderer.draw(g);
+		renderer.draw(g);
 	}
 
 	public abstract List<Point> body();

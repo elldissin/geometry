@@ -21,7 +21,7 @@ public class BFGProjectileMoverTest {
 			bfgProjectileTest.getMover().function(1);
 		}
 		// assert
-		System.out.println(bfgProjectileTest.getPos().getX());
+		System.out.println(bfgProjectileTest.getMover().getPos().getX());
 		System.out.println(bfgProjectileTest.isDestroyed());
 
 		assertTrue(bfgProjectileTest.isDestroyed());
@@ -34,7 +34,7 @@ public class BFGProjectileMoverTest {
 		// act
 		bfgProjectileTest.getMover().function(1);
 		// assert
-		assertEquals(bfgProjectileTest.getPos().getIntX(), -4);
+		assertEquals(bfgProjectileTest.getMover().getPos().getIntX(), -4);
 	}
 
 }

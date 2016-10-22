@@ -21,7 +21,7 @@ public class ProjectileMoverTest {
 			bulletTest.getMover().function(1);
 		}
 		// assert
-		System.out.println(bulletTest.getPos().getX());
+		System.out.println(bulletTest.getMover().getPos().getX());
 		System.out.println(bulletTest.isDestroyed());
 
 		assertTrue(bulletTest.isDestroyed());

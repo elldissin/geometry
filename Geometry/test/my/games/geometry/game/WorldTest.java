@@ -19,7 +19,8 @@ public class WorldTest {
 		// act
 		GameObject playerTest = worldTest.createGameObject("player", new ObjectPosition(0, 0), 0.0);
 		// assert
-		Point playerPositionTest = new Point(playerTest.getPos().getIntX(), playerTest.getPos().getIntY());
+		Point playerPositionTest = new Point(playerTest.getMover().getPos().getIntX(),
+				playerTest.getMover().getPos().getIntY());
 		assertEquals(playerPositionTest.x, 0);
 		assertEquals(playerPositionTest.y, 0);
 	}

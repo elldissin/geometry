@@ -18,8 +18,8 @@ public class DefaultMoverTest {
 		// act
 		playerTest.getMover().function(1);
 		// assert
-		assertEquals(playerTest.getPos().getIntX(), 5);
-		assertEquals(playerTest.getPos().getIntY(), 0);
+		assertEquals(playerTest.getMover().getPos().getIntX(), 5);
+		assertEquals(playerTest.getMover().getPos().getIntY(), 0);
 	}
 
 	@Test
@@ -30,8 +30,8 @@ public class DefaultMoverTest {
 		// act
 		playerTest.getMover().function(1);
 		// assert
-		assertEquals(playerTest.getPos().getIntX(), 0);
-		assertEquals(playerTest.getPos().getIntY(), 5);
+		assertEquals(playerTest.getMover().getPos().getIntX(), 0);
+		assertEquals(playerTest.getMover().getPos().getIntY(), 5);
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class DefaultMoverTest {
 		// act
 		playerTest.getMover().function(1);
 		// assert
-		assertEquals(playerTest.getAngle(), -0.1, 0.001);
+		assertEquals(playerTest.getMover().getAngle(), -0.1, 0.001);
 
 	}
 

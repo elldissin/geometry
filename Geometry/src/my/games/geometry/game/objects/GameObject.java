@@ -178,8 +178,7 @@ public abstract class GameObject implements Updatable, Serializable {
 	}
 
 	public void setShooting(boolean value) {
-		if (weapon != null)
-			weapon.setShooting(value);
+		weapon.setShooting(value);
 	}
 
 	abstract public void getHit(int amount);

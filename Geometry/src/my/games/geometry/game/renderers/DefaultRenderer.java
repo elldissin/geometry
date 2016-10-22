@@ -47,7 +47,7 @@ public class DefaultRenderer implements Renderer, Serializable {
 					objectToDraw.getMover().getPos().getIntY());
 			int objWidth = objectToDraw.getObjWidth();
 			int objHeight = objectToDraw.getObjHeight();
-			double angle = objectToDraw.getAngle();
+			double angle = objectToDraw.getMover().getAngle();
 			g2.drawLine(pos.x, pos.y, (int) (pos.x + (objWidth * Math.cos(angle))),
 					(int) (pos.y + (objHeight * Math.sin(angle))));
 			// drawing life %

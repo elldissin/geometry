@@ -16,6 +16,7 @@ public class Projectile extends GameObject {
 		super(position, angle);
 		mover = new ProjectileMover(this);
 		mover.setPos(position);
+		mover.setAngle(angle);
 		renderer = new ProjectileRenderer(this);
 		weapon = new NoWeapon(this);
 		behaviour = new ProjectileBehaviour(this);
@@ -51,7 +52,7 @@ public class Projectile extends GameObject {
 
 	@Override
 	public GameObject copy() {
-		GameObject copy = new Projectile(this.mover.getPos().copy(), this.angle);
+		GameObject copy = new Projectile(this.mover.getPos().copy(), this.mover.getAngle());
 		// angle, x and y are already copied above by constructor;
 		super.finishCopy(copy);
 		return copy;

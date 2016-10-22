@@ -25,7 +25,6 @@ public abstract class GameObject implements Updatable, Serializable {
 	protected int level;
 	protected int experienceForUp;
 	protected int currentExperience;
-	protected double angle;
 	protected boolean obsolete;
 	protected Behaviour behaviour;
 	protected Mover mover;
@@ -42,7 +41,6 @@ public abstract class GameObject implements Updatable, Serializable {
 		eventObserverList = new CopyOnWriteArrayList<EventObserver>();
 		objWidth = 20;
 		objHeight = 20;
-		this.angle = angle;
 		obsolete = false;
 		points = new CopyOnWriteArrayList<Point>(); // LATER fix CopyOnWrite
 		ignoredObjects = new CopyOnWriteArrayList<GameObject>();
@@ -102,18 +100,6 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	public void setBehaviour(Behaviour behaviour) {
 		this.behaviour = behaviour;
-	}
-
-	public double getAngle() {
-		return angle;
-	}
-
-	public void setAngle(double angle) {
-		this.angle = angle;
-		if (points != null) {
-			points.clear();
-			body();
-		}
 	}
 
 	public void draw(Graphics g) {

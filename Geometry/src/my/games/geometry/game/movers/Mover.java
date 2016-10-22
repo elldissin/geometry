@@ -36,4 +36,8 @@ public interface Mover extends ObjectSystem {
 	void setPos(ObjectPosition position);
 
 	ObjectPosition getPrevPos();
+
+	double getAngle();
+
+	void setAngle(double angle);
 }

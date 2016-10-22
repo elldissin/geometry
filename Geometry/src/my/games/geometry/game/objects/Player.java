@@ -21,6 +21,7 @@ public class Player extends GameObject {
 		currentExperience = 0;
 		mover = new DefaultMover(this);
 		mover.setPos(position);
+		mover.setAngle(angle);
 		weapon = new DefaultWeapon(this);
 		renderer = new DefaultRenderer(this);
 		behaviour = new PlayerBehaviour(this);
@@ -31,8 +32,10 @@ public class Player extends GameObject {
 		// points.clear();
 		if (points.isEmpty()) {
 			for (int i = 0; i < level + 2; i++) {
-				int x1 = (int) (mover.getPos().getX() + (objWidth * Math.cos(2 * Math.PI / (level + 2) * i + angle)));
-				int y1 = (int) (mover.getPos().getY() + (objHeight * Math.sin(2 * Math.PI / (level + 2) * i + angle)));
+				int x1 = (int) (mover.getPos().getX()
+						+ (objWidth * Math.cos(2 * Math.PI / (level + 2) * i + mover.getAngle())));
+				int y1 = (int) (mover.getPos().getY()
+						+ (objHeight * Math.sin(2 * Math.PI / (level + 2) * i + mover.getAngle())));
 				Point p = new Point(x1, y1);
 				points.add(i, p);
 			}
@@ -58,7 +61,7 @@ public class Player extends GameObject {
 
 	@Override
 	public GameObject copy() {
-		GameObject copy = new Player(this.mover.getPos().copy(), this.angle);
+		GameObject copy = new Player(this.mover.getPos().copy(), this.mover.getAngle());
 		// angle, x and y are already copied above by constructor;
 		super.finishCopy(copy);
 		return copy;

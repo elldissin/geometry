@@ -14,6 +14,7 @@ public abstract class GeneralMover implements Mover, Serializable {
 	private static final long serialVersionUID = 1L;
 	protected ObjectPosition currentPos;
 	protected ObjectPosition prevPos;
+	protected double angle;
 	protected boolean isMoving;
 	protected boolean isTurningCW;
 	protected boolean isTurningCCW;
@@ -80,17 +81,17 @@ public abstract class GeneralMover implements Mover, Serializable {
 	}
 
 	private void turnDir(int dir, double delta) {
-		ownerObject.setAngle(ownerObject.getAngle() + turnSpeed * dir * delta);
+		setAngle(angle + turnSpeed * dir * delta);
 	}
 
 	@Override
 	public int getSpeedX() {
-		return (int) (speed * Math.cos(ownerObject.getAngle()));
+		return (int) (speed * Math.cos(angle));
 	}
 
 	@Override
 	public int getSpeedY() {
-		return (int) (speed * Math.sin(ownerObject.getAngle()));
+		return (int) (speed * Math.sin(angle));
 	}
 
 	@Override
@@ -140,6 +141,17 @@ public abstract class GeneralMover implements Mover, Serializable {
 	@Override
 	public ObjectPosition getPrevPos() {
 		return prevPos;
+	}
+
+	@Override
+	public double getAngle() {
+		return angle;
+	}
+
+	@Override
+	public void setAngle(double angle) {
+		this.angle = angle;
+		ownerObject.body();
 	}
 
 	protected void finishCopy(GeneralMover copy) {

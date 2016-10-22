@@ -34,7 +34,7 @@ public class BFG extends GeneralWeapon implements Weapon, Serializable {
 
 	@Override
 	protected Projectile createProjectile() {
-		Projectile projectile = new BFGProjectile(ownerObject.getPos().copy(), ownerObject.getAngle());
+		Projectile projectile = new BFGProjectile(ownerObject.getMover().getPos().copy(), ownerObject.getAngle());
 		projectile.addOnHitEffect(new SlowEffect(20));
 		projectile.addOnHitEffect(new DmgEffect(10));
 		projectile.setBehaviour(new ProjectileBehaviour(projectile));

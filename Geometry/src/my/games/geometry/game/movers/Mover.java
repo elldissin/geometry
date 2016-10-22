@@ -1,5 +1,6 @@
 package my.games.geometry.game.movers;
 
+import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.engine.ObjectSystem;
 
 public interface Mover extends ObjectSystem {
@@ -8,9 +9,9 @@ public interface Mover extends ObjectSystem {
 		CW, CCW
 	}
 
-	public void setMoving(boolean value);
+	void setMoving(boolean value);
 
-	public void setTurning(TurnDirection dir, boolean value);
+	void setTurning(TurnDirection dir, boolean value);
 
 	int getSpeedX();
 
@@ -28,5 +29,11 @@ public interface Mover extends ObjectSystem {
 
 	void setTurnSpeed(double turnSpeed);
 
-	public Mover copy();
+	Mover copy();
+
+	ObjectPosition getPos();
+
+	void setPos(ObjectPosition position);
+
+	ObjectPosition getPrevPos();
 }

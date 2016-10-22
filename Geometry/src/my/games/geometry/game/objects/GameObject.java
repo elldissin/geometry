@@ -20,8 +20,6 @@ import my.games.geometry.game.weapons.Weapon;
 public abstract class GameObject implements Updatable, Serializable {
 	private static final long serialVersionUID = 1L;
 	protected int objectID;
-	protected ObjectPosition currentPos;
-	protected ObjectPosition prevPos;
 	protected int objWidth, objHeight;
 	protected int health;
 	protected int level;
@@ -46,8 +44,6 @@ public abstract class GameObject implements Updatable, Serializable {
 		objHeight = 20;
 		this.angle = angle;
 		obsolete = false;
-		setPos(position);
-		setPrevPos(getPos().copy());
 		points = new CopyOnWriteArrayList<Point>(); // LATER fix CopyOnWrite
 		ignoredObjects = new CopyOnWriteArrayList<GameObject>();
 		onHitEffects = new CopyOnWriteArrayList<Effect>();
@@ -65,32 +61,12 @@ public abstract class GameObject implements Updatable, Serializable {
 		this.health = health;
 	}
 
-	public ObjectPosition getPrevPos() {
-		return prevPos;
-	}
-
-	public void setPrevPos(ObjectPosition prevPos) {
-		this.prevPos = prevPos;
-	}
-
 	public int getObjectID() {
 		return objectID;
 	}
 
 	public void setObjectID(int objectID) {
 		this.objectID = objectID;
-	}
-
-	public void setPos(ObjectPosition position) {
-		currentPos = position;
-		if (points != null) {
-			points.clear();
-			body();
-		}
-	}
-
-	public ObjectPosition getPos() {
-		return currentPos;
 	}
 
 	public int getObjWidth() {
@@ -163,7 +139,7 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	public Rectangle boundingRect() {
 		Rectangle rec;
-		rec = new Rectangle(currentPos.getIntX() - getObjWidth(), currentPos.getIntY() - getObjHeight(),
+		rec = new Rectangle(mover.getPos().getIntX() - getObjWidth(), mover.getPos().getIntY() - getObjHeight(),
 				(int) (getObjWidth()) * 2, (int) (getObjHeight()) * 2);
 		return rec;
 	}
@@ -265,7 +241,6 @@ public abstract class GameObject implements Updatable, Serializable {
 		copyToWorkWith.experienceForUp = this.experienceForUp;
 		copyToWorkWith.currentExperience = this.currentExperience;
 		copyToWorkWith.obsolete = this.obsolete;
-		copyToWorkWith.prevPos = this.prevPos.copy();
 		// LATER need to copy objects below or not?
 		// if (this.behaviour != null)
 		// copyToWorkWith.behaviour = this.behaviour.copy();

@@ -27,13 +27,13 @@ public class ProjectileMover extends GeneralMover implements Mover, Serializable
 		}
 		if (distTravelled > liveDistance) {
 			isMoving = false;
-			objectToMove.destroy();
+			ownerObject.destroy();
 		}
 	}
 
 	@Override
 	public Mover copy() {
-		ProjectileMover copy = new ProjectileMover(objectToMove.copy());
+		ProjectileMover copy = new ProjectileMover(ownerObject.copy());
 		copy.liveDistance = this.liveDistance;
 		copy.distTravelled = this.distTravelled;
 		finishCopy(copy);

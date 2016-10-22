@@ -35,7 +35,7 @@ public class GameStatusPanel extends DisplayElement {
 			playerLevelLabel.setText("Player level:" + focusedObject.getLevel());
 			playerExpLabel
 					.setText("Exp:" + focusedObject.getCurrentExperience() + "/" + focusedObject.getExperienceForUp());
-			playerPositionLabel.setText("Position: " + focusedObject.getPos());
+			playerPositionLabel.setText("Position: " + focusedObject.getMover().getPos());
 		}
 		repaint();
 	}

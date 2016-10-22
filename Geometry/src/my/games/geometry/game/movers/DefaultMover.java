@@ -19,7 +19,7 @@ public class DefaultMover extends GeneralMover implements Mover, Serializable {
 
 	@Override
 	public Mover copy() {
-		DefaultMover copy = new DefaultMover(objectToMove.copy());
+		DefaultMover copy = new DefaultMover(ownerObject.copy());
 		finishCopy(copy);
 		return copy;
 	}

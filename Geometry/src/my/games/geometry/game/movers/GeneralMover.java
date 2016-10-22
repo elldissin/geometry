@@ -12,16 +12,18 @@ import my.games.geometry.game.objects.GameObject;
 public abstract class GeneralMover implements Mover, Serializable {
 
 	private static final long serialVersionUID = 1L;
+	protected ObjectPosition currentPos;
+	protected ObjectPosition prevPos;
 	protected boolean isMoving;
 	protected boolean isTurningCW;
 	protected boolean isTurningCCW;
 	protected int maxSpeed;
 	protected int speed;
 	protected double turnSpeed;
-	protected GameObject objectToMove;
+	protected GameObject ownerObject;
 
-	public GeneralMover(GameObject objectToMove) {
-		this.objectToMove = objectToMove;
+	public GeneralMover(GameObject ownerObject) {
+		this.ownerObject = ownerObject;
 		isMoving = false;
 		isTurningCW = false;
 		isTurningCCW = false;
@@ -43,12 +45,12 @@ public abstract class GeneralMover implements Mover, Serializable {
 
 	protected void moveIfMoving(double delta) {
 		if (isMoving) {
-			objectToMove.setPrevPos(objectToMove.getPos().copy()); // do not assign, but clone
-			double newX = objectToMove.getPos().getX() + getSpeedX() * delta;
-			double newY = objectToMove.getPos().getY() + getSpeedY() * delta;
+			prevPos = currentPos.copy(); // do not assign, but clone
+			double newX = getPos().getX() + getSpeedX() * delta;
+			double newY = getPos().getY() + getSpeedY() * delta;
 			ObjectPosition newPos = new ObjectPosition(newX, newY);
-			objectToMove.setPos(newPos);
-			objectToMove.notifyObserversAbout(new ObjectUpdatedEvent(objectToMove));
+			setPos(newPos);
+			ownerObject.notifyObserversAbout(new ObjectUpdatedEvent(ownerObject));
 		}
 	}
 
@@ -69,26 +71,26 @@ public abstract class GeneralMover implements Mover, Serializable {
 	protected void turnIfTurning(double delta) {
 		if (isTurningCW) {
 			turnDir(1, delta);
-			objectToMove.notifyObserversAbout(new ObjectUpdatedEvent(objectToMove));
+			ownerObject.notifyObserversAbout(new ObjectUpdatedEvent(ownerObject));
 		}
 		if (isTurningCCW) {
 			turnDir(-1, delta);
-			objectToMove.notifyObserversAbout(new ObjectUpdatedEvent(objectToMove));
+			ownerObject.notifyObserversAbout(new ObjectUpdatedEvent(ownerObject));
 		}
 	}
 
 	private void turnDir(int dir, double delta) {
-		objectToMove.setAngle(objectToMove.getAngle() + turnSpeed * dir * delta);
+		ownerObject.setAngle(ownerObject.getAngle() + turnSpeed * dir * delta);
 	}
 
 	@Override
 	public int getSpeedX() {
-		return (int) (speed * Math.cos(objectToMove.getAngle()));
+		return (int) (speed * Math.cos(ownerObject.getAngle()));
 	}
 
 	@Override
 	public int getSpeedY() {
-		return (int) (speed * Math.sin(objectToMove.getAngle()));
+		return (int) (speed * Math.sin(ownerObject.getAngle()));
 	}
 
 	@Override
@@ -122,6 +124,22 @@ public abstract class GeneralMover implements Mover, Serializable {
 	@Override
 	public void setTurnSpeed(double turnSpeed) {
 		this.turnSpeed = turnSpeed;
+	}
+
+	@Override
+	public ObjectPosition getPos() {
+		return currentPos;
+	}
+
+	@Override
+	public void setPos(ObjectPosition currentPos) {
+		this.currentPos = currentPos;
+		ownerObject.body().clear();
+	}
+
+	@Override
+	public ObjectPosition getPrevPos() {
+		return prevPos;
 	}
 
 	protected void finishCopy(GeneralMover copy) {

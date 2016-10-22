@@ -27,13 +27,13 @@ public class DefaultRenderer implements Renderer, Serializable {
 	@Override
 	public void draw(Graphics g) {
 		drawBoundingRect(g);
-		ObjectPosition p = objectToDraw.getPos().copy();
+		ObjectPosition p = objectToDraw.getMover().getPos().copy();
 		p.setPos(p.getX() - objectToDraw.getObjHeight() / 2 + 10, p.getY() - objectToDraw.getObjWidth() / 2 + 20);
 		g.drawString("ID: " + objectToDraw.getObjectID(), p.getIntX(), p.getIntY());
 		Graphics2D g2 = (Graphics2D) g;
 		GeneralPath path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
 		List<Point> origPoints = objectToDraw.body();
-		List<Point> points = animator.animatePoints(origPoints, new Point(objectToDraw.getPos().toPoint()));
+		List<Point> points = animator.animatePoints(origPoints, new Point(objectToDraw.getMover().getPos().toPoint()));
 
 		if (!points.isEmpty()) {
 			path.moveTo(points.get(0).getX(), points.get(0).getY());
@@ -43,7 +43,8 @@ public class DefaultRenderer implements Renderer, Serializable {
 			path.closePath();
 			g2.draw(path);
 			// drawing direction line
-			Point pos = new Point(objectToDraw.getPos().getIntX(), objectToDraw.getPos().getIntY());
+			Point pos = new Point(objectToDraw.getMover().getPos().getIntX(),
+					objectToDraw.getMover().getPos().getIntY());
 			int objWidth = objectToDraw.getObjWidth();
 			int objHeight = objectToDraw.getObjHeight();
 			double angle = objectToDraw.getAngle();

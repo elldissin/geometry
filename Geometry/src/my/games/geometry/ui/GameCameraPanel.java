@@ -34,8 +34,8 @@ public class GameCameraPanel extends DisplayElement {
 	@Override
 	public void show(List<GameObject> objects) {
 		if (focusedObject != null) {
-			Point p = new Point((int) focusedObject.getPos().getX() - getViewWidth() / 2,
-					(int) focusedObject.getPos().getY() - getViewHeight() / 2);
+			Point p = new Point((int) focusedObject.getMover().getPos().getX() - getViewWidth() / 2,
+					(int) focusedObject.getMover().getPos().getY() - getViewHeight() / 2);
 			setViewOffset(p);
 		}
 		drawableObjects = objects;

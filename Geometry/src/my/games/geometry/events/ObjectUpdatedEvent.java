@@ -19,7 +19,7 @@ public class ObjectUpdatedEvent extends GameEvent {
 		if (sourceObject != null) {
 			GameObject objToBeUpdated = world.getObjectByID(sourceObject.getObjectID());
 			if (objToBeUpdated != null) {
-				objToBeUpdated.setPos(sourceObject.getPos());
+				objToBeUpdated.getMover().setPos(sourceObject.getMover().getPos());
 				objToBeUpdated.setAngle(sourceObject.getAngle());
 				objToBeUpdated.setHealth(sourceObject.getHealth());
 			}

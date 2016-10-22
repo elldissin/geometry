@@ -33,7 +33,7 @@ public class DefaultWeapon extends GeneralWeapon implements Weapon, Serializable
 
 	@Override
 	protected Projectile createProjectile() {
-		Projectile projectile = new Projectile(ownerObject.getPos().copy(), ownerObject.getAngle());
+		Projectile projectile = new Projectile(ownerObject.getMover().getPos().copy(), ownerObject.getAngle());
 		projectile.addOnHitEffect(new SlowEffect(20));
 		projectile.addOnHitEffect(new DmgEffect(1));
 		projectile.setBehaviour(new ProjectileBehaviour(projectile));

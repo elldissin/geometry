@@ -2,6 +2,7 @@ package my.games.geometry.game.movers;
 
 import java.io.Serializable;
 
+import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.objects.GameObject;
 
 public class ProjectileMover extends GeneralMover implements Mover, Serializable {
@@ -12,8 +13,8 @@ public class ProjectileMover extends GeneralMover implements Mover, Serializable
 	private int liveDistance;
 	private int distTravelled;
 
-	public ProjectileMover(GameObject objectToMove) {
-		super(objectToMove);
+	public ProjectileMover(GameObject ownerObject, ObjectPosition position, double angle) {
+		super(ownerObject, position, angle);
 		liveDistance = 400;
 		speed = 7;
 		isMoving = true;
@@ -33,7 +34,7 @@ public class ProjectileMover extends GeneralMover implements Mover, Serializable
 
 	@Override
 	public Mover copy() {
-		ProjectileMover copy = new ProjectileMover(ownerObject.copy());
+		ProjectileMover copy = new ProjectileMover(ownerObject.copy(), this.currentPos.copy(), this.angle);
 		copy.liveDistance = this.liveDistance;
 		copy.distTravelled = this.distTravelled;
 		finishCopy(copy);

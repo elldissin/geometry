@@ -19,9 +19,7 @@ public class Player extends GameObject {
 		level = 1;
 		experienceForUp = level * 1000;
 		currentExperience = 0;
-		mover = new DefaultMover(this);
-		mover.setPos(position);
-		mover.setAngle(angle);
+		mover = new DefaultMover(this, position, angle);
 		weapon = new DefaultWeapon(this);
 		renderer = new DefaultRenderer(this);
 		behaviour = new PlayerBehaviour(this);

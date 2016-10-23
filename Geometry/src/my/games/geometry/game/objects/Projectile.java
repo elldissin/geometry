@@ -14,9 +14,7 @@ public class Projectile extends GameObject {
 
 	public Projectile(ObjectPosition position, double angle) {
 		super(position, angle);
-		mover = new ProjectileMover(this);
-		mover.setPos(position);
-		mover.setAngle(angle);
+		mover = new ProjectileMover(this, position, angle);
 		renderer = new ProjectileRenderer(this);
 		weapon = new NoWeapon(this);
 		behaviour = new ProjectileBehaviour(this);

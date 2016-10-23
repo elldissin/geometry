@@ -13,7 +13,7 @@ public class BFGProjectile extends Projectile {
 
 	public BFGProjectile(ObjectPosition position, double angle) {
 		super(position, angle);
-		mover = new BFGProjectileMover(this);
+		mover = new BFGProjectileMover(this, position, angle);
 		renderer = new ProjectileRenderer(this);
 		objHeight = 50;
 		objWidth = 50;

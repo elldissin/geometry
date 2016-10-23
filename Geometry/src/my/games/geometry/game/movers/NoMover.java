@@ -2,6 +2,7 @@ package my.games.geometry.game.movers;
 
 import java.io.Serializable;
 
+import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.objects.GameObject;
 
 /**
@@ -10,8 +11,8 @@ import my.games.geometry.game.objects.GameObject;
 public class NoMover extends GeneralMover implements Mover, Serializable {
 	private static final long serialVersionUID = 1L;
 
-	public NoMover(GameObject objectToMove) {
-		super(objectToMove);
+	public NoMover(GameObject ownerObject, ObjectPosition position, double angle) {
+		super(ownerObject, position, angle);
 	}
 
 	@Override

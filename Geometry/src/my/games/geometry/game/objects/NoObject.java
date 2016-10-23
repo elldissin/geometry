@@ -17,8 +17,7 @@ public class NoObject extends GameObject {
 
 	public NoObject(ObjectPosition position, double angle) {
 		super(position, angle);
-		mover = new NoMover(this);
-		mover.setPos(position);
+		mover = new NoMover(this, position, angle);
 		weapon = new NoWeapon(this);
 		renderer = new NoRenderer(this);
 		destroy(); // to remove itself

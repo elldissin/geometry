@@ -17,9 +17,7 @@ public class StaticObject extends GameObject {
 		level = 2;
 		objWidth = 50;
 		objHeight = 50;
-		mover = new NoMover(this);
-		mover.setPos(position);
-		mover.setAngle(angle);
+		mover = new NoMover(this, position, angle);
 		weapon = new NoWeapon(this);
 		renderer = new DefaultRenderer(this);
 		behaviour = new NoBehaviour(this);

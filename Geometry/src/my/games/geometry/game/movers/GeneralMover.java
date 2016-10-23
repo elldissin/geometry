@@ -23,8 +23,10 @@ public abstract class GeneralMover implements Mover, Serializable {
 	protected double turnSpeed;
 	protected GameObject ownerObject;
 
-	public GeneralMover(GameObject ownerObject) {
+	public GeneralMover(GameObject ownerObject, ObjectPosition position, double angle) {
 		this.ownerObject = ownerObject;
+		this.currentPos = position;
+		this.angle = angle;
 		isMoving = false;
 		isTurningCW = false;
 		isTurningCCW = false;

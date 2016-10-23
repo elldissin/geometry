@@ -1,6 +1,5 @@
 package my.games.geometry.game.engine;
 
-import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,6 @@ public class ObjectAppearance implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<AppearanceElement> elementsList;
-	private int nextElementCounter;
 
 	public ObjectAppearance() {
 		elementsList = new ArrayList<AppearanceElement>();
@@ -26,12 +24,12 @@ public class ObjectAppearance implements Serializable {
 		elementsList.add(elem);
 	}
 
-	public AppearanceElement getNextElement(Point p) {
-		return elementsList.get(nextElementCounter++);
+	public AppearanceElement getElement(int i) {
+		return elementsList.get(i);
 	}
 
-	public boolean hasNext() {
-		return (nextElementCounter + 1) < elementsList.size() ? true : false;
+	public int size() {
+		return elementsList.size();
 	}
 
 }

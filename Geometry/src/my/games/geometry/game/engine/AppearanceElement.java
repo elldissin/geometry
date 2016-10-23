@@ -15,27 +15,22 @@ public class AppearanceElement implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<Point> points;
-	private int nextPointCounter;
+	private List<Point> pointList;
 
 	public AppearanceElement() {
-		points = new ArrayList<Point>();
+		pointList = new ArrayList<Point>();
 	}
 
 	public void addPoint(Point p) {
-		points.add(p);
+		pointList.add(p);
 	}
 
-	public Point getNextPoint(Point p) {
-		return points.get(nextPointCounter++);
-	}
-
-	public boolean hasNext() {
-		return (nextPointCounter + 1) < points.size() ? true : false;
+	public Point getPoint(int i) {
+		return pointList.get(i);
 	}
 
 	public int size() {
-		return points.size();
+		return pointList.size();
 	}
 
 }

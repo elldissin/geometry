@@ -6,9 +6,10 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.GeneralPath;
 import java.io.Serializable;
-import java.util.List;
 
 import my.games.geometry.game.engine.ObjectPosition;
+import my.games.geometry.game.engine.ObjectShape;
+import my.games.geometry.game.engine.ShapeElement;
 import my.games.geometry.game.objects.GameObject;
 
 public class DefaultRenderer implements Renderer, Serializable {
@@ -30,30 +31,37 @@ public class DefaultRenderer implements Renderer, Serializable {
 		ObjectPosition p = objectToDraw.getMover().getPos().copy();
 		p.setPos(p.getX() - objectToDraw.getObjHeight() / 2 + 10, p.getY() - objectToDraw.getObjWidth() / 2 + 20);
 		g.drawString("ID: " + objectToDraw.getObjectID(), p.getIntX(), p.getIntY());
-		Graphics2D g2 = (Graphics2D) g;
-		GeneralPath path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
-		List<Point> origPoints = objectToDraw.body();
-		List<Point> points = animator.animatePoints(origPoints, new Point(objectToDraw.getMover().getPos().toPoint()));
 
-		if (!points.isEmpty()) {
-			path.moveTo(points.get(0).getX(), points.get(0).getY());
-			for (int i = 1; i < points.size(); i++) {
-				path.lineTo(points.get(i).getX(), points.get(i).getY());
-			}
-			path.closePath();
-			g2.draw(path);
-			// drawing direction line
-			Point pos = new Point(objectToDraw.getMover().getPos().getIntX(),
-					objectToDraw.getMover().getPos().getIntY());
-			int objWidth = objectToDraw.getObjWidth();
-			int objHeight = objectToDraw.getObjHeight();
-			double angle = objectToDraw.getMover().getAngle();
-			g2.drawLine(pos.x, pos.y, (int) (pos.x + (objWidth * Math.cos(angle))),
-					(int) (pos.y + (objHeight * Math.sin(angle))));
-			// drawing life %
-			g.drawString(String.valueOf(objectToDraw.getHealth()), pos.x, (pos.y - objHeight));
+		ObjectShape originShape = objectToDraw.rebuildShape();
+		// Point center = new Point(objectToDraw.getMover().getPos().toPoint());
+		// ObjectShape shapeToDraw = animator.animatePoints(originShape, center);
+
+		for (int i = 0; i < originShape.size(); i++) {
+			drawElement(g, originShape.getElement(i));
+			// System.exit(0);
 		}
-		// g2.fill(path);
+		// drawing direction line
+		Point pos = new Point(objectToDraw.getMover().getPos().toPoint());
+		int objWidth = objectToDraw.getObjWidth();
+		int objHeight = objectToDraw.getObjHeight();
+		double angle = objectToDraw.getMover().getAngle();
+		Graphics2D g2 = (Graphics2D) g;
+		g2.drawLine(pos.x, pos.y, (int) (pos.x + (objWidth * Math.cos(angle))),
+				(int) (pos.y + (objHeight * Math.sin(angle))));
+		// drawing life %
+		g.drawString(String.valueOf(objectToDraw.getHealth()), pos.x, (pos.y - objHeight));
+	}
+
+	private void drawElement(Graphics g, ShapeElement element) {
+		GeneralPath path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
+		path.moveTo(element.getPoint(0).getX(), element.getPoint(0).getY());
+		for (int i = 1; i < element.size(); i++) {
+			Point p = element.getPoint(i);
+			path.lineTo(p.getX(), p.getY());
+		}
+		path.closePath();
+		Graphics2D g2 = (Graphics2D) g;
+		g2.draw(path);
 	}
 
 	private void drawBoundingRect(Graphics g) {

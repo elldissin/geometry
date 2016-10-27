@@ -137,7 +137,7 @@ public abstract class GeneralMover implements Mover, Serializable {
 	@Override
 	public void setPos(ObjectPosition currentPos) {
 		this.currentPos = currentPos;
-		ownerObject.body().clear();
+		ownerObject.getShape().clear();
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public abstract class GeneralMover implements Mover, Serializable {
 	@Override
 	public void setAngle(double angle) {
 		this.angle = angle;
-		ownerObject.body();
+		ownerObject.rebuildShape();
 	}
 
 	public void setOwnerObject(GameObject ownerObject) {

@@ -33,4 +33,8 @@ public class ShapeElement implements Serializable {
 		return pointList.size();
 	}
 
+	public void clear() {
+		pointList.clear();
+	}
+
 }

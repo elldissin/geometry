@@ -1,7 +1,8 @@
 package my.games.geometry.game.renderers;
 
 import java.awt.Point;
-import java.util.List;
+
+import my.games.geometry.game.engine.ObjectShape;
 
 public class OrbitingAnimator extends Animator {
 	/**
@@ -10,7 +11,7 @@ public class OrbitingAnimator extends Animator {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void modifyPoints(List<Point> initialPoints, Point center) {
+	protected void modifyPoints(ObjectShape originShape, Point center) {
 		double angle = Math.toRadians(frameCounter) * 2;
 		for (int i = 0; i < initialPoints.size(); i++) {
 			Point p = (Point) initialPoints.get(i).clone();

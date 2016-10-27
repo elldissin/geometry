@@ -32,4 +32,11 @@ public class ObjectShape implements Serializable {
 		return elementsList.size();
 	}
 
+	public void clear() {
+		for (int i = 0; i < elementsList.size(); i++) {
+			elementsList.get(i).clear();
+		}
+		elementsList.clear();
+	}
+
 }

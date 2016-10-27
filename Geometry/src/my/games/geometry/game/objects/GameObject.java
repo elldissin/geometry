@@ -1,7 +1,6 @@
 package my.games.geometry.game.objects;
 
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.List;
@@ -13,6 +12,7 @@ import my.games.geometry.behaviour.NoBehaviour;
 import my.games.geometry.events.GameEvent;
 import my.games.geometry.events.util.EventObserver;
 import my.games.geometry.game.engine.ObjectPosition;
+import my.games.geometry.game.engine.ObjectShape;
 import my.games.geometry.game.movers.Mover;
 import my.games.geometry.game.renderers.Renderer;
 import my.games.geometry.game.weapons.Weapon;
@@ -33,7 +33,7 @@ public abstract class GameObject implements Updatable, Serializable {
 	protected Renderer renderer;
 	protected List<EventObserver> eventObserverList;
 
-	protected List<Point> points;
+	protected ObjectShape shape;
 	protected List<GameObject> ignoredObjects;
 	protected List<Effect> onHitEffects;
 
@@ -44,7 +44,7 @@ public abstract class GameObject implements Updatable, Serializable {
 		objWidth = 20;
 		objHeight = 20;
 		obsolete = false;
-		points = new CopyOnWriteArrayList<Point>(); // LATER fix CopyOnWrite
+		shape = new ObjectShape();
 		ignoredObjects = new CopyOnWriteArrayList<GameObject>();
 		onHitEffects = new CopyOnWriteArrayList<Effect>();
 	}
@@ -108,7 +108,7 @@ public abstract class GameObject implements Updatable, Serializable {
 		renderer.draw(g);
 	}
 
-	public abstract List<Point> body();
+	public abstract ObjectShape rebuildShape();
 
 	public void addIgnoreObject(GameObject o) {
 		if (o != null)
@@ -168,6 +168,10 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
+	}
+
+	public ObjectShape getShape() {
+		return shape;
 	}
 
 	@Override
@@ -253,9 +257,9 @@ public abstract class GameObject implements Updatable, Serializable {
 			copyToWorkWith.onHitEffects.add(this.onHitEffects.get(i).copy());
 			;
 		}
-		for (int i = 0; i < this.points.size(); i++) {
-			copyToWorkWith.points.add(new Point(this.points.get(i)));
-		}
+		// for (int i = 0; i < this.points.size(); i++) {
+		// copyToWorkWith.points.add(new Point(this.points.get(i)));
+		// }
 
 	}
 

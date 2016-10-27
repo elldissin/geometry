@@ -1,15 +1,20 @@
 package my.games.geometry.game.objects;
 
 import java.awt.Point;
-import java.util.List;
 
 import my.games.geometry.behaviour.NoBehaviour;
 import my.games.geometry.game.engine.ObjectPosition;
+import my.games.geometry.game.engine.ObjectShape;
+import my.games.geometry.game.engine.ShapeElement;
 import my.games.geometry.game.movers.NoMover;
 import my.games.geometry.game.renderers.DefaultRenderer;
 import my.games.geometry.game.weapons.NoWeapon;
 
 public class StaticObject extends GameObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public StaticObject(ObjectPosition position, double angle) {
 		super(position, angle);
@@ -21,22 +26,24 @@ public class StaticObject extends GameObject {
 		weapon = new NoWeapon(this);
 		renderer = new DefaultRenderer(this);
 		behaviour = new NoBehaviour(this);
-		body();
+		rebuildShape();
 	}
 
 	@Override
-	public List<Point> body() {
-		if (points.isEmpty()) {
+	public ObjectShape rebuildShape() {
+		ShapeElement element = new ShapeElement();
+		if (shape.size() == 0) {
 			for (int i = 0; i < level + 2; i++) {
 				int x1 = (int) (mover.getPos().getX()
 						+ (objWidth * Math.cos(2 * Math.PI / (level + 2) * i + mover.getAngle())));
 				int y1 = (int) (mover.getPos().getY()
 						+ (objHeight * Math.sin(2 * Math.PI / (level + 2) * i + mover.getAngle())));
 				Point p = new Point(x1, y1);
-				points.add(i, p);
+				element.addPoint(p);
 			}
+			shape.addElement(element);
 		}
-		return points;
+		return shape;
 	}
 
 	@Override

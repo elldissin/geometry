@@ -17,7 +17,7 @@ public class BFGProjectile extends Projectile {
 		renderer = new ProjectileRenderer(this);
 		objHeight = 50;
 		objWidth = 50;
-		body();
+		rebuildShape();
 	}
 
 }

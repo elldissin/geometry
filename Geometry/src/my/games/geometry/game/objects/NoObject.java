@@ -1,10 +1,7 @@
 package my.games.geometry.game.objects;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
-
 import my.games.geometry.game.engine.ObjectPosition;
+import my.games.geometry.game.engine.ObjectShape;
 import my.games.geometry.game.movers.NoMover;
 import my.games.geometry.game.renderers.NoRenderer;
 import my.games.geometry.game.weapons.NoWeapon;
@@ -24,8 +21,8 @@ public class NoObject extends GameObject {
 	}
 
 	@Override
-	public List<Point> body() {
-		return new ArrayList<Point>();
+	public ObjectShape rebuildShape() {
+		return new ObjectShape();
 	}
 
 	@Override

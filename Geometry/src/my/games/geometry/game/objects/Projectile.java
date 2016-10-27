@@ -1,10 +1,11 @@
 package my.games.geometry.game.objects;
 
 import java.awt.Point;
-import java.util.List;
 
 import my.games.geometry.behaviour.ProjectileBehaviour;
 import my.games.geometry.game.engine.ObjectPosition;
+import my.games.geometry.game.engine.ObjectShape;
+import my.games.geometry.game.engine.ShapeElement;
 import my.games.geometry.game.movers.ProjectileMover;
 import my.games.geometry.game.renderers.ProjectileRenderer;
 import my.games.geometry.game.weapons.NoWeapon;
@@ -20,22 +21,24 @@ public class Projectile extends GameObject {
 		behaviour = new ProjectileBehaviour(this);
 		objHeight = 5;
 		objWidth = 5;
-		body();
+		rebuildShape();
 	}
 
 	@Override
-	public List<Point> body() {
-		if (points.isEmpty()) {
+	public ObjectShape rebuildShape() {
+		ShapeElement element = new ShapeElement();
+		if (shape.size() == 0) {
 			Point p = new Point(mover.getPos().getIntX() + objWidth / 2, mover.getPos().getIntY() + objHeight / 2);
-			points.add(0, p);
+			element.addPoint(p);
 			p = new Point(mover.getPos().getIntX() - objWidth / 2, mover.getPos().getIntY() + objHeight / 2);
-			points.add(1, p);
+			element.addPoint(p);
 			p = new Point(mover.getPos().getIntX() - objWidth / 2, mover.getPos().getIntY() - objHeight / 2);
-			points.add(2, p);
+			element.addPoint(p);
 			p = new Point(mover.getPos().getIntX() + objWidth / 2, mover.getPos().getIntY() - objHeight / 2);
-			points.add(3, p);
+			element.addPoint(p);
+			shape.addElement(element);
 		}
-		return points;
+		return shape;
 	}
 
 	@Override

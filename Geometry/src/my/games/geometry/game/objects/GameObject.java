@@ -229,15 +229,23 @@ public abstract class GameObject implements Updatable, Serializable {
 		copyToWorkWith.experienceForUp = this.experienceForUp;
 		copyToWorkWith.currentExperience = this.currentExperience;
 		copyToWorkWith.obsolete = this.obsolete;
-		// LATER need to copy objects below or not?
-		// if (this.behaviour != null)
-		// copyToWorkWith.behaviour = this.behaviour.copy();
-		// if (this.mover != null)
-		// copyToWorkWith.mover = this.mover.copy();
-		// if (this.weapon != null)
-		// copyToWorkWith.weapon = this.weapon.copy();
+		if (this.behaviour != null) {
+			copyToWorkWith.behaviour = this.behaviour.copy();
+			copyToWorkWith.behaviour.setOwnerObject(copyToWorkWith);
+		}
+		if (this.mover != null) {
+			copyToWorkWith.mover = this.mover.copy();
+			copyToWorkWith.mover.setOwnerObject(copyToWorkWith);
+		}
+		if (this.weapon != null) {
+			copyToWorkWith.weapon = this.weapon.copy();
+			copyToWorkWith.weapon.setOwnerObject(copyToWorkWith);
+		}
+		// All below is no required on client side.
+		// LATER use "ghost" copy on client side?
 		// no need to copy renderer copy.renderer = this.renderer.copy();
 		// no need to copy EventObservers
+		// no need to copy ignored objects
 		// for (int i = 0; i < this.ignoredObjects.size(); i++) {
 		// copy.ignoredObjects.add(this.ignoredObjects.get(i).copy());
 		// }

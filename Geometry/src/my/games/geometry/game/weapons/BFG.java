@@ -27,7 +27,7 @@ public class BFG extends GeneralWeapon implements Weapon, Serializable {
 
 	@Override
 	public Weapon copy() {
-		BFG copy = new BFG(this.ownerObject.copy());
+		BFG copy = new BFG(ownerObject);
 		finishCopy(copy);
 		return copy;
 	}

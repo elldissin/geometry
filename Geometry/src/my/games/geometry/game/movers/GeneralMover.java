@@ -156,6 +156,10 @@ public abstract class GeneralMover implements Mover, Serializable {
 		ownerObject.body();
 	}
 
+	public void setOwnerObject(GameObject ownerObject) {
+		this.ownerObject = ownerObject;
+	}
+
 	protected void finishCopy(GeneralMover copy) {
 		copy.speed = this.speed;
 		copy.maxSpeed = this.maxSpeed;

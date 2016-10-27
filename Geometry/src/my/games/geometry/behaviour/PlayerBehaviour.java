@@ -17,7 +17,7 @@ public class PlayerBehaviour extends GeneralBehaviour implements Behaviour {
 
 	@Override
 	public Behaviour copy() {
-		PlayerBehaviour copy = new PlayerBehaviour(this.ownerObject.copy());
+		PlayerBehaviour copy = new PlayerBehaviour(ownerObject);
 		finishCopy(copy);
 		return copy;
 	}

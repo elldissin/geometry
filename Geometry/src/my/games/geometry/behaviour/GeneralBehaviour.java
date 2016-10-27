@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import my.games.geometry.game.objects.GameObject;
 
-public abstract class GeneralBehaviour implements Serializable {
+public abstract class GeneralBehaviour implements Behaviour, Serializable {
 	/**
 	 * 
 	 */
@@ -57,6 +57,16 @@ public abstract class GeneralBehaviour implements Serializable {
 
 	public void setDestructibleOnBump(boolean value) {
 		destrictibleOnBump = value;
+	}
+
+	@Override
+	public void setOwnerObject(GameObject ownerObject) {
+		this.ownerObject = ownerObject;
+	}
+
+	@Override
+	public void function(double delta) {
+		// TODO Auto-generated method stub
 	}
 
 	protected void finishCopy(GeneralBehaviour copyToWorkWith) {

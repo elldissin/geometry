@@ -14,4 +14,10 @@ public class NoBehaviour extends GeneralBehaviour implements Behaviour {
 		return this;
 	}
 
+	@Override
+	public void function(double delta) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

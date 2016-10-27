@@ -15,7 +15,7 @@ public class BFGProjectileMover extends ProjectileMover {
 	}
 
 	public Mover copy() {
-		ProjectileMover copy = new BFGProjectileMover(ownerObject.copy(), this.currentPos.copy(), this.angle);
+		ProjectileMover copy = new BFGProjectileMover(ownerObject, this.currentPos.copy(), this.angle);
 		finishCopy(copy);
 		return copy;
 	}

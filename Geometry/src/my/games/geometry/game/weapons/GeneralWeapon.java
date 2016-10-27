@@ -54,6 +54,12 @@ public abstract class GeneralWeapon implements Weapon, Serializable {
 		return projectileList;
 	}
 
+	@Override
+	public void setOwnerObject(GameObject ownerObject) {
+		this.ownerObject = ownerObject;
+
+	}
+
 	protected void finishCopy(GeneralWeapon copy) {
 		synchronized (projectileList) {
 			for (int i = 0; i < this.projectileList.size(); i++) {

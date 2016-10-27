@@ -26,7 +26,7 @@ public class DefaultWeapon extends GeneralWeapon implements Weapon, Serializable
 
 	@Override
 	public Weapon copy() {
-		DefaultWeapon copy = new DefaultWeapon(this.ownerObject.copy());
+		DefaultWeapon copy = new DefaultWeapon(ownerObject);
 		finishCopy(copy);
 		return copy;
 	}

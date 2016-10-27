@@ -1,6 +1,8 @@
 package my.games.geometry.behaviour;
 
-public interface Behaviour {
+import my.games.geometry.game.engine.ObjectSystem;
+
+public interface Behaviour extends ObjectSystem {
 
 	public void slowDown(int amount);
 

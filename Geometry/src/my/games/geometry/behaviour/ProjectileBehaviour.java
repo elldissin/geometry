@@ -16,7 +16,7 @@ public class ProjectileBehaviour extends GeneralBehaviour implements Behaviour {
 
 	@Override
 	public Behaviour copy() {
-		ProjectileBehaviour copy = new ProjectileBehaviour(this.ownerObject.copy());
+		ProjectileBehaviour copy = new ProjectileBehaviour(ownerObject);
 		finishCopy(copy);
 		return copy;
 	}

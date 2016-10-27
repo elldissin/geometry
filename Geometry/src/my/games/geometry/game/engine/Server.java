@@ -39,6 +39,7 @@ public class Server {
 	public Server() {
 		super();
 		world = new World();
+		world.initializeWorld();
 		gameEventObserver = new GameEventObserver();
 		logDisplayNotifier = new LogDisplayNotifier();
 		world.registerWorldObserver(gameEventObserver);

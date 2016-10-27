@@ -36,10 +36,9 @@ public class World {
 		effectManager = new EffectManager();
 		eventObserverList = new ArrayList<EventObserver>();
 		logDisplayNotifier = new LogDisplayNotifier();
-		initializeWorld();
 	}
 
-	private void initializeWorld() {
+	public void initializeWorld() {
 		GameObject obst = createGameObject("static", new ObjectPosition(250, 50), 0.0);
 		obst.addOnHitEffect(new BumpEffect(0));
 	}

@@ -9,22 +9,22 @@ import java.util.List;
  *         then drawn by renderers when called.
  *
  */
-public class ObjectAppearance implements Serializable {
+public class ObjectShape implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<AppearanceElement> elementsList;
+	private List<ShapeElement> elementsList;
 
-	public ObjectAppearance() {
-		elementsList = new ArrayList<AppearanceElement>();
+	public ObjectShape() {
+		elementsList = new ArrayList<ShapeElement>();
 	}
 
-	public void addElement(AppearanceElement elem) {
+	public void addElement(ShapeElement elem) {
 		elementsList.add(elem);
 	}
 
-	public AppearanceElement getElement(int i) {
+	public ShapeElement getElement(int i) {
 		return elementsList.get(i);
 	}
 

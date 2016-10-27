@@ -10,14 +10,14 @@ import java.util.List;
  *         elements (if many)
  * 
  */
-public class AppearanceElement implements Serializable {
+public class ShapeElement implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<Point> pointList;
 
-	public AppearanceElement() {
+	public ShapeElement() {
 		pointList = new ArrayList<Point>();
 	}
 

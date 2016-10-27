@@ -5,16 +5,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import my.games.geometry.game.engine.ObjectPosition;
-import my.games.geometry.game.engine.World;
 import my.games.geometry.game.objects.GameObject;
+import my.games.geometry.game.objects.Player;
 
 public class DefaultMoverTest {
 
 	@Test
 	public void gameObjectMovetest() {
 		// arrange
-		World worldTest = new World();
-		GameObject playerTest = worldTest.createGameObject("player", new ObjectPosition(0, 0), 0.0);
+		GameObject playerTest = new Player(new ObjectPosition(0, 0), 0.0);
 		// act
 		playerTest.getMover().function(1);
 		// assert
@@ -25,8 +24,7 @@ public class DefaultMoverTest {
 	@Test
 	public void gameObjectMoveAngle90test() {
 		// arrange
-		World worldTest = new World();
-		GameObject playerTest = worldTest.createGameObject("player", new ObjectPosition(0, 0), Math.toRadians(90));
+		GameObject playerTest = new Player(new ObjectPosition(0, 0), 0.0);
 		// act
 		playerTest.getMover().function(1);
 		// assert
@@ -37,8 +35,7 @@ public class DefaultMoverTest {
 	@Test
 	public void gameObjectTurntest() {
 		// arrange
-		World worldTest = new World();
-		GameObject playerTest = worldTest.createGameObject("player", new ObjectPosition(0, 0), 0.0);
+		GameObject playerTest = new Player(new ObjectPosition(0, 0), 0.0);
 		// act
 		playerTest.getMover().function(1);
 		// assert

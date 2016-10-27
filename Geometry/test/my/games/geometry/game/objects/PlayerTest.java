@@ -6,15 +6,13 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import my.games.geometry.game.engine.ObjectPosition;
-import my.games.geometry.game.engine.World;
 
 public class PlayerTest {
 
 	@Test
 	public void PlayerHPTest() {
 		// arrange
-		World worldTest = new World();
-		GameObject playerTest = worldTest.createGameObject("player", new ObjectPosition(0, 0), 0.0);
+		GameObject playerTest = new Player(new ObjectPosition(0, 0), 0.0);
 		// act
 		playerTest.getHit(101);
 		// assert

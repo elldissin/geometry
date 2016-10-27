@@ -16,6 +16,7 @@ import my.games.geometry.game.engine.ObjectPosition;
 import my.games.geometry.game.movers.Mover;
 import my.games.geometry.game.renderers.Renderer;
 import my.games.geometry.game.weapons.Weapon;
+import my.games.geometry.util.UniqueIdProvider;
 
 public abstract class GameObject implements Updatable, Serializable {
 	private static final long serialVersionUID = 1L;
@@ -38,6 +39,7 @@ public abstract class GameObject implements Updatable, Serializable {
 
 	public GameObject(ObjectPosition position, double angle) {
 		super();
+		objectID = UniqueIdProvider.getObjectID();
 		eventObserverList = new CopyOnWriteArrayList<EventObserver>();
 		objWidth = 20;
 		objHeight = 20;

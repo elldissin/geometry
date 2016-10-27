@@ -11,10 +11,8 @@ import my.games.geometry.events.GameEvent;
 import my.games.geometry.events.util.EventObserver;
 import my.games.geometry.game.objects.GameObject;
 import my.games.geometry.game.objects.Player;
-import my.games.geometry.game.objects.Projectile;
 import my.games.geometry.game.objects.StaticObject;
 import my.games.geometry.game.weapons.DefaultWeapon;
-import my.games.geometry.util.UniqueIdProvider;
 
 public class World {
 	private EffectManager effectManager;
@@ -22,7 +20,6 @@ public class World {
 	private List<GameObject> drawableObjectList;
 	private List<GameObject> updatableObjectList;
 	private List<GameObject> collidableObjectList;
-	private List<GameObject> shootersList;
 
 	private List<EventObserver> eventObserverList;
 	private WorldChangeObserver logDisplayNotifier;
@@ -32,53 +29,22 @@ public class World {
 		drawableObjectList = new ArrayList<GameObject>();
 		updatableObjectList = new ArrayList<GameObject>();
 		collidableObjectList = new ArrayList<GameObject>();
-		shootersList = new ArrayList<GameObject>();
 		effectManager = new EffectManager();
 		eventObserverList = new ArrayList<EventObserver>();
 		logDisplayNotifier = new LogDisplayNotifier();
 	}
 
 	public void initializeWorld() {
-		GameObject obst = createGameObject("static", new ObjectPosition(250, 50), 0.0);
-		obst.addOnHitEffect(new BumpEffect(0));
+		GameObject staticObject1 = new StaticObject(new ObjectPosition(250, 50), 0.0);
+		registerGameObject(staticObject1);
+		staticObject1.addOnHitEffect(new BumpEffect(0));
 	}
 
 	public List<GameObject> getGameObjectsList() {
 		return gameObjectList;
 	}
 
-	public GameObject createGameObject(String objType, ObjectPosition position, double angle) {
-		int id = UniqueIdProvider.getObjectID();
-		GameObject obj = null;
-		switch (objType) {
-		case "player":
-			obj = new Player(position, angle);
-			shootersList.add(obj);
-			break;
-		case "projectile":
-			obj = new Projectile(position, angle);
-			break;
-		case "static":
-			obj = new StaticObject(position, angle);
-			break;
-		}
-		if (obj != null) {
-			obj.setObjectID(id);
-			gameObjectList.add(obj);
-			drawableObjectList.add(obj);
-			collidableObjectList.add(obj);
-			updatableObjectList.add(obj);
-			registerObserversForObject(obj);
-
-			GameEvent event = new CreateEvent(obj);
-			obj.notifyObserversAbout(event);
-
-			logDisplayNotifier.worldHasChanged();
-		}
-		return obj;
-	}
-
-	public GameObject createGameObject(GameObject newObject) {
+	public void registerGameObject(GameObject newObject) {
 		if (newObject != null) {
 			gameObjectList.add(newObject);
 			drawableObjectList.add(newObject);
@@ -88,7 +54,8 @@ public class World {
 			logDisplayNotifier.worldHasChanged();
 
 		}
-		return newObject;
+		GameEvent event = new CreateEvent(newObject);
+		newObject.notifyObserversAbout(event);
 	}
 
 	public void destroyGameObject(GameObject obj) {
@@ -117,22 +84,12 @@ public class World {
 	}
 
 	public GameObject addNewConnectedPlayer(int clientID) {
-		GameObject newPlayer = createGameObject("player", new ObjectPosition(100, 100), 0.0); // FIXME
-		// free
-		// position?
+		GameObject newPlayer = new Player(new ObjectPosition(100, 100), 0.0);
+		registerGameObject(newPlayer); // FIXME position?
 		newPlayer.setWeapon(new DefaultWeapon(newPlayer));
 		newPlayer.setBehaviour(new PlayerBehaviour(newPlayer));
 		newPlayer.addOnHitEffect(new BumpEffect(0));
 		return newPlayer;
-	}
-
-	// need first to assign ID, because projectiles do not have it initially
-	public void addProjectile(GameObject obj) {
-		obj.setObjectID(UniqueIdProvider.getObjectID());
-		createGameObject(obj);
-
-		GameEvent event = new CreateEvent(obj);
-		obj.notifyObserversAbout(event);
 	}
 
 	public GameObject getObjectByID(int id) {
@@ -151,11 +108,11 @@ public class World {
 
 	public void update(double delta) {
 		// Handle shooters and their projectiles, add their projectiles to world
-		for (int i = 0; i < shootersList.size(); i++) {
-			for (int j = 0; j < shootersList.get(i).getWeapon().getProjectileList().size(); j++) {
-				GameObject projectile = shootersList.get(i).getWeapon().getProjectileList().get(j);
-				addProjectile(projectile);
-				shootersList.get(i).getWeapon().getProjectileList().remove(j);
+		for (int i = 0; i < updatableObjectList.size(); i++) {
+			for (int j = 0; j < updatableObjectList.get(i).getWeapon().getProjectileList().size(); j++) {
+				GameObject projectile = updatableObjectList.get(i).getWeapon().getProjectileList().get(j);
+				registerGameObject(projectile);
+				updatableObjectList.get(i).getWeapon().getProjectileList().remove(j);
 			}
 		}
 

@@ -5,16 +5,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import my.games.geometry.game.engine.ObjectPosition;
-import my.games.geometry.game.engine.World;
 import my.games.geometry.game.objects.GameObject;
+import my.games.geometry.game.objects.Player;
 
 public class GeneralBehaviourTest {
 
 	@Test
 	public void slowDownTest() {
 		// arrange
-		World worldTest = new World();
-		GameObject playerTest = worldTest.createGameObject("player", new ObjectPosition(0, 0), 0.0);
+		GameObject playerTest = new Player(new ObjectPosition(0, 0), 0.0);
 		// act
 		playerTest.getMover().setSpeed((int) (playerTest.getMover().getSpeed() * (100 - 50) / 100));
 		// assert

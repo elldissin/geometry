@@ -17,7 +17,7 @@ public class CreateEvent extends GameEvent {
 	@Override
 	public void applyEventToWorld(World world) {
 		if (sourceObject != null)
-			world.createGameObject(sourceObject);
+			world.registerGameObject(sourceObject);
 	}
 
 	@Override

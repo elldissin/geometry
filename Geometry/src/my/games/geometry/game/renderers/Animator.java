@@ -3,22 +3,22 @@ package my.games.geometry.game.renderers;
 import java.awt.Point;
 import java.io.Serializable;
 
-import my.games.geometry.game.engine.ObjectShape;
+import my.games.geometry.game.engine.ShapeElement;
 
 public abstract class Animator implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected ObjectShape shapeForCurrentFrame;
+	protected ShapeElement shapeForCurrentFrame;
 	protected int frameCounter;
 
 	public Animator() {
 		frameCounter = 0;
-		shapeForCurrentFrame = new ObjectShape();
+		shapeForCurrentFrame = new ShapeElement();
 	}
 
-	public ObjectShape animatePoints(ObjectShape originShape, Point center) {
+	public ShapeElement animatePoints(ShapeElement originShape, Point center) {
 		shapeForCurrentFrame.clear();
 		frameCounter++;
 		if (frameCounter > 360) {
@@ -28,5 +28,5 @@ public abstract class Animator implements Serializable {
 		return shapeForCurrentFrame;
 	}
 
-	protected abstract void modifyPoints(ObjectShape originShape, Point center);
+	protected abstract void modifyPoints(ShapeElement originShape, Point center);
 }

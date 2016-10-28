@@ -2,7 +2,7 @@ package my.games.geometry.game.renderers;
 
 import java.awt.Point;
 
-import my.games.geometry.game.engine.ObjectShape;
+import my.games.geometry.game.engine.ShapeElement;
 
 public class RotatingAnimator extends Animator {
 	/**
@@ -15,13 +15,12 @@ public class RotatingAnimator extends Animator {
 	}
 
 	@Override
-	protected void modifyPoints(ObjectShape originShape, Point center) {
-		double angle = Math.toRadians(frameCounter) * 2;
-		originShape.getElement(i)
-		for (int i = 0; i < initialPoints.size(); i++) {
-			Point p = (Point) initialPoints.get(i).clone();
+	protected void modifyPoints(ShapeElement originShape, Point center) {
+		double angle = Math.toRadians(frameCounter) * 3;
+		for (int i = 0; i < originShape.size(); i++) {
+			Point p = (Point) originShape.getPoint(i).clone();
 			RotateTransform.transform(p, center, angle);
-			pointsForCurrentFrame.add(p);
+			shapeForCurrentFrame.addPoint(p);
 		}
 	}
 }

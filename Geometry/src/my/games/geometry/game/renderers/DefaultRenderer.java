@@ -31,14 +31,16 @@ public class DefaultRenderer implements Renderer, Serializable {
 		ObjectPosition p = objectToDraw.getMover().getPos().copy();
 		p.setPos(p.getX() - objectToDraw.getObjHeight() / 2 + 10, p.getY() - objectToDraw.getObjWidth() / 2 + 20);
 		g.drawString("ID: " + objectToDraw.getObjectID(), p.getIntX(), p.getIntY());
-
 		ObjectShape originShape = objectToDraw.rebuildShape();
-		// Point center = new Point(objectToDraw.getMover().getPos().toPoint());
 		// ObjectShape shapeToDraw = animator.animatePoints(originShape, center);
 
 		for (int i = 0; i < originShape.size(); i++) {
-			drawElement(g, originShape.getElement(i));
-			// System.exit(0);
+			Point center = new Point(objectToDraw.getMover().getPos().toPoint());
+			if (i > 0) {
+				ShapeElement elementToDraw = animator.animatePoints(originShape.getElement(i), center);
+				drawElement(g, elementToDraw);
+			} else
+				drawElement(g, originShape.getElement(i));
 		}
 		// drawing direction line
 		Point pos = new Point(objectToDraw.getMover().getPos().toPoint());

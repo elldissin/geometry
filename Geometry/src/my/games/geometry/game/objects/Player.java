@@ -39,6 +39,31 @@ public class Player extends GameObject {
 				element.addPoint(p);
 			}
 			shape.addElement(element);
+
+			element = new ShapeElement();
+			for (int i = 0; i < 5; i++) {
+				int x1 = (int) (60 + mover.getPos().getX() + (objWidth / 2 * Math.cos(2 * Math.PI / (5) * i)));
+				int y1 = (int) (mover.getPos().getY() + (objHeight / 2 * Math.sin(2 * Math.PI / (5) * i)));
+				Point p = new Point(x1, y1);
+				element.addPoint(p);
+			}
+			shape.addElement(element);
+			element = new ShapeElement();
+			for (int i = 0; i < 5; i++) {
+				int x1 = (int) (mover.getPos().getX() + (objWidth / 2 * Math.cos(2 * Math.PI / (5) * i)));
+				int y1 = (int) (60 + mover.getPos().getY() + (objHeight / 2 * Math.sin(2 * Math.PI / (5) * i)));
+				Point p = new Point(x1, y1);
+				element.addPoint(p);
+			}
+			shape.addElement(element);
+			element = new ShapeElement();
+			for (int i = 0; i < 5; i++) {
+				int x1 = (int) (-60 + mover.getPos().getX() + (objWidth / 2 * Math.cos(2 * Math.PI / (5) * i)));
+				int y1 = (int) (mover.getPos().getY() + (objHeight / 2 * Math.sin(2 * Math.PI / (5) * i)));
+				Point p = new Point(x1, y1);
+				element.addPoint(p);
+			}
+			shape.addElement(element);
 		}
 		return shape;
 	}

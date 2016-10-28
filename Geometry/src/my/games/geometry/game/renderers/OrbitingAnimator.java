@@ -2,7 +2,7 @@ package my.games.geometry.game.renderers;
 
 import java.awt.Point;
 
-import my.games.geometry.game.engine.ObjectShape;
+import my.games.geometry.game.engine.ShapeElement;
 
 public class OrbitingAnimator extends Animator {
 	/**
@@ -11,16 +11,16 @@ public class OrbitingAnimator extends Animator {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void modifyPoints(ObjectShape originShape, Point center) {
+	protected void modifyPoints(ShapeElement originShape, Point center) {
 		double angle = Math.toRadians(frameCounter) * 2;
-		for (int i = 0; i < initialPoints.size(); i++) {
-			Point p = (Point) initialPoints.get(i).clone();
-			pointsForCurrentFrame.add(p);
+		for (int i = 0; i < originShape.size(); i++) {
+			Point p = (Point) originShape.getPoint(i).clone();
+			shapeForCurrentFrame.addPoint(p);
 		}
 		Point rotatingParticle = new Point(center);
 		rotatingParticle.setLocation(rotatingParticle.getX() + 40, rotatingParticle.getY() + 40);
 		RotateTransform.transform(rotatingParticle, center, angle);
-		pointsForCurrentFrame.add(rotatingParticle);
+		shapeForCurrentFrame.addPoint(rotatingParticle);
 	}
 
 }

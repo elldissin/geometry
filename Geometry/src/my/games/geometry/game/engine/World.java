@@ -51,8 +51,6 @@ public class World {
 			collidableObjectList.add(newObject);
 			updatableObjectList.add(newObject);
 			registerObserversForObject(newObject);
-			logDisplayNotifier.worldHasChanged();
-
 		}
 		GameEvent event = new CreateEvent(newObject);
 		newObject.notifyObserversAbout(event);
@@ -68,7 +66,6 @@ public class World {
 					collidableObjectList.remove(localRemovedObject);
 					updatableObjectList.remove(localRemovedObject);
 					unRegisterObserversForObject(localRemovedObject);
-					logDisplayNotifier.worldHasChanged();
 				}
 			}
 		}
@@ -125,8 +122,9 @@ public class World {
 				destroyGameObject(updatableObjectList.get(i));
 			}
 		}
-
+		logDisplayNotifier.worldHasChanged(); // as time ticks, it always changes
 		checkForCollisions();
+
 	}
 
 	public void checkForCollisions() {

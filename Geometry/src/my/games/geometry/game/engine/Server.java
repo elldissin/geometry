@@ -17,7 +17,7 @@ import my.games.geometry.networking.BufferedEventSender;
 import my.games.geometry.networking.ClientService;
 import my.games.geometry.networking.NetworkMessage;
 import my.games.geometry.networking.PlayerInput;
-import my.games.geometry.ui.ServerLogDisplay;
+import my.games.geometry.ui.ServerStatusWindow;
 import my.games.geometry.ui.engine.NoRenderEngine;
 import my.games.geometry.ui.engine.RenderEngine;
 
@@ -32,7 +32,7 @@ public class Server {
 	private GameEventObserver gameEventObserver; // Observer
 	private BufferedEventSender bufferedSender;
 	private WorldRunner runner;
-	private ServerLogDisplay logDisplay;
+	private ServerStatusWindow logDisplay;
 	private LogDisplayNotifier logDisplayNotifier;
 	private Map<Integer, Integer> clientToPlayerMap;
 
@@ -85,7 +85,8 @@ public class Server {
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						logDisplay.logTextInField(String.valueOf(System.currentTimeMillis()), 0);
+						logDisplay.logTextInField("System time: " + String.valueOf(System.currentTimeMillis()), 0);
+						logDisplay.logTextInField("Active players: " + clientService.getClientList().size(), 1);
 					}
 				});
 
@@ -126,7 +127,7 @@ public class Server {
 		}
 	}
 
-	public void setLogDisplay(ServerLogDisplay logDisplay) {
+	public void setLogDisplay(ServerStatusWindow logDisplay) {
 		this.logDisplay = logDisplay;
 		world.registerLogDisplayNotifyer(logDisplayNotifier);
 	}

@@ -6,11 +6,11 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class ServerLogDisplay implements Runnable {
+public class ServerStatusWindow implements Runnable {
 
 	private List<JLabel> labelsList;
 
-	public ServerLogDisplay() {
+	public ServerStatusWindow() {
 		labelsList = new ArrayList<JLabel>();
 	}
 
@@ -23,7 +23,7 @@ public class ServerLogDisplay implements Runnable {
 
 		for (int i = 0; i < 5; i++) {
 			JLabel label = new JLabel();
-			label.setBounds(0, (i * 50), 200, 20);
+			label.setBounds(0, (i * 25), 200, 20);
 			labelsList.add(i, label);
 			frame.add(label);
 		}
